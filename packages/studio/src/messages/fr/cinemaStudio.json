@@ -1,0 +1,49 @@
+{
+  "cameraOverlay": {
+    "eyebrow": "Studio de cinéma",
+    "title": "Paramètres de l'appareil photo",
+    "description": "Créez un look cinématographique cohérent en choisissant la caméra, l'objectif, la distance focale et la profondeur de champ.",
+    "close": "Fermer",
+    "closeAria": "Fermer les paramètres de l'appareil photo",
+    "columns": {
+      "camera": "Caméra",
+      "lens": "Lentille",
+      "focalLength": "Distance focale",
+      "aperture": "Ouverture"
+    }
+  },
+  "dropdowns": {
+    "aspectRatio": "Rapport hauteur/largeur",
+    "resolution": "Résolution"
+  },
+  "actions": {
+    "copyPrompt": "Copier l'invite",
+    "promptCopied": "Invite copiée",
+    "copyImage": "Copier l'image",
+    "imageCopied": "Image copiée",
+    "download": "Télécharger",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet élément généré ?"
+  },
+  "card": {
+    "noPrompt": "Aucune invite",
+    "badge": "Studio de cinéma",
+    "historyItemAlt": "Élément d'historique {index}"
+  },
+  "empty": {
+    "kicker": "COMMENCEZ À CRÉER AVEC",
+    "title": "ATELIER DE CINÉMA",
+    "description": "Que photographieriez-vous avec un budget infini ? Contrôlez les caméras, l'éclairage, les objectifs et créez des scènes cinématographiques haut de gamme."
+  },
+  "prompt": {
+    "placeholder": "Décrivez votre scène de cinéma...",
+    "generating": "Générateur...",
+    "generate": "Tirer"
+  },
+  "fullscreen": {
+    "alt": "Aperçu plein écran"
+  },
+  "referenceImage": {
+    "alt": "Référence"
+  }
+}

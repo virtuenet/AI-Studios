@@ -177,6 +177,7 @@ export default function StudioApp() {
 
   return (
     <div className="h-screen bg-[#030303] flex flex-col overflow-hidden text-white">
+      <h1 className="sr-only">AI Studios</h1>
       <header className="flex-shrink-0 h-14 border-b border-white/[0.06] flex items-center justify-between px-4 bg-[#0a0a0b]/80 gap-4">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 bg-[#22d3ee] rounded-lg flex items-center justify-center">

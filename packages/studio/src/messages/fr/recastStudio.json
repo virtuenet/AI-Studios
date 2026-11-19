@@ -1,0 +1,68 @@
+{
+  "labels": {
+    "video": "Vidéo",
+    "characterImage": "Image du personnage",
+    "library": "Bibliothèque",
+    "orientationPrefix": "Orientation:"
+  },
+  "buttons": {
+    "use": "Utiliser",
+    "download": "Télécharger",
+    "delete": "Supprimer",
+    "swapBody": "Carrosserie interchangeable",
+    "swapping": "Échange..."
+  },
+  "titles": {
+    "clickToClear": "{fileName} — cliquez pour effacer",
+    "uploadFile": "Téléchargez le fichier {label} ou faites un glisser-déposer",
+    "enlargePreview": "Agrandir l'aperçu",
+    "deleteFromLibrary": "Supprimer de la bibliothèque"
+  },
+  "assetLibrary": {
+    "header": "Bibliothèque d'actifs",
+    "tabs": {
+      "videos": "Vidéos",
+      "images": "Images",
+      "results": "Résultats"
+    },
+    "empty": "Aucun élément trouvé"
+  },
+  "dropdowns": {
+    "model": "Modèle",
+    "selectModel": "Sélectionnez le modèle",
+    "aspectRatio": "Rapport hauteur/largeur",
+    "orientation": "Orientation",
+    "orientationImage": "Image",
+    "orientationVideo": "Vidéo",
+    "orientationImageDesc": "Utiliser l'orientation de l'image (vidéo de 10 s maximum)",
+    "orientationVideoDesc": "Utiliser l'orientation vidéo (vidéo de 30 s maximum)"
+  },
+  "empty": {
+    "titleLine1": "COMMENCEZ À CRÉER AVEC",
+    "titleLine2": "STUDIO D'ÉCHANGE DE CORPS",
+    "description": ""
+  },
+  "placeholders": {
+    "prompt": "Facultatif : décrivez le mouvement ou la scène..."
+  },
+  "badges": {
+    "bodySwap": "Échange de corps"
+  },
+  "confirm": {
+    "deleteGenerated": "Êtes-vous sûr de vouloir supprimer cet élément généré ?"
+  },
+  "errors": {
+    "videoTooLarge": "La vidéo dépasse la limite de 50 Mo.",
+    "imageTooLarge": "L'image dépasse la limite de 10 Mo.",
+    "missingVideo": "Veuillez d'abord télécharger une vidéo source.",
+    "missingImage": "Veuillez d'abord télécharger une image de personnage.",
+    "videoUploadFailed": "Échec du téléchargement de la vidéo : {message}",
+    "imageUploadFailed": "Échec du téléchargement de l'image : {message}",
+    "generationFailed": "La génération d'échange de corps a échoué"
+  },
+  "defaults": {
+    "selectedVideo": "Vidéo sélectionnée",
+    "selectedImage": "Image sélectionnée",
+    "resultVideo": "Vidéo du résultat"
+  }
+}

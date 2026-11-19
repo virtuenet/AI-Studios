@@ -1,0 +1,57 @@
+{
+  "tabs": {
+    "templates": "テンプレート",
+    "my-agents": "マイエージェント",
+    "my-chats": "マイチャット"
+  },
+  "headings": {
+    "agents": "エージェント",
+    "createAgent": "エージェントを作成"
+  },
+  "buttons": {
+    "back": "エージェント",
+    "create": "作成",
+    "createAgentSubmit": "エージェントを作成",
+    "creating": "作成中...",
+    "send": "送信",
+    "retry": "再試行",
+    "browseTemplates": "テンプレートを閲覧"
+  },
+  "labels": {
+    "name": "名前",
+    "description": "説明",
+    "systemPrompt": "システムプロンプト",
+    "welcomeMessage": "ウェルカムメッセージ（オプション）"
+  },
+  "placeholders": {
+    "name": "例：Caption Crafter Pro",
+    "description": "このエージェントはどのようなサポートをしますか？",
+    "systemPrompt": "あなたは次のようなサポートを提供する便利なアシスタントです...",
+    "welcomeMessage": "こんにちは！今日はどのようなお手伝いが必要ですか？",
+    "chatInput": "このエージェントにメッセージを送る..."
+  },
+  "empty": {
+    "noChats": "まだチャットはありません",
+    "noAgents": "エージェントが見つかりません"
+  },
+  "errors": {
+    "loadFailed": "読み込めませんでした。",
+    "loadAgentFailed": "エージェントの読み込みに失敗しました",
+    "sendFailed": "メッセージの送信に失敗しました",
+    "createFailed": "エージェントの作成に失敗しました"
+  },
+  "card": {
+    "defaultCategory": "AIアシスタント",
+    "unnamedAgent": "名前のないエージェント",
+    "byPrefix": "作成者：",
+    "unknownAgent": "不明なエージェント",
+    "newChat": "新しいチャット",
+    "msgsSuffix": "メッセージ"
+  },
+  "time": {
+    "justNow": "たった今",
+    "minutesAgo": "{n}分前",
+    "hoursAgo": "{n}時間前",
+    "daysAgo": "{n}日前"
+  }
+}

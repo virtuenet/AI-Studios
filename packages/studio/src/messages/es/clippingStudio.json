@@ -1,0 +1,73 @@
+{
+  "headings": {
+    "startCreatingWith": "EMPIEZA A CREAR CON",
+    "aiClippingStudio": "AI CLIPPING STUDIO",
+    "emptyStateSubtitle": "Extrae automáticamente los momentos destacados virales y los tiempos precisos de tus vídeos.",
+    "clippingHistoryRuns": "Ejecuciones del historial de recortes",
+    "savedGenerations": "{count} generaciones guardadas",
+    "backToHistory": "Volver al historial",
+    "highlightsTimeline": "Cronología de los aspectos destacados",
+    "matches": "{count} coincidencias",
+    "extractedVideoClips": "Clips de vídeo extraídos",
+    "aspectRatioLabel": "Relación de aspecto: {ratio}",
+    "originalVideoPlayer": "Reproductor de vídeo original"
+  },
+  "modes": {
+    "timelineSeek": "Modo de búsqueda en la línea de tiempo",
+    "clipsGallery": "Modo Galería de clips"
+  },
+  "labels": {
+    "highlights": "{count} momentos destacados",
+    "clips": "{count} clips",
+    "highlightFallback": "Aspecto destacado n.º {index}",
+    "scoreSuffix": "% de puntuación",
+    "durationSuffix": "duración en s",
+    "seekAndPlay": "Buscar y reproducir",
+    "clipIndex": "Clip n.º {index}",
+    "aiClipping": "Creación de clips con IA"
+  },
+  "buttons": {
+    "deleteFromHistory": "Eliminar del historial",
+    "delete": "Eliminar",
+    "copyLink": "Copiar enlace",
+    "copyLinkShort": "Copiar enlace",
+    "download": "Descargar",
+    "clearVideo": "Borrar vídeo",
+    "uploadSourceVideo": "Subir vídeo original",
+    "generate": "Generar",
+    "generating": "Generando...",
+    "coordinatesOnly": "Solo coordenadas"
+  },
+  "placeholders": {
+    "promptOrUrl": "Describir la indicación / los aspectos destacados que se van a extraer"
+  },
+  "popovers": {
+    "aspectRatio": "Relación de aspecto",
+    "maxHighlights": "Máximo de aspectos destacados",
+    "limit": "Límite:"
+  },
+  "empty": {
+    "noHighlights": "No se han extraído aspectos destacados.",
+    "noClips": "No se han generado videoclips. Intenta volver a ejecutarlos."
+  },
+  "alerts": {
+    "urlCopied": "¡URL copiada al portapapeles!",
+    "needVideo": "Primero sube un vídeo o pega la URL de un vídeo."
+  },
+  "errors": {
+    "dismissNotification": "Descartar notificación",
+    "videoTooLarge": "El archivo es demasiado grande para este modo. Comprime o recorta el vídeo y, a continuación, sube un archivo más pequeño.",
+    "videoExceedsLimit": "El vídeo supera el límite de {mb} MB.",
+    "uploadFailed": "Error al subir el vídeo. Inténtalo de nuevo.",
+    "generationFailed": "Error al procesar el recorte con IA."
+  },
+  "sourceVideoFallback": "source_video.mp4",
+  "aspectRatioLabels": {
+    "9:16": "9:16 (TikTok / Reels / Shorts)",
+    "16:9": "16:9 (YouTube / TV)",
+    "1:1": "1:1 (cuadrado de Instagram)",
+    "4:5": "4:5 (retrato de Instagram)",
+    "4:3": "4:3 (vídeo clásico)",
+    "3:4": "3:4 (retrato)"
+  }
+}

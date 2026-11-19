@@ -2,9 +2,7 @@
 
 import React from 'react';
 import { FaGithub, FaTerminal, FaPlug, FaStar, FaExternalLinkAlt } from 'react-icons/fa';
-import en from '../messages/en/mcpCliStudio.json';
-import zh from '../messages/zh/mcpCliStudio.json';
-import { resolveCopy } from '../i18nUtils';
+import { getStudioCopy } from '../messages/studioCopy';
 
 // `title`/`tag` stay canonical (product/package names and short technical
 // category tags); `id` keys into copy.features/copy.quickStart/copy.examples
@@ -66,7 +64,7 @@ function CodeBlock({ children, className = '' }) {
 }
 
 export default function McpCliStudio({ locale = 'en' }) {
-  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
+  const copy = getStudioCopy('mcpCliStudio', locale);
 
   return (
     <div className="w-full h-full overflow-y-auto bg-[#050505] text-white">

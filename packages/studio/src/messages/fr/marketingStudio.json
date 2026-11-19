@@ -1,0 +1,49 @@
+{
+  "empty": {
+    "titleLine1": "COMMENCEZ À CRÉER AVEC",
+    "titleLine2": "ATELIER DE MARKETING",
+    "subtitle": "Décrivez votre scène, téléchargez votre produit et regardez des publicités vidéo IA à fort taux de conversion prendre vie."
+  },
+  "uploadSlots": {
+    "product": "Produit",
+    "avatar": "Avatar",
+    "references": "Références",
+    "uploadPrefix": "Télécharger"
+  },
+  "prompt": {
+    "placeholder": "Décrivez votre script publicitaire... Utilisez @image1 pour le produit, @image2 pour l'avatar."
+  },
+  "dropdowns": {
+    "videoFormatPresets": "Préréglages de format vidéo",
+    "avatarPresets": "Préréglages d'avatar",
+    "aspectRatio": "Rapport hauteur/largeur",
+    "resolution": "Résolution",
+    "duration": "Durée",
+    "selectAvatarFallback": "Sélectionnez un avatar"
+  },
+  "buttons": {
+    "generating": "Générateur...",
+    "launch": "Lancement",
+    "enlargePreview": "Agrandir l'aperçu",
+    "enlargeSelectedAvatar": "Agrandir l'avatar sélectionné",
+    "selectAvatar": "Sélectionnez un avatar",
+    "download": "Télécharger",
+    "delete": "Supprimer"
+  },
+  "history": {
+    "badge": "Studio de commercialisation"
+  },
+  "alt": {
+    "creativeAsset": "Actif créatif {index}",
+    "previousAvatar": "Avatar précédent",
+    "nextAvatar": "Avatar suivant"
+  },
+  "errors": {
+    "missingScript": "Veuillez saisir un script d'annonce.",
+    "missingProductImage": "Veuillez télécharger une image du produit.",
+    "generationFailed": "La génération marketing a échoué"
+  },
+  "confirm": {
+    "deleteItem": "Êtes-vous sûr de vouloir supprimer cet élément généré ?"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "labels": {
+    "referenceVideo": "Vídeo de referencia",
+    "characterImages": "Imágenes de intérpretes/personajes",
+    "addImage": "Añadir imagen",
+    "library": "Biblioteca",
+    "mode": "Modo",
+    "motionTransfer": "Transferencia de movimiento",
+    "objectsSwap": "Intercambio de objetos",
+    "duration": "Duración",
+    "durationSeconds": "{count} s",
+    "quality": "Calidad",
+    "highBitrate": "Tasa de bits alta",
+    "generateAudio": "Generar audio",
+    "seed": "Semilla",
+    "randomSeed": "Aleatorio (-1)"
+  },
+  "buttons": {
+    "use": "Usar",
+    "useAsVideo": "Usar como vídeo",
+    "useAsImage": "Añadir como imagen",
+    "download": "Descargar",
+    "delete": "Eliminar",
+    "generate": "Generar movimiento",
+    "generating": "Generando..."
+  },
+  "titles": {
+    "clickToClear": "{fileName} — haz clic para borrar",
+    "uploadVideo": "Suba el vídeo de referencia (MP4/WebM/MOV) o arrástrelo y suéltelo",
+    "uploadImage": "Subir imágenes de personajes o intérpretes (PNG/JPEG/WebP)",
+    "enlargePreview": "Ampliar vista previa",
+    "deleteFromLibrary": "Eliminar de la biblioteca",
+    "removeImage": "Eliminar imagen"
+  },
+  "assetLibrary": {
+    "header": "Biblioteca de elementos",
+    "tabs": {
+      "videos": "Vídeos",
+      "images": "Imágenes",
+      "results": "Resultados"
+    },
+    "empty": "No se han encontrado activos"
+  },
+  "dropdowns": {
+    "model": "Modelo",
+    "selectModel": "Seleccionar modelo",
+    "aspectRatio": "Relación de aspecto",
+    "qualityBasic": "Básico",
+    "qualityHigh": "Alta",
+    "qualityBasicDesc": "Generación más rápida, resolución estándar",
+    "qualityHighDesc": "Máximo detalle cinematográfico y coherencia del movimiento"
+  },
+  "modes": {
+    "motionTransfer": "Transferencia de movimiento",
+    "motionTransferDesc": "Extrae el movimiento y la coreografía del vídeo y reconstruye la escena con tu personaje",
+    "objectsSwap": "Intercambio de objetos",
+    "objectsSwapDesc": "Mantén la escena del vídeo sin cambios e intercambia atuendos, personajes o productos"
+  },
+  "empty": {
+    "titleLine1": "EMPIEZA A CREAR CON",
+    "titleLine2": "MOTION CONTROL STUDIO",
+    "description": "Anima las imágenes de los personajes con movimientos de vídeo de referencia, coreografías y movimientos de cámara utilizando Seedance Motion Control."
+  },
+  "placeholders": {
+    "prompt": "Opcional: describe detalles adicionales de la escena, la iluminación o los matices del movimiento..."
+  },
+  "badges": {
+    "motionControl": "Control del movimiento",
+    "motionTransfer": "Transferencia de movimiento",
+    "objectsSwap": "Intercambio de objetos"
+  },
+  "confirm": {
+    "deleteGenerated": "¿Seguro que quieres eliminar este elemento generado?"
+  },
+  "errors": {
+    "videoTooLarge": "El vídeo supera el límite de 100 MB.",
+    "imageTooLarge": "La imagen supera el límite de 20 MB.",
+    "missingVideo": "Primero suba o seleccione un vídeo de referencia.",
+    "missingImages": "Cargue o seleccione al menos una imagen del personaje/intérprete.",
+    "maxImagesExceeded": "Máximo de {max} imágenes permitidas para este modelo.",
+    "videoUploadFailed": "Error al subir el vídeo: {message}",
+    "imageUploadFailed": "Error al subir la imagen: {message}",
+    "generationFailed": "Error al generar el vídeo de control de movimiento"
+  },
+  "defaults": {
+    "selectedVideo": "Vídeo de referencia",
+    "selectedImage": "Imagen del personaje",
+    "resultVideo": "Vídeo de control de movimiento"
+  }
+}

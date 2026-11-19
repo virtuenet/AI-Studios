@@ -1,0 +1,90 @@
+{
+  "labels": {
+    "referenceVideo": "リファレンス動画",
+    "characterImages": "パフォーマー／キャラクターの画像",
+    "addImage": "画像を挿入",
+    "library": "ライブラリ",
+    "mode": "モード",
+    "motionTransfer": "モーション転送",
+    "objectsSwap": "オブジェクトの入れ替え",
+    "duration": "持続時間",
+    "durationSeconds": "{count}秒",
+    "quality": "画質",
+    "highBitrate": "高ビットレート",
+    "generateAudio": "オーディオを生成",
+    "seed": "シード",
+    "randomSeed": "ランダム（-1）"
+  },
+  "buttons": {
+    "use": "使用",
+    "useAsVideo": "動画として使用",
+    "useAsImage": "画像として追加",
+    "download": "ダウンロード",
+    "delete": "削除",
+    "generate": "モーションを生成",
+    "generating": "生成中..."
+  },
+  "titles": {
+    "clickToClear": "{fileName} — クリックしてクリア",
+    "uploadVideo": "リファレンス動画（MP4/WebM/MOV）をアップロードするか、ドラッグアンドドロップしてください",
+    "uploadImage": "キャラクターまたはパフォーマーの画像をアップロード（PNG/JPEG/WebP）",
+    "enlargePreview": "プレビューを拡大",
+    "deleteFromLibrary": "ライブラリから削除",
+    "removeImage": "画像を削除"
+  },
+  "assetLibrary": {
+    "header": "アセットライブラリ",
+    "tabs": {
+      "videos": "動画",
+      "images": "画像",
+      "results": "結果"
+    },
+    "empty": "アセットが見つかりません"
+  },
+  "dropdowns": {
+    "model": "モデル",
+    "selectModel": "モデルを選択",
+    "aspectRatio": "アスペクト比",
+    "qualityBasic": "ベーシック",
+    "qualityHigh": "高",
+    "qualityBasicDesc": "より高速な生成、標準解像度",
+    "qualityHighDesc": "最高の映画的ディテールと動きの一貫性"
+  },
+  "modes": {
+    "motionTransfer": "モーション転送",
+    "motionTransferDesc": "動画から動きと振り付けを抽出し、キャラクターを使ってシーンを再現します",
+    "objectsSwap": "オブジェクトの入れ替え",
+    "objectsSwapDesc": "ビデオシーンはそのままに、衣装、キャラクター、または製品を入れ替えます"
+  },
+  "empty": {
+    "titleLine1": "次のツールでクリエーションを始めましょう",
+    "titleLine2": "モーションコントロールスタジオ",
+    "description": "Seedance Motion Controlを使用して、リファレンスビデオの動き、振り付け、カメラの動きでキャラクターの画像を動かします。"
+  },
+  "placeholders": {
+    "prompt": "オプション — シーンの追加の詳細、照明、または動きのニュアンスを説明してください..."
+  },
+  "badges": {
+    "motionControl": "モーションコントロール",
+    "motionTransfer": "モーション転送",
+    "objectsSwap": "オブジェクトの入れ替え"
+  },
+  "confirm": {
+    "deleteGenerated": "この生成されたアイテムを削除してもよろしいですか？"
+  },
+  "errors": {
+    "videoTooLarge": "動画が100MBの上限を超えています。",
+    "imageTooLarge": "画像が20MBの制限を超えています。",
+    "missingVideo": "まず、リファレンス動画をアップロードするか選択してください。",
+    "missingImages": "少なくとも1つのキャラクター/パフォーマーの画像をアップロードするか、選択してください。",
+    "maxImagesExceeded": "このモデルで許可される画像の最大数は{max}枚です。",
+    "videoUploadFailed": "動画のアップロードに失敗しました：{message}",
+    "imageUploadFailed": "画像のアップロードに失敗しました：{message}",
+    "generationFailed": "モーションコントロール動画の生成に失敗しました"
+  },
+  "defaults": {
+    "selectedVideo": "リファレンス動画",
+    "selectedImage": "キャラクター画像",
+    "resultVideo": "モーションコントロールビデオ"
+  }
+}

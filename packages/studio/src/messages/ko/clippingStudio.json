@@ -1,0 +1,73 @@
+{
+  "headings": {
+    "startCreatingWith": "만들기 시작하기",
+    "aiClippingStudio": "AI 클리핑 스튜디오",
+    "emptyStateSubtitle": "비디오에서 바이럴 하이라이트와 정확한 타이밍을 자동으로 추출합니다.",
+    "clippingHistoryRuns": "클리핑 기록 실행",
+    "savedGenerations": "{count} 저장된 세대",
+    "backToHistory": "역사로 돌아가기",
+    "highlightsTimeline": "하이라이트 타임라인",
+    "matches": "{count} 경기",
+    "extractedVideoClips": "추출된 비디오 클립",
+    "aspectRatioLabel": "가로세로 비율: {ratio}",
+    "originalVideoPlayer": "원본 비디오 플레이어"
+  },
+  "modes": {
+    "timelineSeek": "타임라인 탐색 모드",
+    "clipsGallery": "클립 갤러리 모드"
+  },
+  "labels": {
+    "highlights": "{count} 하이라이트",
+    "clips": "{count}개의 클립",
+    "highlightFallback": "#{색인} 강조 표시 {index}",
+    "scoreSuffix": "% 점수",
+    "durationSuffix": "초 기간",
+    "seekAndPlay": "탐색 및 재생",
+    "clipIndex": "클립 #{색인} {index}",
+    "aiClipping": "AI 클리핑"
+  },
+  "buttons": {
+    "deleteFromHistory": "기록에서 삭제",
+    "delete": "삭제",
+    "copyLink": "링크 복사",
+    "copyLinkShort": "링크 복사",
+    "download": "다운로드",
+    "clearVideo": "선명한 영상",
+    "uploadSourceVideo": "소스 영상 업로드",
+    "generate": "생성하다",
+    "generating": "생성 중...",
+    "coordinatesOnly": "좌표만"
+  },
+  "placeholders": {
+    "promptOrUrl": "추출할 프롬프트/하이라이트 설명"
+  },
+  "popovers": {
+    "aspectRatio": "종횡비",
+    "maxHighlights": "최대 하이라이트",
+    "limit": "한계:"
+  },
+  "empty": {
+    "noHighlights": "하이라이트가 추출되지 않았습니다.",
+    "noClips": "생성된 비디오 클립이 없습니다. 다시 실행해 보세요."
+  },
+  "alerts": {
+    "urlCopied": "URL이 클립보드에 복사되었습니다!",
+    "needVideo": "먼저 동영상을 업로드하거나 동영상 URL을 붙여넣으세요."
+  },
+  "errors": {
+    "dismissNotification": "알림 닫기",
+    "videoTooLarge": "이 모드에서는 파일이 너무 큽니다. 동영상을 압축하거나 다듬은 후 더 작은 파일을 업로드하세요.",
+    "videoExceedsLimit": "동영상이 {mb}MB 제한을 초과했습니다.",
+    "uploadFailed": "동영상 업로드에 실패했습니다. 다시 시도해 주세요.",
+    "generationFailed": "AI 클리핑 처리에 실패했습니다."
+  },
+  "sourceVideoFallback": "소스_비디오.mp4",
+  "aspectRatioLabels": {
+    "9:16": "9:16 (TikTok / 릴 / 반바지)",
+    "16:9": "16:9 (유튜브/TV)",
+    "1:1": "1:1 (인스타그램스퀘어)",
+    "4:5": "4:5(인스타그램 인물 사진)",
+    "4:3": "4:3(클래식 비디오)",
+    "3:4": "3:4(인물)"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "labels": {
+    "referenceVideo": "참고영상",
+    "characterImages": "출연자 / 캐릭터 이미지",
+    "addImage": "이미지 추가",
+    "library": "도서관",
+    "mode": "방법",
+    "motionTransfer": "모션 전송",
+    "objectsSwap": "객체 교환",
+    "duration": "지속",
+    "durationSeconds": "{count}초",
+    "quality": "품질",
+    "highBitrate": "높은 비트 전송률",
+    "generateAudio": "오디오 생성",
+    "seed": "씨앗",
+    "randomSeed": "무작위 (-1)"
+  },
+  "buttons": {
+    "use": "사용",
+    "useAsVideo": "비디오로 사용",
+    "useAsImage": "이미지로 추가",
+    "download": "다운로드",
+    "delete": "삭제",
+    "generate": "모션 생성",
+    "generating": "생성 중..."
+  },
+  "titles": {
+    "clickToClear": "{fileName} — 지우려면 클릭하세요.",
+    "uploadVideo": "참조 비디오(MP4/WebM/MOV) 업로드 또는 드래그 앤 드롭",
+    "uploadImage": "캐릭터 또는 연기자 이미지 업로드(PNG/JPEG/WebP)",
+    "enlargePreview": "미리보기 확대",
+    "deleteFromLibrary": "라이브러리에서 삭제",
+    "removeImage": "이미지 삭제"
+  },
+  "assetLibrary": {
+    "header": "자산 라이브러리",
+    "tabs": {
+      "videos": "비디오",
+      "images": "이미지",
+      "results": "결과"
+    },
+    "empty": "자산을 찾을 수 없습니다."
+  },
+  "dropdowns": {
+    "model": "모델",
+    "selectModel": "모델 선택",
+    "aspectRatio": "종횡비",
+    "qualityBasic": "기초적인",
+    "qualityHigh": "높은",
+    "qualityBasicDesc": "더 빠른 생성, 표준 해상도",
+    "qualityHighDesc": "최고의 영화적 디테일과 모션 일관성"
+  },
+  "modes": {
+    "motionTransfer": "모션 전송",
+    "motionTransferDesc": "비디오에서 동작과 안무를 추출하고 캐릭터로 장면을 재구성하세요.",
+    "objectsSwap": "객체 교환",
+    "objectsSwapDesc": "비디오 장면을 변경하지 않고 유지하고 의상, 캐릭터 또는 제품을 교체하세요."
+  },
+  "empty": {
+    "titleLine1": "만들기 시작하기",
+    "titleLine2": "모션 컨트롤 스튜디오",
+    "description": "Seedance Motion Control을 사용하여 참조 비디오 모션, 안무, 카메라 움직임으로 캐릭터 이미지를 구동합니다."
+  },
+  "placeholders": {
+    "prompt": "선택 사항 - 추가 장면 세부 정보, 조명 또는 모션 뉘앙스를 설명합니다..."
+  },
+  "badges": {
+    "motionControl": "모션 제어",
+    "motionTransfer": "모션 전송",
+    "objectsSwap": "객체 교환"
+  },
+  "confirm": {
+    "deleteGenerated": "생성된 이 항목을 삭제하시겠습니까?"
+  },
+  "errors": {
+    "videoTooLarge": "동영상이 100MB 제한을 초과했습니다.",
+    "imageTooLarge": "이미지가 20MB 제한을 초과했습니다.",
+    "missingVideo": "먼저 참조 동영상을 업로드하거나 선택하세요.",
+    "missingImages": "캐릭터/배우 이미지를 하나 이상 업로드하거나 선택하세요.",
+    "maxImagesExceeded": "이 모델에 허용되는 최대 {max}개의 이미지입니다.",
+    "videoUploadFailed": "동영상 업로드 실패: {message}",
+    "imageUploadFailed": "이미지 업로드 실패: {message}",
+    "generationFailed": "모션 제어 비디오 생성 실패"
+  },
+  "defaults": {
+    "selectedVideo": "참고영상",
+    "selectedImage": "캐릭터 이미지",
+    "resultVideo": "모션 제어 비디오"
+  }
+}

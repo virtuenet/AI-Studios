@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "badge": "Plantillas preparadas para generar ingresos",
+    "titleLine1": "LANZA UNA APLICACIÓN DE IA.",
+    "titleLine2": "EMPIEZA A GANAR DINERO HOY MISMO.",
+    "subtitle": "Cada plantilla es un SaaS de IA totalmente funcional e integrado con Stripe que puedes implementar en cuestión de minutos. Cobra a tus usuarios y quédate con los ingresos: muapi se encarga de la infraestructura de IA."
+  },
+  "steps": {
+    "stepLabel": "Paso",
+    "deploy": {
+      "title": "Implementa en cuestión de minutos",
+      "body": "Crea una bifurcación de la plantilla de código abierto, añade tu clave de muapi y haz un «push» a Vercel. No es necesaria ninguna configuración de backend."
+    },
+    "collect": {
+      "title": "Cobra pagos",
+      "body": "Stripe está preconfigurado. Establezca sus propios precios: créditos únicos, suscripciones o pago por uso."
+    },
+    "keep": {
+      "title": "Quédese con los ingresos",
+      "body": "Los pagos van directamente a tu cuenta de Stripe. El producto, la marca y los beneficios son suyos."
+    }
+  },
+  "card": {
+    "templateFallback": "Plantilla",
+    "github": "GitHub",
+    "demo": "Demo"
+  },
+  "footer": {
+    "moreComingSoon": "Ecosistema Muapi — Más plantillas próximamente"
+  },
+  "modal": {
+    "deployTitle": "Implementar {appName}",
+    "body": "Introduzca sus datos y le enviaremos la plantilla de {appName} junto con las instrucciones de configuración para que pueda implementarla y empezar a ganar dinero de inmediato.",
+    "sending": "Enviando datos...",
+    "getTemplate": "Obtener plantilla",
+    "maybeLater": "Quizás más tarde"
+  },
+  "toast": {
+    "requestSuccess": "¡Entendido! Le enviaremos los detalles de la plantilla en breve.",
+    "requestError": "No se ha podido registrar el interés. Inténtelo de nuevo más tarde."
+  }
+}

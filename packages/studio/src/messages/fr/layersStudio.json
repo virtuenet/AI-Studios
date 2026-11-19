@@ -1,0 +1,204 @@
+{
+  "common": {
+    "model": "Modèle",
+    "reset": "Réinitialiser"
+  },
+  "panels": {
+    "layer-decomposition": "Décomposition des couches",
+    "upscale": "Haut de gamme",
+    "color-grading": "Étalonnage des couleurs",
+    "remove-bg": "Supprimer l'arrière-plan",
+    "expand-crop": "Agrandir l'image",
+    "tools": "Outils"
+  },
+  "menuItems": {
+    "layer-decomposition": "Décomposition des couches",
+    "upscale": "Haut de gamme",
+    "color-grading": "Étalonnage des couleurs",
+    "remove-bg": "Supprimer l'arrière-plan",
+    "expand-crop": "Agrandir et peindre",
+    "edit-text": "Modifier le texte",
+    "enhancer": "Améliorateur",
+    "relight": "Rallumer",
+    "angles": "Angles",
+    "new": "Nouveau"
+  },
+  "tools": {
+    "uploadOrChangeImage": "Télécharger ou modifier l'image",
+    "clearMarkedRegions": "Effacer les régions marquées",
+    "runSelectionEdit": "Exécuter la sélection Modifier",
+    "line": "Doubler",
+    "arrow": "Flèche",
+    "rectangle": "Rectangle",
+    "circle": "Cercle",
+    "customColor": "Couleur personnalisée",
+    "undoStroke": "Annuler le trait",
+    "redoStroke": "Refaire le trait",
+    "clearDrawings": "Dessins clairs",
+    "selectPointerTool": "Sélectionner l'outil Pointeur",
+    "panTool": "Outil Panoramique",
+    "lassoEdit": "Lasso Modifier",
+    "regionalEdit": "Régional Modifier",
+    "highlightMarkerPen": "Stylo marqueur de surbrillance",
+    "eraserTool": "Outil Gomme",
+    "shapes": "Formes (R)",
+    "resetZoomPan": "Réinitialiser le zoom et le panoramique",
+    "addImage": "Ajouter une image",
+    "runLayerDecomposition": "Exécuter la décomposition des couches",
+    "backToTools": "Retour aux outils",
+    "closePanel": "Fermer le panneau",
+    "regionalPromptPlaceholder": "Tapez votre invite ici..."
+  },
+  "sample": {
+    "clickToLoad": "Cliquez pour charger cet exemple de décomposition de couches",
+    "original": "Original",
+    "layersCount": "5 couches",
+    "try": "Essayez →",
+    "clickToExplore": "Cliquez pour explorer l'échantillon"
+  },
+  "settings": {
+    "heading": "Paramètres",
+    "resolution": "Résolution",
+    "layers": "Calques"
+  },
+  "carousel": {
+    "heading": "Carrousel de calques",
+    "soloActive": "Solo Actif",
+    "stackMode": "Mode pile",
+    "viewOnlyActive": "Afficher uniquement le calque actif",
+    "downloadAll": "Télécharger tout",
+    "previousLayer": "Couche précédente",
+    "nextLayer": "Couche suivante",
+    "toggleVisibility": "Basculer la visibilité",
+    "downloadThisLayer": "Téléchargez cette couche",
+    "save": "Sauvegarder",
+    "layerLabel": "Couche {n}",
+    "seedreamDecomposed": "Rêve de graines décomposé"
+  },
+  "colorGrading": {
+    "colorCorrect": {
+      "heading": "Couleur correcte",
+      "info": "Température, teinte, saturation, contraste et ton divisé",
+      "reset": "Réinitialiser la correction des couleurs"
+    },
+    "softenDetails": {
+      "heading": "Adoucir les détails",
+      "info": "Adoucissement du rayon et des détails",
+      "reset": "Réinitialiser les détails du adoucissement"
+    },
+    "bloom": {
+      "heading": "Floraison",
+      "info": "Diffusion de luminescence et mode de fusion",
+      "reset": "Réinitialiser la floraison"
+    },
+    "halation": {
+      "heading": "Halation",
+      "info": "Filmez une lueur rouge autour des reflets intenses",
+      "reset": "Réinitialiser le halo"
+    },
+    "lensInstructions": {
+      "heading": "Instructions pour les lentilles",
+      "info": "Vignette et distorsion de la lentille optique",
+      "reset": "Instructions de réinitialisation de l'objectif"
+    },
+    "exposure": {
+      "heading": "Exposition",
+      "info": "L’exposition arrête le réglage",
+      "reset": "Réinitialiser l'exposition"
+    },
+    "filmGrain": {
+      "heading": "Grains de films",
+      "info": "Simulation de grain de film analogique",
+      "reset": "Réinitialiser le grain du film"
+    },
+    "resetToDefault": "Réinitialiser aux valeurs par défaut",
+    "resetAll": "Réinitialiser tout l'étalonnage des couleurs",
+    "download": "Télécharger"
+  },
+  "removeBg": {
+    "modelName": "Suppresseur d'arrière-plan IA",
+    "targetPreview": "Aperçu de la cible",
+    "alphaMatte": "Découpe Alpha Matte",
+    "feature1": "Extraction de précision des bords (poils, fourrure, contours fins)",
+    "feature2": "Sortie PNG transparente haute résolution"
+  },
+  "expandCrop": {
+    "modelName": "Extension d'image IA",
+    "canvasPreview": "Aperçu du canevas",
+    "boundaryOutpainting": "Peinture des limites",
+    "expand": "Développer",
+    "feature1": "Élargit les bordures tout en faisant correspondre l'éclairage, le style et les textures",
+    "feature2": "Peinture et continuation intelligentes automatiques des bords"
+  },
+  "editText": {
+    "heading": "Outil Modifier le texte",
+    "placeholder": "Entrez l'invite de modification du texte...",
+    "run": "Exécuter la modification du texte",
+    "processing": "Traitement..."
+  },
+  "enhancer": {
+    "heading": "Améliorateur d'IA",
+    "description": "Optimisez automatiquement l’éclairage, la netteté et la balance des couleurs.",
+    "run": "Améliorer l'image",
+    "processing": "Améliorer..."
+  },
+  "relight": {
+    "heading": "Rallumage de l'IA",
+    "description": "Ajustez l’éclairage, la lumière ambiante du studio et les ombres.",
+    "run": "Appliquer le rééclairage",
+    "processing": "Rallumage..."
+  },
+  "angles": {
+    "heading": "Perspective angulaire 3D",
+    "description": "Ajustez l’inclinaison de la perspective et l’alignement de l’angle de la caméra.",
+    "run": "Appliquer l'angle de perspective",
+    "processing": "Transformer..."
+  },
+  "footer": {
+    "decomposing": "Décomposition ({progress}%)...",
+    "separateLayers": "Couches séparées {count}",
+    "upscaling": "Mise à l'échelle ({progress} %)...",
+    "upscaleCost": "Haut de gamme {coût} {cost}",
+    "removingBackground": "Suppression de l'arrière-plan ({progress}%)...",
+    "removeBackgroundCost": "Supprimer l'arrière-plan 1.0",
+    "expandingBorders": "Élargissement des frontières ({progress}%)...",
+    "expandImageCost": "Agrandir l'image 0,03"
+  },
+  "toasts": {
+    "enterApiKeyUpload": "Veuillez entrer votre clé API pour télécharger des images.",
+    "imageUploaded": "Image téléchargée avec succès !",
+    "uploadFailed": "Échec du téléchargement : {erreur} {error}",
+    "uploadImageFileOnly": "Veuillez télécharger un fichier image.",
+    "fileTooLarge": "Fichier trop volumineux (20 Mo maximum) : {name}",
+    "viewReset": "Afficher la réinitialisation",
+    "enterApiKey": "Veuillez saisir votre clé API.",
+    "enterRegionPrompt": "Veuillez saisir une invite pour la région sélectionnée.",
+    "editFailed": "Échec de la modification : {erreur} {error}",
+    "apiKeyMissingSet": "La clé API est manquante. Veuillez définir votre clé API.",
+    "uploadOrSelectDecompose": "Veuillez télécharger ou sélectionner une image à décomposer en calques.",
+    "decomposedInto": "Décomposé en {count} couche(s) !",
+    "decompositionFailed": "Échec de la décomposition : {erreur} {error}",
+    "uploadOrSelectUpscale": "Veuillez sélectionner ou télécharger une image pour la mettre à niveau.",
+    "upscaleSuccess": "Image mise à l'échelle avec succès avec {model} !",
+    "upscaleNoOutput": "Mise à niveau terminée, mais aucune URL de sortie n'a été renvoyée.",
+    "upscaleFailed": "Échec de la mise à niveau : {erreur} {error}",
+    "uploadOrSelectRemoveBg": "Veuillez télécharger ou sélectionner une image pour supprimer l'arrière-plan.",
+    "removeBgSuccess": "L'arrière-plan est supprimé proprement avec AI Background Remover !",
+    "removeBgNoOutput": "Suppression de l'arrière-plan terminée, mais aucune URL de sortie n'a été renvoyée.",
+    "removeBgFailed": "Échec de la suppression en arrière-plan : {erreur} {error}",
+    "uploadOrSelectExpand": "Veuillez télécharger ou sélectionner une image à développer.",
+    "expandSuccess": "Image agrandie proprement avec AI Image Extension !",
+    "expandNoOutput": "Expansion de l'image terminée, mais aucune URL de sortie n'a été renvoyée.",
+    "expandFailed": "Échec de l'expansion de l'image : {erreur} {error}",
+    "upscaleSettingsReset": "Paramètres haut de gamme réinitialisés par défaut",
+    "resetCategory": "Réinitialiser {catégorie} {category}",
+    "colorGradingReset": "L'étalonnage des couleurs est réinitialisé par défaut",
+    "downloadedGraded": "Image étalonnée en couleurs téléchargée !",
+    "loadedSample": "Échantillon Seedream à 5 couches chargé !",
+    "apiKeyMissing": "La clé API est manquante.",
+    "uploadImageFirst": "Veuillez d'abord télécharger une image.",
+    "toolCompleted": "{outil} terminé avec succès ! {tool}",
+    "operationFailed": "Échec de l'opération : {erreur} {error}",
+    "downloadingAll": "Téléchargement de toutes les couches..."
+  }
+}

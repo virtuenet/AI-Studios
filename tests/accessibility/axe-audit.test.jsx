@@ -143,6 +143,29 @@ describe('Accessibility Audit', () => {
       expect(src).toContain('aria-label');
     });
 
+    it('StandaloneShell exposes a document heading and main landmark', () => {
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/StandaloneShell.js'), 'utf-8');
+      expect(src).toContain('<h1 className="sr-only">AI Studios</h1>');
+      expect(src).toContain('role="main"');
+      expect(src).toContain('aria-label="Studio workspace"');
+    });
+
+    it('desktop SPA exposes a document heading', () => {
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'src/StudioApp.jsx'), 'utf-8');
+      expect(src).toContain('<h1 className="sr-only">AI Studios</h1>');
+      expect(src).toContain('<main');
+    });
+
+    it('manual screen-reader checklist is documented', () => {
+      const src = fs.readFileSync(
+        path.join(REPO_ROOT, 'docs/accessibility-manual-checklist.md'),
+        'utf-8'
+      );
+      expect(src).toContain('Screen-Reader Verification');
+      expect(src).toContain('VoiceOver');
+      expect(src).toContain('NVDA');
+    });
+
     it('ApiKeyModal has focus trapping', () => {
       const src = fs.readFileSync(path.join(REPO_ROOT, 'components/ApiKeyModal.jsx'), 'utf-8');
       expect(src).toContain('useRef');

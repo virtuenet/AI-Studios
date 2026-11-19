@@ -1,0 +1,68 @@
+{
+  "labels": {
+    "video": "Vídeo",
+    "characterImage": "Imagen del personaje",
+    "library": "Biblioteca",
+    "orientationPrefix": "Orientación:"
+  },
+  "buttons": {
+    "use": "Uso",
+    "download": "Descargar",
+    "delete": "Eliminar",
+    "swapBody": "Caja móvil",
+    "swapping": "Intercambiando..."
+  },
+  "titles": {
+    "clickToClear": "{fileName} — haga clic para borrar",
+    "uploadFile": "Suba el archivo {label} o arrástrelo y suéltelo",
+    "enlargePreview": "Ampliar la vista previa",
+    "deleteFromLibrary": "Eliminar de la biblioteca"
+  },
+  "assetLibrary": {
+    "header": "Biblioteca de elementos",
+    "tabs": {
+      "videos": "Vídeos",
+      "images": "Imágenes",
+      "results": "Resultados"
+    },
+    "empty": "No se han encontrado activos"
+  },
+  "dropdowns": {
+    "model": "Modelo",
+    "selectModel": "Seleccionar modelo",
+    "aspectRatio": "Relación de aspecto",
+    "orientation": "Orientación",
+    "orientationImage": "Imagen",
+    "orientationVideo": "Vídeo",
+    "orientationImageDesc": "Usar la orientación de la imagen (vídeo de 10 s como máximo)",
+    "orientationVideoDesc": "Usar la orientación de vídeo (vídeo de 30 s como máximo)"
+  },
+  "empty": {
+    "titleLine1": "EMPIEZA A CREAR CON",
+    "titleLine2": "BODY SWAP STUDIO",
+    "description": "Cambia el personaje de cualquier vídeo de forma dinámica eligiendo un videoclip y una imagen del personaje objetivo."
+  },
+  "placeholders": {
+    "prompt": "Opcional: describe el movimiento o la escena..."
+  },
+  "badges": {
+    "bodySwap": "Intercambio de cuerpos"
+  },
+  "confirm": {
+    "deleteGenerated": "¿Seguro que quieres eliminar este elemento generado?"
+  },
+  "errors": {
+    "videoTooLarge": "El vídeo supera el límite de 50 MB.",
+    "imageTooLarge": "La imagen supera el límite de 10 MB.",
+    "missingVideo": "Primero suba un vídeo de origen.",
+    "missingImage": "Primero sube una imagen del personaje.",
+    "videoUploadFailed": "Error al subir el vídeo: {message}",
+    "imageUploadFailed": "Error al subir la imagen: {message}",
+    "generationFailed": "Error al generar el intercambio de cuerpos"
+  },
+  "defaults": {
+    "selectedVideo": "Vídeo seleccionado",
+    "selectedImage": "Imagen seleccionada",
+    "resultVideo": "Vídeo resultante"
+  }
+}

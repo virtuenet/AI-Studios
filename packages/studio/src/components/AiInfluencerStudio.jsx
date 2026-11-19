@@ -7,9 +7,7 @@ import { formatErrorMessage } from "../utils/formatError.js";
 import MobileGenerationActions, {
   GenerationCopyButtons,
 } from "./MobileGenerationActions.jsx";
-import en from "../messages/en/aiInfluencerStudio.json";
-import zh from "../messages/zh/aiInfluencerStudio.json";
-import { resolveCopy } from "../i18nUtils";
+import { getStudioCopy } from '../messages/studioCopy';
 
 const CDN = "https://cdn.muapi.ai/influencer";
 
@@ -348,7 +346,7 @@ export default function AiInfluencerStudio({
   isGenerating: externalIsGenerating,
   locale = "en",
 }) {
-  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
+  const copy = getStudioCopy('aiInfluencerStudio', locale);
   const [activeTab, setActiveTab] = useState("face");
 
   const [selectedOptions, setSelectedOptions] = useState(() => {

@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "badge": "Para desarrolladores y agentes de IA",
+    "title": "MCP y CLI",
+    "description": "Utiliza AI Studios desde tu terminal, tu IDE o cualquier asistente compatible con MCP. Genera imágenes, vídeos y audios de calidad cinematográfica con más de 100 modelos, sin salir de tu flujo de trabajo."
+  },
+  "quickStart": {
+    "sectionLabel": "Inicio rápido",
+    "steps": {
+      "installCli": "Instala la CLI",
+      "signIn": "Iniciar sesión",
+      "addSkills": "Añadir las habilidades"
+    }
+  },
+  "features": {
+    "cli": {
+      "description": "Genera imágenes, vídeos y audio desde el terminal con más de 14 modelos de IA. Interfaz dual: resultados humanos en color y JSON para agentes (--output-json, filtrado --jq). Flujos de trabajo asíncronos, subidas de archivos, seguimiento de créditos."
+    },
+    "mcp": {
+      "description": "Conecta Claude, Cursor, Windsurf y cualquier asistente compatible con MCP a más de 100 modelos generativos. Endpoint alojado: sin necesidad de instalación. 19 herramientas estructuradas con esquemas de entrada/salida, sondeo asíncrono y gestión de cuentas."
+    },
+    "skills": {
+      "description": "Kit de herramientas multimodal para Claude Code, Cursor y Gemini CLI. Ajustes predeterminados de Cinema Director, Nano-Banana, UI Designer, Logo Creator, Seedance 2, AI Clipping y YouTube Shorts. Nativo de agentes con salidas JSON y códigos de salida semánticos."
+    }
+  },
+  "viewOnGithub": "Ver en GitHub",
+  "examples": {
+    "sectionLabel": "Ejemplos",
+    "imageGeneration": "Generación de imágenes",
+    "textToVideo": "Texto a vídeo",
+    "audioCreation": "Creación de audio",
+    "runSkill": "Ejecutar una habilidad"
+  },
+  "footer": "Código abierto · Licencia MIT · Funciona con Claude, Cursor, Windsurf y Gemini CLI"
+}

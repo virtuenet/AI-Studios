@@ -1,0 +1,567 @@
+{
+  "categories": {
+    "all": "Tous",
+    "t2v": "Texte en vidéo",
+    "i2v": "Image en vidéo",
+    "v2v": "Outils vidéo"
+  },
+  "providers": {
+    "allProviders": "Tous les fournisseurs"
+  },
+  "search": {
+    "placeholder": "Rechercher des modèles..."
+  },
+  "media": {
+    "image": "Image",
+    "video": "Vidéo",
+    "audio": "Audio",
+    "endFrame": "Fin du cadre",
+    "removePrefix": "Retirer"
+  },
+  "upload": {
+    "uploadStartFrame": "Télécharger l'image de début",
+    "uploadEndFrame": "Télécharger le cadre de fin",
+    "uploadUpToReferenceImages": "Téléchargez jusqu'à {count} images de référence",
+    "uploadingProgress": "{title} : {progress} % téléchargés"
+  },
+  "placeholders": {
+    "editVideo": "Décrire comment éditer la vidéo",
+    "continueVideo": "Décrivez comment continuer la vidéo",
+    "motion": "Décrire le mouvement",
+    "motionOptional": "Décrire le mouvement (facultatif)",
+    "videoReadyRemoveWatermark": "Vidéo prête : cliquez sur Générer pour supprimer le filigrane",
+    "motionOrEffect": "Décrire le mouvement ou l'effet",
+    "motionOrEffectOptional": "Décrire le mouvement ou l'effet (facultatif)",
+    "optionalContinueVideo": "Facultatif : décrivez comment continuer la vidéo...",
+    "describeVideo": "Décrivez la vidéo que vous souhaitez créer"
+  },
+  "dropdowns": {
+    "model": "Modèle",
+    "source": "Mode vidéo",
+    "baseGeneration": "Génération de base",
+    "aspectRatio": "Rapport hauteur/largeur",
+    "effect": "Effet",
+    "effectType": "Type d'effet",
+    "duration": "Durée",
+    "resolution": "Résolution"
+  },
+  "controls": {
+    "draw": "Dessiner",
+    "generate": "Générer",
+    "generating": "Générateur..."
+  },
+  "extend": {
+    "continuingGeneration": "Poursuivre la génération précédente {famille} {family}"
+  },
+  "gallery": {
+    "download": "Télécharger",
+    "extend": "Étendre",
+    "extendSeedance": "Prolongez cette vidéo en utilisant Seedance 2.0 Extend",
+    "delete": "Supprimer",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet élément généré ?",
+    "noPromptProvided": "Aucune invite fournie",
+    "fallbackTitle": "Studio vidéo"
+  },
+  "empty": {
+    "heading": "COMMENCEZ À CRÉER AVEC",
+    "subtitle": "Animez des images dans de superbes vidéos IA avec des effets de mouvement"
+  },
+  "creativeAssets": {
+    "asset1": "Élément créatif 1",
+    "asset2": "Élément créatif 2",
+    "asset3": "Élément créatif 3",
+    "asset4": "Actif créatif 4"
+  },
+  "errors": {
+    "modelChangedDuringUpload": "Le modèle a changé lors du téléchargement. Veuillez ajouter à nouveau le fichier.",
+    "modelDoesNotSupportReference": "{family} ne prend pas en charge les références {mediaType}.",
+    "sourceDoesNotAcceptImages": "La source sélectionnée n'accepte pas les images.",
+    "waitForCurrentUpload": "Attendez la fin du téléchargement en cours, puis ajoutez à nouveau ces fichiers.",
+    "imageExceeds10MB": "L'image dépasse la limite de 10 Mo.",
+    "labelExceedsLimit": "{label} dépasse la limite de {limit} Mo.",
+    "labelUploadFailed": "Échec du téléchargement de {label} : {message}",
+    "noPromptForModel": "Veuillez saisir une invite pour ce modèle.",
+    "uploadVideoFirst": "Veuillez d'abord télécharger une vidéo.",
+    "uploadReferenceImageForMotion": "Veuillez télécharger une image de référence pour le contrôle de mouvement.",
+    "uploadAtLeastOneReferenceImage": "Veuillez d'abord télécharger au moins une image de référence.",
+    "enterPromptToGenerate": "Veuillez saisir une invite pour générer une vidéo.",
+    "noVideoUrlReturned": "Aucune URL de vidéo renvoyée par l'API",
+    "videoGenerationFailed": "La génération vidéo a échoué",
+    "deleteItemFailed": "Échec de la suppression de l'élément",
+    "noContinuationSource": "Choisissez un résultat {famille} compatible pour continuer. {family}"
+  },
+  "modelControls": {
+    "modes": {
+      "text": "À partir de l'invite",
+      "animate_image": "Animer une image",
+      "keyframes": "Images de début et de fin",
+      "references": "Utiliser des références",
+      "edit_video": "Modifier la vidéo",
+      "extend_uploaded_video": "Étendre la vidéo",
+      "motion_transfer": "Mouvement de transfert"
+    },
+    "settings": "Paramètres",
+    "quality": "Qualité",
+    "extensionDuration": "Durée de prolongation",
+    "defaultResolution": "Service par défaut",
+    "incompatible": "Ce choix n'est pas disponible pour cette version du modèle.",
+    "incompatibleShort": "Indisponible pour cette version",
+    "inheritedFormat": "Le format suit l'image source",
+    "inheritedVideoResolution": "La résolution suit la vidéo source",
+    "modeDescriptions": {
+      "text": "Créez une vidéo à partir de votre description.",
+      "animate_image": "Animez une image téléchargée en utilisant votre description.",
+      "keyframes": "Créez une vidéo entre deux images de votre choix.",
+      "references": "Créez une vidéo en utilisant les fichiers téléchargés comme guides.",
+      "edit_video": "Téléchargez une vidéo et décrivez vos modifications.",
+      "extend_uploaded_video": "Ajoutez de nouvelles séquences à la fin d'une vidéo téléchargée.",
+      "motion_transfer": "Appliquez le mouvement d’une vidéo à l’image d’un personnage."
+    },
+    "defaultVariant": "Défaut",
+    "advanced": "Avancé",
+    "adjustments": {
+      "resolution": "Utilise {valeur} {value}",
+      "duration": "Durée : {valeur} {value}",
+      "aspectRatio": "Format : {valeur} {value}",
+      "speed": "Vitesse : {valeur} {value}",
+      "profile": "Service : {valeur} {value}",
+      "quality": "Qualité : {valeur} {value}",
+      "imageUnused": "Les images téléchargées ne seront pas utilisées",
+      "videoUnused": "Les vidéos téléchargées ne seront pas utilisées",
+      "audioUnused": "L'audio téléchargé ne sera pas utilisé",
+      "imageCount": "Images utilisées : {valeur} {value}",
+      "videoCount": "Vidéos utilisées : {value}",
+      "audioCount": "Fichiers audio utilisés : {value}"
+    },
+    "fields": {
+      "seed": {
+        "title": "Graine",
+        "description": "Utilisez −1 pour des résultats aléatoires."
+      },
+      "high_bitrate": {
+        "title": "Débit binaire élevé",
+        "description": "Des fichiers plus volumineux, plus de détails."
+      },
+      "generate_audio": {
+        "title": "Générer du son",
+        "description": ""
+      },
+      "camera_fixed": {
+        "title": "Caméra fixe",
+        "description": "Gardez l'appareil photo immobile."
+      }
+    },
+    "provider": "Service de génération",
+    "providerHelp": "Choisissez un service spécifique en cas de besoin.",
+    "resolutionUnknown": "La résolution de sortie n'est pas spécifiée par ce service.",
+    "referenceSupport": "Prise en charge : {médias}. {media}",
+    "referenceMediaTypes": {
+      "image": "Images",
+      "video": "Vidéo",
+      "audio": "Audio"
+    },
+    "restoreDefaultResolution": "Utiliser la taille de sortie par défaut du service"
+  },
+  "seedance": {
+    "speed": "Vitesse",
+    "speeds": {
+      "standard": "Vitesse standard",
+      "fast": "Rapide"
+    },
+    "tools": "Outils vidéo Seedance",
+    "profiles": {
+      "standard": {
+        "label": "Standard",
+        "description": ""
+      },
+      "intl": {
+        "label": "International",
+        "description": "Déploiement international."
+      },
+      "vip": {
+        "label": "VIP",
+        "description": "Traitement prioritaire."
+      },
+      "mini": {
+        "label": "Mini",
+        "description": "Modèle plus léger."
+      },
+      "spicy": {
+        "label": "Épicé",
+        "description": "Contraste et mouvement plus audacieux."
+      },
+      "mini_spicy": {
+        "label": "Mini épicé",
+        "description": ""
+      },
+      "legacy": {
+        "label": "API Seedance 2.0",
+        "description": ""
+      },
+      "legacy_new": {
+        "label": "Nouvelle API Seedance 2.0",
+        "description": ""
+      }
+    },
+    "continueGenerated": "Continuer un résultat Seedance 2.0",
+    "removeWatermark": "Supprimer le filigrane",
+    "toolNames": {
+      "continueGenerated": "Continuer Seedance 2.0",
+      "removeWatermark": "Supprimer le filigrane"
+    },
+    "toolVariants": {
+      "standard": "Standard",
+      "vip": "VIP",
+      "pro": "Pro"
+    },
+    "editAudio": {
+      "title": "Nouveau son",
+      "description": "Désactivé conserve l’audio d’origine."
+    }
+  },
+  "happyHorse": {
+    "fields": {
+      "seed": {
+        "title": "Graine",
+        "description": "Laissez vide pour des résultats aléatoires."
+      },
+      "audio_setting": {
+        "title": "Audio",
+        "description": "",
+        "optionLabels": {
+          "auto": "Laissez le modèle choisir",
+          "origin": "Conserver l'original"
+        }
+      }
+    }
+  },
+  "veo": {
+    "speed": "Génération",
+    "speeds": {
+      "standard": "Standard",
+      "fast": "Rapide",
+      "lite": "Léger"
+    },
+    "speedDescriptions": {
+      "standard": "",
+      "fast": "Génération plus rapide.",
+      "lite": "Coût inférieur."
+    },
+    "tools": "Outils vidéo Veo",
+    "toolNames": {
+      "continueGenerated": "Continuer Veo 3.1",
+      "upscale": "Créer une copie 4K"
+    },
+    "toolsHelp": "Utilisez une vidéo Veo 3.1 terminée.",
+    "sourceVideo": "Vidéo source",
+    "sourceHelp": {
+      "continueGenerated": "Créez d'abord une vidéo 720p avec Veo 3.1 Standard ou Fast.",
+      "upscale": "Créez d'abord une vidéo avec Veo 3.1 Standard ou Fast."
+    },
+    "adjustments": {
+      "speed": "Génération : {valeur} {value}"
+    }
+  },
+  "minimax": {
+    "speed": "Vitesse",
+    "speeds": {
+      "standard": "Vitesse standard",
+      "fast": "Rapide"
+    },
+    "speedDescriptions": {
+      "standard": "",
+      "fast": "Génération plus rapide."
+    },
+    "provider": "Personnalisation",
+    "providerHelp": "Utilisez un modèle LoRA ou Spicy.",
+    "profiles": {
+      "standard": {
+        "label": "Standard",
+        "description": ""
+      },
+      "lora": {
+        "label": "LoRA",
+        "description": "Appliquez des styles ou des caractères personnalisés."
+      },
+      "spicy": {
+        "label": "Épicé",
+        "description": "Modèle alternatif pour l’animation d’images."
+      }
+    },
+    "adjustments": {
+      "profile": "Personnalisation : {valeur} {value}"
+    },
+    "fields": {
+      "go_fast": {
+        "title": "Vitesse supplémentaire",
+        "description": "Échange les détails contre la vitesse."
+      },
+      "loras": {
+        "title": "LoRA",
+        "description": "Ajoutez jusqu'à 3 styles ou caractères personnalisés."
+      }
+    }
+  },
+  "alibaba": {
+    "speed": "Vitesse",
+    "speeds": {
+      "standard": "Vitesse standard",
+      "fast": "Rapide"
+    },
+    "speedDescriptions": {
+      "standard": "",
+      "fast": "Génération plus rapide."
+    },
+    "provider": "Service de génération",
+    "providerHelp": "Utilisez un service différent pour la même version Wan.",
+    "profiles": {
+      "standard": {
+        "label": "Standard",
+        "description": ""
+      },
+      "prime": {
+        "label": "Prime",
+        "description": ""
+      },
+      "spicy": {
+        "label": "Épicé",
+        "description": ""
+      }
+    },
+    "durationLabels": {
+      "0": "Durée de la source (jusqu'à 10 s)"
+    },
+    "fields": {
+      "enable_audio": {
+        "title": "Générer du son",
+        "description": ""
+      },
+      "thinking_mode": {
+        "title": "Raisonnement rapide",
+        "description": "Aidez le modèle à interpréter des descriptions complexes."
+      },
+      "negative_prompt": {
+        "title": "Éviter",
+        "description": "Décrivez ce qu'il faut laisser de côté."
+      },
+      "shot_type": {
+        "title": "Coups de feu",
+        "description": "Utilisez une prise de vue continue ou plusieurs prises de vue.",
+        "optionLabels": {
+          "single": "Coup unique",
+          "multi": "Prises de vue multiples"
+        }
+      },
+      "enable_prompt_expansion": {
+        "title": "Développer l'invite",
+        "description": "Laissez le modèle ajouter des détails à votre description."
+      },
+      "audio_setting": {
+        "title": "Audio",
+        "description": "Suivez votre description ou conservez l'audio source.",
+        "optionLabels": {
+          "auto": "Suivre l'invite",
+          "origin": "Conserver l'original"
+        }
+      },
+      "mode": {
+        "title": "Animation de personnages",
+        "description": "Animez le personnage ou remplacez celui de la vidéo.",
+        "optionLabels": {
+          "animate": "Personnage animé",
+          "replace": "Remplacer le personnage"
+        }
+      }
+    }
+  },
+  "kling": {
+    "speed": "Vitesse",
+    "speeds": {
+      "standard": "Vitesse standard",
+      "fast": "Rapide"
+    },
+    "speedDescriptions": {
+      "standard": "",
+      "fast": "Génération plus rapide."
+    },
+    "provider": "Génération",
+    "providerHelp": "",
+    "profiles": {
+      "standard": {
+        "label": "Standard",
+        "description": ""
+      },
+      "master": {
+        "label": "Maître",
+        "description": "Mouvement amélioré et suivi rapide."
+      },
+      "pro": {
+        "label": "Pro",
+        "description": "Plus de détails."
+      },
+      "fast": {
+        "label": "Rapide",
+        "description": "Montage vidéo plus rapide."
+      }
+    },
+    "adjustments": {
+      "profile": "Génération : {valeur} {value}"
+    },
+    "fields": {
+      "sound": {
+        "title": "Générer du son",
+        "description": ""
+      },
+      "keep_original_sound": {
+        "title": "Conserver l'audio d'origine",
+        "description": "Utilisez l'audio de votre vidéo."
+      },
+      "character_orientation": {
+        "title": "Pose du personnage",
+        "description": "Choisissez quelle source définit la pose du personnage.",
+        "optionLabels": {
+          "image": "À partir de l'image (jusqu'à 10 s)",
+          "video": "À partir de la vidéo (jusqu'à 30 s)"
+        }
+      }
+    }
+  },
+  "vidu": {
+    "speed": "Vitesse",
+    "speeds": {
+      "standard": "Vitesse standard",
+      "fast": "Rapide"
+    },
+    "speedDescriptions": {
+      "standard": "",
+      "fast": "Génération plus rapide."
+    },
+    "fields": {
+      "audio": {
+        "title": "Générer du son",
+        "description": ""
+      },
+      "bgm": {
+        "title": "Musique de fond",
+        "description": ""
+      },
+      "movement_amplitude": {
+        "title": "Mouvement",
+        "description": "Combien de sujets bougent.",
+        "optionLabels": {
+          "auto": "Laissez le modèle choisir",
+          "small": "Subtil",
+          "medium": "Modéré",
+          "large": "Fort"
+        }
+      }
+    },
+    "musicDuration": "Définit la durée sur 4 secondes."
+  },
+  "xai": {
+    "aspectRatioLabels": {
+      "auto": "Faire correspondre l'image"
+    },
+    "singleImageFormat": "Avec une image, le format suit cette image.",
+    "fields": {
+      "mode": {
+        "title": "Style",
+        "description": "",
+        "optionLabels": {
+          "normal": "Standard",
+          "fun": "Créatif",
+          "spicy": "Épicé"
+        }
+      }
+    }
+  },
+  "sora": {
+    "provider": "Génération",
+    "providerHelp": "",
+    "profiles": {
+      "standard": {
+        "label": "Standard",
+        "description": "Pour les vidéos de tous les jours."
+      },
+      "pro": {
+        "label": "Pro",
+        "description": "Plus de détails, jusqu'à 1080p."
+      }
+    },
+    "adjustments": {
+      "profile": "Génération : {valeur} {value}"
+    }
+  },
+  "ltx": {
+    "provider": "Génération",
+    "providerHelp": "",
+    "profiles": {
+      "standard": {
+        "label": "Standard",
+        "description": "480p-1080p, 5-20 secondes."
+      },
+      "pro": {
+        "label": "Pro",
+        "description": "6, 8 ou 10 secondes."
+      },
+      "fast": {
+        "label": "Rapide",
+        "description": "Génération plus rapide, jusqu'à 20 secondes."
+      }
+    },
+    "adjustments": {
+      "profile": "Génération : {valeur} {value}"
+    }
+  },
+  "pixverse": {
+    "fields": {
+      "audio": {
+        "title": "Générer du son",
+        "description": ""
+      },
+      "generate_audio_switch": {
+        "title": "Générer du son",
+        "description": ""
+      },
+      "style": {
+        "title": "Style",
+        "description": "",
+        "emptyLabel": "Aucun préréglage",
+        "optionLabels": {
+          "none": "Aucun préréglage",
+          "anime": "Anime",
+          "3d_animation": "Animations 3D",
+          "clay": "Argile",
+          "comic": "Comique",
+          "cyberpunk": "Cyberpunk"
+        }
+      },
+      "thinking": {
+        "title": "Amélioration rapide",
+        "description": "Laissez le modèle affiner votre description.",
+        "optionLabels": {
+          "auto": "Laissez le modèle choisir",
+          "enabled": "Sur",
+          "disabled": "Désactivé"
+        }
+      },
+      "thinking_type": {
+        "title": "Amélioration rapide",
+        "description": "Aidez le modèle à interpréter votre description.",
+        "optionLabels": {
+          "auto": "Laissez le modèle choisir",
+          "enabled": "Sur",
+          "disabled": "Désactivé"
+        }
+      },
+      "multi_clip": {
+        "title": "Prises de vue multiples",
+        "description": "Utilisez plusieurs prises de vue avec des changements de caméra."
+      },
+      "negative_prompt": {
+        "title": "Éviter",
+        "description": "Décrivez ce qu'il faut laisser de côté."
+      }
+    }
+  }
+}

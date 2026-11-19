@@ -31,9 +31,7 @@ import {
   promptControlClassName,
   promptMediaButtonClassName,
 } from "./prompt/PromptComposer.jsx";
-import en from "../messages/en/motionControlStudio.json";
-import zh from "../messages/zh/motionControlStudio.json";
-import { resolveCopy } from "../i18nUtils";
+import { getStudioCopy } from '../messages/studioCopy';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 async function downloadFile(url, filename) {
@@ -555,7 +553,7 @@ export default function MotionControlStudio({
   onFilesHandled,
   locale = "en",
 }) {
-  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
+  const copy = getStudioCopy('motionControlStudio', locale);
   const LEGACY_PERSIST_KEY = "hg_motion_control_studio_persistent";
   const PERSIST_KEY = scopedPersistKey(LEGACY_PERSIST_KEY, apiKey);
 

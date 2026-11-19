@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "titleLine1": "COMMENCEZ À CRÉER AVEC",
+    "titleLine2": "STUDIO DE SYNCHRONISATION LIPALE",
+    "subtitle": "Synchronisez n'importe quelle voix avec n'importe quelle vidéo de visage pour créer des avatars et des vidéos parlants de qualité supérieure."
+  },
+  "modes": {
+    "portraitImage": "Portrait",
+    "video": "Vidéo"
+  },
+  "media": {
+    "imageLabel": "Image",
+    "videoLabel": "Vidéo",
+    "audioLabel": "Audio",
+    "uploadFilePrefix": "Télécharger",
+    "uploadFileSuffix": "déposer",
+    "clickToClear": "cliquez pour effacer",
+    "noImage": "Aucune image",
+    "noVideo": "Pas de vidéo",
+    "noAudio": "Pas de son"
+  },
+  "prompt": {
+    "placeholder": "Décrire le style de discours..."
+  },
+  "model": {
+    "selectModel": "Sélectionnez le modèle",
+    "dropdownTitle": "Modèle",
+    "resolutionDropdownTitle": "Résolution"
+  },
+  "actions": {
+    "generate": "Synchronisation des lèvres",
+    "generating": "Générateur...",
+    "download": "Télécharger",
+    "delete": "Supprimer"
+  },
+  "confirm": {
+    "deleteItem": "Êtes-vous sûr de vouloir supprimer cet élément généré ?"
+  },
+  "badges": {
+    "lipSync": "Synchronisation labiale"
+  },
+  "errors": {
+    "imageTooLarge": "L'image dépasse la limite de 10 Mo.",
+    "videoTooLarge": "La vidéo dépasse la limite de 50 Mo.",
+    "audioTooLarge": "Le fichier audio dépasse la limite de 10 Mo.",
+    "imageUploadFailed": "Échec du téléchargement de l'image : {message}",
+    "videoUploadFailed": "Échec du téléchargement de la vidéo : {message}",
+    "audioUploadFailed": "Échec du téléchargement audio : {message}",
+    "needAudio": "Veuillez d'abord télécharger un fichier audio.",
+    "needImage": "Veuillez d'abord télécharger une image portrait.",
+    "needVideo": "Veuillez d'abord télécharger une vidéo source.",
+    "generationFailed": "La génération de synchronisation labiale a échoué"
+  }
+}

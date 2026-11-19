@@ -588,7 +588,7 @@ The `packages/studio` library is also consumed by the hosted version on [muapi.a
 ## 🧪 Testing
 
 ```bash
-npm run test:vitest    # 149 unit / component / accessibility tests (Vitest)
+npm run test:vitest    # 164 unit / component / accessibility tests (Vitest)
 npm test               # 77 Electron local-inference tests (Node)
 npx playwright test --project=chromium   # 11 E2E smoke tests (port 3100)
 ```

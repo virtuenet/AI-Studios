@@ -1,0 +1,53 @@
+{
+  "uploader": {
+    "clear": "Clair",
+    "uploadPrompt": "Télécharger une piste audio",
+    "uploadHint": "MP3, WAV, M4A jusqu'à 20 Mo",
+    "uploading": "Téléchargement...",
+    "ready": "Prêt à générer",
+    "maxSuffix": "(Maximum {maximum}) {max}",
+    "trackLabel": "Piste n° {index}",
+    "sizeLimitError": "Le fichier audio dépasse la limite de 20 Mo.",
+    "uploadFailedError": "Échec du téléchargement : {message}"
+  },
+  "player": {
+    "nowPlaying": "Lecture en cours",
+    "defaultTitle": "Piste générée",
+    "muteUnmute": "Désactiver/Réactiver le son",
+    "pause": "Pause",
+    "play": "Jouer",
+    "download": "Télécharger l'audio",
+    "save": "Sauvegarder"
+  },
+  "sidebar": {
+    "modelLabel": "Modèle audio",
+    "selectModel": "Sélectionnez le modèle",
+    "descriptionLabel": "Description",
+    "selectOption": "Sélectionnez une option",
+    "promptPlaceholder": "Entrez ce que vous voulez générer...",
+    "lyricsPromptLabel": "Paroles / Invite",
+    "fieldPlaceholder": "Saisissez {champ}... {field}",
+    "requiredFieldError": "Veuillez remplir le champ obligatoire : {field}"
+  },
+  "generate": {
+    "generating": "Génération audio...",
+    "cta": "Générer une piste",
+    "noUrlError": "Aucune URL audio renvoyée par l'API.",
+    "genericError": "La génération audio a échoué",
+    "droppedFileUploadError": "Échec du téléchargement du fichier supprimé : {message}"
+  },
+  "result": {
+    "errorHeading": "Erreur de génération",
+    "loadingHeading": "Générer une bande-son",
+    "loadingSubtext": "Rendu des formes d'onde audio et des voix...",
+    "emptyHeading": "Studio audio",
+    "emptyBody": "Choisissez un modèle de musique IA, un cloneur de voix ou un générateur de sons. Modifiez les variables sur la gauche et créez votre prochaine piste haute fidélité.",
+    "newGeneration": "Nouvelle génération",
+    "success": "Succès"
+  },
+  "history": {
+    "heading": "Historique des générations ({count})",
+    "untitled": "Audio sans titre",
+    "fallbackModel": "Audio"
+  }
+}

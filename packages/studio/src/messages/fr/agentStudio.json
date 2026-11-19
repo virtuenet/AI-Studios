@@ -1,0 +1,57 @@
+{
+  "tabs": {
+    "templates": "Modèles",
+    "my-agents": "Mes agents",
+    "my-chats": "Mes discussions"
+  },
+  "headings": {
+    "agents": "Agents",
+    "createAgent": "Créer un agent"
+  },
+  "buttons": {
+    "back": "Agents",
+    "create": "Créer",
+    "createAgentSubmit": "Créer un agent",
+    "creating": "Création...",
+    "send": "Envoyer",
+    "retry": "Réessayer",
+    "browseTemplates": "Parcourir les modèles"
+  },
+  "labels": {
+    "name": "Nom",
+    "description": "Description",
+    "systemPrompt": "Invite système",
+    "welcomeMessage": "Message de bienvenue (facultatif)"
+  },
+  "placeholders": {
+    "name": "par ex. Créateur de légendes Pro",
+    "description": "En quoi cet agent aide-t-il ?",
+    "systemPrompt": "Vous êtes un assistant utile qui...",
+    "welcomeMessage": "Salut! Comment puis-je vous aider aujourd'hui ?",
+    "chatInput": "Envoyez un message à cet agent..."
+  },
+  "empty": {
+    "noChats": "Pas encore de chat",
+    "noAgents": "Aucun agent trouvé"
+  },
+  "errors": {
+    "loadFailed": "Échec du chargement.",
+    "loadAgentFailed": "Échec du chargement de l'agent",
+    "sendFailed": "Échec de l'envoi du message",
+    "createFailed": "Échec de la création de l'agent"
+  },
+  "card": {
+    "defaultCategory": "Assistant IA",
+    "unnamedAgent": "Agent sans nom",
+    "byPrefix": "Par",
+    "unknownAgent": "Agent inconnu",
+    "newChat": "Nouvelle discussion",
+    "msgsSuffix": "msgs"
+  },
+  "time": {
+    "justNow": "tout à l' heure",
+    "minutesAgo": "il y a {n}il y a",
+    "hoursAgo": "il y a {n}h",
+    "daysAgo": "il y a {n}d"
+  }
+}

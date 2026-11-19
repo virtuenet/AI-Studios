@@ -1,0 +1,49 @@
+{
+  "cameraOverlay": {
+    "eyebrow": "シネマスタジオ",
+    "title": "カメラ設定",
+    "description": "カメラ、レンズ、焦点距離、被写界深度を選択して、一貫した映画のような外観を作り出します。",
+    "close": "閉じる",
+    "closeAria": "カメラ設定を閉じる",
+    "columns": {
+      "camera": "カメラ",
+      "lens": "レンズ",
+      "focalLength": "焦点距離",
+      "aperture": "絞り"
+    }
+  },
+  "dropdowns": {
+    "aspectRatio": "アスペクト比",
+    "resolution": "解像度"
+  },
+  "actions": {
+    "copyPrompt": "プロンプトをコピー",
+    "promptCopied": "プロンプトをコピーしました",
+    "copyImage": "画像をコピー",
+    "imageCopied": "画像をコピーしました",
+    "download": "ダウンロード",
+    "delete": "削除",
+    "deleteConfirm": "この生成されたアイテムを削除してもよろしいですか？"
+  },
+  "card": {
+    "noPrompt": "プロンプトなし",
+    "badge": "シネマスタジオ",
+    "historyItemAlt": "履歴アイテム{index}"
+  },
+  "empty": {
+    "kicker": "次のツールでクリエーションを始めましょう",
+    "title": "CINEMA STUDIO",
+    "description": "予算が無制限なら、何を撮影しますか？カメラ、照明、レンズをコントロールし、高品質の映画シーンをプロンプトで作成します。"
+  },
+  "prompt": {
+    "placeholder": "あなたの映画シーンを説明してください...",
+    "generating": "生成中...",
+    "generate": "撮影"
+  },
+  "fullscreen": {
+    "alt": "全画面プレビュー"
+  },
+  "referenceImage": {
+    "alt": "参照"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "uploadButton": {
+    "faceLabel": "Affronter",
+    "referenceImageLabel": "Image de référence",
+    "addUpToImages": "Ajoutez jusqu'à {max} images",
+    "singleSelectedTitle": "1 image sélectionnée – cliquez pour en ajouter d'autres (jusqu'à {max})",
+    "multiSelectedTitle": "{count} sur {max} images sélectionnées — cliquez pour gérer",
+    "tooLargeAlert": "Les images suivantes sont trop volumineuses (10 Mo maximum) : {names}",
+    "uploadFailedAlert": "Échec du téléchargement de l'image : {message}",
+    "headerTitle": "Images de référence",
+    "selectUpTo": "Sélectionnez jusqu'à {max} images",
+    "doneButton": "✓ Terminé ({count})",
+    "uploadFilesButton": "Télécharger des fichiers",
+    "uploadNewButton": "Télécharger nouveau",
+    "emptyState": "Aucun téléchargement pour l'instant",
+    "removeFromHistory": "Supprimer de l'historique",
+    "selectedCount": "{count} sur {max} sélectionnés",
+    "useSelected": "Utiliser la sélection"
+  },
+  "modelDropdown": {
+    "categoryAll": "Tous",
+    "categoryT2I": "Texte en image",
+    "categoryI2I": "Image à image",
+    "allProviders": "Tous les fournisseurs",
+    "searchPlaceholder": "Rechercher des modèles...",
+    "modelsSuffix": "modèles",
+    "noModelsFound": "Aucun modèle trouvé"
+  },
+  "gallery": {
+    "generatedImageAlt": "Image générée",
+    "download": "Télécharger",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet élément généré ?",
+    "deleteFailed": "Échec de la suppression de l'élément",
+    "noPrompt": "Aucune invite fournie",
+    "modelFallback": "Studio d'images"
+  },
+  "emptyState": {
+    "heading": "COMMENCEZ À CRÉER AVEC",
+    "subtitle": "Décrivez une scène, un personnage, une ambiance ou un style et regardez-le prendre vie"
+  },
+  "promptBar": {
+    "placeholderMultiImage": "{count} images sélectionnées – décrire la transformation (facultatif)",
+    "placeholderI2I": "Décrivez comment transformer cette image (facultatif)",
+    "placeholderT2I": "Décrivez l'image que vous souhaitez créer",
+    "swapFaceLabel": "Changer de visage",
+    "effectFallback": "Effet",
+    "drawButton": "Dessiner",
+    "generating": "Générateur...",
+    "generateButton": "Générer"
+  },
+  "popovers": {
+    "model": "Modèle",
+    "aspectRatio": "Rapport hauteur/largeur",
+    "resolution": "Résolution",
+    "effectType": "Type d'effet"
+  },
+  "errors": {
+    "noImageReferenceSupport": "{name} ne prend pas en charge les références d'images.",
+    "uploadReferenceFirst": "Veuillez d'abord télécharger une image de référence.",
+    "uploadSwapFaceFirst": "Veuillez télécharger une image de visage d'échange.",
+    "enterPromptFirst": "Veuillez saisir une invite pour générer une image.",
+    "generationFailed": "La génération d'image a échoué"
+  },
+  "fullscreen": {
+    "previewAlt": "Aperçu plein écran"
+  }
+}

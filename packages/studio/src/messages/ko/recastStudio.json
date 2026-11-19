@@ -1,0 +1,68 @@
+{
+  "labels": {
+    "video": "동영상",
+    "characterImage": "캐릭터 이미지",
+    "library": "도서관",
+    "orientationPrefix": "정위:"
+  },
+  "buttons": {
+    "use": "사용",
+    "download": "다운로드",
+    "delete": "삭제",
+    "swapBody": "바디 교환",
+    "swapping": "교환 중..."
+  },
+  "titles": {
+    "clickToClear": "{fileName} — 지우려면 클릭하세요.",
+    "uploadFile": "{label} 파일을 업로드하거나 드래그 앤 드롭하세요.",
+    "enlargePreview": "미리보기 확대",
+    "deleteFromLibrary": "라이브러리에서 삭제"
+  },
+  "assetLibrary": {
+    "header": "자산 라이브러리",
+    "tabs": {
+      "videos": "비디오",
+      "images": "이미지",
+      "results": "결과"
+    },
+    "empty": "자산을 찾을 수 없습니다."
+  },
+  "dropdowns": {
+    "model": "모델",
+    "selectModel": "모델 선택",
+    "aspectRatio": "종횡비",
+    "orientation": "정위",
+    "orientationImage": "영상",
+    "orientationVideo": "동영상",
+    "orientationImageDesc": "이미지 방향 사용(최대 10초 동영상)",
+    "orientationVideoDesc": "비디오 방향 사용(최대 30초 비디오)"
+  },
+  "empty": {
+    "titleLine1": "만들기 시작하기",
+    "titleLine2": "바디 스왑 스튜디오",
+    "description": "비디오 클립과 대상 캐릭터 이미지를 선택하여 비디오의 캐릭터를 동적으로 교체합니다."
+  },
+  "placeholders": {
+    "prompt": "선택 사항 - 동작이나 장면을 설명합니다..."
+  },
+  "badges": {
+    "bodySwap": "바디 스왑"
+  },
+  "confirm": {
+    "deleteGenerated": "생성된 이 항목을 삭제하시겠습니까?"
+  },
+  "errors": {
+    "videoTooLarge": "동영상이 50MB 제한을 초과했습니다.",
+    "imageTooLarge": "이미지가 10MB 제한을 초과했습니다.",
+    "missingVideo": "먼저 원본 영상을 올려주세요.",
+    "missingImage": "먼저 캐릭터 이미지를 업로드해주세요.",
+    "videoUploadFailed": "동영상 업로드 실패: {message}",
+    "imageUploadFailed": "이미지 업로드 실패: {message}",
+    "generationFailed": "본체 스왑 생성 실패"
+  },
+  "defaults": {
+    "selectedVideo": "선택한 비디오",
+    "selectedImage": "선택한 이미지",
+    "resultVideo": "결과 영상"
+  }
+}

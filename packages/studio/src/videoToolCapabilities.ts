@@ -1,3 +1,13 @@
+/**
+ * Video tool capability detection, presentation metadata, option
+ * serialization, and payload construction.
+ *
+ * Converted from videoToolCapabilities.js as part of the incremental
+ * TypeScript migration. Complex dynamic maps are intentionally left loosely
+ * typed for now; exported signatures are annotated and can be tightened
+ * incrementally.
+ */
+
 const HEYGEN_TRANSLATION_LANGUAGES = Object.freeze([
   "English",
   "Spanish",
@@ -529,7 +539,7 @@ const continuationSourceModelIds = new Map(
   ]),
 );
 
-export function isContinuationSourceModel(modelOrId, sourceModelId) {
+export function isContinuationSourceModel(modelOrId: unknown, sourceModelId?: string | null): boolean {
   const modelId = typeof modelOrId === "string" ? modelOrId : modelOrId?.id;
   const family = CONTINUATION_TARGETS[modelId]?.family;
   return continuationSourceModelIds.get(family)?.has(sourceModelId) || false;
@@ -556,7 +566,7 @@ function getVideoToolCapabilities(model) {
   };
 }
 
-export function getVideoToolPresentation(model) {
+export function getVideoToolPresentation(model: Record<string, any> | null | undefined) {
   const capabilities = getVideoToolCapabilities(model);
   if (!capabilities) {
     return {
@@ -596,6 +606,7 @@ export function getVideoToolPresentation(model) {
 }
 
 export function resolveVideoUploadTransition({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mode,
   currentModel,
   defaultModel,
@@ -621,7 +632,7 @@ export function resolveVideoUploadTransition({
   };
 }
 
-export function getVideoToolOptionDefinitions(model) {
+export function getVideoToolOptionDefinitions(model: Record<string, any> | null | undefined) {
   const capabilities = getVideoToolCapabilities(model);
   if (!capabilities) return [];
 
@@ -630,7 +641,7 @@ export function getVideoToolOptionDefinitions(model) {
     .map(([key, input]) => ({ key, ...input }));
 }
 
-export function getDefaultVideoToolOptions(model) {
+export function getDefaultVideoToolOptions(model: Record<string, any> | null | undefined) {
   const options = {};
   for (const input of getVideoToolOptionDefinitions(model)) {
     if (input.default !== undefined) options[input.key] = input.default;
@@ -638,7 +649,7 @@ export function getDefaultVideoToolOptions(model) {
   return options;
 }
 
-export function serializeVideoToolOptions(model, values = {}) {
+export function serializeVideoToolOptions(model: Record<string, any> | null | undefined, values: Record<string, unknown> = {}) {
   const payload = {};
   for (const input of getVideoToolOptionDefinitions(model)) {
     const value = values[input.key];
@@ -657,7 +668,7 @@ function getVideoToolPayloadDefaults(model) {
   return { ...(capabilities?.payloadDefaults || {}) };
 }
 
-export function buildVideoToolPayload(model, params = {}) {
+export function buildVideoToolPayload(model: Record<string, any> | null | undefined, params: Record<string, any> = {}) {
   const capabilities = getVideoToolCapabilities(model);
   const videoField = capabilities?.videoField || "video_url";
   const payload = {
@@ -678,7 +689,7 @@ export function buildVideoToolPayload(model, params = {}) {
   };
 }
 
-export function getContinuationConfig(modelOrId) {
+export function getContinuationConfig(modelOrId: unknown) {
   const modelId = typeof modelOrId === "string" ? modelOrId : modelOrId?.id;
   const target = CONTINUATION_TARGETS[modelId];
   if (!target) return null;
@@ -724,7 +735,7 @@ function resolveContinuationRequestId(entry) {
   return null;
 }
 
-export function getCompatibleContinuationSources(modelOrId, history = []) {
+export function getCompatibleContinuationSources(modelOrId: unknown, history: unknown[] = []) {
   const config = getContinuationConfig(modelOrId);
   if (!config) return [];
   const sources = [];

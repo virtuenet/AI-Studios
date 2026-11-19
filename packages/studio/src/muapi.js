@@ -2,12 +2,12 @@ import { getModelById, getVideoModelById, getI2IModelById, getI2VModelById, getV
 import {
     buildVideoToolPayload,
     serializeVideoToolOptions,
-} from './videoToolCapabilities.js';
+} from './videoToolCapabilities';
 import { buildImageSizePayload } from './imageSizing';
-import { buildImageInputPayload, getImageInputValidationError, normalizePrimaryImageUrls } from './imageInputContracts.js';
+import { buildImageInputPayload, getImageInputValidationError, normalizePrimaryImageUrls } from './imageInputContracts';
 import { pollForGenerationResult } from './utils/generationLifecycle.js';
 import { getModelMediaCapabilities, mapReferenceParams } from './modelCapabilities';
-import { buildSupplementalInputPayload } from './modelParameters.js';
+import { buildSupplementalInputPayload } from './modelParameters';
 import { getGroupedVideoConfiguration } from './groupedVideoModels.js';
 
 // In an http(s) browser we route through the host app's proxy (Next.js routes

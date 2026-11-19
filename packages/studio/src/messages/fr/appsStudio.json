@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "badge": "Modèles prêts pour les revenus",
+    "titleLine1": "LANCEZ UNE APPLICATION IA.",
+    "titleLine2": "COMMENCEZ À GAGNER AUJOURD’HUI.",
+    "subtitle": "Chaque modèle est un SaaS IA entièrement fonctionnel et intégré à Stripe que vous pouvez déployer en quelques minutes. Facturez vos utilisateurs, conservez les revenus : muapi gère l'infrastructure de l'IA."
+  },
+  "steps": {
+    "stepLabel": "Étape",
+    "deploy": {
+      "title": "Déployer en quelques minutes",
+      "body": "Forkez le modèle open source, ajoutez votre clé muapi et appuyez sur Vercel. Aucune configuration back-end n’est nécessaire."
+    },
+    "collect": {
+      "title": "Collecter les paiements",
+      "body": "Stripe est pré-câblé. Définissez votre propre tarification : crédits uniques, abonnements ou paiement à l'utilisation."
+    },
+    "keep": {
+      "title": "Gardez les revenus",
+      "body": "Les paiements vont directement sur votre compte Stripe. Vous possédez le produit, la marque et les bénéfices."
+    }
+  },
+  "card": {
+    "templateFallback": "Modèle",
+    "github": "GitHub",
+    "demo": "Démo"
+  },
+  "footer": {
+    "moreComingSoon": "Écosystème Muapi — Plus de modèles à venir"
+  },
+  "modal": {
+    "deployTitle": "Déployer {appName}",
+    "body": "Entrez vos coordonnées et nous vous enverrons le modèle {appName} ainsi que les instructions de configuration afin que vous puissiez le déployer et commencer à gagner immédiatement.",
+    "sending": "Envoi des détails...",
+    "getTemplate": "Obtenir un modèle",
+    "maybeLater": "Peut-être plus tard"
+  },
+  "toast": {
+    "requestSuccess": "J'ai compris! Nous vous enverrons les détails du modèle sous peu.",
+    "requestError": "Échec de l'enregistrement de l'intérêt. Veuillez réessayer plus tard."
+  }
+}

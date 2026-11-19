@@ -1,0 +1,63 @@
+{
+  "builder": {
+    "title": "빌더",
+    "reset": "다시 놓기"
+  },
+  "categoryTabs": {
+    "face": "얼굴",
+    "body": "몸",
+    "style": "스타일"
+  },
+  "subcategories": {
+    "character_type": "문자 유형",
+    "gender": "성별",
+    "ethnicity_origin_base": "민족 / 출신",
+    "eye_color": "눈 색깔",
+    "eyes_type": "눈 유형",
+    "eyes_details": "눈의 특징",
+    "mouth": "입과 치아",
+    "ears": "귀",
+    "horns": "어느 한 쪽",
+    "skin_conditions": "피부 상태",
+    "face_skin_material": "얼굴 피부 소재",
+    "face_surface_pattern": "피부 패턴",
+    "body_type": "체형",
+    "left_arm": "왼쪽 팔",
+    "right_arm": "오른팔",
+    "left_leg": "왼쪽 다리",
+    "right_leg": "오른쪽 다리",
+    "hair": "모발 / 머리 성장",
+    "accessories": "액세서리 및 표시",
+    "rendering_style": "렌더링 스타일"
+  },
+  "toolbar": {
+    "shuffle": "혼합",
+    "generate": "캐릭터 생성",
+    "generating": "생성 중…"
+  },
+  "preview": {
+    "generating": "AI 영향력자를 생성하는 중…",
+    "emptyTitle": "귀하의 AI 영향력자는 여기에 살고 있습니다.",
+    "emptySubtitleLine1": "AI 인플루언서 설계 및 구축",
+    "emptySubtitleLine2": "처음부터",
+    "save": "구하다",
+    "altGenerated": "생성된 AI 캐릭터"
+  },
+  "tags": {
+    "showMore": "더 보여줘",
+    "hide": "숨다"
+  },
+  "customPrompt": {
+    "placeholder": "추가 세부정보를 추가하세요. 예: 네온 사이버펑크 조명, 극적인 그림자"
+  },
+  "gallery": {
+    "title": "생성됨",
+    "countSuffix": "문자",
+    "emptyText": "생성된 캐릭터\n여기에 나타나다",
+    "altPrefix": "성격",
+    "download": "다운로드"
+  },
+  "errors": {
+    "generationFailed": "생성에 실패했습니다. 다시 시도해 주세요."
+  }
+}

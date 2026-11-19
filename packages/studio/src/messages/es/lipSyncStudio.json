@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "titleLine1": "EMPIEZA A CREAR CON",
+    "titleLine2": "LIP SYNC STUDIO",
+    "subtitle": "Sincroniza cualquier voz con cualquier vídeo de rostro para crear avatares y vídeos parlantes de primera calidad."
+  },
+  "modes": {
+    "portraitImage": "Imagen de retrato",
+    "video": "Vídeo"
+  },
+  "media": {
+    "imageLabel": "Imagen",
+    "videoLabel": "Vídeo",
+    "audioLabel": "Audio",
+    "uploadFilePrefix": "Subir",
+    "uploadFileSuffix": "archivo",
+    "clickToClear": "Haga clic para borrar",
+    "noImage": "Sin imagen",
+    "noVideo": "Sin vídeo",
+    "noAudio": "Sin audio"
+  },
+  "prompt": {
+    "placeholder": "Describir el estilo del habla..."
+  },
+  "model": {
+    "selectModel": "Seleccionar modelo",
+    "dropdownTitle": "Modelo",
+    "resolutionDropdownTitle": "Resolución"
+  },
+  "actions": {
+    "generate": "Sincronizar labios",
+    "generating": "Generando...",
+    "download": "Descargar",
+    "delete": "Eliminar"
+  },
+  "confirm": {
+    "deleteItem": "¿Seguro que quieres eliminar este elemento generado?"
+  },
+  "badges": {
+    "lipSync": "Sincronización labial"
+  },
+  "errors": {
+    "imageTooLarge": "La imagen supera el límite de 10 MB.",
+    "videoTooLarge": "El vídeo supera el límite de 50 MB.",
+    "audioTooLarge": "El archivo de audio supera el límite de 10 MB.",
+    "imageUploadFailed": "Error al subir la imagen: {message}",
+    "videoUploadFailed": "Error al subir el vídeo: {message}",
+    "audioUploadFailed": "Error al subir el audio: {message}",
+    "needAudio": "Primero sube un archivo de audio.",
+    "needImage": "Primero sube una imagen en formato vertical.",
+    "needVideo": "Primero sube un vídeo fuente.",
+    "generationFailed": "Error al generar la sincronización labial"
+  }
+}

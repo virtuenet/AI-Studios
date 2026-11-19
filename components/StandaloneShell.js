@@ -719,6 +719,9 @@ export default function StandaloneShell({ locale = 'en' }) {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
+      {/* Screen-reader document heading */}
+      <h1 className="sr-only">AI Studios</h1>
+
       {/* Skip to content — accessibility */}
       <a
         href="#studio-content"
@@ -1033,7 +1036,7 @@ export default function StandaloneShell({ locale = 'en' }) {
         )}
 
         {/* Studio Content */}
-        <div id="studio-content" className="flex-1 min-h-0 h-full relative overflow-hidden bg-[#030303]">
+        <div id="studio-content" role="main" aria-label="Studio workspace" className="flex-1 min-h-0 h-full relative overflow-hidden bg-[#030303]">
         <div className={activeTab === 'image' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('image',
           <ImageStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('image')} onGenerationEnd={makeGenerationEndCallback('image')} onGenerationComplete={makeSuccessCallback('image')} onGenerationError={makeErrorCallback('image')} />

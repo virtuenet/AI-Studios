@@ -1,0 +1,59 @@
+{
+  "loading": {
+    "remixing": "Remixer des graphiques animés…",
+    "generating": "Générer des graphiques animés…",
+    "backend": "Rendu React/Remotion sur Modal"
+  },
+  "card": {
+    "modeEdit": "✏ Modifier",
+    "modeGenerated": "✦ Généré",
+    "download": "Télécharger",
+    "remixThis": "Remixer cette génération",
+    "legacyRemixUnavailable": "Génération héritée – remix non disponible. Générez un nouveau graphique animé pour activer l’édition.",
+    "delete": "Supprimer",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet élément généré ?",
+    "noPrompt": "Aucune invite",
+    "tag": "Mouvement d'ambiance"
+  },
+  "mobileActions": {
+    "download": "Télécharger",
+    "remix": "Remixer",
+    "delete": "Supprimer"
+  },
+  "empty": {
+    "titleLine1": "COMMENCEZ À CRÉER AVEC",
+    "titleLine2": "STUDIO DE MOUVEMENT VIBE",
+    "description": "Générez des graphiques animés à partir d'une invite de texte : typographie cinétique, graphiques de données, révélation de logo, etc."
+  },
+  "modeToggle": {
+    "generate": "Générer",
+    "edit": "Modifier"
+  },
+  "editBanner": {
+    "editingPrefix": "Édition :",
+    "selectSource": "Sélectionnez une génération source dans la galerie",
+    "cancelEdit": "Annuler le mode édition"
+  },
+  "placeholder": {
+    "edit": "Décrivez ce qu'il faut changer : \"changer l'arrière-plan en bleu marine foncé, rendre les barres dorées, ajouter des particules...\"",
+    "generate": "Décrivez le graphique animé : « Tableau de bord des ventes animé avec des graphiques à barres lumineuses et des chiffres en hausse »"
+  },
+  "controls": {
+    "aspectRatio": "Rapport hauteur/largeur",
+    "duration": "Durée",
+    "sourcePrefix": "Source:",
+    "pickSource": "Choisissez la source…",
+    "sourceGeneration": "Génération de sources",
+    "shortcutHint": "Ctrl+Entrée pour exécuter"
+  },
+  "errors": {
+    "staleEditUnavailable": "Cette génération ne peut pas être remixée : le code d'animation n'a pas été enregistré côté serveur. Générez d’abord un nouveau graphique animé, puis remixez ce résultat.",
+    "generationFailed": "La génération Vibe Motion a échoué"
+  },
+  "generateButton": {
+    "remixing": "Remixer...",
+    "generating": "Générateur...",
+    "remix": "Remixer",
+    "generate": "Générer"
+  }
+}

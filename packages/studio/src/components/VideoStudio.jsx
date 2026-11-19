@@ -54,8 +54,8 @@ import {
   createModelParameterValues,
   getSupplementalModelInputs,
   mergeModelParameterValues,
-} from "../modelParameters.js";
-import { getCompatibleContinuationSources, getContinuationConfig, isContinuationSourceModel } from "../videoToolCapabilities.js";
+} from "../modelParameters";
+import { getCompatibleContinuationSources, getContinuationConfig, isContinuationSourceModel } from "../videoToolCapabilities";
 import {
   appendVideoWorkflowMedia,
   buildVideoWorkflowMediaParams,
@@ -96,9 +96,7 @@ import {
   promptMediaButtonClassName,
 } from "./prompt/PromptComposer.jsx";
 import usePromptMenu from "./prompt/usePromptMenu.js";
-import en from "../messages/en/videoStudio.json";
-import zh from "../messages/zh/videoStudio.json";
-import { resolveCopy } from "../i18nUtils";
+import { getStudioCopy } from '../messages/studioCopy';
 
 async function downloadFile(url, filename) {
   try {
@@ -782,7 +780,7 @@ export default function VideoStudio({
   onFilesHandled,
   locale = "en",
 }) {
-  const copy = useMemo(() => resolveCopy(en, locale === 'zh' ? zh : null, locale), [locale]);
+  const copy = useMemo(() => getStudioCopy('videoStudio', locale), [locale]);
   const LEGACY_PERSIST_KEY = "hg_video_studio_persistent";
   const PERSIST_KEY = scopedPersistKey(LEGACY_PERSIST_KEY, apiKey);
   useEffect(() => {

@@ -39,7 +39,7 @@ interface ModelMediaCapabilities {
 }
 
 /** A model definition object (subset of fields used by this module). */
-interface ModelInfo {
+export interface ModelInfo {
   imageField?: string;
   videoField?: string;
   audioField?: string;
@@ -52,11 +52,25 @@ interface ModelInfo {
 }
 
 /** A single model input definition (subset). */
-interface ModelInputInfo {
+export interface ModelInputInfo {
   type?: string;
   field?: string;
+  title?: string;
+  name?: string;
+  description?: string;
+  default?: unknown;
+  enum?: unknown[];
+  minValue?: number;
+  minimum?: number;
+  maxValue?: number;
+  maximum?: number;
+  step?: number;
   maxItems?: number;
   max_items?: number;
+  configurable?: boolean;
+  items?: ModelInputInfo;
+  properties?: Record<string, ModelInputInfo>;
+  required?: string[];
 }
 
 /** Parameters for building reference media payloads. */

@@ -1,0 +1,63 @@
+{
+  "builder": {
+    "title": "Constructeur",
+    "reset": "Réinitialiser"
+  },
+  "categoryTabs": {
+    "face": "Affronter",
+    "body": "Corps",
+    "style": "Style"
+  },
+  "subcategories": {
+    "character_type": "Type de caractère",
+    "gender": "Genre",
+    "ethnicity_origin_base": "Origine ethnique / origine",
+    "eye_color": "Couleur des yeux",
+    "eyes_type": "Type d'oeil",
+    "eyes_details": "Caractéristiques des yeux",
+    "mouth": "Bouche et dents",
+    "ears": "Oreilles",
+    "horns": "Cornes",
+    "skin_conditions": "Conditions cutanées",
+    "face_skin_material": "Matériau de la peau du visage",
+    "face_surface_pattern": "Modèle de peau",
+    "body_type": "Type de corps",
+    "left_arm": "Bras gauche",
+    "right_arm": "Bras droit",
+    "left_leg": "Jambe gauche",
+    "right_leg": "Jambe droite",
+    "hair": "Croissance des cheveux/tête",
+    "accessories": "Accessoires et marquages",
+    "rendering_style": "Style de rendu"
+  },
+  "toolbar": {
+    "shuffle": "Mélanger",
+    "generate": "Générer un personnage",
+    "generating": "Générateur…"
+  },
+  "preview": {
+    "generating": "Générer votre influenceur IA…",
+    "emptyTitle": "Votre influenceur IA vit ici.",
+    "emptySubtitleLine1": "Concevez et construisez votre influenceur IA",
+    "emptySubtitleLine2": "à partir de zéro",
+    "save": "Sauvegarder",
+    "altGenerated": "Personnage IA généré"
+  },
+  "tags": {
+    "showMore": "afficher plus",
+    "hide": "cacher"
+  },
+  "customPrompt": {
+    "placeholder": "Ajoutez des détails supplémentaires… par ex. éclairage cyberpunk au néon, ombres dramatiques"
+  },
+  "gallery": {
+    "title": "Généré",
+    "countSuffix": "personnages",
+    "emptyText": "Caractères générés\napparaître ici",
+    "altPrefix": "Personnage",
+    "download": "Télécharger"
+  },
+  "errors": {
+    "generationFailed": "La génération a échoué. Veuillez réessayer."
+  }
+}

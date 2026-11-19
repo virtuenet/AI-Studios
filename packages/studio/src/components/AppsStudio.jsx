@@ -9,9 +9,7 @@ import {
 } from "react-icons/fa";
 import { registerAppInterest, getAppInterests } from '../muapi.js';
 import toast, { Toaster } from 'react-hot-toast';
-import en from '../messages/en/appsStudio.json';
-import zh from '../messages/zh/appsStudio.json';
-import { resolveCopy } from '../i18nUtils';
+import { getStudioCopy } from '../messages/studioCopy';
 
 const templateApps = [
   {
@@ -133,7 +131,7 @@ const dummyAppsData = [
 ];
 
 export default function AppsStudio({ apiKey, locale = 'en' }) {
-  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
+  const copy = getStudioCopy('appsStudio', locale);
   const [selectedApp, setSelectedApp] = useState(null);
   const [isRequesting, setIsRequesting] = useState(false);
   const [requestedApps, setRequestedApps] = useState([]);

@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "badge": "開発者とAIエージェント向け",
+    "title": "MCPとCLI",
+    "description": "ターミナル、IDE、またはMCP互換のアシスタントからAI Studiosを使用できます。ワークフローを離れることなく、100種類以上のモデルで映画のような画像、動画、音声を生成できます。"
+  },
+  "quickStart": {
+    "sectionLabel": "クイックスタート",
+    "steps": {
+      "installCli": "CLIをインストールする",
+      "signIn": "サインイン",
+      "addSkills": "スキルを追加する"
+    }
+  },
+  "features": {
+    "cli": {
+      "description": "14種類以上のAIモデルを使用して、ターミナルから画像、動画、音声を生成します。デュアルインターフェース — エージェント向けに、色分けされた人間による出力とJSON（--output-json、--jqフィルタリング）を提供。非同期ワークフロー、ファイルアップロード、クレジット追跡。"
+    },
+    "mcp": {
+      "description": "Claude、Cursor、Windsurf、およびMCP互換のあらゆるアシスタントを100以上の生成モデルに接続します。ホストされたエンドポイント — インストール不要。入力/出力スキーマ、非同期ポーリング、アカウント管理を備えた19種類の構造化ツール。"
+    },
+    "skills": {
+      "description": "Claude Code、Cursor、Gemini CLI用のマルチモーダルツールキット。Cinema Director、Nano-Banana、UI Designer、Logo Creator、Seedance 2、AI Clipping、およびYouTube Shortsのプリセット。JSON出力とセマンティック終了コードを備えたエージェントネイティブ。"
+    }
+  },
+  "viewOnGithub": "GitHubで表示",
+  "examples": {
+    "sectionLabel": "例",
+    "imageGeneration": "画像生成",
+    "textToVideo": "テキストから動画へ",
+    "audioCreation": "音声の作成",
+    "runSkill": "スキルを実行する"
+  },
+  "footer": "オープンソース · MITライセンス · Claude、Cursor、Windsurf、Gemini CLIで動作"
+}

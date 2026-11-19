@@ -1,0 +1,68 @@
+{
+  "uploadButton": {
+    "faceLabel": "顔",
+    "referenceImageLabel": "参照画像",
+    "addUpToImages": "最大{max}枚の画像を追加",
+    "singleSelectedTitle": "1枚の画像が選択されています — クリックしてさらに追加してください（最大{max}枚まで）",
+    "multiSelectedTitle": "{max}枚中{count}枚の画像が選択されています — クリックして管理してください",
+    "tooLargeAlert": "次の画像は大きすぎます（最大10MB）：{names}",
+    "uploadFailedAlert": "画像のアップロードに失敗しました：{message}",
+    "headerTitle": "参照画像",
+    "selectUpTo": "最大{max}枚の画像を選択してください",
+    "doneButton": "✓ 完了（{count}件）",
+    "uploadFilesButton": "ファイルをアップロード",
+    "uploadNewButton": "新規アップロード",
+    "emptyState": "まだアップロードはありません",
+    "removeFromHistory": "履歴から削除",
+    "selectedCount": "{max}件中{count}件を選択済み",
+    "useSelected": "選択したものを適用"
+  },
+  "modelDropdown": {
+    "categoryAll": "すべて",
+    "categoryT2I": "テキストから画像へ",
+    "categoryI2I": "画像から画像へ",
+    "allProviders": "すべてのプロバイダー",
+    "searchPlaceholder": "モデルを検索...",
+    "modelsSuffix": "モデル",
+    "noModelsFound": "モデルが見つかりません"
+  },
+  "gallery": {
+    "generatedImageAlt": "生成された画像",
+    "download": "ダウンロード",
+    "delete": "削除",
+    "deleteConfirm": "この生成されたアイテムを削除してもよろしいですか？",
+    "deleteFailed": "アイテムを削除できませんでした",
+    "noPrompt": "プロンプトが入力されていません",
+    "modelFallback": "画像スタジオ"
+  },
+  "emptyState": {
+    "heading": "次のツールでクリエーションを始めましょう",
+    "subtitle": "シーン、キャラクター、雰囲気、またはスタイルを説明すると、それが実現されます"
+  },
+  "promptBar": {
+    "placeholderMultiImage": "{count}枚の画像が選択されました — 変換内容を説明してください（オプション）",
+    "placeholderI2I": "この画像をどのように変換するかを説明してください（オプション）",
+    "placeholderT2I": "作成したい画像を説明してください",
+    "swapFaceLabel": "顔を入れ替える",
+    "effectFallback": "エフェクト",
+    "drawButton": "描画",
+    "generating": "生成中...",
+    "generateButton": "生成"
+  },
+  "popovers": {
+    "model": "モデル",
+    "aspectRatio": "アスペクト比",
+    "resolution": "解像度",
+    "effectType": "エフェクトの種類"
+  },
+  "errors": {
+    "noImageReferenceSupport": "{name}は画像参照をサポートしていません。",
+    "uploadReferenceFirst": "まず、参照画像をアップロードしてください。",
+    "uploadSwapFaceFirst": "顔を入れ替える画像をアップロードしてください。",
+    "enterPromptFirst": "画像を生成するためのプロンプトを入力してください。",
+    "generationFailed": "画像の生成に失敗しました"
+  },
+  "fullscreen": {
+    "previewAlt": "全画面プレビュー"
+  }
+}

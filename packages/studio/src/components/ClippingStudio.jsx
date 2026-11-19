@@ -25,9 +25,7 @@ import {
   promptControlClassName,
   promptMediaButtonClassName,
 } from "./prompt/PromptComposer.jsx";
-import en from "../messages/en/clippingStudio.json";
-import zh from "../messages/zh/clippingStudio.json";
-import { resolveCopy } from "../i18nUtils";
+import { getStudioCopy } from '../messages/studioCopy';
 
 const MAX_VIDEO_SIZE_MB = 100;
 const MAX_VIDEO_SIZE_BYTES = MAX_VIDEO_SIZE_MB * 1024 * 1024;
@@ -218,7 +216,7 @@ export default function ClippingStudio({
   onFilesHandled,
   locale = "en",
 }) {
-  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
+  const copy = getStudioCopy('clippingStudio', locale);
   const LEGACY_PERSIST_KEY = "hg_clipping_studio_persistent";
   const PERSIST_KEY = scopedPersistKey(LEGACY_PERSIST_KEY, apiKey);
   useEffect(() => {

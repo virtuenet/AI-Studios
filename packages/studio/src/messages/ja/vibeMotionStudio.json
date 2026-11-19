@@ -1,0 +1,59 @@
+{
+  "loading": {
+    "remixing": "モーショングラフィックスをリミックス中…",
+    "generating": "モーショングラフィックスを生成しています…",
+    "backend": "モーダルでのReact/Remotionレンダリング"
+  },
+  "card": {
+    "modeEdit": "✏ 編集",
+    "modeGenerated": "✦ 生成済み",
+    "download": "ダウンロード",
+    "remixThis": "この生成をリミックスする",
+    "legacyRemixUnavailable": "レガシー生成 — リミックスは利用できません。新しいモーショングラフィックを生成して、編集を有効にします。",
+    "delete": "削除",
+    "confirmDelete": "この生成されたアイテムを削除してもよろしいですか？",
+    "noPrompt": "プロンプトなし",
+    "tag": "バイブレーションモーション"
+  },
+  "mobileActions": {
+    "download": "ダウンロード",
+    "remix": "リミックス",
+    "delete": "削除"
+  },
+  "empty": {
+    "titleLine1": "次のツールでクリエーションを始めましょう",
+    "titleLine2": "VIBE MOTION STUDIO",
+    "description": "テキストプロンプトからアニメーションのモーショングラフィックスを生成 — カイネティックタイポグラフィ、データチャート、ロゴリビールなど。"
+  },
+  "modeToggle": {
+    "generate": "生成",
+    "edit": "編集"
+  },
+  "editBanner": {
+    "editingPrefix": "編集中：",
+    "selectSource": "ギャラリーからソース生成を選択",
+    "cancelEdit": "編集モードをキャンセル"
+  },
+  "placeholder": {
+    "edit": "変更内容を説明してください。「背景をダークネイビーに変更し、バーをゴールドにし、パーティクルを追加する…」",
+    "generate": "モーショングラフィックの説明 — 「光る棒グラフと上昇する数値が表示されたアニメーションのセールスダッシュボード」"
+  },
+  "controls": {
+    "aspectRatio": "アスペクト比",
+    "duration": "再生時間",
+    "sourcePrefix": "ソース：",
+    "pickSource": "ソースを選択…",
+    "sourceGeneration": "ソースの生成",
+    "shortcutHint": "Ctrl+Enterで実行"
+  },
+  "errors": {
+    "staleEditUnavailable": "この生成はリミックスできません。アニメーションコードがサーバー側に保存されていません。まず新しいモーショングラフィックを生成してから、その結果をリミックスしてください。",
+    "generationFailed": "Vibe Motionの生成に失敗しました"
+  },
+  "generateButton": {
+    "remixing": "リミックス中...",
+    "generating": "生成中...",
+    "remix": "リミックス",
+    "generate": "生成する"
+  }
+}

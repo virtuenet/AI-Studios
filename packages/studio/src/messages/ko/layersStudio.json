@@ -1,0 +1,204 @@
+{
+  "common": {
+    "model": "모델",
+    "reset": "다시 놓기"
+  },
+  "panels": {
+    "layer-decomposition": "레이어 분해",
+    "upscale": "고급",
+    "color-grading": "컬러 그레이딩",
+    "remove-bg": "배경 제거",
+    "expand-crop": "이미지 확장",
+    "tools": "도구"
+  },
+  "menuItems": {
+    "layer-decomposition": "레이어 분해",
+    "upscale": "고급",
+    "color-grading": "컬러 그레이딩",
+    "remove-bg": "배경 제거",
+    "expand-crop": "확장 및 아웃페인트",
+    "edit-text": "텍스트 편집",
+    "enhancer": "강화제",
+    "relight": "재조명",
+    "angles": "각도",
+    "new": "새로운"
+  },
+  "tools": {
+    "uploadOrChangeImage": "이미지 업로드 또는 변경",
+    "clearMarkedRegions": "표시된 영역 지우기",
+    "runSelectionEdit": "선택 편집 실행",
+    "line": "선",
+    "arrow": "화살",
+    "rectangle": "구형",
+    "circle": "원",
+    "customColor": "사용자 정의 색상",
+    "undoStroke": "스트로크 실행 취소",
+    "redoStroke": "스트로크 다시 실행",
+    "clearDrawings": "도면 지우기",
+    "selectPointerTool": "포인터 도구 선택",
+    "panTool": "팬 도구",
+    "lassoEdit": "올가미 편집",
+    "regionalEdit": "지역 편집",
+    "highlightMarkerPen": "하이라이트 마커 펜",
+    "eraserTool": "지우개 도구",
+    "shapes": "모양(R)",
+    "resetZoomPan": "줌 및 팬 재설정",
+    "addImage": "이미지 추가",
+    "runLayerDecomposition": "레이어 분해 실행",
+    "backToTools": "도구로 돌아가기",
+    "closePanel": "패널 닫기",
+    "regionalPromptPlaceholder": "여기에 프롬프트를 입력하세요..."
+  },
+  "sample": {
+    "clickToLoad": "이 레이어 분해 예시를 로드하려면 클릭하세요.",
+    "original": "원래의",
+    "layersCount": "5개의 층",
+    "try": "시도 →",
+    "clickToExplore": "샘플을 살펴보려면 클릭하세요."
+  },
+  "settings": {
+    "heading": "설정",
+    "resolution": "해결",
+    "layers": "레이어"
+  },
+  "carousel": {
+    "heading": "레이어 캐러셀",
+    "soloActive": "솔로 액티브",
+    "stackMode": "스택 모드",
+    "viewOnlyActive": "활성 레이어만 보기",
+    "downloadAll": "모두 다운로드",
+    "previousLayer": "이전 레이어",
+    "nextLayer": "다음 레이어",
+    "toggleVisibility": "가시성 전환",
+    "downloadThisLayer": "이 레이어 다운로드",
+    "save": "구하다",
+    "layerLabel": "레이어 {n}",
+    "seedreamDecomposed": "시드림 분해"
+  },
+  "colorGrading": {
+    "colorCorrect": {
+      "heading": "색상 교정",
+      "info": "온도, 색조, 채도, 대비 및 분할 톤",
+      "reset": "색상 교정 재설정"
+    },
+    "softenDetails": {
+      "heading": "디테일을 부드럽게 하다",
+      "info": "반경 및 디테일 완화",
+      "reset": "부드럽게 세부사항 재설정"
+    },
+    "bloom": {
+      "heading": "꽃",
+      "info": "발광 확산 및 블렌드 모드",
+      "reset": "블룸 재설정"
+    },
+    "halation": {
+      "heading": "헐레이션",
+      "info": "강렬한 하이라이트 주위에 필름 레드 글로우",
+      "reset": "헐레이션 재설정"
+    },
+    "lensInstructions": {
+      "heading": "렌즈 지침",
+      "info": "비네팅 및 광학 렌즈 왜곡",
+      "reset": "렌즈 재설정 지침"
+    },
+    "exposure": {
+      "heading": "노출",
+      "info": "노출 정지 조정",
+      "reset": "노출 재설정"
+    },
+    "filmGrain": {
+      "heading": "필름 그레인",
+      "info": "아날로그 필름 스톡 그레인 시뮬레이션",
+      "reset": "필름 그레인 재설정"
+    },
+    "resetToDefault": "기본값으로 재설정",
+    "resetAll": "모든 컬러 그레이딩 재설정",
+    "download": "다운로드"
+  },
+  "removeBg": {
+    "modelName": "AI 배경 제거제",
+    "targetPreview": "타겟 미리보기",
+    "alphaMatte": "알파 매트 컷아웃",
+    "feature1": "정밀한 가장자리 추출(머리카락, 털, 미세한 윤곽)",
+    "feature2": "고해상도 투명 PNG 출력"
+  },
+  "expandCrop": {
+    "modelName": "AI 이미지 확장",
+    "canvasPreview": "캔버스 미리보기",
+    "boundaryOutpainting": "경계 아웃페인팅",
+    "expand": "확장하다",
+    "feature1": "조명, 스타일 및 질감을 일치시키면서 테두리를 확장합니다.",
+    "feature2": "자동 지능형 가장자리 아웃페인팅 및 연속"
+  },
+  "editText": {
+    "heading": "텍스트 편집 도구",
+    "placeholder": "텍스트 수정 프롬프트를 입력하세요...",
+    "run": "텍스트 편집 실행",
+    "processing": "처리 중..."
+  },
+  "enhancer": {
+    "heading": "AI 강화기",
+    "description": "조명, 선명도, 색상 균형을 자동으로 최적화합니다.",
+    "run": "이미지 향상",
+    "processing": "강화 중..."
+  },
+  "relight": {
+    "heading": "AI 리라이트",
+    "description": "조명, 주변 스튜디오 조명 및 그림자를 조정합니다.",
+    "run": "리라이트 적용",
+    "processing": "재조명 중..."
+  },
+  "angles": {
+    "heading": "3D 각도 관점",
+    "description": "원근 기울기와 카메라 각도 정렬을 조정합니다.",
+    "run": "투시 각도 적용",
+    "processing": "변신 중..."
+  },
+  "footer": {
+    "decomposing": "분해 중({progress}%)...",
+    "separateLayers": "별도의 레이어 {count}",
+    "upscaling": "확장 중({progress}%)...",
+    "upscaleCost": "고급 {비용} {cost}",
+    "removingBackground": "배경 제거 중({progress}%)...",
+    "removeBackgroundCost": "배경 1.0 제거",
+    "expandingBorders": "테두리 확장 중({progress}%)...",
+    "expandImageCost": "이미지 0.03 확장"
+  },
+  "toasts": {
+    "enterApiKeyUpload": "이미지를 업로드하려면 API 키를 입력하세요.",
+    "imageUploaded": "이미지가 성공적으로 업로드되었습니다!",
+    "uploadFailed": "업로드 실패: {오류} {error}",
+    "uploadImageFileOnly": "이미지 파일을 업로드해주세요.",
+    "fileTooLarge": "파일이 너무 큼(최대 20MB): {name}",
+    "viewReset": "재설정 보기",
+    "enterApiKey": "API 키를 입력하세요.",
+    "enterRegionPrompt": "선택한 지역에 대한 프롬프트를 입력하세요.",
+    "editFailed": "수정 실패: {오류} {error}",
+    "apiKeyMissingSet": "API 키가 누락되었습니다. API 키를 설정해주세요.",
+    "uploadOrSelectDecompose": "레이어로 분해할 이미지를 업로드하거나 선택하세요.",
+    "decomposedInto": "{count}개의 레이어로 분해되었습니다!",
+    "decompositionFailed": "분해 실패: {오류} {error}",
+    "uploadOrSelectUpscale": "확대할 이미지를 선택하거나 업로드하세요.",
+    "upscaleSuccess": "{model}을(를) 사용하여 이미지가 성공적으로 확대되었습니다!",
+    "upscaleNoOutput": "확대가 완료되었지만 출력 URL이 반환되지 않았습니다.",
+    "upscaleFailed": "확장 실패: {오류} {error}",
+    "uploadOrSelectRemoveBg": "배경을 제거하려면 이미지를 업로드하거나 선택하세요.",
+    "removeBgSuccess": "AI Background Remover로 배경을 깔끔하게 제거!",
+    "removeBgNoOutput": "백그라운드 제거가 완료되었지만 출력 URL이 반환되지 않았습니다.",
+    "removeBgFailed": "백그라운드 제거 실패: {오류} {error}",
+    "uploadOrSelectExpand": "확장할 이미지를 업로드하거나 선택하세요.",
+    "expandSuccess": "AI Image Extension으로 이미지가 깔끔하게 확장되었습니다!",
+    "expandNoOutput": "이미지 확장이 완료되었지만 출력 URL이 반환되지 않았습니다.",
+    "expandFailed": "이미지 확장 실패: {오류} {error}",
+    "upscaleSettingsReset": "고급 설정이 기본값으로 재설정됨",
+    "resetCategory": "{카테고리} 재설정 {category}",
+    "colorGradingReset": "컬러 그레이딩이 기본값으로 재설정되었습니다.",
+    "downloadedGraded": "컬러 그레이딩 이미지를 다운로드 받았습니다!",
+    "loadedSample": "Seedream 5레이어 샘플 로딩!",
+    "apiKeyMissing": "API 키가 누락되었습니다.",
+    "uploadImageFirst": "먼저 이미지를 업로드해주세요.",
+    "toolCompleted": "{tool}이(가) 성공적으로 완료되었습니다!",
+    "operationFailed": "작업 실패: {오류} {error}",
+    "downloadingAll": "모든 레이어를 다운로드하는 중..."
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "headings": {
+    "startCreatingWith": "次のツールで創作を始めましょう",
+    "aiClippingStudio": "AIクリッピングスタジオ",
+    "emptyStateSubtitle": "動画からバズりそうなハイライトと正確なタイミングを自動的に抽出します。",
+    "clippingHistoryRuns": "クリッピング履歴の実行",
+    "savedGenerations": "{count}件の保存された生成",
+    "backToHistory": "履歴に戻る",
+    "highlightsTimeline": "ハイライトのタイムライン",
+    "matches": "{count}件の一致",
+    "extractedVideoClips": "抽出されたビデオクリップ",
+    "aspectRatioLabel": "アスペクト比：{ratio}",
+    "originalVideoPlayer": "元のビデオプレーヤー"
+  },
+  "modes": {
+    "timelineSeek": "タイムラインシークモード",
+    "clipsGallery": "クリップギャラリーモード"
+  },
+  "labels": {
+    "highlights": "{count}件のハイライト",
+    "clips": "{count}件のクリップ",
+    "highlightFallback": "#{index}をハイライト",
+    "scoreSuffix": "スコア（%）",
+    "durationSuffix": "秒の再生時間",
+    "seekAndPlay": "シーク＆再生",
+    "clipIndex": "クリップ#{index}",
+    "aiClipping": "AIクリッピング"
+  },
+  "buttons": {
+    "deleteFromHistory": "履歴から削除",
+    "delete": "削除",
+    "copyLink": "リンクをコピー",
+    "copyLinkShort": "リンクをコピー",
+    "download": "ダウンロード",
+    "clearVideo": "動画を消去",
+    "uploadSourceVideo": "ソース動画をアップロード",
+    "generate": "生成",
+    "generating": "生成中...",
+    "coordinatesOnly": "座標のみ"
+  },
+  "placeholders": {
+    "promptOrUrl": "抽出するプロンプト/ハイライトを説明してください"
+  },
+  "popovers": {
+    "aspectRatio": "アスペクト比",
+    "maxHighlights": "ハイライトの最大数",
+    "limit": "制限："
+  },
+  "empty": {
+    "noHighlights": "ハイライトが抽出されていません。",
+    "noClips": "ビデオクリップが生成されませんでした。再度実行してみてください。"
+  },
+  "alerts": {
+    "urlCopied": "URLをクリップボードにコピーしました！",
+    "needVideo": "最初に動画をアップロードするか、動画のURLを貼り付けてください。"
+  },
+  "errors": {
+    "dismissNotification": "通知を閉じる",
+    "videoTooLarge": "このモードではファイルが大きすぎます。動画を圧縮またはトリミングしてから、より小さいサイズのファイルをアップロードしてください。",
+    "videoExceedsLimit": "動画が{mb}MBの制限を超えています。",
+    "uploadFailed": "動画のアップロードに失敗しました。もう一度お試しください。",
+    "generationFailed": "AIクリッピングの処理に失敗しました。"
+  },
+  "sourceVideoFallback": "source_video.mp4",
+  "aspectRatioLabels": {
+    "9:16": "9:16（TikTok / Reels / Shorts）",
+    "16:9": "16:9（YouTube / TV）",
+    "1:1": "1:1（Instagram正方形）",
+    "4:5": "4:5（Instagram縦向き）",
+    "4:3": "4:3（クラシックビデオ）",
+    "3:4": "3:4（縦向き）"
+  }
+}

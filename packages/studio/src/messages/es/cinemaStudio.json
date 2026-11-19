@@ -1,0 +1,49 @@
+{
+  "cameraOverlay": {
+    "eyebrow": "Estudio de cine",
+    "title": "Ajustes de la cámara",
+    "description": "Cree un aspecto cinematográfico coherente eligiendo la cámara, el objetivo, la distancia focal y la profundidad de campo.",
+    "close": "Cerrar",
+    "closeAria": "Cerrar los ajustes de la cámara",
+    "columns": {
+      "camera": "Cámara",
+      "lens": "Objetivo",
+      "focalLength": "Distancia focal",
+      "aperture": "Apertura"
+    }
+  },
+  "dropdowns": {
+    "aspectRatio": "Relación de aspecto",
+    "resolution": "Resolución"
+  },
+  "actions": {
+    "copyPrompt": "Copiar indicación",
+    "promptCopied": "Indicación copiada",
+    "copyImage": "Copiar imagen",
+    "imageCopied": "Imagen copiada",
+    "download": "Descargar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Seguro que desea eliminar este elemento generado?"
+  },
+  "card": {
+    "noPrompt": "Sin aviso",
+    "badge": "Estudio de cine",
+    "historyItemAlt": "Elemento del historial {index}"
+  },
+  "empty": {
+    "kicker": "EMPIEZA A CREAR CON",
+    "title": "CINEMA STUDIO",
+    "description": "¿Qué grabarías si tuvieras un presupuesto ilimitado? Controla las cámaras, la iluminación y los objetivos, y genera escenas cinematográficas de alta calidad."
+  },
+  "prompt": {
+    "placeholder": "Describe tu escena de cine...",
+    "generating": "Generando...",
+    "generate": "Grabar"
+  },
+  "fullscreen": {
+    "alt": "Vista previa en pantalla completa"
+  },
+  "referenceImage": {
+    "alt": "Referencia"
+  }
+}

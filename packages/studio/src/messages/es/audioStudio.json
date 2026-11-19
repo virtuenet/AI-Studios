@@ -1,0 +1,53 @@
+{
+  "uploader": {
+    "clear": "Borrar",
+    "uploadPrompt": "Subir pista de audio",
+    "uploadHint": "MP3, WAV, M4A de hasta 20 MB",
+    "uploading": "Cargando...",
+    "ready": "Listo para generar",
+    "maxSuffix": "(Máx. {max})",
+    "trackLabel": "Pista n.º {index}",
+    "sizeLimitError": "El archivo de audio supera el límite de 20 MB.",
+    "uploadFailedError": "Error al subir: {message}"
+  },
+  "player": {
+    "nowPlaying": "Reproduciéndose ahora",
+    "defaultTitle": "Pista generada",
+    "muteUnmute": "Silenciar/Activar sonido",
+    "pause": "Pausar",
+    "play": "Reproducir",
+    "download": "Descargar audio",
+    "save": "Guardar"
+  },
+  "sidebar": {
+    "modelLabel": "Modelo de audio",
+    "selectModel": "Seleccionar modelo",
+    "descriptionLabel": "Descripción",
+    "selectOption": "Seleccionar opción",
+    "promptPlaceholder": "Introduce lo que quieres generar...",
+    "lyricsPromptLabel": "Letra / Indicación",
+    "fieldPlaceholder": "Introduce {field}...",
+    "requiredFieldError": "Completa el campo obligatorio: {field}"
+  },
+  "generate": {
+    "generating": "Generando audio...",
+    "cta": "Generar pista",
+    "noUrlError": "La API no ha devuelto ninguna URL de audio.",
+    "genericError": "Error al generar el audio",
+    "droppedFileUploadError": "Error al subir el archivo arrastrado: {message}"
+  },
+  "result": {
+    "errorHeading": "Error de generación",
+    "loadingHeading": "Generando banda sonora",
+    "loadingSubtext": "Renderizando las formas de onda de audio y las voces...",
+    "emptyHeading": "Estudio de audio",
+    "emptyBody": "Elige un modelo de música con IA, un clonador de voz o un generador de sonidos. Modifica las variables de la izquierda y crea tu próxima pista de alta fidelidad.",
+    "newGeneration": "Nueva generación",
+    "success": "Correcto"
+  },
+  "history": {
+    "heading": "Historial de generación ({count})",
+    "untitled": "Audio sin título",
+    "fallbackModel": "Audio"
+  }
+}

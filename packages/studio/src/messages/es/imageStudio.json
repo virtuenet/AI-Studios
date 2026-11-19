@@ -1,0 +1,68 @@
+{
+  "uploadButton": {
+    "faceLabel": "Rostro",
+    "referenceImageLabel": "Imagen de referencia",
+    "addUpToImages": "Añadir hasta {max} imágenes",
+    "singleSelectedTitle": "1 imagen seleccionada — Haz clic para añadir más (hasta {max})",
+    "multiSelectedTitle": "{count} de {max} imágenes seleccionadas — haz clic para gestionarlas",
+    "tooLargeAlert": "Las siguientes imágenes son demasiado grandes (máx. 10 MB): {names}",
+    "uploadFailedAlert": "Error al subir la imagen: {message}",
+    "headerTitle": "Imágenes de referencia",
+    "selectUpTo": "Seleccione hasta {max} imágenes",
+    "doneButton": "✓ Listo ({count})",
+    "uploadFilesButton": "Subir archivos",
+    "uploadNewButton": "Subir nuevos",
+    "emptyState": "Aún no hay archivos subidos",
+    "removeFromHistory": "Eliminar del historial",
+    "selectedCount": "{count} de {max} seleccionados",
+    "useSelected": "Usar seleccionados"
+  },
+  "modelDropdown": {
+    "categoryAll": "Todo",
+    "categoryT2I": "Texto a imagen",
+    "categoryI2I": "De imagen a imagen",
+    "allProviders": "Todos los proveedores",
+    "searchPlaceholder": "Buscar modelos...",
+    "modelsSuffix": "modelos",
+    "noModelsFound": "No se han encontrado modelos"
+  },
+  "gallery": {
+    "generatedImageAlt": "Imagen generada",
+    "download": "Descargar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Seguro que desea eliminar este elemento generado?",
+    "deleteFailed": "No se ha podido eliminar el elemento",
+    "noPrompt": "No se ha proporcionado ninguna indicación",
+    "modelFallback": "Image Studio"
+  },
+  "emptyState": {
+    "heading": "EMPIEZA A CREAR CON",
+    "subtitle": "Describe una escena, un personaje, un estado de ánimo o un estilo y observa cómo cobra vida"
+  },
+  "promptBar": {
+    "placeholderMultiImage": "{count} imágenes seleccionadas: describe la transformación (opcional)",
+    "placeholderI2I": "Describe cómo transformar esta imagen (opcional)",
+    "placeholderT2I": "Describe la imagen que quieres crear",
+    "swapFaceLabel": "Intercambiar cara",
+    "effectFallback": "Efecto",
+    "drawButton": "Dibujar",
+    "generating": "Generando...",
+    "generateButton": "Generar"
+  },
+  "popovers": {
+    "model": "Modelo",
+    "aspectRatio": "Relación de aspecto",
+    "resolution": "Resolución",
+    "effectType": "Tipo de efecto"
+  },
+  "errors": {
+    "noImageReferenceSupport": "{name} no admite referencias a imágenes.",
+    "uploadReferenceFirst": "Primero suba una imagen de referencia.",
+    "uploadSwapFaceFirst": "Sube una imagen para intercambiar caras.",
+    "enterPromptFirst": "Introduce una indicación para generar una imagen.",
+    "generationFailed": "Error al generar la imagen"
+  },
+  "fullscreen": {
+    "previewAlt": "Vista previa en pantalla completa"
+  }
+}

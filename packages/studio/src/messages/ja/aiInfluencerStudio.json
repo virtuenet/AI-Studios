@@ -1,0 +1,63 @@
+{
+  "builder": {
+    "title": "ビルダー",
+    "reset": "リセット"
+  },
+  "categoryTabs": {
+    "face": "顔",
+    "body": "ボディ",
+    "style": "スタイル"
+  },
+  "subcategories": {
+    "character_type": "キャラクタータイプ",
+    "gender": "性別",
+    "ethnicity_origin_base": "民族/出自",
+    "eye_color": "目の色",
+    "eyes_type": "目のタイプ",
+    "eyes_details": "目の特徴",
+    "mouth": "口と歯",
+    "ears": "耳",
+    "horns": "角",
+    "skin_conditions": "皮膚の状態",
+    "face_skin_material": "顔の皮膚の材質",
+    "face_surface_pattern": "肌の模様",
+    "body_type": "体型",
+    "left_arm": "左腕",
+    "right_arm": "右腕",
+    "left_leg": "左脚",
+    "right_leg": "右脚",
+    "hair": "髪/頭髪の成長",
+    "accessories": "アクセサリー＆マーキング",
+    "rendering_style": "レンダリングスタイル"
+  },
+  "toolbar": {
+    "shuffle": "シャッフル",
+    "generate": "キャラクターを生成",
+    "generating": "生成中…"
+  },
+  "preview": {
+    "generating": "AIインフルエンサーを生成しています…",
+    "emptyTitle": "あなたのAIインフルエンサーはこちらにいます。",
+    "emptySubtitleLine1": "AIインフルエンサーをデザインして構築する",
+    "emptySubtitleLine2": "ゼロから",
+    "save": "保存",
+    "altGenerated": "生成されたAIキャラクター"
+  },
+  "tags": {
+    "showMore": "さらに表示",
+    "hide": "非表示"
+  },
+  "customPrompt": {
+    "placeholder": "追加の詳細を入力してください…例：ネオンのサイバーパンク照明、ドラマチックな影"
+  },
+  "gallery": {
+    "title": "生成済み",
+    "countSuffix": "キャラクター",
+    "emptyText": "生成された文字\nここに表示されます",
+    "altPrefix": "キャラクター",
+    "download": "ダウンロード"
+  },
+  "errors": {
+    "generationFailed": "生成に失敗しました。もう一度お試しください。"
+  }
+}

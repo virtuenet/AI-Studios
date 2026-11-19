@@ -1,0 +1,73 @@
+{
+  "headings": {
+    "startCreatingWith": "COMMENCEZ À CRÉER AVEC",
+    "aiClippingStudio": "STUDIO DE CLIPPING IA",
+    "emptyStateSubtitle": "Extrayez automatiquement les moments forts viraux et les timings précis de vos vidéos.",
+    "clippingHistoryRuns": "Historique des coupures",
+    "savedGenerations": "{count} générations enregistrées",
+    "backToHistory": "Retour à l'Histoire",
+    "highlightsTimeline": "Chronologie des faits saillants",
+    "matches": "{count} correspondances",
+    "extractedVideoClips": "Clips vidéo extraits",
+    "aspectRatioLabel": "Format d'image : {rapport} {ratio}",
+    "originalVideoPlayer": "Lecteur vidéo original"
+  },
+  "modes": {
+    "timelineSeek": "Mode de recherche de chronologie",
+    "clipsGallery": "Mode Galerie de clips"
+  },
+  "labels": {
+    "highlights": "{count} faits saillants",
+    "clips": "{count} extraits",
+    "highlightFallback": "Surligner #{index}",
+    "scoreSuffix": "% Score",
+    "durationSuffix": "durée",
+    "seekAndPlay": "Rechercher et jouer",
+    "clipIndex": "Extrait n° {index}",
+    "aiClipping": "Découpage IA"
+  },
+  "buttons": {
+    "deleteFromHistory": "Supprimer de l'historique",
+    "delete": "Supprimer",
+    "copyLink": "Copier le lien",
+    "copyLinkShort": "Copier le lien",
+    "download": "Télécharger",
+    "clearVideo": "Effacer la vidéo",
+    "uploadSourceVideo": "Télécharger la vidéo source",
+    "generate": "Générer",
+    "generating": "Générateur...",
+    "coordinatesOnly": "Coordonnées uniquement"
+  },
+  "placeholders": {
+    "promptOrUrl": "Décrire l'invite/les points saillants à extraire"
+  },
+  "popovers": {
+    "aspectRatio": "Rapport hauteur/largeur",
+    "maxHighlights": "Points forts maximum",
+    "limit": "Limite:"
+  },
+  "empty": {
+    "noHighlights": "Aucun temps fort extrait.",
+    "noClips": "Aucun clip vidéo généré. Essayez de réexécuter."
+  },
+  "alerts": {
+    "urlCopied": "URL copiée dans le presse-papier !",
+    "needVideo": "Veuillez d'abord télécharger une vidéo ou coller l'URL d'une vidéo."
+  },
+  "errors": {
+    "dismissNotification": "Rejeter la notification",
+    "videoTooLarge": "Le fichier est trop volumineux pour ce mode. Compressez ou découpez la vidéo, puis téléchargez un fichier plus petit.",
+    "videoExceedsLimit": "La vidéo dépasse la limite de {mb} Mo.",
+    "uploadFailed": "Échec du téléchargement de la vidéo. Veuillez réessayer.",
+    "generationFailed": "Échec du traitement du découpage IA."
+  },
+  "sourceVideoFallback": "source_vidéo.mp4",
+  "aspectRatioLabels": {
+    "9:16": "9h16 (TikTok / Bobines / Shorts)",
+    "16:9": "16:9 (YouTube / Télévision)",
+    "1:1": "1:1 (Place Instagram)",
+    "4:5": "4:5 (Portrait Instagram)",
+    "4:3": "4:3 (Vidéo classique)",
+    "3:4": "3:4 (Portrait)"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "cameraOverlay": {
+    "eyebrow": "시네마 스튜디오",
+    "title": "카메라 설정",
+    "description": "카메라, 렌즈, 초점 거리, 피사계 심도를 선택하여 일관된 영화적 룩을 구축하세요.",
+    "close": "닫다",
+    "closeAria": "카메라 설정 닫기",
+    "columns": {
+      "camera": "카메라",
+      "lens": "렌즈",
+      "focalLength": "초점 거리",
+      "aperture": "구멍"
+    }
+  },
+  "dropdowns": {
+    "aspectRatio": "종횡비",
+    "resolution": "해결"
+  },
+  "actions": {
+    "copyPrompt": "프롬프트 복사",
+    "promptCopied": "프롬프트 복사됨",
+    "copyImage": "이미지 복사",
+    "imageCopied": "이미지가 복사되었습니다.",
+    "download": "다운로드",
+    "delete": "삭제",
+    "deleteConfirm": "생성된 이 항목을 삭제하시겠습니까?"
+  },
+  "card": {
+    "noPrompt": "프롬프트 없음",
+    "badge": "시네마 스튜디오",
+    "historyItemAlt": "기록 항목 {색인} {index}"
+  },
+  "empty": {
+    "kicker": "만들기 시작하기",
+    "title": "시네마 스튜디오",
+    "description": "무한한 예산으로 무엇을 촬영하시겠습니까? 카메라, 조명, 렌즈 및 즉각적인 고급 영화 장면을 제어하세요."
+  },
+  "prompt": {
+    "placeholder": "당신의 영화 장면을 묘사해 보세요...",
+    "generating": "생성 중...",
+    "generate": "사격"
+  },
+  "fullscreen": {
+    "alt": "전체 화면 미리보기"
+  },
+  "referenceImage": {
+    "alt": "참조"
+  }
+}
