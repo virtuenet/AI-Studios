@@ -87,10 +87,10 @@ One-click installers — no Node.js or terminal required.
 
 | Platform | Download |
 |---|---|
-| macOS Apple Silicon (M1/M2/M3/M4) | [AI Studios-2.0.0-arm64.dmg](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI-2.0.0-arm64.dmg) |
-| macOS Intel (x64) | [AI Studios-2.0.0.dmg](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI-2.0.0.dmg) |
-| Windows (x64) | [AI Studios Setup 2.0.0.exe](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI.Setup.2.0.0.exe) |
-| Linux (Ubuntu x64) | [`.AppImage`](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI-2.0.0.AppImage) / [`.deb`](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/ai-studios_2.0.0_amd64.deb), or build locally with `npm run electron:build:linux`. |
+| macOS Apple Silicon (M1/M2/M3/M4) | [AI Studios-2.0.0-arm64.dmg](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/AI-Studios-2.0.0-arm64.dmg) |
+| macOS Intel (x64) | [AI Studios-2.0.0.dmg](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/AI-Studios-2.0.0.dmg) |
+| Windows (x64) | [AI Studios Setup 2.0.0.exe](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/AI-Studios-Setup-2.0.0.exe) |
+| Linux (Ubuntu x64) | [`.AppImage`](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/AI-Studios-2.0.0.AppImage) / [`.deb`](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/ai-studios_2.0.0_amd64.deb), or build locally with `npm run electron:build:linux`. |
 
 All releases: [github.com/your-username/AI-Studios/releases](https://github.com/your-username/AI-Studios/releases)
 

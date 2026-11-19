@@ -285,7 +285,7 @@ const getNavigationCategory = (tabId) => (
 );
 
 const STORAGE_KEY = 'muapi_key';
-const NOTIFICATIONS_STORAGE_KEY = 'open_gen_notifications_v1';
+const NOTIFICATIONS_STORAGE_KEY = 'ai_studios_notifications_v1';
 const MAX_VISIBLE_NOTIFICATIONS = 3;
 
 const loadStoredNotifications = () => {

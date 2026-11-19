@@ -16,7 +16,7 @@ export const metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Open Gen AI',
+    title: 'AI Studios',
   },
 };
 

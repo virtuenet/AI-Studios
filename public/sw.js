@@ -209,7 +209,7 @@ async function getOfflineGenerations() {
 
 function openQueueDB() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('OpenGenAIQueue', 1);
+    const request = indexedDB.open('AIStudiosQueue', 1);
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains('queue')) {
