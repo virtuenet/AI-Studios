@@ -179,7 +179,8 @@
     "follow-redirects": "^1.16.3",
     "form-data": "^4.0.6",
     "sharp": "^0.35.5",
-    "prismjs": "^1.30.0"
+    "prismjs": "^1.30.0",
+    "typescript": "$typescript"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

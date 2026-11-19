@@ -36,7 +36,7 @@
     "dist"
   ],
   "scripts": {
-    "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
+    "build:css": "node ../../scripts/build-studio-css.js",
     "build": "npm run build:css && node ../../scripts/build-studio-dist.js"
   },
   "license": "MIT",
