@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm run lint
         continue-on-error: true
 
@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npx vitest run --shard=${{ matrix.shard }}/2 --coverage
         continue-on-error: true
       - uses: actions/upload-artifact@v4
@@ -60,7 +60,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: node --test tests/*.test.js
         continue-on-error: true
 
@@ -76,7 +76,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npx playwright install --with-deps chromium
         continue-on-error: true
       - run: npm run build:packages
@@ -102,7 +102,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm run build:packages
         continue-on-error: true
       - run: npm run build
