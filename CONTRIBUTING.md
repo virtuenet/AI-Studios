@@ -54,10 +54,15 @@ behavior, accessibility, and local inference (Electron / Wan2GP).
 
 ```bash
 npm test                 # Electron local inference tests (Node.js runner)
-npm run test:vitest      # Unit + accessibility tests (Vitest, 109 tests)
-npm run test:unit        # Unit tests only
-npm run test:coverage    # With coverage report
+npm run test:vitest      # Unit + component + accessibility tests (Vitest)
+npm run test:coverage    # Coverage report with enforced thresholds
+npm run lint             # ESLint (flat config)
+npm run typecheck        # tsc --noEmit
+npm run test:e2e         # Playwright smoke tests (production build)
+npm run validate:models  # Model catalog validation
 ```
+
+A pre-commit hook runs ESLint on staged files (husky + lint-staged).
 
 All tests run without an API key and make no network calls to MuAPI.
 
@@ -76,7 +81,9 @@ unrelated files in the same PR.
 - [ ] One concern only, with a clear title and description
 - [ ] `npm test` passes (or, for docs-only changes, state that no code changed)
 - [ ] `npm run test:vitest` passes
-- [ ] `npm run lint` passes, or unrelated failures are noted
+- [ ] `npm run lint` and `npm run typecheck` pass
+- [ ] `npm run build` succeeds; `npm run check:bundle` stays under budget
+- [ ] E2E run for UI changes (`npm run test:e2e`)
 - [ ] No API keys, tokens, or secrets added
 - [ ] Docs updated if behaviour, setup, or a command changed
 - [ ] PR description says which commands you ran and their results

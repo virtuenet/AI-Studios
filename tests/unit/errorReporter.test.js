@@ -44,12 +44,34 @@ describe('Error reporter', () => {
   });
 
   it('caps the buffer at 50 entries', async () => {
-    for (let i = 0; i < 55; i++) {
-      await reportError({ source: 'test', error: `error ${i}` });
+    // Advance time between batches to stay under the per-minute rate limit.
+    const realNow = Date.now;
+    let clock = realNow();
+    Date.now = () => clock;
+    try {
+      for (let i = 0; i < 55; i++) {
+        if (i > 0 && i % 5 === 0) clock += 61_000;
+        await reportError({ source: 'test', error: `error ${i}` });
+      }
+    } finally {
+      Date.now = realNow;
     }
     const buffer = getErrorBuffer();
     expect(buffer).toHaveLength(50);
     expect(buffer[buffer.length - 1].message).toBe('error 54');
+  });
+
+  it('suppresses duplicate reports within 5 seconds', async () => {
+    await reportError({ source: 'dup', error: 'same failure' });
+    await reportError({ source: 'dup', error: 'same failure' });
+    expect(getErrorBuffer().filter((e) => e.message === 'same failure')).toHaveLength(1);
+  });
+
+  it('rate limits to 10 reports per minute', async () => {
+    for (let i = 0; i < 15; i++) {
+      await reportError({ source: `rate-${i}`, error: `unique ${i}` });
+    }
+    expect(getErrorBuffer()).toHaveLength(10);
   });
 
   it('persists the buffer to sessionStorage', async () => {

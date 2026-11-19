@@ -75,13 +75,26 @@ async function fetchWithRetry(url, options, { maxRetries = 3, baseDelay = 1000 }
             const response = await fetch(url, options);
             // Only retry on specific transient server errors
             if (RETRYABLE_STATUSES.has(response.status) && attempt < maxRetries) {
-                const delay = baseDelay * Math.pow(2, attempt);
+                let delay = baseDelay * Math.pow(2, attempt);
+                // Honor Retry-After (seconds or HTTP date) when present.
+                const retryAfter = response.headers?.get?.('retry-after');
+                if (retryAfter) {
+                    const seconds = Number(retryAfter);
+                    if (Number.isFinite(seconds)) {
+                        delay = Math.max(delay, seconds * 1000);
+                    } else {
+                        const date = Date.parse(retryAfter);
+                        if (Number.isFinite(date)) delay = Math.max(delay, date - Date.now());
+                    }
+                }
                 await new Promise(resolve => setTimeout(resolve, delay));
                 continue;
             }
             return response;
         } catch (err) {
             lastError = err;
+            // Aborts are user intent — never retry them.
+            if (err.name === 'AbortError') throw err;
             // Retry on network errors (not HTTP errors)
             if (attempt < maxRetries && (err.name === 'TypeError' || err.message?.includes('network') || err.message?.includes('fetch'))) {
                 const delay = baseDelay * Math.pow(2, attempt);
@@ -120,7 +133,7 @@ export function isStreamingEnabled() {
  * support streaming (404/405, wrong content type, or unreadable body) so the
  * caller can fall back to submit+poll without surfacing an error.
  */
-export async function streamGeneration(endpoint, payload, key, { onProgress, onRequestId } = {}) {
+export async function streamGeneration(endpoint, payload, key, { onProgress, onRequestId, signal } = {}) {
     let response;
     try {
         response = await fetch(`${BASE_URL}/api/v1/${endpoint}/stream`, {
@@ -131,6 +144,7 @@ export async function streamGeneration(endpoint, payload, key, { onProgress, onR
                 'x-api-key': key,
             },
             body: JSON.stringify(payload),
+            signal,
         });
     } catch {
         return null;
@@ -193,9 +207,9 @@ export async function streamGeneration(endpoint, payload, key, { onProgress, onR
     return null;
 }
 
-async function submitAndPoll(endpoint, payload, key, onRequestId, maxAttempts = 60, { onProgress } = {}) {
+async function submitAndPoll(endpoint, payload, key, onRequestId, maxAttempts = 60, { onProgress, signal } = {}) {
     if (streamingEnabled) {
-        const streamed = await streamGeneration(endpoint, payload, key, { onProgress, onRequestId });
+        const streamed = await streamGeneration(endpoint, payload, key, { onProgress, onRequestId, signal });
         if (streamed) return streamed;
         // fall through to submit+poll
     }
@@ -204,7 +218,8 @@ async function submitAndPoll(endpoint, payload, key, onRequestId, maxAttempts = 
     const response = await fetchWithRetry(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': key },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal,
     });
     if (!response.ok) {
         const errText = await response.text();
@@ -240,7 +255,7 @@ export async function generateImage(apiKey, params) {
         payload.image_url = null;
     }
     if (params.seed && params.seed !== -1) payload.seed = params.seed;
-    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60, { onProgress: params.onProgress });
+    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60, { onProgress: params.onProgress, signal: params.signal });
 }
 
 export async function generateI2I(apiKey, params) {
@@ -270,7 +285,7 @@ export async function generateI2I(apiKey, params) {
     if (modelInfo?.inputs?.name) {
         payload.name = params.name || modelInfo.inputs.name.default;
     }
-    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60, { onProgress: params.onProgress });
+    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60, { onProgress: params.onProgress, signal: params.signal });
 }
 
 export async function decomposeLayers(apiKey, params) {

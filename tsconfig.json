@@ -1,0 +1,63 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "studio": [
+        "./packages/studio/src/index.js"
+      ],
+      "studio/*": [
+        "./packages/studio/src/*"
+      ],
+      "ai-agent": [
+        "./packages/Open-Poe-AI/packages/agents/src/index.js"
+      ],
+      "workflow-builder": [
+        "./packages/Vibe-Workflow/packages/workflow-builder/src/index.js"
+      ],
+      "design-agent": [
+        "./packages/Open-AI-Design-Agent/packages/design-agent/src/index.js"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "packages/studio/src/**/*.ts",
+    "packages/studio/src/**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    "release",
+    "packages/*/dist",
+    "packages/**/dist"
+  ]
+}

@@ -122,6 +122,42 @@ describe('API Retry Logic (Exponential Backoff)', () => {
     expect(mockFetch).toHaveBeenCalledTimes(3);
   });
 
+  it('honors Retry-After headers on 429', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: false,
+      status: 429,
+      headers: { get: (name) => (name.toLowerCase() === 'retry-after' ? '0' : null) },
+      json: async () => ({ error: 'Rate limited' }),
+      text: async () => 'rate limited',
+    });
+    mockFetch.mockResolvedValueOnce(mockResponse(200, { request_id: 'req-ra' }));
+    mockFetch.mockResolvedValueOnce(mockResponse(200, {
+      status: 'completed',
+      output: { url: 'https://cdn.example.com/ra.png' },
+    }));
+
+    const promise = generateImage(KEY, { model: 'nano-banana', prompt: 'retry-after' });
+    await vi.runAllTimersAsync();
+    const result = await promise;
+    expect(result.url).toBe('https://cdn.example.com/ra.png');
+  });
+
+  it('does not retry aborted requests', async () => {
+    const abortError = new Error('The operation was aborted');
+    abortError.name = 'AbortError';
+    mockFetch.mockRejectedValueOnce(abortError);
+
+    await expect(
+      generateImage(KEY, {
+        model: 'nano-banana',
+        prompt: 'abort test',
+        signal: new AbortController().signal,
+      })
+    ).rejects.toThrow(/abort/i);
+
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+
   it('gives up after max retries on persistent 429', async () => {
     // All attempts return 429 — provide plenty of mock responses
     for (let i = 0; i < 50; i++) {

@@ -70,6 +70,19 @@ function createWindow() {
 app.whenReady().then(() => {
     createWindow();
 
+    // Auto-update only in packaged builds; dev/CI runs have no feed.
+    if (app.isPackaged) {
+        try {
+            const { autoUpdater } = require('electron-updater');
+            autoUpdater.autoDownload = true;
+            autoUpdater.checkForUpdatesAndNotify().catch((err) => {
+                console.warn('Update check failed:', err?.message || err);
+            });
+        } catch (err) {
+            console.warn('Updater unavailable:', err?.message || err);
+        }
+    }
+
     try {
         registerLocalInference();
         registerWan2gp();

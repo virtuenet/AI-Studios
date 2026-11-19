@@ -256,7 +256,7 @@ for (const id of REQUIRED_EXTEND_TOOL_IDS) {
 }
 
 for (const id of KLING_EDIT_TOOL_IDS) {
-  const inputs = {};
+  const inputs: Record<string, any> = {};
 
   if (KLING_ASPECT_RATIO_TOOL_IDS.has(id)) {
     inputs.aspect_ratio = {
@@ -539,19 +539,19 @@ const continuationSourceModelIds = new Map(
   ]),
 );
 
-export function isContinuationSourceModel(modelOrId: unknown, sourceModelId?: string | null): boolean {
-  const modelId = typeof modelOrId === "string" ? modelOrId : modelOrId?.id;
-  const family = CONTINUATION_TARGETS[modelId]?.family;
+export function isContinuationSourceModel(modelOrId: any, sourceModelId?: string | null): boolean {
+  const modelId = typeof modelOrId === "string" ? modelOrId : (modelOrId as any)?.id;
+  const family = (CONTINUATION_TARGETS as any)[modelId]?.family;
   return continuationSourceModelIds.get(family)?.has(sourceModelId) || false;
 }
 
 const MIN_CLIENT_TIMESTAMP = Date.UTC(2000, 0, 1);
 const MAX_CLIENT_TIMESTAMP = Date.UTC(2101, 0, 1);
 
-function mergeInputs(modelInputs = {}, overrideInputs = {}) {
-  const inputs = { ...modelInputs };
+function mergeInputs(modelInputs: any = {}, overrideInputs: any = {}) {
+  const inputs: Record<string, any> = { ...modelInputs };
   for (const [key, override] of Object.entries(overrideInputs)) {
-    inputs[key] = { ...modelInputs[key], ...override };
+    inputs[key] = { ...(modelInputs as any)[key], ...(override as any) };
   }
   return inputs;
 }
@@ -566,7 +566,7 @@ function getVideoToolCapabilities(model) {
   };
 }
 
-export function getVideoToolPresentation(model: Record<string, any> | null | undefined) {
+export function getVideoToolPresentation(model: any) {
   const capabilities = getVideoToolCapabilities(model);
   if (!capabilities) {
     return {
@@ -606,7 +606,6 @@ export function getVideoToolPresentation(model: Record<string, any> | null | und
 }
 
 export function resolveVideoUploadTransition({
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mode,
   currentModel,
   defaultModel,
@@ -632,16 +631,16 @@ export function resolveVideoUploadTransition({
   };
 }
 
-export function getVideoToolOptionDefinitions(model: Record<string, any> | null | undefined) {
+export function getVideoToolOptionDefinitions(model: any) {
   const capabilities = getVideoToolCapabilities(model);
   if (!capabilities) return [];
 
   return Object.entries(capabilities.inputs || {})
-    .filter(([, input]) => input.configurable)
-    .map(([key, input]) => ({ key, ...input }));
+    .filter(([, input]) => (input as any).configurable)
+    .map(([key, input]) => ({ key, ...(input as any) }));
 }
 
-export function getDefaultVideoToolOptions(model: Record<string, any> | null | undefined) {
+export function getDefaultVideoToolOptions(model: any) {
   const options = {};
   for (const input of getVideoToolOptionDefinitions(model)) {
     if (input.default !== undefined) options[input.key] = input.default;
@@ -649,7 +648,7 @@ export function getDefaultVideoToolOptions(model: Record<string, any> | null | u
   return options;
 }
 
-export function serializeVideoToolOptions(model: Record<string, any> | null | undefined, values: Record<string, unknown> = {}) {
+export function serializeVideoToolOptions(model: any, values: any = {}) {
   const payload = {};
   for (const input of getVideoToolOptionDefinitions(model)) {
     const value = values[input.key];
@@ -668,7 +667,7 @@ function getVideoToolPayloadDefaults(model) {
   return { ...(capabilities?.payloadDefaults || {}) };
 }
 
-export function buildVideoToolPayload(model: Record<string, any> | null | undefined, params: Record<string, any> = {}) {
+export function buildVideoToolPayload(model: any, params: any = {}) {
   const capabilities = getVideoToolCapabilities(model);
   const videoField = capabilities?.videoField || "video_url";
   const payload = {
@@ -689,9 +688,9 @@ export function buildVideoToolPayload(model: Record<string, any> | null | undefi
   };
 }
 
-export function getContinuationConfig(modelOrId: unknown) {
+export function getContinuationConfig(modelOrId: any) {
   const modelId = typeof modelOrId === "string" ? modelOrId : modelOrId?.id;
-  const target = CONTINUATION_TARGETS[modelId];
+  const target = (CONTINUATION_TARGETS as any)[modelId];
   if (!target) return null;
   const model = typeof modelOrId === "string" ? { id: modelId } : modelOrId;
   const capabilities = getVideoToolCapabilities(model);
@@ -735,7 +734,7 @@ function resolveContinuationRequestId(entry) {
   return null;
 }
 
-export function getCompatibleContinuationSources(modelOrId: unknown, history: unknown[] = []) {
+export function getCompatibleContinuationSources(modelOrId: any, history: any[] = []) {
   const config = getContinuationConfig(modelOrId);
   if (!config) return [];
   const sources = [];

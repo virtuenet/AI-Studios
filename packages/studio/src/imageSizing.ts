@@ -182,5 +182,5 @@ export const buildImageSizePayload = (
   }
 
   const dimensions = resolveImageDimensions(model, aspectRatio);
-  return dimensions || {};
+  return dimensions ? { width: dimensions.width, height: dimensions.height } : {};
 };

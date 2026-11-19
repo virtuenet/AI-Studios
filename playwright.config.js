@@ -39,7 +39,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run dev -- -p ${PORT}`,
+    command: `npm run build && npm run start -- -p ${PORT}`,
     url: BASE_URL,
     reuseExistingServer: false,
     timeout: 180 * 1000,

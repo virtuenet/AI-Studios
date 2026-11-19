@@ -1,0 +1,8 @@
+# Default owners for everything in the repo.
+* @virtuenet
+
+# Security-sensitive paths require maintainer review.
+/lib/uploadProxyTarget.js @virtuenet
+/middleware.js @virtuenet
+/electron/ @virtuenet
+/.github/workflows/ @virtuenet

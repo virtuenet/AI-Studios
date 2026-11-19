@@ -12,7 +12,7 @@ This document is the authoritative knowledge base for AI Studios. It covers arch
 
 - **Core goal:** unrestricted access to 579 AI models across 17 studios through one self-hostable interface.
 - **Current state:** v2.0.0 — Image, Video, Audio, Lip Sync, Cinema, Layers, Motion Control, Vibe Motion, Body Swap, Marketing, Workflow, Agent, Design Agent, AI Influencer, Apps, and MCP/CLI studios. Desktop app for macOS, Windows, and Linux.
-- **Stack:** Next.js 15 (App Router), React 19, Tailwind CSS v3, npm workspaces, Electron 33.
+- **Stack:** Next.js 16 (App Router, Turbopack), React 19.2, Tailwind CSS v3, npm workspaces, Electron 33.
 - **Primary branch:** `main`
 
 ## 2. Architecture & File Structure
@@ -93,8 +93,13 @@ AI-Studios/
 │   └── *.test.js                     # Electron Node.js tests
 │
 ├── .github/workflows/
-│   ├── ci.yml                        # Lint, unit, electron, e2e, build
-│   └── release.yml                   # Desktop installers on tag
+│   ├── ci.yml                        # Lint, typecheck, coverage, electron, e2e, build, budgets
+│   ├── release.yml                   # Desktop installers on tag
+│   ├── e2e-nightly.yml               # Chromium/Firefox/WebKit nightly
+│   └── update-submodules.yml         # Weekly submodule sync PR
+├── eslint.config.mjs                 # Flat ESLint config (next/core-web-vitals)
+├── tsconfig.json                     # TypeScript check (tsc --noEmit)
+├── SECURITY.md / CODEOWNERS / .github templates
 │
 ├── Dockerfile                        # Multi-stage, non-root, healthcheck
 ├── docker-compose.yml
@@ -181,13 +186,28 @@ external qualification for accessibility.
 
 | Suite | Command | Count |
 |-------|---------|-------|
-| Unit (Vitest) | `npm run test:unit` | 164 across 10 files |
+| Unit (Vitest) | `npm run test:unit` | 223 across 16 files (coverage-gated) |
 | Components (RTL) | `npm run test:components` | included above |
 | Accessibility (axe-core) | included above | 15 |
 | Electron (Node) | `npm test` | 77 |
-| E2E (Playwright) | `npx playwright test --project=chromium` | 11 (1 live-generation skipped without key) |
+| E2E (Playwright) | `npm run test:e2e` | 11 (production server; 1 live-generation skipped without key) |
+| Typecheck | `npm run typecheck` | `tsc --noEmit` |
+| Lint | `npm run lint` | ESLint flat config, 0 errors enforced |
+| Model catalog | `npm run validate:models` | 624 models |
+| Bundle budget | `npm run check:bundle` | 6 MB JS ceiling |
 
 Coverage includes: model catalog integrity, muapi submit/poll + retry + SSE streaming, error reporter, locales, studio render smoke tests, axe-core audits, keyboard/focus checks, PWA endpoints, security headers.
+
+## 8b. Security Operations
+
+- Upload proxy validation is covered by `tests/unit/uploadProxyTarget.test.js`
+  (HTTPS-only, loopback/private/link-local blocking, S3 host patterns, blocked
+  file types, API-key extraction).
+- Production dependencies are audited; `next@16.4.6` + patched axios/form-data/
+  follow-redirects/sharp. Only third-party submodule-nested moderate advisories
+  remain (owner-managed).
+- Error reporting dedupes identical crashes within 5s and rate-limits to 10/min.
+- Session-only API keys supported alongside localStorage persistence.
 
 ## 9. Docker
 
@@ -220,9 +240,10 @@ npm test                    # electron
 
 ## 12. Roadmap
 
-- Full TypeScript migration (9 modules converted: modelCapabilities,
-  imageSizing, persistKey, i18nUtils, modelParameters, imageInputContracts,
-  videoToolCapabilities, messages registry tests, models.d.ts)
+- Continue the TypeScript migration (9 modules converted; tsc enforces the set)
 - Professional review of machine-generated ja/ko/es/fr studio translations
-- Server-side SSE streaming once the Muapi API exposes stream endpoints (client ready)
-- Manual screen-reader pass (checklist tracked in docs/)
+  (automated completeness/placeholder gates are in place)
+- Server-side SSE streaming once the Muapi API exposes stream endpoints
+  (client, Retry-After handling, and AbortController support are ready)
+- Manual screen-reader pass (checklist in docs/accessibility-manual-checklist.md)
+- Code signing/notarization for desktop installers (auto-update is wired)

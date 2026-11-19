@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ImageStudio, VideoStudio, getUserBalance } from 'studio';
 import StudioErrorBoundary from 'studio/components/StudioErrorBoundary';
+import { STUDIO_LABELS } from 'studio/studioRegistry';
 import { reportError } from 'studio/utils/errorReporter';
 
 // Lazy-load non-primary studios to reduce initial bundle size.
@@ -278,6 +279,11 @@ const NAVIGATION_CATEGORIES = [
     )
   }
 ];
+
+// Shared canonical labels (see packages/studio/src/studioRegistry.js).
+for (const tab of TABS) {
+  if (STUDIO_LABELS[tab.id]) tab.label = STUDIO_LABELS[tab.id];
+}
 
 const EXPLORE_APPS_TAB = TABS.find((tab) => tab.id === 'apps');
 

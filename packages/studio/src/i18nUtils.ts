@@ -43,3 +43,24 @@ export function resolveCopy<T extends CopyObject>(
   if (!locale || locale === 'en') return en;
   return mergeCopy(en, localeBundle);
 }
+
+/**
+ * Locale-aware plural selection using Intl.PluralRules.
+ *
+ * Studio copy currently embeds plural nouns in fixed strings; new copy should
+ * provide `{ one, other, ... }` forms and call this helper instead of
+ * hard-coding "s". Falls back to `other` when the locale has no matching form.
+ */
+export function pluralize(
+  locale: string | undefined,
+  count: number,
+  forms: Partial<Record<Intl.LDMLPluralRule, string>> & { other: string }
+): string {
+  const language = locale || 'en';
+  try {
+    const rule = new Intl.PluralRules(language).select(count);
+    return forms[rule] ?? forms.other;
+  } catch {
+    return forms.other;
+  }
+}

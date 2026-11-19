@@ -585,15 +585,27 @@ AI-Studios/
 
 The `packages/studio` library is also consumed by the hosted version on [muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) — model updates made in `packages/studio/src/models/*` apply to both the self-hosted app and the hosted version automatically.
 
-## 🧪 Testing
+## 🧪 Testing & Quality Gates
 
 ```bash
-npm run test:vitest    # 164 unit / component / accessibility tests (Vitest)
+npm run lint           # ESLint (flat config, next/core-web-vitals)
+npm run typecheck      # tsc --noEmit (TypeScript modules)
+npm run test:vitest    # 223 unit / component / accessibility tests (Vitest)
+npm run test:coverage  # Coverage gate (75%/64%/86%/79% thresholds)
 npm test               # 77 Electron local-inference tests (Node)
-npx playwright test --project=chromium   # 11 E2E smoke tests (port 3100)
+npm run test:e2e       # 11 Playwright smoke tests (production build, port 3100)
+npm run validate:models # Catalog integrity (624 models)
+npm run check:bundle   # 6 MB JS bundle budget (Next + Electron SPA)
 ```
 
-Coverage includes model catalog integrity, API submit/poll + retry + SSE streaming, error reporting, locale registry, studio render smoke tests, axe-core accessibility audits (including color contrast), PWA endpoints, and security headers.
+CI enforces lint, typecheck, coverage-gated unit tests, Electron tests, E2E
+(production server), model validation, build, and bundle budget. Nightly jobs run
+E2E across Chromium, Firefox, and WebKit.
+
+Coverage includes model catalog integrity, API submit/poll + retry (Retry-After,
+abort) + SSE streaming, MSW contract tests, error reporting (dedupe/rate limit),
+locale registry + translation completeness, studio render smoke tests, axe-core
+accessibility audits (including color contrast), PWA endpoints, and security headers.
 
 ## 🐳 Docker
 
@@ -602,6 +614,17 @@ docker compose up --build    # http://localhost:3001
 ```
 
 Multi-stage build, non-root user, `HEALTHCHECK`, and `NEXT_TELEMETRY_DISABLED`.
+
+## 🔐 Security & Operations
+
+- CSP + hardening headers in `middleware.js`; SSRF/file-type guards in
+  `lib/uploadProxyTarget.js` with a dedicated test suite.
+- Session-only API-key storage option in the API-key dialog.
+- Error reports are buffered/deduped; set `NEXT_PUBLIC_ERROR_ENDPOINT` to forward.
+- Desktop builds auto-update via `electron-updater` (GitHub releases); installers
+  are currently unsigned — see `SECURITY.md`.
+- Dependabot keeps npm, submodules, and Actions current; a weekly workflow syncs
+  submodules and opens a PR.
 
 ## 🔌 API Integration
 

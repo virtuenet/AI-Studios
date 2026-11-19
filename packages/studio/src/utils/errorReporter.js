@@ -18,6 +18,14 @@ const STORAGE_KEY = 'ai_studios_error_buffer_v1';
 
 /** @type {Array<Object>} */
 let buffer = [];
+// Dedupe/rate-limit state: identical source+message within 5s is suppressed,
+// and at most 10 reports may be recorded per rolling minute.
+const RECENT_WINDOW_MS = 5000;
+const RATE_WINDOW_MS = 60000;
+const MAX_PER_MINUTE = 10;
+const recent = new Map();
+let minuteWindowStart = 0;
+let minuteCount = 0;
 
 function getEndpoint() {
   if (typeof window === 'undefined') return null;
@@ -74,6 +82,22 @@ export async function reportError({ source = 'unknown', error, context = {} }) {
     userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
   };
 
+  const now = Date.now();
+  const dedupeKey = `${source}:${message}`;
+  const lastSeen = recent.get(dedupeKey);
+  if (lastSeen && now - lastSeen < RECENT_WINDOW_MS) {
+    return false; // duplicate within the suppression window
+  }
+  recent.set(dedupeKey, now);
+  if (now - minuteWindowStart > RATE_WINDOW_MS) {
+    minuteWindowStart = now;
+    minuteCount = 0;
+  }
+  if (minuteCount >= MAX_PER_MINUTE) {
+    return false; // rate limited
+  }
+  minuteCount += 1;
+
   hydrateBuffer();
   buffer = [...buffer, entry].slice(-MAX_BUFFER);
   persistBuffer();
@@ -108,6 +132,9 @@ export function getErrorBuffer() {
 /** Clear the in-memory + session buffer. */
 export function clearErrorBuffer() {
   buffer = [];
+  recent.clear();
+  minuteWindowStart = 0;
+  minuteCount = 0;
   if (typeof window !== 'undefined') {
     try {
       window.sessionStorage.removeItem(STORAGE_KEY);

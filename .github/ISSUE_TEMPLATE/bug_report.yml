@@ -1,0 +1,45 @@
+name: Bug report
+description: Report a reproducible problem
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include API keys or other secrets. For security issues use the Security tab instead.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open /studio/image
+        2. Select model ...
+        3. Click Generate
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour + logs
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options: [Web (Next.js), Desktop (Electron), Docker, Other]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+  - type: input
+    id: env
+    attributes:
+      label: OS, browser, Node version

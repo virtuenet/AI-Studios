@@ -78,6 +78,21 @@ describe('Studio message bundles', () => {
     }
   });
 
+  it.each(LOCALES)('%s translates at least 90%% of strings', (locale) => {
+    let total = 0;
+    let translated = 0;
+    for (const ns of NAMESPACES) {
+      const en = flatten(JSON.parse(fs.readFileSync(path.join(MESSAGES, 'en', `${ns}.json`), 'utf8')));
+      const tr = flatten(JSON.parse(fs.readFileSync(path.join(MESSAGES, locale, `${ns}.json`), 'utf8')));
+      for (const [key, value] of Object.entries(en)) {
+        if (typeof value !== 'string' || value.length <= 3) continue;
+        total += 1;
+        if (tr[key] !== value) translated += 1;
+      }
+    }
+    expect(translated / total).toBeGreaterThanOrEqual(0.9);
+  });
+
   it('registry resolves translated copy for each locale', async () => {
     const { getStudioCopy, STUDIO_NAMESPACES } = await import(
       '../../packages/studio/src/messages/studioCopy'
@@ -99,5 +114,14 @@ describe('Studio message bundles', () => {
     const en = { a: 'English A', b: 'English B' };
     const partial = { a: 'Übersetzt A' };
     expect(mergeCopy(en, partial)).toEqual({ a: 'Übersetzt A', b: 'English B' });
+  });
+
+  it('pluralize selects locale-correct forms', async () => {
+    const { pluralize } = await import('../../packages/studio/src/i18nUtils');
+    const forms = { one: 'image', other: 'images' };
+    expect(pluralize('en', 1, forms)).toBe('image');
+    expect(pluralize('en', 3, forms)).toBe('images');
+    expect(pluralize(undefined, 2, forms)).toBe('images');
+    expect(pluralize('!', 1, { one: 'bad', other: 'fallback' })).toBe('fallback');
   });
 });

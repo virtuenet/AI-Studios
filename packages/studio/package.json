@@ -28,7 +28,8 @@
     "./MotionControlStudio": "./src/components/MotionControlStudio.jsx",
     "./components/StudioErrorBoundary": "./src/components/StudioErrorBoundary.jsx",
     "./utils/errorReporter": "./src/utils/errorReporter.js",
-    "./muapi": "./src/muapi.js"
+    "./muapi": "./src/muapi.js",
+    "./studioRegistry": "./src/studioRegistry.js"
   },
   "files": [
     "src",
@@ -36,7 +37,7 @@
   ],
   "scripts": {
     "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
-    "build": "npm run build:css && babel src --out-dir dist --extensions .js,.jsx,.ts,.tsx"
+    "build": "npm run build:css && node ../../scripts/build-studio-dist.js"
   },
   "license": "MIT",
   "dependencies": {

@@ -1,42 +1,32 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 // Import studios via their individual package subpaths rather than the barrel
 // (studio's index.js also pulls Workflow/Agent/DesignAgent, which drag host-only
 // dependencies into the Electron bundle and are available in the web app).
 import ImageStudio from 'studio/ImageStudio';
-import VideoStudio from 'studio/VideoStudio';
-import AudioStudio from 'studio/AudioStudio';
-import ClippingStudio from 'studio/ClippingStudio';
-import MotionControlStudio from 'studio/MotionControlStudio';
-import VibeMotionStudio from 'studio/VibeMotionStudio';
-import LipSyncStudio from 'studio/LipSyncStudio';
-import RecastStudio from 'studio/RecastStudio';
-import CinemaStudio from 'studio/CinemaStudio';
-import MarketingStudio from 'studio/MarketingStudio';
-import AiInfluencerStudio from 'studio/AiInfluencerStudio';
-import LayersStudio from 'studio/LayersStudio';
-import AppsStudio from 'studio/AppsStudio';
-import McpCliStudio from 'studio/McpCliStudio';
+import { STUDIO_TABS } from 'studio/studioRegistry';
+const VideoStudio = lazy(() => import('studio/VideoStudio'));
+const AudioStudio = lazy(() => import('studio/AudioStudio'));
+const ClippingStudio = lazy(() => import('studio/ClippingStudio'));
+const MotionControlStudio = lazy(() => import('studio/MotionControlStudio'));
+const VibeMotionStudio = lazy(() => import('studio/VibeMotionStudio'));
+const LipSyncStudio = lazy(() => import('studio/LipSyncStudio'));
+const RecastStudio = lazy(() => import('studio/RecastStudio'));
+const CinemaStudio = lazy(() => import('studio/CinemaStudio'));
+const MarketingStudio = lazy(() => import('studio/MarketingStudio'));
+const AiInfluencerStudio = lazy(() => import('studio/AiInfluencerStudio'));
+const LayersStudio = lazy(() => import('studio/LayersStudio'));
+const AppsStudio = lazy(() => import('studio/AppsStudio'));
+const McpCliStudio = lazy(() => import('studio/McpCliStudio'));
 import StudioErrorBoundary from 'studio/components/StudioErrorBoundary';
 import { getUserBalance } from 'studio/muapi';
 
 const STORAGE_KEY = 'muapi_key';
 
-const TABS = [
-  { id: 'image', label: 'Image' },
-  { id: 'video', label: 'Video' },
-  { id: 'audio', label: 'Audio' },
-  { id: 'lipsync', label: 'Lip Sync' },
-  { id: 'clipping', label: 'Clipping' },
-  { id: 'motion-control', label: 'Motion' },
-  { id: 'vibe-motion', label: 'Vibe' },
-  { id: 'body-swap', label: 'Recast' },
-  { id: 'cinema', label: 'Cinema' },
-  { id: 'layers', label: 'Layers' },
-  { id: 'marketing', label: 'Marketing' },
-  { id: 'ai-influencer', label: 'Influencer' },
-  { id: 'apps', label: 'Apps' },
-  { id: 'mcp-cli', label: 'MCP & CLI' },
-];
+const DESKTOP_TABS = new Set([
+  'image', 'video', 'audio', 'lipsync', 'clipping', 'motion-control', 'vibe-motion',
+  'body-swap', 'cinema', 'layers', 'marketing', 'ai-influencer', 'apps', 'mcp-cli',
+]);
+const TABS = STUDIO_TABS.filter((tab) => DESKTOP_TABS.has(tab.id));
 
 function ApiKeyGate({ onSave }) {
   const [key, setKey] = useState('');
@@ -243,7 +233,15 @@ export default function StudioApp() {
 
       <main id="studio-content" className="flex-1 min-h-0 overflow-hidden">
         <StudioErrorBoundary studio={activeTab}>
-          {renderStudio()}
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center bg-[#030303]">
+                <div className="animate-spin text-3xl text-[#22d3ee]">◌</div>
+              </div>
+            }
+          >
+            {renderStudio()}
+          </Suspense>
         </StudioErrorBoundary>
       </main>
     </div>

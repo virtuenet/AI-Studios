@@ -1,64 +1,92 @@
-# Implementation Status Report
+# Codebase Improvement Implementation — Final Report
 
-> Generated: 2026-11-19 | Project: AI Studios
-> All planned items implemented; 226 automated tests passing.
+> Date: 2026-11-20 | Project: AI Studios
+> Scope: all 9 recommended improvement areas implemented and verified.
 
-## Plan Item Status
+## 1. CI enforcement ✅
 
-| # | Item | Status | Evidence |
-|---|------|--------|----------|
-| 1 | Test Suite | ✅ Done | 164 Vitest + 77 Electron = **241 tests, 0 failures** |
-| 2 | CI/CD Pipeline | ✅ Done | `.github/workflows/ci.yml` (lint, unit shards, electron, e2e, build) |
-| 3 | Legacy Code Cleanup | ✅ Done | `src/` vanilla JS replaced by React SPA (`StudioApp.jsx`); legacy components deleted |
-| 4 | Error Boundaries | ✅ Done | `StudioErrorBoundary.jsx` on all 15 web studios + desktop SPA |
-| 5 | Documentation | ✅ Done | `project_knowledge.md`, `CONTRIBUTING.md`, this file |
-| 6 | Performance — Code Splitting | ✅ Done | 13 web studios lazy-loaded; all studios memoized; model catalog split into 9 modules |
-| 7 | API Retry Logic | ✅ Done | `fetchWithRetry()` exponential backoff (429/502/503 + network) |
-| 8 | Accessibility | ✅ Done | axe-core audit (12 tests), color-contrast fixes, focus trapping, skip link, ARIA, keyboard checks |
-| 9 | PWA / Offline | ✅ Done | `manifest.json` + `sw.js` (static cache, SWR balance, result cache, IndexedDB offline queue) |
-| 10 | Streaming API | ✅ Done (client) | SSE client in `muapi.js` with automatic poll fallback; 9 tests. Server-side streaming awaits Muapi SSE endpoints |
-| 11 | TypeScript Migration | ✅ In progress (9 modules) | `modelCapabilities.ts`, `imageSizing.ts`, `persistKey.ts`, `i18nUtils.ts`, `modelParameters.ts`, `imageInputContracts.ts`, `videoToolCapabilities.ts`, `types/models.d.ts`; Babel TS preset wired |
-| 12 | Model Catalog Tree-Shaking | ✅ Done | `models.js` 39,172 → 249 lines; 9 per-category modules |
-| 13 | React Performance | ✅ Done | `React.memo` on all studio exports; shared callbacks memoized in shell |
-| 14 | Docker Optimization | ✅ Done | Multi-stage, `npm ci`, `npm prune --omit=dev`, non-root user, HEALTHCHECK |
-| 15 | Additional i18n | ✅ Done | ja/ko/es/fr shell **and all 15 studio message namespaces** translated (957 keys each), routes + switcher; placeholder parity enforced by tests |
-| 16 | Desktop Release Pipeline | ✅ Done | `.github/workflows/release.yml` (macOS/Windows/Linux artifacts + GitHub Release) |
-| 17 | Error Monitoring | ✅ Done | `utils/errorReporter.js` ring buffer + optional endpoint forwarding; integrated in boundary & generation errors; 7 tests |
-| 18 | E2E Tests | ✅ Done | Playwright on dedicated port: **11 passed, 1 skipped** (live generation needs key) |
-| 19 | Component Tests | ✅ Done | 11 studio smoke tests + ImageStudio tests via React Testing Library |
+- `eslint.config.mjs` added (flat config, `next/core-web-vitals`, 0 errors enforced,
+  202 tracked warnings for React-Compiler migration rules).
+- `tsconfig.json` added; `npm run typecheck` runs `tsc --noEmit` (passes, 0 errors).
+- Coverage gate enforced: scoped to pure-logic modules with thresholds
+  **75.49% stmts / 64.54% branches / 86.07% funcs / 79.45% lines** (thresholds 70/60/70/72).
+- All `continue-on-error` removed from lint/tests/electron/E2E/build/model/budget steps.
+- CI jobs: Lint, Typecheck, Unit (coverage), Electron, E2E (production server), Build.
 
-## Test Results
+## 2. Type checking ✅
 
-```
-Vitest (unit + components + a11y):   164 passed, 0 failures (10 files)
-Electron (Node test runner):          77 passed, 0 failures
-Playwright E2E (chromium):            11 passed, 1 skipped
-────────────────────────────────────────────────────────────
-Total automated:                     241 passed, 0 failures
-```
+- `typescript@5.9.3` pinned (eslint-config-next compatibility).
+- `tsc --noEmit` clean over the TypeScript module set (9 modules).
+- Babel TS preset replaced by esbuild for `packages/studio/dist` (84 files, ~1.5s vs ~12s).
 
-## Build Status
+## 3. Security ✅
 
-```
-✅ Next.js production build — 15/15 static pages
-✅ Vite Electron SPA build — dist/assets (1.7 MB js / 143 KB css)
-✅ Studio package build — 82 files (JS + TS)
-```
+- `tests/unit/uploadProxyTarget.test.js` — 13 tests covering SSRF guards
+  (HTTPS-only, loopback/private/link-local/IP-literal blocking, S3 host patterns,
+  blocked extensions/MIME, API-key extraction).
+- Dependency upgrades: Next 15.5.29 → **16.4.6**, React 19.2, axios 1.21.1,
+  follow-redirects 1.16.3, form-data 4.0.6, postcss 8.5.33, sharp 0.35.5,
+  prismjs override. `npm audit --omit=dev` is clean for first-party dependencies;
+  only third-party submodule-nested moderate advisories remain (documented).
+- Next 16 migration fixes: CSS `@import` ordering, ESLint flat config, E2E against
+  the production server (dev HMR cross-origin is blocked by Next 16).
+- Session-only API-key storage option added to the API-key dialog.
+- `SECURITY.md`, `CODEOWNERS` added.
 
-## Remaining External Dependencies
+## 4. Shell deduplication ✅
 
-| Item | Nature | Status |
-|------|--------|--------|
-| Server-side SSE streaming | Muapi API does not expose `/stream` endpoints | Client implemented + tested; opt-in flag. Falls back to polling automatically |
-| Translation review (ja/ko/es/fr) | Machine-generated (MyMemory/Google public endpoints) | All 15 namespaces × 4 locales generated and validated; professional review recommended before treating strings as final copy |
-| Full TypeScript conversion | 4–6 week incremental effort | 9 modules converted (7 core .ts + registry/types); remaining files migrate as touched |
-| Manual screen-reader pass | Requires VoiceOver/NVDA hardware + human | Checklist tracked in `docs/accessibility-manual-checklist.md`; automated axe/landmark coverage in place |
+- Canonical `packages/studio/src/studioRegistry.js` (ids + English labels).
+- Web `StandaloneShell` labels and Electron `StudioApp` tabs both derive from it.
+- Desktop SPA keeps studio subpath imports; shared barrel already memoized.
 
-## Commits
+## 5. Testing depth ✅
 
-```
-57e01ff rebrand: rename 'Open Generative AI' → 'AI Studios', remove GitHub remote ties
-22863fd rebrand: deep clean — remove all remaining 'Open Generative AI' traces
-6a1028b docs: update all documentation for AI Studios rebrand
-... (this batch: 11-item implementation)
-```
+- New unit suites: `imageSizing`, `imageInputContracts`, `modelParameters`,
+  `persistKey`, `videoToolCapabilities`, `uploadProxyTarget`, `muapi.contract`
+  (MSW), plus error-reporter dedupe/rate-limit and Retry-After/abort tests.
+- Totals: **223 Vitest tests (16 files)** + **77 Electron tests**, 0 failures.
+- Nightly E2E workflow runs Chromium, Firefox, and WebKit.
+- Interactive E2E flows remain a tracked follow-up (smoke coverage is in place).
+
+## 6. i18n quality ✅
+
+- `pluralize()` helper (Intl.PluralRules) added and tested.
+- Translation completeness gate: each of ja/ko/es/fr must translate ≥90% of
+  strings (measured 94.9–99.9%) and preserve all interpolation placeholders.
+- Bundle/key/placeholder parity tests cover 15 namespaces × 4 locales.
+
+## 7. Performance ✅
+
+- Desktop SPA: 13 studios now `React.lazy` + Suspense (Image stays eager).
+- Next bundle analyzer (`npm run analyze`) and **6 MB JS budget**
+  (`npm run check:bundle`): Next 5053 KB, Electron 1872 KB.
+- Studio package build moved from Babel to esbuild.
+- Model catalog remains split into nine category modules.
+
+## 8. Resilience/UX ✅
+
+- `fetchWithRetry` honors `Retry-After` (seconds and HTTP-date).
+- `AbortController` signal support through submit/poll and SSE streams; aborts are
+  never retried.
+- PWA update prompt (`components/ServiceWorkerUpdater.jsx`) replaces silent
+  activation; SW registration errors are non-fatal.
+- `errorReporter` dedupes identical crashes within 5s and rate-limits to 10/min.
+
+## 9. DX/ops ✅
+
+- Dependabot (npm, submodules, Actions); weekly submodule-sync PR workflow.
+- Issue templates, PR template, `SECURITY.md`, `CODEOWNERS`.
+- Husky + lint-staged pre-commit hook.
+- `electron-updater` wired for packaged builds with GitHub publish config.
+- `scripts/validate-models.js` (624 models) enforced in CI.
+- Docs updated: README, `project_knowledge.md`, `CONTRIBUTING.md`.
+
+## Remaining external/manual items
+
+| Item | Status |
+|------|--------|
+| Manual screen-reader pass (VoiceOver/NVDA) | Checklist in `docs/accessibility-manual-checklist.md`; requires human |
+| Professional translation review | Machine-generated bundles validated automatically; native review recommended |
+| Desktop signing/notarization | Auto-update wired; certificates are external secrets |
+| Submodule-nested moderate advisories | Owned by third-party submodules; tracked pending upstream sync |
+| Full TypeScript migration of all JS files | Incremental; enforced set is type-checked in CI |

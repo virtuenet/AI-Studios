@@ -1,6 +1,6 @@
 {
   "name": "ai-studios",
-  "description": "Open-source alternative to HF AI — AI image, video, cinema and lip sync studio",
+  "description": "Open-source alternative to HF AI \u2014 AI image, video, cinema and lip sync studio",
   "homepage": "",
   "private": true,
   "version": "2.0.0",
@@ -16,7 +16,7 @@
     "build": "next build",
     "start": "next start",
     "test": "node --test",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test:vitest": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -41,12 +41,18 @@
     "package:linux:deb": "node scripts/package-linux-deb.js",
     "package:linux:deb:arm64": "node scripts/package-linux-deb.js --arch arm64",
     "package:linux:deb:x64": "node scripts/package-linux-deb.js --arch x64",
-    "electron:build:all": "vite build && electron-builder --mac --win --linux"
+    "electron:build:all": "vite build && electron-builder --mac --win --linux",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test --project=chromium",
+    "analyze": "ANALYZE=true next build",
+    "check:bundle": "node scripts/check-bundle-size.js",
+    "prepare": "husky || true",
+    "validate:models": "node scripts/validate-models.js"
   },
   "build": {
     "appId": "ai.generative.open",
     "productName": "AI Studios",
-    "copyright": "Copyright © 2025",
+    "copyright": "Copyright \u00a9 2025",
     "directories": {
       "output": "release"
     },
@@ -119,14 +125,22 @@
           ]
         }
       ]
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "virtuenet",
+        "repo": "AI-Studios"
+      }
+    ]
   },
   "dependencies": {
     "ai-agent": "file:./packages/Open-Poe-AI/packages/agents",
-    "axios": "^1.7.0",
-    "next": "^15.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "axios": "^1.21.1",
+    "electron-updater": "^6.8.11",
+    "next": "^16.4.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-hot-toast": "^2.4.1",
     "studio": "*",
     "workflow-builder": "file:./packages/Vibe-Workflow/packages/workflow-builder",
@@ -134,23 +148,43 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^16.4.6",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/vite": "^4.1.18",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.12",
+    "@types/react": "19.3.0",
+    "@vitest/coverage-v8": "^4.1.12",
     "autoprefixer": "^10.4.24",
     "axe-core": "^4.14.1",
     "electron": "^33.4.11",
     "electron-builder": "^25.1.8",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
-    "eslint-config-next": "^15.0.0",
+    "eslint-config-next": "^16.4.6",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "postcss": "^8.5.6",
+    "lint-staged": "^16.4.0",
+    "msw": "^2.15.0",
+    "postcss": "^8.5.33",
     "tailwindcss": "^3.4.0",
+    "typescript": "^5.9.3",
     "vite": "^5.4.0",
     "vitest": "^4.1.12"
   },
-  "main": "electron/main.js"
+  "main": "electron/main.js",
+  "overrides": {
+    "follow-redirects": "^1.16.3",
+    "form-data": "^4.0.6",
+    "sharp": "^0.35.5",
+    "prismjs": "^1.30.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.json": []
+  }
 }

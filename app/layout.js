@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from "next/font/google";
 import { headers } from 'next/headers';
 import { getLocaleConfig } from '@/lib/locales';
+import ServiceWorkerUpdater from '@/components/ServiceWorkerUpdater';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,23 +36,10 @@ export default async function RootLayout({ children }) {
       <head>
         {/* Apply the saved theme before first paint to avoid a dark flash. */}
         <script dangerouslySetInnerHTML={{ __html: "try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}" }} />
-        {/* Register service worker for PWA offline support */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js').then(
-                    (reg) => console.log('[SW] Registered:', reg.scope),
-                    (err) => console.warn('[SW] Registration failed:', err)
-                  );
-                });
-              }
-            `,
-          }}
-        />
       </head>
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>{children}
+        <ServiceWorkerUpdater />
+      </body>
     </html>
   );
 }
