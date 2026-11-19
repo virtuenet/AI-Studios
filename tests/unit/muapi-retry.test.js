@@ -164,12 +164,16 @@ describe('API Retry Logic (Exponential Backoff)', () => {
       mockFetch.mockResolvedValueOnce(mockResponse(429, { error: 'Rate limited' }, false));
     }
 
-    const promise = generateImage(KEY, { model: 'nano-banana', prompt: 'test persistent' });
-    
-    // Run all fake timers to flush retry delays
+    // Attach the rejection handler before timers run so the rejection is
+    // never unhandled (Vitest fails the job on unhandled rejections).
+    const settled = generateImage(KEY, {
+      model: 'nano-banana',
+      prompt: 'test persistent',
+    }).catch((error) => error);
+
     await vi.runAllTimersAsync();
-    
-    // Should eventually reject
-    await expect(promise).rejects.toThrow();
+
+    const error = await settled;
+    expect(error).toBeInstanceOf(Error);
   });
 });
