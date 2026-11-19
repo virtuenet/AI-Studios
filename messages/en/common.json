@@ -55,7 +55,7 @@
     "ariaLabel": "Generation activity and notifications"
   },
   "apiKeyModal": {
-    "title": "Open Generative AI",
+    "title": "AI Studios",
     "subtitlePrefix": "Enter your",
     "subtitleSuffix": "API key to start creating",
     "close": "Close",

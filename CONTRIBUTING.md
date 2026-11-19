@@ -1,4 +1,4 @@
-# Contributing to Open Generative AI
+# Contributing to AI Studios
 
 Thanks for contributing. This guide covers the setup steps that are easy to
 get wrong in this repo, so a first pull request does not fail on setup alone.
@@ -25,8 +25,8 @@ for cloud generations; local-model and test work does not need one.
 # Clone WITH submodules — this is required, not optional.
 # The workflow, agent, and design-agent packages live in submodules, and a
 # plain clone leaves those directories empty, which breaks the build.
-git clone --recurse-submodules https://github.com/Anil-matcha/Open-Generative-AI.git
-cd Open-Generative-AI
+git clone --recurse-submodules https://github.com/AI-Studios.git
+cd AI-Studios
 
 # If you already cloned without --recurse-submodules, run this once:
 git submodule update --init --recursive

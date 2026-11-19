@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const TEST_API_KEY = process.env.TEST_MUAPI_KEY || '';
 
-test.describe('Open Generative AI — E2E Smoke Tests', () => {
+test.describe('AI Studios — E2E Smoke Tests', () => {
   test.describe('App Shell', () => {
     test('loads and shows API key modal when no key is set', async ({ page }) => {
       // Clear localStorage to simulate first visit

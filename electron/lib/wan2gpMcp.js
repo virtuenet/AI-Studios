@@ -87,7 +87,7 @@ function createMcpClient(url, { fetchImpl = fetch } = {}) {
                 const result = await rpc('initialize', {
                     protocolVersion: PROTOCOL_VERSION,
                     capabilities: {},
-                    clientInfo: { name: 'open-generative-ai', version: '2' },
+                    clientInfo: { name: 'ai-studios', version: '2' },
                 });
                 await rpc('notifications/initialized', {}, { notify: true });
                 return result;

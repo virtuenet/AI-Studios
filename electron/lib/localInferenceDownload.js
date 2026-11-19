@@ -3,7 +3,7 @@ const { Readable, Transform } = require('stream');
 const { pipeline } = require('stream/promises');
 
 const REQUEST_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (compatible; open-generative-ai/1.0)',
+    'User-Agent': 'Mozilla/5.0 (compatible; ai-studios/1.0)',
     'Accept': '*/*',
     'Accept-Encoding': 'identity',
 };

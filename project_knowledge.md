@@ -1,19 +1,19 @@
-# Open Generative AI: Technical Documentation & Context
+# AI Studios: Technical Documentation & Context
 
 > **Last updated:** 2026-11-19
 > **Version:** 2.0.0
 > **Architecture:** Next.js 15 + React 19 + npm workspaces monorepo
 
-This document serves as the authoritative knowledge base for the Open Generative AI project. It details the architecture, key components, API integration patterns, state management strategies, and contribution guidelines.
+This document serves as the authoritative knowledge base for the AI Studios project. It details the architecture, key components, API integration patterns, state management strategies, and contribution guidelines.
 
 ## 1. Project Vision & Overview
 
-**Open Generative AI** is a free, open-source AI media generation studio — an alternative to paid platforms like Midjourney, Runway, Kling, and Luma.
+**AI Studios** is a free, open-source AI media generation studio — an alternative to paid platforms like Midjourney, Runway, Kling, and Luma.
 
 - **Core Goal:** Provide unrestricted access to 579 AI models across 17 studios through a unified, self-hostable interface.
 - **Current State:** v2.0.0 — fully operational with Image, Video, Audio, Lip Sync, Cinema, Workflow, Agent, Design Agent, and 10 additional studios. Desktop app available for macOS, Windows, and Linux.
 - **Stack:** Next.js 15 (App Router), React 19, Tailwind CSS v3, npm workspaces, Electron 33.
-- **Repository:** `https://github.com/Anil-matcha/Open-Generative-AI`
+- **Repository:** ``
 - **Primary Branch:** `main`
 
 ## 2. Architecture & File Structure
@@ -21,7 +21,7 @@ This document serves as the authoritative knowledge base for the Open Generative
 The project is a **Next.js monorepo** with three git submodules and a shared component library.
 
 ```
-Open-Generative-AI/
+AI-Studios/
 ├── app/                              # Next.js App Router (v15)
 │   ├── layout.js                     # Root layout (Tailwind, fonts, providers)
 │   ├── page.js                       # Redirects → /studio
@@ -313,8 +313,8 @@ npm run test:electron # Electron-specific tests
 
 ### Running Locally
 ```bash
-git clone --recurse-submodules https://github.com/Anil-matcha/Open-Generative-AI.git
-cd Open-Generative-AI
+git clone --recurse-submodules .git
+cd AI-Studios
 npm run setup     # Install deps + build workspace packages
 npm run dev       # Next.js dev server → http://localhost:3000
 # OR

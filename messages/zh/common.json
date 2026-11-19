@@ -55,7 +55,7 @@
     "ariaLabel": "生成活动与通知"
   },
   "apiKeyModal": {
-    "title": "Open Generative AI",
+    "title": "AI Studios",
     "subtitlePrefix": "输入您的",
     "subtitleSuffix": "API 密钥以开始创作",
     "close": "关闭",

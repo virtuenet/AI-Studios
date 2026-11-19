@@ -707,7 +707,7 @@ export default function StandaloneShell({ locale = 'en' }) {
     <div 
       className="h-screen bg-[#030303] flex flex-col overflow-hidden text-white relative"
       role="application"
-      aria-label={copy.shell?.brand || "Open Generative AI"}
+      aria-label={copy.shell?.brand || "AI Studios"}
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}

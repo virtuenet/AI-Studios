@@ -1,5 +1,5 @@
 /**
- * Core type definitions for the Open Generative AI model catalog and API.
+ * Core type definitions for the AI Studios model catalog and API.
  * These types document the structure of model definitions, inputs, and API
  * interactions. They are used for documentation and JSDoc type checking;
  * full TypeScript migration is tracked as a future milestone.

@@ -49,13 +49,13 @@ test('resolveRedirectUrl rejects a redirect with no Location', () => {
 
 test('getBundledBinaryResourceDir resolves linux arm64 bundled path', () => {
     const bundledDir = getBundledBinaryResourceDir({
-        resourcesPath: '/opt/Open Generative AI/resources',
+        resourcesPath: '/opt/AI Studios/resources',
         platform: 'linux',
         arch: 'arm64',
     });
 
     assert.equal(
         bundledDir,
-        '/opt/Open Generative AI/resources/local-ai/linux-arm64/bin'
+        '/opt/AI Studios/resources/local-ai/linux-arm64/bin'
     );
 });

@@ -1,5 +1,5 @@
 /**
- * Open Generative AI — Service Worker
+ * AI Studios — Service Worker
  *
  * Provides:
  * 1. Static asset caching (CSS, JS, fonts, images) for offline access
@@ -10,10 +10,10 @@
  * @version 1.0.0
  */
 
-const CACHE_NAME = 'open-gen-ai-v1';
-const STATIC_CACHE = 'open-gen-ai-static-v1';
-const API_CACHE = 'open-gen-ai-api-v1';
-const HISTORY_CACHE = 'open-gen-ai-history-v1';
+const CACHE_NAME = 'ai-studios-v1';
+const STATIC_CACHE = 'ai-studios-static-v1';
+const API_CACHE = 'ai-studios-api-v1';
+const HISTORY_CACHE = 'ai-studios-history-v1';
 
 // Assets to pre-cache on install
 const PRECACHE_ASSETS = [

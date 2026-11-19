@@ -1,6 +1,6 @@
 {
-  "name": "Open Generative AI",
-  "short_name": "Open Gen AI",
+  "name": "AI Studios",
+  "short_name": "AI Studios",
   "description": "Free, open-source AI image and video generation studio with 579 models across 17 studios",
   "start_url": "/studio/image",
   "display": "standalone",

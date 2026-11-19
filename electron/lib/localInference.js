@@ -35,7 +35,7 @@ function ensureLocalAiPaths() {
     MODELS_DIR = resolved.modelsDir;
     TMP_DIR = resolved.tmpDir;
     // Power users can point at an existing sd-cli build (#396). Models already
-    // can via OPEN_GENERATIVE_AI_LOCAL_AI_DIR.
+    // can via AI_STUDIOS_LOCAL_AI_DIR.
     const customBinary = (process.env[SD_CLI_ENV] || '').trim();
     BINARY_PATH = customBinary && fs.existsSync(customBinary)
         ? path.resolve(customBinary)
@@ -46,7 +46,7 @@ function ensureLocalAiPaths() {
     }
 }
 
-const SD_CLI_ENV = 'OPEN_GENERATIVE_AI_SD_CLI';
+const SD_CLI_ENV = 'AI_STUDIOS_SD_CLI';
 const BINARY_NAME = process.platform === 'win32' ? 'sd-cli.exe' : 'sd-cli';
 let BINARY_PATH;
 
@@ -60,7 +60,7 @@ const activeDownloads = new Map(); // modelId → request object
 // ships e.g. avx512 still resolves cleanly.
 function fetchJson(url) {
     return new Promise((resolve, reject) => {
-        https.get(url, { headers: { 'User-Agent': 'open-generative-ai' } }, (res) => {
+        https.get(url, { headers: { 'User-Agent': 'ai-studios' } }, (res) => {
             if (res.statusCode !== 200) {
                 res.resume();
                 reject(new Error(`HTTP ${res.statusCode} from ${url}`));
@@ -158,7 +158,7 @@ async function getBinaryStatus() {
 // Metal-enabled binaries hosted on our own release (macOS arm64 only).
 // Other platforms fall back to the stock leejet release.
 const CUSTOM_BINARIES = {
-    'darwin-arm64': 'https://github.com/Anil-matcha/Open-Generative-AI/releases/download/v1.0.3-binaries/sd-cli-metal-macos-arm64.zip',
+    'darwin-arm64': '# Local inference binary URL — configure for your release',
 };
 
 // The Windows CUDA build ships ggml-cuda.dll but not the CUDA runtime it links

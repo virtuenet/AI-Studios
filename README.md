@@ -1,6 +1,6 @@
-# Open Generative AI — Unrestricted Open-Source Alternative to AI Video Platforms
+# AI Studios — Unrestricted Open-Source Alternative to AI Video Platforms
 
-[![Powered by MuAPI](https://img.shields.io/badge/Powered%20by-MuAPI-6366f1?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNHYtNGgtMnYtMmg0djZoLTJ6bTAtOFY2aDJ2MmgtMnoiLz48L3N2Zz4=)](https://muapi.ai?utm_source=github&utm_medium=badge&utm_campaign=open-generative-ai)
+[![Powered by MuAPI](https://img.shields.io/badge/Powered%20by-MuAPI-6366f1?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNHYtNGgtMnYtMmg0djZoLTJ6bTAtOFY2aDJ2MmgtMnoiLz48L3N2Zz4=)](https://muapi.ai?utm_source=github&utm_medium=badge&utm_campaign=ai-studios)
 
 
 > **The free, open-source alternative to AI Video Platforms.** Generate AI images and videos using 600+ state-of-the-art models across 14 studios — no content filters, no closed ecosystem, no subscription fees.
@@ -23,14 +23,14 @@
 
 ## 💰 Turn This Into Your Own Product — White Label & Resell
 
-Want to launch this as **your own branded AI studio** and charge your own customers for it? [MuAPI White Label](https://muapi.ai/white-label?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai) lets you spin up a fully white-labeled version of this app — your logo, your colors, your custom domain, your own pricing — with zero infra to manage. You keep the markup on every generation; MuAPI handles the models, the queue, and the billing plumbing underneath.
+Want to launch this as **your own branded AI studio** and charge your own customers for it? [MuAPI White Label](https://muapi.ai/white-label?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) lets you spin up a fully white-labeled version of this app — your logo, your colors, your custom domain, your own pricing — with zero infra to manage. You keep the markup on every generation; MuAPI handles the models, the queue, and the billing plumbing underneath.
 
 - **Your branding** — logo, color theme, and a custom domain (e.g. `studio.yourbrand.com`)
 - **Your pricing** — set your own credit/subscription prices for end users, keep the margin
 - **No infra** — no servers, workers, or model hosting to run yourself
 - **All studios included** — Image, Video, Audio, Lip Sync, Cinema, Workflows, and more, depending on plan
 
-Plans start at $49/mo. [Get started with White Label →](https://muapi.ai/white-label?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai)
+Plans start at $49/mo. [Get started with White Label →](https://muapi.ai/white-label?utm_source=github&utm_medium=readme&utm_campaign=ai-studios)
 
 ### What similar AI studios charge their users
 
@@ -73,7 +73,7 @@ This is a curated set of high-value hubs, popular distribution tools, and model-
 
 ## 🌐 Try it Online — No Install Required
 
-**Hosted version:** [https://muapi.ai/open-generative-ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai](https://muapi.ai/open-generative-ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai)
+**Hosted version:** [https://muapi.ai/ai-studios?utm_source=github&utm_medium=readme&utm_campaign=ai-studios](https://muapi.ai/ai-studios?utm_source=github&utm_medium=readme&utm_campaign=ai-studios)
 
 Use all studios (Image, Video, Audio, AI Clipping, Vibe Motion, Lip Sync, Cinema, Marketing, Workflows, Agents, Design Agent, Apps, MCP & CLI) directly in your browser — no Node.js, no setup. Sign up for a free account to start generating. The hosted version is always up to date with the latest models.
 
@@ -87,12 +87,12 @@ One-click installers — no Node.js or terminal required.
 
 | Platform | Download |
 |---|---|
-| macOS Apple Silicon (M1/M2/M3/M4) | [Open Generative AI-2.0.0-arm64.dmg](https://github.com/Anil-matcha/Open-Generative-AI/releases/download/v2.0.0/Open.Generative.AI-2.0.0-arm64.dmg) |
-| macOS Intel (x64) | [Open Generative AI-2.0.0.dmg](https://github.com/Anil-matcha/Open-Generative-AI/releases/download/v2.0.0/Open.Generative.AI-2.0.0.dmg) |
-| Windows (x64) | [Open Generative AI Setup 2.0.0.exe](https://github.com/Anil-matcha/Open-Generative-AI/releases/download/v2.0.0/Open.Generative.AI.Setup.2.0.0.exe) |
-| Linux (Ubuntu x64) | [`.AppImage`](https://github.com/Anil-matcha/Open-Generative-AI/releases/download/v2.0.0/Open.Generative.AI-2.0.0.AppImage) / [`.deb`](https://github.com/Anil-matcha/Open-Generative-AI/releases/download/v2.0.0/open-generative-ai_2.0.0_amd64.deb), or build locally with `npm run electron:build:linux`. |
+| macOS Apple Silicon (M1/M2/M3/M4) | [AI Studios-2.0.0-arm64.dmg](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI-2.0.0-arm64.dmg) |
+| macOS Intel (x64) | [AI Studios-2.0.0.dmg](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI-2.0.0.dmg) |
+| Windows (x64) | [AI Studios Setup 2.0.0.exe](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI.Setup.2.0.0.exe) |
+| Linux (Ubuntu x64) | [`.AppImage`](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/Open.Generative.AI-2.0.0.AppImage) / [`.deb`](https://github.com/your-username/AI-Studios/releases/download/v2.0.0/ai-studios_2.0.0_amd64.deb), or build locally with `npm run electron:build:linux`. |
 
-All releases: [github.com/Anil-matcha/Open-Generative-AI/releases](https://github.com/Anil-matcha/Open-Generative-AI/releases)
+All releases: [github.com/your-username/AI-Studios/releases](https://github.com/your-username/AI-Studios/releases)
 
 ### macOS Installation Guide
 
@@ -102,7 +102,7 @@ Because the app is not notarized by Apple, macOS Gatekeeper will block it on fir
 
 **Step 2** — Open Terminal and run:
 ```bash
-xattr -cr "/Applications/Open Generative AI.app"
+xattr -cr "/Applications/AI Studios.app"
 ```
 
 **Step 3** — Right-click the app in `/Applications` → click **Open** → click **Open** again on the dialog
@@ -112,7 +112,7 @@ xattr -cr "/Applications/Open Generative AI.app"
 **Alternative (no Terminal):**
 1. Try to open the app — macOS will block it
 2. Go to **System Settings → Privacy & Security**
-3. Scroll down to find _"Open Generative AI was blocked"_
+3. Scroll down to find _"AI Studios was blocked"_
 4. Click **Open Anyway** → **Open**
 
 ### Windows Installation — SmartScreen warning fix
@@ -136,12 +136,12 @@ npm run electron:build:linux
 Generated files are written to the `release/` folder:
 - **AppImage** — portable, run directly after making executable:
   ```bash
-  chmod +x "release/Open Generative AI-*.AppImage"
+  chmod +x "release/AI Studios-*.AppImage"
   ./release/Open\ Generative\ AI-*.AppImage
   ```
 - **.deb** — install on Debian/Ubuntu:
   ```bash
-  sudo apt install ./release/open-generative-ai_*_amd64.deb
+  sudo apt install ./release/ai-studios_*_amd64.deb
   ```
 
 If AppImage fails to start on older systems, install `libfuse2`:
@@ -168,9 +168,9 @@ echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/9
 
 ---
 
-Open Generative AI is a free, open-source AI image, video, cinema, and lip sync studio that brings creative workflows to everyone. No content filters, no prompt rejections, no guardrails — just full creative freedom. Powered by [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai), it supports text-to-image, image-to-image, text-to-video, image-to-video, and audio-driven lip sync generation across models like Flux, Nano Banana, Midjourney, Kling, Sora, Veo, Seedream, Infinite Talk, LTX Lipsync, Wan 2.2, and more — all from a sleek, modern interface you can self-host and customize.
+AI Studios is a free, open-source AI image, video, cinema, and lip sync studio that brings creative workflows to everyone. No content filters, no prompt rejections, no guardrails — just full creative freedom. Powered by [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios), it supports text-to-image, image-to-image, text-to-video, image-to-video, and audio-driven lip sync generation across models like Flux, Nano Banana, Midjourney, Kling, Sora, Veo, Seedream, Infinite Talk, LTX Lipsync, Wan 2.2, and more — all from a sleek, modern interface you can self-host and customize.
 
-**Why Open Generative AI instead of other AI Video Platforms?**
+**Why AI Studios instead of other AI Video Platforms?**
 - **No filters** — no content filters, no nanny guardrails, no prompt rejections
 - **Free & open-source** — no subscription, no vendor lock-in
 - **Self-hosted** — your data stays on your machine, full creative control
@@ -218,11 +218,11 @@ All downloads happen inside the app. Nothing is installed system-wide.
 
 By default, `sd.cpp` stores the engine, model weights, and temporary downloads under Electron's app data directory. Common paths are:
 
-- macOS: `~/Library/Application Support/open-generative-ai/local-ai`
-- Windows: `%APPDATA%\open-generative-ai\local-ai`
-- Linux: `~/.config/open-generative-ai/local-ai`
+- macOS: `~/Library/Application Support/ai-studios/local-ai`
+- Windows: `%APPDATA%\ai-studios\local-ai`
+- Linux: `~/.config/ai-studios/local-ai`
 
-To keep multi-GB model weights on another drive, set `OPEN_GENERATIVE_AI_LOCAL_AI_DIR`
+To keep multi-GB model weights on another drive, set `AI_STUDIOS_LOCAL_AI_DIR`
 before launching the desktop app. The app will create `bin/`, `models/`, and `tmp/`
 inside that directory, and **Settings -> Local Models** shows the resolved model folder.
 Local engine output and download errors are written to the app process console, so launch
@@ -276,7 +276,7 @@ If you want to confirm sd.cpp is installed correctly without going through the U
 
 ```bash
 # 1. App data layout (created on first app launch)
-APP_DATA="${OPEN_GENERATIVE_AI_LOCAL_AI_DIR:-$HOME/Library/Application Support/open-generative-ai/local-ai}"
+APP_DATA="${AI_STUDIOS_LOCAL_AI_DIR:-$HOME/Library/Application Support/ai-studios/local-ai}"
 ls "$APP_DATA/bin"     # sd-cli, libstable-diffusion.dylib
 ls "$APP_DATA/models"  # whatever you've downloaded
 
@@ -468,11 +468,11 @@ Every image you upload is saved locally (URL + thumbnail) so you never upload th
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18+)
-- A [Muapi.ai access key](https://muapi.ai/access-keys?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai). Copy the generated key value into the app; do not enter the key name or label.
+- A [Muapi.ai access key](https://muapi.ai/access-keys?utm_source=github&utm_medium=readme&utm_campaign=ai-studios). Copy the generated key value into the app; do not enter the key name or label.
 
 ### Setup
 
-> **Most users want the desktop app, not this dev path.** If you just want to run Open Generative AI on your machine, [download a prebuilt installer](#-download-desktop-app) instead — no Node.js required. The instructions below are for contributors building from source.
+> **Most users want the desktop app, not this dev path.** If you just want to run AI Studios on your machine, [download a prebuilt installer](#-download-desktop-app) instead — no Node.js required. The instructions below are for contributors building from source.
 
 Pick the entry point that matches your goal:
 
@@ -481,8 +481,8 @@ Pick the entry point that matches your goal:
 
 ```bash
 # Clone the repository (with submodules — required for the workflow + agent packages)
-git clone --recurse-submodules https://github.com/Anil-matcha/Open-Generative-AI.git
-cd Open-Generative-AI
+git clone --recurse-submodules https://github.com/your-username/AI-Studios.git
+cd AI-Studios
 
 # If you already cloned without --recurse-submodules, run this once:
 # git submodule update --init --recursive
@@ -513,8 +513,8 @@ npm run start
 The image builds from the submodule packages, so clone with submodules first. Without them, `docker compose up --build` stops with `failed to solve: lstat /packages/Vibe-Workflow/packages/workflow-builder: no such file or directory`.
 
 ```bash
-git clone --recurse-submodules https://github.com/Anil-matcha/Open-Generative-AI.git
-cd Open-Generative-AI
+git clone --recurse-submodules https://github.com/your-username/AI-Studios.git
+cd AI-Studios
 
 # If you already cloned without --recurse-submodules, run this once:
 # git submodule update --init --recursive
@@ -542,14 +542,14 @@ npm run electron:build:linux
 npm run electron:build:all
 ```
 
-Installers are output to the `release/` folder. Pre-built binaries are also available on the [Releases page](https://github.com/Anil-matcha/Open-Generative-AI/releases).
+Installers are output to the `release/` folder. Pre-built binaries are also available on the [Releases page](https://github.com/your-username/AI-Studios/releases).
 
 ## 🏗️ Architecture
 
 The app is a **Next.js monorepo** with a shared `packages/studio` component library.
 
 ```
-Open-Generative-AI/
+AI-Studios/
 ├── app/                        # Next.js App Router
 │   ├── layout.js               # Root layout (Tailwind, fonts)
 │   ├── page.js                 # Redirects → /studio
@@ -575,11 +575,11 @@ Open-Generative-AI/
 └── package.json                # workspaces: ["packages/studio"]
 ```
 
-The `packages/studio` library is also consumed by the hosted version on [muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai) — model updates made in `packages/studio/src/models.js` apply to both the self-hosted app and the hosted version automatically.
+The `packages/studio` library is also consumed by the hosted version on [muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) — model updates made in `packages/studio/src/models.js` apply to both the self-hosted app and the hosted version automatically.
 
 ## 🔌 API Integration
 
-The app communicates with [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai) using a two-step pattern:
+The app communicates with [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) using a two-step pattern:
 
 1. **Submit** — `POST /api/v1/{model-endpoint}` with prompt and parameters
 2. **Poll** — `GET /api/v1/predictions/{request_id}/result` until status is `completed`
@@ -615,9 +615,9 @@ Lip sync jobs use the same two-step pattern: a dedicated `processLipSync()` meth
 
 ## 🤔 How is this different from other AI Video Platforms?
 
-**Open Generative AI** is a community-driven, open-source alternative that provides similar creative capabilities without the closed ecosystem:
+**AI Studios** is a community-driven, open-source alternative that provides similar creative capabilities without the closed ecosystem:
 
-| | Other providers | Open Generative AI |
+| | Other providers | AI Studios |
 | :--- | :--- | :--- |
 | **Cost** | Subscription-based | Free (open-source) |
 | **Content filters** | Yes — prompts blocked or altered | None |
@@ -625,7 +625,7 @@ Lip sync jobs use the same two-step pattern: a dedicated `processLipSync()` meth
 | **Models** | Proprietary | 400+ open & commercial models |
 | **Multi-image input** | Limited | Up to 14 images per request |
 | **Lip sync** | No | 9 models, image & video modes |
-| **Hosted version** | Subscription | Free at [muapi.ai/open-generative-ai](https://muapi.ai/open-generative-ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai) |
+| **Hosted version** | Subscription | Free at [muapi.ai/ai-studios](https://muapi.ai/ai-studios?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) |
 | **Self-hosting** | No | Yes |
 | **Customizable** | No | Fully hackable |
 | **Data privacy** | Cloud-based | Your data stays local |
@@ -637,10 +637,10 @@ MIT
 
 ## 🙏 Credits
 
-Built with [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-generative-ai) — the unified API for AI image and video generation models.
+Built with [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) — the unified API for AI image and video generation models.
 
 ---
 **Deep Dive**: For more details on the "AI Influencer" engine, upcoming "Popcorn" storyboarding features, and the future of this project, read the [full technical overview](https://medium.com/@anilmatcha/).
 
 ---
-*Looking for a free, open-source AI Video Platform? Open Generative AI is an open-source AI image and video generation studio — with no content filters that you can self-host, customize, and extend.*
+*Looking for a free, open-source AI Video Platform? AI Studios is an open-source AI image and video generation studio — with no content filters that you can self-host, customize, and extend.*
