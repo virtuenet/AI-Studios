@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { reportError } from '../utils/errorReporter';
 
 /**
  * StudioErrorBoundary — catches render errors in individual studio tabs
@@ -23,13 +24,16 @@ export default class StudioErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error(
-      `[StudioErrorBoundary] ${this.props.studio || 'unknown'} crashed:`,
-      error,
-      errorInfo
-    );
-
     this.setState({ errorInfo });
+
+    void reportError({
+      source: 'studio-boundary',
+      error,
+      context: {
+        studio: this.props.studio || 'unknown',
+        componentStack: (errorInfo?.componentStack || '').slice(0, 4000),
+      },
+    });
 
     if (this.props.onError) {
       this.props.onError({

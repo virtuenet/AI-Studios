@@ -1,20 +1,45 @@
 "use client";
 
-export { default as ImageStudio } from './components/ImageStudio';
-export { default as VideoStudio } from './components/VideoStudio';
-export { default as ClippingStudio } from './components/ClippingStudio';
-export { default as VibeMotionStudio } from './components/VibeMotionStudio';
-export { default as LipSyncStudio } from './components/LipSyncStudio';
-export { default as RecastStudio } from './components/RecastStudio';
-export { default as CinemaStudio } from './components/CinemaStudio';
-export { default as AudioStudio } from './components/AudioStudio';
-export { default as MarketingStudio } from './components/MarketingStudio';
-export { default as WorkflowStudio } from './components/WorkflowStudio';
-export { default as AgentStudio } from './components/AgentStudio';
-export { default as DesignAgentStudio } from './components/DesignAgentStudio';
-export { default as AppsStudio } from './components/AppsStudio';
-export { default as McpCliStudio } from './components/McpCliStudio';
-export { default as AiInfluencerStudio } from './components/AiInfluencerStudio';
-export { default as LayersStudio } from './components/LayersStudio';
-export { default as MotionControlStudio } from './components/MotionControlStudio';
+import { memo } from 'react';
+
+// Studio components are memoized at the package boundary so that switching
+// tabs (which re-renders StandaloneShell) does not re-render studios whose
+// props have not changed. All studios stay mounted to preserve in-flight
+// generations; memoization keeps hidden tabs cheap.
+import ImageStudioBase from './components/ImageStudio';
+import VideoStudioBase from './components/VideoStudio';
+import ClippingStudioBase from './components/ClippingStudio';
+import VibeMotionStudioBase from './components/VibeMotionStudio';
+import LipSyncStudioBase from './components/LipSyncStudio';
+import RecastStudioBase from './components/RecastStudio';
+import CinemaStudioBase from './components/CinemaStudio';
+import AudioStudioBase from './components/AudioStudio';
+import MarketingStudioBase from './components/MarketingStudio';
+import WorkflowStudioBase from './components/WorkflowStudio';
+import AgentStudioBase from './components/AgentStudio';
+import DesignAgentStudioBase from './components/DesignAgentStudio';
+import AppsStudioBase from './components/AppsStudio';
+import McpCliStudioBase from './components/McpCliStudio';
+import AiInfluencerStudioBase from './components/AiInfluencerStudio';
+import LayersStudioBase from './components/LayersStudio';
+import MotionControlStudioBase from './components/MotionControlStudio';
+
+export const ImageStudio = memo(ImageStudioBase);
+export const VideoStudio = memo(VideoStudioBase);
+export const ClippingStudio = memo(ClippingStudioBase);
+export const VibeMotionStudio = memo(VibeMotionStudioBase);
+export const LipSyncStudio = memo(LipSyncStudioBase);
+export const RecastStudio = memo(RecastStudioBase);
+export const CinemaStudio = memo(CinemaStudioBase);
+export const AudioStudio = memo(AudioStudioBase);
+export const MarketingStudio = memo(MarketingStudioBase);
+export const WorkflowStudio = memo(WorkflowStudioBase);
+export const AgentStudio = memo(AgentStudioBase);
+export const DesignAgentStudio = memo(DesignAgentStudioBase);
+export const AppsStudio = memo(AppsStudioBase);
+export const McpCliStudio = memo(McpCliStudioBase);
+export const AiInfluencerStudio = memo(AiInfluencerStudioBase);
+export const LayersStudio = memo(LayersStudioBase);
+export const MotionControlStudio = memo(MotionControlStudioBase);
+
 export * from './muapi';

@@ -322,6 +322,11 @@ A healthy run on Apple Silicon prints `total params memory size = 1969.78MB (VRA
 - **Image & Video Download** — One-click download of generated outputs in full resolution
 - **API Key Management** — Secure API key storage in browser localStorage (never sent to any server except Muapi)
 - **Responsive Design** — Works seamlessly on desktop and mobile with dark glassmorphism UI
+- **6 Languages** — English, Chinese, Japanese, Korean, Spanish, and French shell UI with a built-in language switcher and per-locale routes (`/ja/studio/video`, …)
+- **PWA & Offline** — Installable web app with a service worker that caches the shell, keeps generation results for offline viewing, and queues prompts while offline
+- **Resilient API Client** — Automatic retry with exponential backoff on rate limits and transient failures; streaming-ready SSE path with transparent polling fallback
+- **Error Monitoring** — Per-studio crash boundaries plus a buffered client error reporter that can forward to any HTTP collector
+- **Localized Shell, Memoized Studios, Split Model Catalog** — 13 studios lazy-load, all studio components are memoized, and the 579-model catalog is split into 9 tree-shakeable modules
 
 ### 🖼️ Image Studio — Dual Mode
 
@@ -551,31 +556,52 @@ The app is a **Next.js monorepo** with a shared `packages/studio` component libr
 ```
 AI-Studios/
 ├── app/                        # Next.js App Router
-│   ├── layout.js               # Root layout (Tailwind, fonts)
+│   ├── layout.js               # Root layout (Tailwind, fonts, PWA, SW registration)
 │   ├── page.js                 # Redirects → /studio
-│   └── studio/
-│       └── page.js             # Studio page — renders StandaloneShell
+│   ├── studio/[[...slug]]/     # Studio shell
+│   └── zh|ja|ko|es|fr/         # Locale route trees
 ├── components/
-│   ├── StandaloneShell.js      # Tab nav + BYOK (API key from localStorage)
-│   └── ApiKeyModal.js          # API key entry modal
+│   ├── StandaloneShell.js      # Tab nav, BYOK, language switcher, error isolation
+│   ├── ApiKeyModal.jsx         # API key modal (focus-trapped)
+│   └── ThemeToggle.jsx         # Light/dark toggle
 ├── packages/
 │   └── studio/                 # Shared React component library
 │       └── src/
-│           ├── index.js        # Exports: ImageStudio, VideoStudio, AudioStudio, ClippingStudio, VibeMotionStudio, LipSyncStudio, RecastStudio, CinemaStudio, MarketingStudio, WorkflowStudio, AgentStudio, DesignAgentStudio, AppsStudio, AiInfluencerStudio, McpCliStudio
-│           ├── models.js       # 400+ model definitions (single source of truth)
-│           ├── muapi.js        # API client (named exports, apiKey as first param)
-│           └── components/
-│               ├── ImageStudio.jsx    # Dual-mode t2i/i2i studio
-│               ├── VideoStudio.jsx    # Dual-mode t2v/i2v studio
-│               ├── LipSyncStudio.jsx  # Portrait/video + audio → talking video
-│               ├── CinemaStudio.jsx   # Pro studio with camera controls
-│               └── WorkflowStudio.jsx # Multi-step pipeline builder & playground
+│           ├── index.js        # Memoized exports of all 17 studios
+│           ├── models.js       # Barrel + lookup helpers
+│           ├── models/         # 9 per-category catalogs (tree-shakeable)
+│           ├── muapi.js        # API client (poll + SSE streaming + retry)
+│           ├── modelCapabilities.ts / imageSizing.ts / persistKey.ts / i18nUtils.ts
+│           ├── utils/errorReporter.js
+│           └── components/     # Studio components + StudioErrorBoundary
+├── src/                        # Electron SPA (React + Vite) reusing packages/studio
+├── public/manifest.json + sw.js  # PWA
+├── tests/                      # Vitest, RTL, axe-core, Playwright, Node
+├── .github/workflows/          # ci.yml + release.yml
+├── Dockerfile                  # Multi-stage, non-root, healthcheck
 ├── next.config.mjs             # transpilePackages: ['studio']
-├── tailwind.config.js
-└── package.json                # workspaces: ["packages/studio"]
+└── package.json                # workspaces
 ```
 
-The `packages/studio` library is also consumed by the hosted version on [muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) — model updates made in `packages/studio/src/models.js` apply to both the self-hosted app and the hosted version automatically.
+The `packages/studio` library is also consumed by the hosted version on [muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) — model updates made in `packages/studio/src/models/*` apply to both the self-hosted app and the hosted version automatically.
+
+## 🧪 Testing
+
+```bash
+npm run test:vitest    # 149 unit / component / accessibility tests (Vitest)
+npm test               # 77 Electron local-inference tests (Node)
+npx playwright test --project=chromium   # 11 E2E smoke tests (port 3100)
+```
+
+Coverage includes model catalog integrity, API submit/poll + retry + SSE streaming, error reporting, locale registry, studio render smoke tests, axe-core accessibility audits (including color contrast), PWA endpoints, and security headers.
+
+## 🐳 Docker
+
+```bash
+docker compose up --build    # http://localhost:3001
+```
+
+Multi-stage build, non-root user, `HEALTHCHECK`, and `NEXT_TELEMETRY_DISABLED`.
 
 ## 🔌 API Integration
 
@@ -583,6 +609,8 @@ The app communicates with [Muapi.ai](https://muapi.ai?utm_source=github&utm_medi
 
 1. **Submit** — `POST /api/v1/{model-endpoint}` with prompt and parameters
 2. **Poll** — `GET /api/v1/predictions/{request_id}/result` until status is `completed`
+
+Transient failures (429/502/503) are retried with exponential backoff. When the API exposes SSE streaming, enable the streaming client with `NEXT_PUBLIC_MUAPI_STREAMING=1` (or `window.__AI_STUDIOS_STREAMING__ = true`); it automatically falls back to polling when streaming is unavailable.
 
 Authentication uses the `x-api-key` header. During development, a Vite proxy handles CORS by routing `/api` requests to `https://api.muapi.ai`.
 

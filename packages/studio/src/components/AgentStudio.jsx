@@ -165,7 +165,7 @@ const TABS = ["templates", "my-agents", "my-chats"];
 export default function AgentStudio({ apiKey, locale = "en" }) {
   const router = useRouter();
   const params = useParams();
-  const copy = resolveCopy(en, zh, locale);
+  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
 
   const [activeMainTab, setActiveMainTab] = useState("templates");
   const [agents, setAgents] = useState([]);

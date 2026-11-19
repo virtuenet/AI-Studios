@@ -66,7 +66,7 @@ function CodeBlock({ children, className = '' }) {
 }
 
 export default function McpCliStudio({ locale = 'en' }) {
-  const copy = resolveCopy(en, zh, locale);
+  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
 
   return (
     <div className="w-full h-full overflow-y-auto bg-[#050505] text-white">

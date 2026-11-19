@@ -37,7 +37,7 @@ function createFakeDocument() {
 }
 
 test('history download media keeps untrusted URL and prompt out of HTML setters', async () => {
-    const { createHistoryMediaWithDownload } = await import('../src/lib/historyDom.mjs');
+    const { createHistoryMediaWithDownload } = await import('../lib/historyDom.mjs');
     const { document, innerHtmlWrites } = createFakeDocument();
     const maliciousUrl = 'https://example.invalid/x" onerror="globalThis.pwned=true';
     const maliciousPrompt = 'preview" onerror="globalThis.pwned=true';
@@ -63,7 +63,7 @@ test('history download media keeps untrusted URL and prompt out of HTML setters'
 });
 
 test('history video URL is assigned as a property and preserves media settings', async () => {
-    const { createHistoryMediaWithDownload } = await import('../src/lib/historyDom.mjs');
+    const { createHistoryMediaWithDownload } = await import('../lib/historyDom.mjs');
     const { document, innerHtmlWrites } = createFakeDocument();
     const maliciousUrl = 'https://example.invalid/video.mp4" onerror="globalThis.pwned=true';
 
@@ -80,7 +80,7 @@ test('history video URL is assigned as a property and preserves media settings',
 });
 
 test('history label uses textContent for localized copy', async () => {
-    const { createHistoryImageWithLabel } = await import('../src/lib/historyDom.mjs');
+    const { createHistoryImageWithLabel } = await import('../lib/historyDom.mjs');
     const { document, innerHtmlWrites } = createFakeDocument();
     const maliciousUrl = 'https://example.invalid/x" onerror="globalThis.pwned=true';
     const maliciousLabel = 'Load <img src=x onerror="globalThis.pwned=true">';
@@ -98,7 +98,7 @@ test('history label uses textContent for localized copy', async () => {
 });
 
 test('history media includes a delete button', async () => {
-    const { createHistoryMediaWithDownload } = await import('../src/lib/historyDom.mjs');
+    const { createHistoryMediaWithDownload } = await import('../lib/historyDom.mjs');
     const { document } = createFakeDocument();
     const { overlay, deleteButton } = createHistoryMediaWithDownload({ document, tagName: 'img', url: 'x' });
     assert.ok(deleteButton.className.includes('hist-delete'));

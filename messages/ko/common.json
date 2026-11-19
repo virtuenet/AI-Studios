@@ -1,0 +1,69 @@
+{
+  "tabs": {
+    "image": "이미지 스튜디오",
+    "layers": "레이어 스튜디오",
+    "video": "비디오 스튜디오",
+    "audio": "오디오 스튜디오",
+    "clipping": "AI 클리핑",
+    "motion-control": "모션 컨트롤",
+    "vibe-motion": "바이브 모션",
+    "lipsync": "립싱크",
+    "body-swap": "바디 스왑",
+    "cinema": "시네마 스튜디오",
+    "marketing": "마케팅 스튜디오",
+    "workflows": "워크플로우",
+    "agents": "에이전트",
+    "design-agent": "디자인 에이전트",
+    "apps": "앱 둘러보기",
+    "ai-influencer": "AI 인플루언서 스튜디오"
+  },
+  "categories": {
+    "images": "이미지",
+    "video": "비디오",
+    "audio": "오디오",
+    "agents-automation": "에이전트 및 자동화"
+  },
+  "shell": {
+    "brand": "AI Studios",
+    "studioFallback": "스튜디오",
+    "expandSidebar": "사이드바 펼치기",
+    "collapseSidebar": "사이드바 접기",
+    "toggleNavMenu": "내비게이션 메뉴 전환",
+    "studioNavigation": "스튜디오 내비게이션",
+    "toolsSuffix": "도구",
+    "settings": "설정",
+    "dropHere": "여기에 미디어를 놓으세요",
+    "dropHereHint": "이미지, 비디오 또는 오디오 파일",
+    "vadooPromo": "무제한 AI 이미지 및 비디오 → YouTube Shorts 및 TikTok으로 자동 게시, 수익 창출 ↗",
+    "dismiss": "닫기"
+  },
+  "settingsModal": {
+    "title": "설정",
+    "subtitle": "AI 스튜디오 환경설정과 인증을 관리하세요.",
+    "activeApiKey": "활성 API 키",
+    "changeKey": "키 변경",
+    "close": "닫기"
+  },
+  "notifications": {
+    "generating": "생성 중입니다",
+    "generationComplete": "- 생성 완료",
+    "generationFailed": "- 생성 실패",
+    "resultReady": "결과가 준비되었습니다.",
+    "open": "열기 →",
+    "openResult": "{label} 결과 열기",
+    "dismissNotification": "알림 닫기",
+    "ariaLabel": "생성 활동 및 알림"
+  },
+  "apiKeyModal": {
+    "title": "AI Studios",
+    "subtitlePrefix": "당신의",
+    "subtitleSuffix": "API 키를 입력하여 제작을 시작하세요",
+    "close": "닫기",
+    "label": "API 액세스 키",
+    "placeholder": "여기에 키를 붙여넣으세요...",
+    "missingKeyError": "API 키를 입력하세요",
+    "submit": "시작하기",
+    "needKey": "키가 필요하신가요?",
+    "getOneFree": "무료로 받기 →"
+  }
+}

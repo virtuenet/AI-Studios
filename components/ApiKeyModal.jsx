@@ -77,7 +77,7 @@ export default function ApiKeyModal({ onSave, onClose, overlay = false, title, s
           <h1 id="api-key-title" className="text-xl font-bold text-white tracking-tight mb-2">
             {title || copy.title}
           </h1>
-          <p id="api-key-desc" className="text-white/40 text-[13px] leading-relaxed px-4">
+          <p id="api-key-desc" className="text-white/60 text-[13px] leading-relaxed px-4">
             {subtitle || (
               <>{copy.subtitlePrefix} <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer" className="text-[#22d3ee] hover:text-[#e5ff33] transition-colors">Muapi.ai</a> {copy.subtitleSuffix}</>
             )}
@@ -86,7 +86,7 @@ export default function ApiKeyModal({ onSave, onClose, overlay = false, title, s
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-white/30 ml-1">
+            <label className="block text-xs font-bold text-white/60 ml-1">
               {copy.label}
             </label>
             <input
@@ -95,7 +95,7 @@ export default function ApiKeyModal({ onSave, onClose, overlay = false, title, s
               value={key}
               onChange={(e) => { setKey(e.target.value); setError(''); }}
               placeholder={copy.placeholder}
-              className="w-full bg-white/5 border border-white/[0.03] rounded-md px-5 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-1 focus:ring-[#22d3ee]/30 focus:bg-white/[0.07] transition-all"
+              className="w-full bg-white/5 border border-white/[0.03] rounded-md px-5 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-[#22d3ee]/30 focus:bg-white/[0.07] transition-all"
               suppressHydrationWarning
             />
             {error && <p className="mt-2 text-red-500/80 text-[11px] font-medium ml-1">{error}</p>}
@@ -109,9 +109,9 @@ export default function ApiKeyModal({ onSave, onClose, overlay = false, title, s
             {copy.submit}
           </button>
 
-          <p className="text-center text-[12px] text-white/20 pt-2">
+          <p className="text-center text-[12px] text-white/50 pt-2">
             {copy.needKey}{' '}
-            <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer" className="text-white/40 hover:text-[#22d3ee] transition-colors font-medium">
+            <a href="https://muapi.ai/access-keys" target="_blank" rel="noreferrer" className="text-white/60 hover:text-[#22d3ee] transition-colors font-medium">
               {copy.getOneFree}
             </a>
           </p>

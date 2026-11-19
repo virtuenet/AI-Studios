@@ -36,3 +36,7 @@ out/
 .env
 .env.*
 !.env.example
+
+# Playwright artifacts
+playwright-report/
+test-results/

@@ -1,0 +1,69 @@
+{
+  "tabs": {
+    "image": "Studio d'Image",
+    "layers": "Studio de Calques",
+    "video": "Studio Vidéo",
+    "audio": "Studio Audio",
+    "clipping": "Découpage IA",
+    "motion-control": "Contrôle du Mouvement",
+    "vibe-motion": "Vibe Motion",
+    "lipsync": "Synchronisation Labiale",
+    "body-swap": "Échange de Corps",
+    "cinema": "Studio Cinéma",
+    "marketing": "Studio Marketing",
+    "workflows": "Flux de Travail",
+    "agents": "Agents",
+    "design-agent": "Agent de Design",
+    "apps": "Explorer les Apps",
+    "ai-influencer": "Studio d'Influenceur IA"
+  },
+  "categories": {
+    "images": "Images",
+    "video": "Vidéo",
+    "audio": "Audio",
+    "agents-automation": "Agents et Automatisation"
+  },
+  "shell": {
+    "brand": "AI Studios",
+    "studioFallback": "Studio",
+    "expandSidebar": "Développer la barre latérale",
+    "collapseSidebar": "Réduire la barre latérale",
+    "toggleNavMenu": "Basculer le menu de navigation",
+    "studioNavigation": "Navigation du studio",
+    "toolsSuffix": "outils",
+    "settings": "Paramètres",
+    "dropHere": "Déposez votre média ici",
+    "dropHereHint": "Fichiers image, vidéo ou audio",
+    "vadooPromo": "Images et vidéos IA sans restriction → Publication automatique sur YouTube Shorts et TikTok, gagnez ↗",
+    "dismiss": "Fermer"
+  },
+  "settingsModal": {
+    "title": "Paramètres",
+    "subtitle": "Gérez vos préférences de studio IA et votre authentification.",
+    "activeApiKey": "Clé API active",
+    "changeKey": "Changer la clé",
+    "close": "Fermer"
+  },
+  "notifications": {
+    "generating": "génère en cours",
+    "generationComplete": "- Génération terminée",
+    "generationFailed": "- Échec de la génération",
+    "resultReady": "Votre résultat est prêt.",
+    "open": "Ouvrir →",
+    "openResult": "Ouvrir le résultat de {label}",
+    "dismissNotification": "Fermer la notification",
+    "ariaLabel": "Activité de génération et notifications"
+  },
+  "apiKeyModal": {
+    "title": "AI Studios",
+    "subtitlePrefix": "Entrez votre",
+    "subtitleSuffix": "clé API pour commencer à créer",
+    "close": "Fermer",
+    "label": "Clé d'accès API",
+    "placeholder": "Collez votre clé ici...",
+    "missingKeyError": "Veuillez saisir votre clé API",
+    "submit": "Commencer",
+    "needKey": "Besoin d'une clé ?",
+    "getOneFree": "Obtenez-en une gratuitement →"
+  }
+}

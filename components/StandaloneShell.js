@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ImageStudio, VideoStudio, getUserBalance } from 'studio';
 import StudioErrorBoundary from 'studio/components/StudioErrorBoundary';
+import { reportError } from 'studio/utils/errorReporter';
 
 // Lazy-load non-primary studios to reduce initial bundle size.
 // ImageStudio and VideoStudio are eager-loaded (most-used tabs).
@@ -29,7 +30,7 @@ function StudioLoading() {
 import axios from 'axios';
 import ApiKeyModal from './ApiKeyModal';
 import ThemeToggle from './ThemeToggle';
-import { getCommonCopy, getLocaleConfig, localizeStudioPath } from '@/lib/locales';
+import { getCommonCopy, getLocaleConfig, localizeStudioPath, SUPPORTED_LOCALES, LOCALE_CONFIGS } from '@/lib/locales';
 
 // Tab/category ids, icons, and English `label` fallbacks are stable
 // identifiers, not locale copy — the actual rendered label is resolved
@@ -496,6 +497,11 @@ export default function StandaloneShell({ locale = 'en' }) {
       ? errorOrMessage
       : (errorOrMessage?.message || errorOrMessage?.error || String(errorOrMessage || 'Generation failed'));
     pushNotification({ type: 'error', tabId, label: tab?.label || tabId, message });
+    void reportError({
+      source: 'generation',
+      error: message,
+      context: { studio: tabId, label: tab?.label },
+    });
     if (apiKey) void fetchBalance(apiKey);
   }, [apiKey, fetchBalance, pushNotification]);
 
@@ -830,6 +836,24 @@ export default function StandaloneShell({ locale = 'en' }) {
 
           {/* Right: Actions */}
           <div className="flex-shrink-0 flex items-center gap-3">
+            <label className="sr-only" htmlFor="locale-switcher">Language</label>
+            <select
+              id="locale-switcher"
+              value={locale}
+              onChange={(e) => {
+                const target = e.target.value;
+                const { rootPath } = getLocaleConfig(target);
+                window.location.href = `${rootPath}/studio/${activeTab}`;
+              }}
+              className="bg-white/5 border border-white/10 text-white/80 text-xs font-bold rounded-md px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#22d3ee]/50"
+              aria-label="Language"
+            >
+              {SUPPORTED_LOCALES.map((code) => (
+                <option key={code} value={code} className="bg-[#0a0a0b]">
+                  {LOCALE_CONFIGS[code].nativeName}
+                </option>
+              ))}
+            </select>
             <ThemeToggle />
             <div className="flex items-center gap-2.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/5 transition-colors">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />

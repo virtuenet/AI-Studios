@@ -133,7 +133,7 @@ const dummyAppsData = [
 ];
 
 export default function AppsStudio({ apiKey, locale = 'en' }) {
-  const copy = resolveCopy(en, zh, locale);
+  const copy = resolveCopy(en, locale === 'zh' ? zh : null, locale);
   const [selectedApp, setSelectedApp] = useState(null);
   const [isRequesting, setIsRequesting] = useState(false);
   const [requestedApps, setRequestedApps] = useState([]);

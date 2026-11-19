@@ -3,7 +3,7 @@ import {
     buildVideoToolPayload,
     serializeVideoToolOptions,
 } from './videoToolCapabilities.js';
-import { buildImageSizePayload } from './imageSizing.js';
+import { buildImageSizePayload } from './imageSizing';
 import { buildImageInputPayload, getImageInputValidationError, normalizePrimaryImageUrls } from './imageInputContracts.js';
 import { pollForGenerationResult } from './utils/generationLifecycle.js';
 import { getModelMediaCapabilities, mapReferenceParams } from './modelCapabilities';
@@ -94,7 +94,112 @@ async function fetchWithRetry(url, options, { maxRetries = 3, baseDelay = 1000 }
     throw lastError || new Error('Max retries exceeded');
 }
 
-async function submitAndPoll(endpoint, payload, key, onRequestId, maxAttempts = 60) {
+// Streaming is opt-in: the upstream API currently exposes submit+poll only.
+// Set `window.__AI_STUDIOS_STREAMING__ = true` (or NEXT_PUBLIC_MUAPI_STREAMING=1)
+// once the API ships SSE support. When enabled, submission tries the streaming
+// endpoint first and transparently falls back to polling if it is unavailable.
+let streamingEnabled = (() => {
+    if (typeof window !== 'undefined' && typeof window.__AI_STUDIOS_STREAMING__ === 'boolean') {
+        return window.__AI_STUDIOS_STREAMING__;
+    }
+    return typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_MUAPI_STREAMING === '1';
+})();
+
+export function setStreamingEnabled(enabled) {
+    streamingEnabled = Boolean(enabled);
+}
+
+export function isStreamingEnabled() {
+    return streamingEnabled;
+}
+
+/**
+ * Attempt one generation over Server-Sent Events.
+ *
+ * Returns the final normalized result, or `null` when the server does not
+ * support streaming (404/405, wrong content type, or unreadable body) so the
+ * caller can fall back to submit+poll without surfacing an error.
+ */
+export async function streamGeneration(endpoint, payload, key, { onProgress, onRequestId } = {}) {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/api/v1/${endpoint}/stream`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'text/event-stream',
+                'x-api-key': key,
+            },
+            body: JSON.stringify(payload),
+        });
+    } catch {
+        return null;
+    }
+
+    if (!response.ok) return null;
+    const contentType = response.headers?.get?.('content-type') || '';
+    if (!contentType.includes('text/event-stream') || !response.body?.getReader) {
+        return null;
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let lastEvent = {};
+    let requestId;
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let boundary;
+        while ((boundary = buffer.indexOf('\n\n')) !== -1) {
+            const chunk = buffer.slice(0, boundary);
+            buffer = buffer.slice(boundary + 2);
+
+            for (const line of chunk.split('\n')) {
+                if (!line.startsWith('data:')) continue;
+                const raw = line.slice(5).trim();
+                if (!raw || raw === '[DONE]') continue;
+                let event;
+                try {
+                    event = JSON.parse(raw);
+                } catch {
+                    continue;
+                }
+                lastEvent = event;
+                requestId = requestId || event.request_id || event.id;
+                if (requestId && onRequestId) onRequestId(requestId);
+
+                const status = event.status?.toLowerCase();
+                if (typeof event.progress === 'number') onProgress?.(event.progress);
+                if (status === 'failed' || status === 'error' || status === 'cancelled') {
+                    throw new Error(event.error?.message || event.error || event.message || 'Generation failed');
+                }
+                if (status === 'completed' || status === 'succeeded' || status === 'success') {
+                    const outputUrl = event.outputs?.[0] || event.url || event.output?.url;
+                    return normalizePredictionResult(event, event, outputUrl);
+                }
+            }
+        }
+    }
+
+    // Stream ended without a terminal event — treat as unsupported.
+    if (lastEvent?.status && ['completed', 'succeeded', 'success'].includes(lastEvent.status.toLowerCase())) {
+        const outputUrl = lastEvent.outputs?.[0] || lastEvent.url || lastEvent.output?.url;
+        return normalizePredictionResult(lastEvent, lastEvent, outputUrl);
+    }
+    return null;
+}
+
+async function submitAndPoll(endpoint, payload, key, onRequestId, maxAttempts = 60, { onProgress } = {}) {
+    if (streamingEnabled) {
+        const streamed = await streamGeneration(endpoint, payload, key, { onProgress, onRequestId });
+        if (streamed) return streamed;
+        // fall through to submit+poll
+    }
+
     const url = `${BASE_URL}/api/v1/${endpoint}`;
     const response = await fetchWithRetry(url, {
         method: 'POST',
@@ -135,7 +240,7 @@ export async function generateImage(apiKey, params) {
         payload.image_url = null;
     }
     if (params.seed && params.seed !== -1) payload.seed = params.seed;
-    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60);
+    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60, { onProgress: params.onProgress });
 }
 
 export async function generateI2I(apiKey, params) {
@@ -165,7 +270,7 @@ export async function generateI2I(apiKey, params) {
     if (modelInfo?.inputs?.name) {
         payload.name = params.name || modelInfo.inputs.name.default;
     }
-    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60);
+    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 60, { onProgress: params.onProgress });
 }
 
 export async function decomposeLayers(apiKey, params) {

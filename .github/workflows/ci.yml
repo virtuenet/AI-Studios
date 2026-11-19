@@ -79,6 +79,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
         continue-on-error: true
+      - run: npm run build:packages
+        continue-on-error: true
       - run: npm run build
         continue-on-error: true
       - run: npx playwright test --project=chromium

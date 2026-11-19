@@ -1,0 +1,69 @@
+{
+  "tabs": {
+    "image": "画像スタジオ",
+    "layers": "レイヤースタジオ",
+    "video": "動画スタジオ",
+    "audio": "音声スタジオ",
+    "clipping": "AIクリッピング",
+    "motion-control": "モーションコントロール",
+    "vibe-motion": "バイブモーション",
+    "lipsync": "リップシンク",
+    "body-swap": "ボディスワップ",
+    "cinema": "シネマスタジオ",
+    "marketing": "マーケティングスタジオ",
+    "workflows": "ワークフロー",
+    "agents": "エージェント",
+    "design-agent": "デザインエージェント",
+    "apps": "アプリを探す",
+    "ai-influencer": "AIインフルエンサースタジオ"
+  },
+  "categories": {
+    "images": "画像",
+    "video": "動画",
+    "audio": "音声",
+    "agents-automation": "エージェントと自動化"
+  },
+  "shell": {
+    "brand": "AI Studios",
+    "studioFallback": "スタジオ",
+    "expandSidebar": "サイドバーを展開",
+    "collapseSidebar": "サイドバーを折りたたむ",
+    "toggleNavMenu": "ナビゲーションメニューを切り替え",
+    "studioNavigation": "スタジオナビゲーション",
+    "toolsSuffix": "ツール",
+    "settings": "設定",
+    "dropHere": "ここにメディアをドロップ",
+    "dropHereHint": "画像、動画、音声ファイル",
+    "vadooPromo": "無制限のAI画像と動画 → YouTubeショートやTikTokとして自動公開、収益化 ↗",
+    "dismiss": "閉じる"
+  },
+  "settingsModal": {
+    "title": "設定",
+    "subtitle": "AIスタジオの設定と認証を管理します。",
+    "activeApiKey": "有効なAPIキー",
+    "changeKey": "キーを変更",
+    "close": "閉じる"
+  },
+  "notifications": {
+    "generating": "生成中です",
+    "generationComplete": "- 生成が完了しました",
+    "generationFailed": "- 生成に失敗しました",
+    "resultReady": "結果の準備ができました。",
+    "open": "開く →",
+    "openResult": "{label}の結果を開く",
+    "dismissNotification": "通知を閉じる",
+    "ariaLabel": "生成アクティビティと通知"
+  },
+  "apiKeyModal": {
+    "title": "AI Studios",
+    "subtitlePrefix": "あなたの",
+    "subtitleSuffix": "APIキーを入力して作成を開始",
+    "close": "閉じる",
+    "label": "APIアクセスキー",
+    "placeholder": "ここにキーを貼り付けてください...",
+    "missingKeyError": "APIキーを入力してください",
+    "submit": "始める",
+    "needKey": "キーが必要ですか？",
+    "getOneFree": "無料で取得 →"
+  }
+}

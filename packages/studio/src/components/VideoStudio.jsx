@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback, useMemo, useId } from "react"
 import toast, { Toaster } from "react-hot-toast";
 import { generateVideo, generateI2V, processV2V, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
-import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey.js";
+import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
 import { VideoOptionControl, VideoSettingsControl } from "./VideoModelControls.jsx";
@@ -782,7 +782,7 @@ export default function VideoStudio({
   onFilesHandled,
   locale = "en",
 }) {
-  const copy = useMemo(() => resolveCopy(en, zh, locale), [locale]);
+  const copy = useMemo(() => resolveCopy(en, locale === 'zh' ? zh : null, locale), [locale]);
   const LEGACY_PERSIST_KEY = "hg_video_studio_persistent";
   const PERSIST_KEY = scopedPersistKey(LEGACY_PERSIST_KEY, apiKey);
   useEffect(() => {

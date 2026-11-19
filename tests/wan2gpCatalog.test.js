@@ -17,7 +17,7 @@ test('catalog entries carry a real WanGP model_type and unique ids', () => {
 });
 
 test('frontend catalog (src/lib/localModels.js) mirrors the Wan2GP catalog', async () => {
-    const { LOCAL_MODEL_CATALOG } = await import('../src/lib/localModels.js');
+    const { LOCAL_MODEL_CATALOG } = await import('../lib/localModels.js');
     const pick = (m) => ({ id: m.id, type: m.type, modelType: m.modelType, needsImage: !!m.needsImage, aspectRatios: m.aspectRatios });
     const frontend = LOCAL_MODEL_CATALOG.filter(m => m.provider === 'wan2gp').map(pick);
     assert.deepEqual(frontend, WAN2GP_CATALOG.map(pick));

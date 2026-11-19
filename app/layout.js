@@ -12,12 +12,15 @@ export const metadata = {
   title: 'AI Studios — Free AI Image & Video Studio',
   description: 'Generate AI images and videos using 200+ models — Flux, Midjourney, Kling, Veo, Seedance and more.',
   manifest: '/manifest.json',
-  themeColor: '#22d3ee',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'AI Studios',
   },
+};
+
+export const viewport = {
+  themeColor: '#22d3ee',
 };
 
 export default async function RootLayout({ children }) {

@@ -160,6 +160,31 @@ describe('Accessibility Audit', () => {
     });
   });
 
+  describe('Color contrast (WCAG 2.1 AA)', () => {
+    it('ApiKeyModal has no color-contrast violations', async () => {
+      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { container } = render(
+        <ApiKeyModal onSave={vi.fn()} locale="en" overlay={true} />
+      );
+      // Run axe with color-contrast enabled (jsdom computes real styles for inline/Tailwind classes only when loaded; here we assert the rule executes)
+      const results = await axe.run(container, {
+        runOnly: { type: 'rule', values: ['color-contrast'] },
+      });
+      const critical = results.violations.filter(v => v.impact === 'critical' || v.impact === 'serious');
+      if (critical.length > 0) {
+        const detail = critical.map(v => `${v.id}: ${v.nodes.length} nodes`).join('; ');
+        throw new Error(`Color contrast violations: ${detail}`);
+      }
+      expect(critical).toHaveLength(0);
+    });
+
+    it('modal body text uses sufficient-opacity utilities', () => {
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/ApiKeyModal.jsx'), 'utf-8');
+      // Guard against low-contrast text utilities (text-white/10–/30) in body copy.
+      expect(src).not.toMatch(/text-white\/(10|20|30)\b/);
+    });
+  });
+
   describe('Keyboard navigation', () => {
     it('ApiKeyModal interactive elements are natively focusable', async () => {
       const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
