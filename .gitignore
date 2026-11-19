@@ -40,3 +40,7 @@ out/
 # Playwright artifacts
 playwright-report/
 test-results/
+
+# Test/build artifacts
+coverage/
+tsconfig.tsbuildinfo
