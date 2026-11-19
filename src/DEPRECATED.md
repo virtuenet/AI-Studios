@@ -1,7 +1,7 @@
 # ⚠️ DEPRECATED — Legacy Vanilla JS Implementation
 
-This directory contains an **older vanilla JavaScript implementation** of the Open
-Generative AI studio, used exclusively by the **Electron desktop app's Vite build**.
+This directory contains an **older vanilla JavaScript implementation** of the
+AI Studios application, used exclusively by the **Electron desktop app's Vite build**.
 
 ## Status
 

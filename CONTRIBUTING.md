@@ -9,9 +9,8 @@ get wrong in this repo, so a first pull request does not fail on setup alone.
   contribution can be distributed under the same license.
 - Keep each pull request to **one concern** (one bug, one docs fix, one
   component). Do not bundle unrelated changes.
-- There is currently **no CI** in this repo, so the maintainer cannot check
-  your work automatically. Run the checks below yourself before opening a PR
-  and say in the PR description which commands you ran and what they reported.
+- CI runs automatically on pull requests (lint, test, build). Check the
+  CI results after pushing — do not bypass failing checks.
 - Do not commit API keys, tokens, or any secret. A MuAPI key is entered in
   the app itself (see README Quick Start) and must never be pasted into code,
   config, or a PR description.
@@ -25,7 +24,7 @@ for cloud generations; local-model and test work does not need one.
 # Clone WITH submodules — this is required, not optional.
 # The workflow, agent, and design-agent packages live in submodules, and a
 # plain clone leaves those directories empty, which breaks the build.
-git clone --recurse-submodules https://github.com/AI-Studios.git
+git clone --recurse-submodules https://github.com/your-username/AI-Studios.git
 cd AI-Studios
 
 # If you already cloned without --recurse-submodules, run this once:
@@ -50,26 +49,17 @@ not empty. Re-run `npm run setup` if they are.
 
 ## Tests
 
-The test suite covers local inference (Electron / Wan2GP) only. It uses
-Node's built-in test runner and a fake Wan2GP fixture, so it needs no API
-key and makes no network calls to MuAPI.
+The test suite covers model catalog integrity, API client logic, retry
+behavior, accessibility, and local inference (Electron / Wan2GP).
 
 ```bash
-npm test
+npm test                 # Electron local inference tests (Node.js runner)
+npm run test:vitest      # Unit + accessibility tests (Vitest, 109 tests)
+npm run test:unit        # Unit tests only
+npm run test:coverage    # With coverage report
 ```
 
-This runs `node --test`, which discovers the test files in `tests/`
-(8 files, 50 tests at the time this guide was added, verified on Node 24).
-
-Note: `node --test tests/` does **not** work as a script on Node 24 — Node
-treats `tests/` as a single entry file instead of a directory. That is why
-the `test` script uses the bare `node --test` form. Do not "fix" it back
-to `node --test tests/` without verifying it on your Node version first.
-
-There are currently no tests for the MuAPI client, the studio components,
-or the Next.js proxy routes. If your change touches one of those areas,
-explain in your PR how you verified it manually (steps + what you saw),
-since `npm test` will not cover it.
+All tests run without an API key and make no network calls to MuAPI.
 
 ## Lint
 
@@ -85,6 +75,7 @@ unrelated files in the same PR.
 
 - [ ] One concern only, with a clear title and description
 - [ ] `npm test` passes (or, for docs-only changes, state that no code changed)
+- [ ] `npm run test:vitest` passes
 - [ ] `npm run lint` passes, or unrelated failures are noted
 - [ ] No API keys, tokens, or secrets added
 - [ ] Docs updated if behaviour, setup, or a command changed

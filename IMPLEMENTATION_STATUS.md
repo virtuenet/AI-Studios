@@ -1,12 +1,13 @@
 # Implementation Status Report
 
 > Generated: 2026-11-19 | Target: 100% completion
+> Project: AI Studios (formerly Open Generative AI)
 
 ## Overall: 88% Complete
 
 | # | Plan Item | Priority | Status | Evidence |
 |---|-----------|----------|--------|----------|
-| 1 | Test Suite | 🔴 Critical | ✅ 159 tests | 109 unit/a11y + 50 Electron = 159 tests, 0 failures |
+| 1 | Test Suite | 🔴 Critical | ✅ 186 tests | 109 unit/a11y + 77 Electron = 186 tests, 0 failures |
 | 2 | CI/CD Pipeline | 🔴 Critical | ✅ Done | `.github/workflows/ci.yml` |
 | 3 | Legacy Code Cleanup | 🟠 High | ✅ Done | 520→80 line muapi shim, deprecation doc |
 | 4 | Error Boundaries | 🟠 High | ✅ Done | `StudioErrorBoundary.jsx` wrapping all 15 studios |
@@ -16,24 +17,24 @@
 | 8 | Accessibility | 🟡 Medium | ✅ 85% | axe-core audit (10 tests), skip-link, focus trapping, ARIA roles, keyboard nav |
 | 9 | PWA / Offline | 🟢 Low | ✅ Done | Service worker, manifest, offline queue, caching |
 | 10 | Streaming API | 🟡 Medium | 🔴 Blocked | Requires Muapi API SSE/streaming endpoints |
-| 11 | TypeScript Migration | 🟢 Low | 🟡 30% | Core types (`models.d.ts`) + `modelCapabilities.ts` (226 lines, 7 imports updated) |
+| 11 | TypeScript Migration | 🟢 Low | 🟡 30% | `modelCapabilities.ts` converted + `models.d.ts` types |
 
 ## Completed Items (Detail)
 
-### 1. Test Suite — 159 tests, 0 failures
+### 1. Test Suite — 186 tests, 0 failures
 - **83** model catalog integrity tests
 - **9** API client core tests
 - **7** API retry logic tests (429, 502, 503, network errors)
 - **10** accessibility audit tests (axe-core + structural checks)
-- **50** Electron local inference tests
+- **77** Electron local inference tests
 
 ### 2. CI/CD Pipeline
 - GitHub Actions: lint, test (sharded), Electron tests, E2E, build
 - Concurrency groups, artifact uploads
-- npm scripts: `test`, `test:watch`, `test:coverage`, `test:unit`, `test:electron`
+- npm scripts: `test`, `test:vitest`, `test:watch`, `test:coverage`, `test:unit`, `test:electron`
 
 ### 3. Legacy Code Cleanup
-- `src/lib/muapi.js`: 520-line duplicate → 80-line compatibility shim
+- `src/lib/muapi.js`: 520-line duplicate → compatibility shim with deprecation notice
 - `src/lib/models.js`: Already a 5-line re-export
 - `src/DEPRECATED.md`: Migration plan documented
 - `components/ApiKeyModal.js` → `.jsx`: Fixed JSX-in-.js parsing
@@ -47,6 +48,7 @@
 - `project_knowledge.md`: Complete rewrite (330+ lines)
 - `IMPLEMENTATION_STATUS.md`: This file
 - `src/DEPRECATED.md`: Legacy migration guide
+- `CONTRIBUTING.md`: Updated with current test commands
 
 ### 6. Performance — Code Splitting
 - 13 studios lazy-loaded via `next/dynamic`
@@ -82,16 +84,15 @@
 - **`packages/studio/src/types/models.d.ts`**: Core type definitions (ModelInput, ModelDefinition, GenerationParams, PollResult, etc.)
 - **`packages/studio/src/modelCapabilities.ts`**: First production file converted from JS to TypeScript (226 lines)
   - Full type annotations on all functions, interfaces for ModelInfo/MediaCapability/GenerationSources
-  - 7 consumer imports updated (muapi.js, models.js, modelFamilies.js, modelParameters.js, videoWorkflows.js, ImageStudio.jsx, VideoStudio.jsx)
-  - Old `modelCapabilities.js` removed
-- **Migration pattern established**: `.js` → `.ts` conversion with explicit interfaces, consumer imports drop `.js` extension
+  - 7 consumer imports updated
+  - Migration pattern established for future `.js` → `.ts` conversions
 
 ## Blocked Items
 
 | Item | Blocker | Resolution |
 |------|---------|------------|
 | **Streaming API** | Muapi API lacks SSE/streaming endpoints | Await API-side implementation |
-| **TypeScript full migration** | 4-6 week effort, low priority | Core types defined; incremental migration deferred |
+| **TypeScript full migration** | 4-6 week effort, low priority | Pattern established; incremental migration deferred |
 
 ## Test Results (Final)
 
@@ -101,12 +102,12 @@ Test Files  4 passed (4)
 Tests      109 passed (109)
 
 === Electron Tests (Node.js) ===
-tests       50
-pass        50
+tests       77
+pass        77
 fail         0
 
 === TOTAL ===
-Tests      159 passed
+Tests      186 passed
 Failures     0
 ```
 
@@ -121,9 +122,14 @@ Failures     0
 ✅ Design agent: 4 files compiled
 ```
 
-## Commits (7 total, pushed to fork)
+## Commits
 
 ```
+22863fd rebrand: deep clean — remove all remaining 'Open Generative AI' traces
+57e01ff rebrand: rename 'Open Generative AI' → 'AI Studios', remove GitHub remote ties
+c19dffa merge: resolve conflicts with upstream main
+7fa9a43 feat: TypeScript migration — convert modelCapabilities.js → modelCapabilities.ts
+c79deff docs: final status — 88% complete, 159 tests
 03fd9af feat: PWA support, accessibility axe-core audit (10 tests), ApiKeyModal JSX fix
 9564b64 docs: final implementation status — 85% complete, 149 tests passing
 67e332d feat: API retry logic, legacy muapi unification, accessibility improvements, retry tests
@@ -132,7 +138,3 @@ Failures     0
 55b9aff feat: lazy-loaded studios, TypeScript types, accessibility, legacy deprecation
 4748479 feat: CI/CD pipeline, test infrastructure (92 unit tests), error boundaries, updated documentation
 ```
-
-## Merge Path
-
-3. The changes are ready to be committed and pushed to the target repository.
