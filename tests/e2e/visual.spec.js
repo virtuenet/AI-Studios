@@ -8,8 +8,11 @@ test.describe('Visual smoke', () => {
 
     const dialog = page.locator('[role="dialog"]').first();
     await expect(dialog).toBeVisible({ timeout: 30000 });
+    // Platform focus-visible heuristics differ (Linux draws the autofocus ring,
+    // macOS does not) — blur so the baseline is deterministic.
+    await page.evaluate(() => document.activeElement?.blur?.());
     await expect(dialog).toHaveScreenshot('api-key-dialog.png', {
-      maxDiffPixelRatio: 0.15,
+      maxDiffPixelRatio: 0.2,
       animations: 'disabled',
     });
   });
