@@ -4,6 +4,9 @@ import path from 'path';
 export default defineConfig({
   test: {
     environment: 'jsdom',
+    // Studio renders and locale merges can exceed Vitest's 5s default on a
+    // busy CI/desktop machine; keep enough headroom for real regressions.
+    testTimeout: 15000,
     globals: true,
     setupFiles: [],
     include: ['tests/unit/**/*.test.{js,jsx}', 'tests/components/**/*.test.{js,jsx}', 'tests/accessibility/**/*.test.{js,jsx}', 'tests/routes/**/*.test.{js,jsx}'],
