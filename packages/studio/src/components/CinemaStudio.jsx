@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, startTransition, useEffect, useRef, useCallback } from "react";
+import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import { generateImage, uploadFile } from "../muapi.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
@@ -556,7 +558,7 @@ export default function CinemaStudio({
 
   // ── UI state ──
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const generation = useGeneration();
   const [canvasUrl, setCanvasUrl] = useState(null); // null = prompt view
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -648,42 +650,26 @@ export default function CinemaStudio({
     }
   };
 
-  // ── Persistence: Load ────────────────────────────────────────────────────
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        startTransition(() => {
-          if (data.settings) setSettings(data.settings);
-          if (data.resolution) setResolution(data.resolution);
-          if (data.internalHistory) setInternalHistory(data.internalHistory);
-          if (data.uploadedImage) setUploadedImage(data.uploadedImage);
-        });
-      }
-    } catch (err) {
-      console.warn("Failed to load CinemaStudio persistence:", err);
-    }
-  }, [PERSIST_KEY]);
-
-  // ── Adjust height on load ────────────────────────────────────────────────
-  // ── Persistence: Save ────────────────────────────────────────────────────
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        const state = {
-          settings,
-          resolution,
-          internalHistory,
-          uploadedImage,
-        };
-        localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
-      } catch (err) {
-        console.warn("Failed to save CinemaStudio persistence:", err);
-      }
-    }, 500); // 500ms debounce
-    return () => clearTimeout(timer);
-  }, [settings, resolution, internalHistory, uploadedImage, PERSIST_KEY]);
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) return;
+      startTransition(() => {
+        if (data.settings) setSettings(data.settings);
+        if (data.resolution) setResolution(data.resolution);
+        if (data.internalHistory) setInternalHistory(data.internalHistory);
+        if (data.uploadedImage) setUploadedImage(data.uploadedImage);
+      });
+    },
+    getState: () => ({
+      settings,
+      resolution,
+      internalHistory,
+      uploadedImage,
+    }),
+    deps: [settings, resolution, internalHistory, uploadedImage],
+  });
 
   // Derive effective history (prop wins over internal)
   const history = historyItems != null ? historyItems : internalHistory;
@@ -700,10 +686,10 @@ export default function CinemaStudio({
   // ── Generate ──
   const handleGenerate = useCallback(async () => {
     const basePrompt = settings.prompt.trim();
-    if (!basePrompt || isGenerating) return;
+    if (!basePrompt || generation.isRunning) return;
 
     onGenerationStart?.();
-    setIsGenerating(true);
+    generation.start();
 
     const finalPrompt = buildNanoBananaPrompt(
       basePrompt,
@@ -760,14 +746,14 @@ export default function CinemaStudio({
       console.error(e);
       onGenerationError?.(e.message?.slice(0, 120) || "Cinema generation failed");
     } finally {
-      setIsGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   }, [
     settings,
     resolution,
     apiKey,
-    isGenerating,
+    generation,
     onGenerationComplete,
     onGenerationEnd,
     onGenerationError,
@@ -1259,10 +1245,10 @@ export default function CinemaStudio({
 
             {/* Generate Button */}
             <PromptAction
-              disabled={isGenerating || !settings.prompt.trim()}
+              disabled={generation.isRunning || !settings.prompt.trim()}
               onClick={handleGenerate}
             >
-              {isGenerating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">◌</span>
                   <span>{copy.prompt.generating}</span>

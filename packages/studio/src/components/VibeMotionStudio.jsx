@@ -4,6 +4,7 @@ import { startTransition, useState, useEffect, useRef, useCallback } from "react
 import toast, { Toaster } from "react-hot-toast";
 import { runMotionGraphics, runMotionGraphicsEdit } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -99,8 +100,10 @@ export default function VibeMotionStudio({
   const textareaRef = useRef(null);
 
   // ── Generation state ──────────────────────────────────────────────────────
-  const [generating, setGenerating] = useState(false);
-  const [generateError, setGenerateError] = useState(null);
+  const generation = useGeneration();
+  const vibeErrorMsg = generation.error
+    ? formatErrorMessage(generation.error, copy.errors.generationFailed)
+    : null;
   const [elapsedTime, setElapsedTime] = useState(0);
   const timerRef = useRef(null);
   const pendingRequestId = useRef(null);
@@ -151,10 +154,10 @@ export default function VibeMotionStudio({
 
   // ── Generate ──────────────────────────────────────────────────────────────
   const handleGenerate = useCallback(async () => {
-    if (!prompt.trim() || generating) return;
+    if (!prompt.trim() || generation.isRunning) return;
     onGenerationStart?.();
     setGenerating(true);
-    setGenerateError(null);
+    generation.start();
     startTimer();
     try {
       let result;
@@ -235,7 +238,7 @@ export default function VibeMotionStudio({
     onGenerationError,
     onGenerationStart,
     copy,
-    generating,
+    generation,
   ]);
 
   const handleKeyDown = (e) => {
@@ -279,7 +282,7 @@ export default function VibeMotionStudio({
 
       {/* ── GALLERY AREA ── */}
       <div className="flex-1 w-full max-w-7xl mx-auto overflow-y-auto custom-scrollbar pb-40 lg:pb-32 px-2">
-        {generating && (
+        {generation.isRunning && (
           /* ── Loading card at top of grid ── */
           <div className="w-full pt-6 flex justify-center animate-fade-in-up">
             <div className="flex flex-col items-center gap-4 py-16">
@@ -310,7 +313,7 @@ export default function VibeMotionStudio({
           </div>
         )}
 
-        {!generating && history.length > 0 ? (
+        {!generation.isRunning && history.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-4 animate-fade-in-up">
             {history.map((entry, idx) => (
               <div
@@ -463,7 +466,7 @@ export default function VibeMotionStudio({
               </div>
             ))}
           </div>
-        ) : !generating ? (
+        ) : !generation.isRunning ? (
           /* ── Empty State ── */
           <div className="flex flex-col items-center justify-center h-full animate-fade-in-up transition-all duration-700 min-h-[50vh]">
             {/* Overlapping floating cards */}
@@ -575,10 +578,10 @@ export default function VibeMotionStudio({
             </div>
 
           {/* ── Error banner ── */}
-          {generateError && (
+          {vibeErrorMsg && (
             <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded text-red-400 text-xs">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              {generateError}
+              {vibeErrorMsg}
             </div>
           )}
 
@@ -699,9 +702,9 @@ export default function VibeMotionStudio({
             {/* ── Generate Button — matches VideoStudio exactly ── */}
             <PromptAction
               onClick={handleGenerate}
-              disabled={generating || !prompt.trim() || (editMode && !editSourceId)}
+              disabled={generation.isRunning || !prompt.trim() || (editMode && !editSourceId)}
             >
-              {generating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">◌</span>{" "}
                   {editMode ? copy.generateButton.remixing : copy.generateButton.generating}

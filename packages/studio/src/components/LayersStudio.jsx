@@ -12,6 +12,7 @@ import {
   expandImage,
 } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
 import { getStudioCopy } from '../messages/studioCopy';
 
 // Upscale Models Definition from schema_data.json
@@ -93,7 +94,7 @@ export default function LayersStudio({
   // Main canvas & image state
   const [currentImageUrl, setCurrentImageUrl] = useState(DEFAULT_SAMPLE_IMAGE);
   const [prompt, setPrompt] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
+  const generation = useGeneration();
   const [progress, setProgress] = useState(0);
 
   // Layer Decomposition Sidebar Settings
@@ -735,7 +736,7 @@ export default function LayersStudio({
       return;
     }
 
-    setIsProcessing(true);
+    generation.start();
     setProgress(20);
     onGenerationStart?.();
 
@@ -794,7 +795,7 @@ export default function LayersStudio({
       toast.error(copy.toasts.editFailed.replace('{error}', errorMsg));
       onGenerationError?.(errorMsg);
     } finally {
-      setIsProcessing(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -844,7 +845,7 @@ export default function LayersStudio({
       return;
     }
 
-    setIsProcessing(true);
+    generation.start();
     setProgress(15);
     onGenerationStart?.();
 
@@ -886,7 +887,7 @@ export default function LayersStudio({
       toast.error(copy.toasts.decompositionFailed.replace('{error}', errorMsg));
       onGenerationError?.(errorMsg);
     } finally {
-      setIsProcessing(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -902,7 +903,7 @@ export default function LayersStudio({
       return;
     }
 
-    setIsProcessing(true);
+    generation.start();
     setProgress(15);
     onGenerationStart?.();
 
@@ -945,7 +946,7 @@ export default function LayersStudio({
       toast.error(copy.toasts.upscaleFailed.replace('{error}', errorMsg));
       onGenerationError?.(errorMsg);
     } finally {
-      setIsProcessing(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -961,7 +962,7 @@ export default function LayersStudio({
       return;
     }
 
-    setIsProcessing(true);
+    generation.start();
     setProgress(15);
     onGenerationStart?.();
 
@@ -1001,7 +1002,7 @@ export default function LayersStudio({
       toast.error(copy.toasts.removeBgFailed.replace('{error}', errorMsg));
       onGenerationError?.(errorMsg);
     } finally {
-      setIsProcessing(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1017,7 +1018,7 @@ export default function LayersStudio({
       return;
     }
 
-    setIsProcessing(true);
+    generation.start();
     setProgress(15);
     onGenerationStart?.();
 
@@ -1052,7 +1053,7 @@ export default function LayersStudio({
       toast.error(copy.toasts.expandFailed.replace('{error}', errorMsg));
       onGenerationError?.(errorMsg);
     } finally {
-      setIsProcessing(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1197,7 +1198,7 @@ export default function LayersStudio({
       return handleRunExpand();
     }
 
-    setIsProcessing(true);
+    generation.start();
     setProgress(20);
     onGenerationStart?.();
 
@@ -1239,7 +1240,7 @@ export default function LayersStudio({
       toast.error(copy.toasts.operationFailed.replace('{error}', errorMsg));
       onGenerationError?.(errorMsg);
     } finally {
-      setIsProcessing(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1527,7 +1528,7 @@ export default function LayersStudio({
                   />
                   <button
                     onClick={handleRunRegionalEdit}
-                    disabled={isProcessing}
+                    disabled={generation.isRunning}
                     className="w-7 h-7 rounded-full bg-[#84cc16] hover:bg-[#a3e635] text-black flex items-center justify-center shadow-[0_0_12px_rgba(132,204,22,0.6)] transition-all hover:scale-105 active:scale-95 flex-shrink-0"
                     title={copy.tools.runSelectionEdit}
                   >
@@ -1592,7 +1593,7 @@ export default function LayersStudio({
               )}
 
               {/* Loading Overlay */}
-              {isProcessing && (
+              {generation.isRunning && (
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-6 z-40">
                   <div className="relative w-16 h-16 mb-4">
                     <div className="absolute inset-0 border-4 border-[#84cc16]/20 rounded-full" />
@@ -2081,7 +2082,7 @@ export default function LayersStudio({
 
             <button
               onClick={() => handleDecompose()}
-              disabled={isProcessing}
+              disabled={generation.isRunning}
               className="w-10 h-10 rounded-full bg-[#84cc16] hover:bg-[#a3e635] text-black flex items-center justify-center shadow-[0_0_20px_rgba(132,204,22,0.5)] transition-all hover:scale-105 active:scale-95 disabled:opacity-50 ml-2 flex-shrink-0"
               title={copy.tools.runLayerDecomposition}
             >
@@ -3910,10 +3911,10 @@ export default function LayersStudio({
                 />
                 <button
                   onClick={() => handleExecuteSideTool("edit-text")}
-                  disabled={isProcessing}
+                  disabled={generation.isRunning}
                   className="w-full py-2 bg-[#84cc16] hover:bg-[#a3e635] text-black font-bold text-xs uppercase rounded-xl shadow-md"
                 >
-                  {isProcessing ? copy.editText.processing : copy.editText.run}
+                  {generation.isRunning ? copy.editText.processing : copy.editText.run}
                 </button>
               </div>
             )}
@@ -3928,10 +3929,10 @@ export default function LayersStudio({
                 </p>
                 <button
                   onClick={() => handleExecuteSideTool("enhancer")}
-                  disabled={isProcessing}
+                  disabled={generation.isRunning}
                   className="w-full py-2 bg-[#84cc16] hover:bg-[#a3e635] text-black font-bold text-xs uppercase rounded-xl shadow-md"
                 >
-                  {isProcessing ? copy.enhancer.processing : copy.enhancer.run}
+                  {generation.isRunning ? copy.enhancer.processing : copy.enhancer.run}
                 </button>
               </div>
             )}
@@ -3946,10 +3947,10 @@ export default function LayersStudio({
                 </p>
                 <button
                   onClick={() => handleExecuteSideTool("relight")}
-                  disabled={isProcessing}
+                  disabled={generation.isRunning}
                   className="w-full py-2 bg-[#84cc16] hover:bg-[#a3e635] text-black font-bold text-xs uppercase rounded-xl shadow-md"
                 >
-                  {isProcessing ? copy.relight.processing : copy.relight.run}
+                  {generation.isRunning ? copy.relight.processing : copy.relight.run}
                 </button>
               </div>
             )}
@@ -3964,10 +3965,10 @@ export default function LayersStudio({
                 </p>
                 <button
                   onClick={() => handleExecuteSideTool("angles")}
-                  disabled={isProcessing}
+                  disabled={generation.isRunning}
                   className="w-full py-2 bg-[#84cc16] hover:bg-[#a3e635] text-black font-bold text-xs uppercase rounded-xl shadow-md"
                 >
-                  {isProcessing ? copy.angles.processing : copy.angles.run}
+                  {generation.isRunning ? copy.angles.processing : copy.angles.run}
                 </button>
               </div>
             )}
@@ -3978,10 +3979,10 @@ export default function LayersStudio({
             {activeSideTab === "layer-decomposition" ? (
               <button
                 onClick={() => handleDecompose()}
-                disabled={isProcessing}
+                disabled={generation.isRunning}
                 className="w-full py-3.5 bg-[#e2f924] hover:bg-[#d4ed1b] active:scale-[0.98] text-black font-extrabold text-sm rounded-2xl shadow-[0_4px_25px_rgba(226,249,36,0.35)] transition-all flex items-center justify-center gap-2 tracking-tight disabled:opacity-50"
               >
-                {isProcessing ? (
+                {generation.isRunning ? (
                   <span>{copy.footer.decomposing.replace('{progress}', progress)}</span>
                 ) : (
                   <>
@@ -4000,10 +4001,10 @@ export default function LayersStudio({
             ) : activeSideTab === "upscale" ? (
               <button
                 onClick={handleRunUpscale}
-                disabled={isProcessing}
+                disabled={generation.isRunning}
                 className="w-full py-3.5 bg-[#e2f924] hover:bg-[#d4ed1b] active:scale-[0.98] text-black font-extrabold text-sm rounded-2xl shadow-[0_4px_25px_rgba(226,249,36,0.35)] transition-all flex items-center justify-center gap-2 tracking-tight disabled:opacity-50"
               >
-                {isProcessing ? (
+                {generation.isRunning ? (
                   <span>{copy.footer.upscaling.replace('{progress}', progress)}</span>
                 ) : (
                   <>
@@ -4066,10 +4067,10 @@ export default function LayersStudio({
             ) : activeSideTab === "remove-bg" ? (
               <button
                 onClick={handleRunRemoveBg}
-                disabled={isProcessing}
+                disabled={generation.isRunning}
                 className="w-full py-3.5 bg-[#e2f924] hover:bg-[#d4ed1b] active:scale-[0.98] text-black font-extrabold text-sm rounded-2xl shadow-[0_4px_25px_rgba(226,249,36,0.35)] transition-all flex items-center justify-center gap-2 tracking-tight disabled:opacity-50"
               >
-                {isProcessing ? (
+                {generation.isRunning ? (
                   <span>{copy.footer.removingBackground.replace('{progress}', progress)}</span>
                 ) : (
                   <>
@@ -4088,10 +4089,10 @@ export default function LayersStudio({
             ) : activeSideTab === "expand-crop" ? (
               <button
                 onClick={handleRunExpand}
-                disabled={isProcessing}
+                disabled={generation.isRunning}
                 className="w-full py-3.5 bg-[#e2f924] hover:bg-[#d4ed1b] active:scale-[0.98] text-black font-extrabold text-sm rounded-2xl shadow-[0_4px_25px_rgba(226,249,36,0.35)] transition-all flex items-center justify-center gap-2 tracking-tight disabled:opacity-50"
               >
-                {isProcessing ? (
+                {generation.isRunning ? (
                   <span>{copy.footer.expandingBorders.replace('{progress}', progress)}</span>
                 ) : (
                   <>

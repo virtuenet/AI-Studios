@@ -4,6 +4,7 @@ import { startTransition, useState, useEffect, useRef, useCallback } from "react
 import toast, { Toaster } from "react-hot-toast";
 import { processMotionControl, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -614,7 +615,7 @@ export default function MotionControlStudio({
   const textareaRef = useRef(null);
 
   // ── Generation State ────────────────────────────────────────────────────────
-  const [isGenerating, setIsGenerating] = useState(false);
+  const generation = useGeneration();
   const [elapsedTime, setElapsedTime] = useState(0);
   const timerRef = useRef(null);
   const pendingRequestId = useRef(null);
@@ -878,7 +879,7 @@ export default function MotionControlStudio({
       onGenerationError?.(msg);
     } finally {
       clearInterval(timerRef.current);
-      setIsGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1409,8 +1410,8 @@ export default function MotionControlStudio({
           </PromptControls>
 
           {/* Action Generate Button */}
-          <PromptAction onClick={handleGenerate} className="whitespace-nowrap" disabled={isGenerating}>
-            {isGenerating ? (
+          <PromptAction onClick={handleGenerate} className="whitespace-nowrap" disabled={generation.isRunning}>
+            {generation.isRunning ? (
               <>
                 <span className="animate-spin inline-block text-black mr-1.5">◌</span>
                 <span>{copy.buttons.generating}</span>

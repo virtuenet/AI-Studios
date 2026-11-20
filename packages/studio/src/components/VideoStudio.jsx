@@ -4,6 +4,7 @@ import { startTransition, useState, useEffect, useRef, useCallback, useMemo, use
 import toast, { Toaster } from "react-hot-toast";
 import { generateVideo, generateI2V, processV2V, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
@@ -844,8 +845,10 @@ export default function VideoStudio({
   const uploadedVideoUrl = uploadedVideoUrls[0] || null;
 
   // ── generation / canvas ──
-  const [generating, setGenerating] = useState(false);
-  const [generateError, setGenerateError] = useState(null);
+  const generation = useGeneration();
+  const videoErrorMsg = generation.error
+    ? formatErrorMessage(generation.error, copy.errors.generationFailed)
+    : null;
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
   const [canvasUrl, setCanvasUrl] = useState(null);
   const [canvasModel, setCanvasModel] = useState(null);
@@ -2191,8 +2194,7 @@ export default function VideoStudio({
     }
 
     onGenerationStart?.();
-    setGenerating(true);
-    setGenerateError(null);
+    const signal = generation.start();
 
     try {
       let res;
@@ -2339,7 +2341,7 @@ export default function VideoStudio({
       if (onGenerationError) onGenerationError(errMsg);
       else toast.error(errMsg);
     } finally {
-      setGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   }, [
@@ -2378,6 +2380,7 @@ export default function VideoStudio({
     onGenerationStart,
     uploadedImageUrl,
     uploadedVideoUrl,
+    generation,
   ]);
 
   // ── reset to prompt bar ───────────────────────────────────────────────────
@@ -3418,9 +3421,9 @@ export default function VideoStudio({
             {/* Generate button */}
             <PromptAction
               onClick={handleGenerate}
-              disabled={generating || mediaUploading || (selectedTool?.group === "continueGenerated" && !hasContinuationSource) || (selectedVeoTool && !selectedVeoSource)}
+              disabled={generation.isRunning || mediaUploading || (selectedTool?.group === "continueGenerated" && !hasContinuationSource) || (selectedVeoTool && !selectedVeoSource)}
             >
-              {generating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">
                     ◌

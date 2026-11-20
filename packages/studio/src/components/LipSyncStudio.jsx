@@ -5,6 +5,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { analyzeAudioFile, audioQcHints } from "../filmCrew/audioQc";
 import { processLipSync, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -532,8 +534,10 @@ export default function LipSyncStudio({
   const [prompt, setPrompt] = useState("");
 
   // ── Generation / UI state ───────────────────────────────────────────────
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generateError, setGenerateError] = useState(null);
+  const generation = useGeneration();
+  const lipErrorMsg = generation.error
+    ? formatErrorMessage(generation.error, copy.errors.generationFailed)
+    : null;
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
   const [view, setView] = useState("input"); // 'input' | 'result'
   const [activeResultUrl, setActiveResultUrl] = useState(null);
@@ -554,81 +558,53 @@ export default function LipSyncStudio({
   const resultVideoRef = useRef(null);
   const hasRestored = useRef(false);
 
-  // ── Persistence: Load ────────────────────────────────────────────────────
-  useEffect(() => {
-    hasRestored.current = false;
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        startTransition(() => {
-          if (data.inputMode) setInputMode(data.inputMode);
-          if (data.selectedModelId) setSelectedModelId(data.selectedModelId);
-          if (data.selectedResolution) setSelectedResolution(data.selectedResolution);
-          if (data.imageUrl) {
-            setImageUrl(data.imageUrl);
-            setImageState(UPLOAD_STATE.READY);
-          }
-          if (data.videoUrl) {
-            setVideoUrl(data.videoUrl);
-            setVideoState(UPLOAD_STATE.READY);
-          }
-          if (data.audioUrl) {
-            setAudioUrl(data.audioUrl);
-            setAudioState(UPLOAD_STATE.READY);
-          }
-          if (data.imageName) setImageName(data.imageName);
-          if (data.videoName) setVideoName(data.videoName);
-          if (data.audioName) setAudioName(data.audioName);
-          if (data.prompt) setPrompt(data.prompt);
-          if (data.internalHistory) setInternalHistory(data.internalHistory);
-        });
-      }
-    } catch (err) {
-      console.warn("Failed to load LipSyncStudio persistence:", err);
-    } finally {
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) { hasRestored.current = true; return; }
+      startTransition(() => {
+        if (data.inputMode) setInputMode(data.inputMode);
+        if (data.selectedModelId) setSelectedModelId(data.selectedModelId);
+        if (data.selectedResolution) setSelectedResolution(data.selectedResolution);
+        if (data.imageUrl) { setImageUrl(data.imageUrl); setImageState(UPLOAD_STATE.READY); }
+        if (data.videoUrl) { setVideoUrl(data.videoUrl); setVideoState(UPLOAD_STATE.READY); }
+        if (data.audioUrl) { setAudioUrl(data.audioUrl); setAudioState(UPLOAD_STATE.READY); }
+        if (data.imageName) setImageName(data.imageName);
+        if (data.videoName) setVideoName(data.videoName);
+        if (data.audioName) setAudioName(data.audioName);
+        if (data.prompt) setPrompt(data.prompt);
+        if (data.internalHistory) setInternalHistory(data.internalHistory);
+      });
       hasRestored.current = true;
-    }
-  }, [PERSIST_KEY]);
-
-  // ── Persistence: Save ────────────────────────────────────────────────────
-  useEffect(() => {
-    if (!hasRestored.current) return;
-    const timer = setTimeout(() => {
-      try {
-        const state = {
-          inputMode,
-          selectedModelId,
-          selectedResolution,
-          imageUrl,
-          imageName,
-          videoUrl,
-          videoName,
-          audioUrl,
-          audioName,
-          prompt,
-          internalHistory,
-        };
-        localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
-      } catch (err) {
-        console.warn("Failed to save LipSyncStudio persistence:", err);
-      }
-    }, 500); // 500ms debounce
-    return () => clearTimeout(timer);
-  }, [
-    PERSIST_KEY,
-    inputMode,
-    selectedModelId,
-    selectedResolution,
-    imageUrl,
-    imageName,
-    videoUrl,
-    videoName,
-    audioUrl,
-    audioName,
-    prompt,
-    internalHistory,
-  ]);
+    },
+    getState: () => ({
+      inputMode,
+      selectedModelId,
+      selectedResolution,
+      imageUrl,
+      imageName,
+      videoUrl,
+      videoName,
+      audioUrl,
+      audioName,
+      prompt,
+      internalHistory,
+    }),
+    deps: [
+      inputMode,
+      selectedModelId,
+      selectedResolution,
+      imageUrl,
+      imageName,
+      videoUrl,
+      videoName,
+      audioUrl,
+      audioName,
+      prompt,
+      internalHistory,
+    ],
+  });
 
   // ── Derived model info ──────────────────────────────────────────────────
   const selectedModel = lipsyncModels.find((m) => m.id === selectedModelId);
@@ -678,7 +654,7 @@ export default function LipSyncStudio({
         setImageProgress(0);
       }
     },
-    [apiKey, copy],
+    [apiKey, copy, setImageState, setImageProgress, setImageUrl, setImageName],
   );
 
   const handleVideoPick = useCallback(
@@ -705,7 +681,7 @@ export default function LipSyncStudio({
         setVideoProgress(0);
       }
     },
-    [apiKey, copy],
+    [apiKey, copy, setVideoState, setVideoProgress, setVideoUrl, setVideoName],
   );
 
   const handlePromptInput = (e) => {
@@ -740,7 +716,7 @@ export default function LipSyncStudio({
         setAudioProgress(0);
       }
     },
-    [apiKey, copy],
+    [apiKey, copy, setAudioState, setAudioProgress, setAudioUrl, setAudioName],
   );
 
   // ── Handle Dropped Files ────────────────────────────────────────────────
@@ -850,8 +826,7 @@ export default function LipSyncStudio({
     }
 
     onGenerationStart?.();
-    setIsGenerating(true);
-    setGenerateError(null);
+    const signal = generation.start();
 
     try {
       const lipsyncParams = {
@@ -897,7 +872,7 @@ export default function LipSyncStudio({
       if (onGenerationError) onGenerationError(errMsg);
       else toast.error(errMsg);
     } finally {
-      setIsGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1309,9 +1284,9 @@ export default function LipSyncStudio({
             {/* Generate button */}
             <PromptAction
               onClick={handleGenerate}
-              disabled={isGenerating}
+              disabled={generation.isRunning}
             >
-              {isGenerating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">
                     ◌

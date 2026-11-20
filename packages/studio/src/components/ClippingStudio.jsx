@@ -4,6 +4,8 @@ import { startTransition, useState, useEffect, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { runClipping, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -244,8 +246,10 @@ export default function ClippingStudio({
   const videoDragCounterRef = useRef(0);
 
   // ── Generation State ─────────────────────────────────────────────────────
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generateError, setGenerateError] = useState(null);
+  const generation = useGeneration();
+  const clipErrorMsg = generation.error
+    ? formatErrorMessage(generation.error, copy.errors.generationFailed)
+    : null;
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const timerRef = useRef(null);
@@ -283,7 +287,7 @@ export default function ClippingStudio({
 
   // Timer effect for generation progress
   useEffect(() => {
-    if (isGenerating) {
+    if (generation.isRunning) {
       startTransition(() => setElapsedTime(0));
       timerRef.current = setInterval(() => {
         setElapsedTime((prev) => prev + 1);
@@ -296,47 +300,32 @@ export default function ClippingStudio({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isGenerating]);
+  }, [generation.isRunning]);
 
-  // ── Load Persistent State from localStorage ──────────────────────────────
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        startTransition(() => { if (data.videoUrl) setVideoUrl(data.videoUrl); });
-        startTransition(() => {
-          if (data.numHighlights) setNumHighlights(data.numHighlights);
-          if (data.aspectRatio) setAspectRatio(data.aspectRatio);
-          if (data.returnCoordinatesOnly !== undefined) setReturnCoordinatesOnly(data.returnCoordinatesOnly);
-          if (data.history) setHistory(data.history);
-          if (data.result) setResult(data.result);
-        });
-      }
-    } catch (err) {
-      console.warn("Failed to load ClippingStudio persistent state:", err);
-    }
-  }, [PERSIST_KEY]);
-
-  // ── Save Persistent State to localStorage ───────────────────────────────
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        const state = {
-          videoUrl,
-          numHighlights,
-          aspectRatio,
-          returnCoordinatesOnly,
-          history,
-          result,
-        };
-        localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
-      } catch (err) {
-        console.warn("Failed to save ClippingStudio persistent state:", err);
-      }
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [videoUrl, numHighlights, aspectRatio, returnCoordinatesOnly, history, result, PERSIST_KEY]);
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) return;
+      startTransition(() => {
+        if (data.videoUrl) setVideoUrl(data.videoUrl);
+        if (data.numHighlights) setNumHighlights(data.numHighlights);
+        if (data.aspectRatio) setAspectRatio(data.aspectRatio);
+        if (data.returnCoordinatesOnly !== undefined) setReturnCoordinatesOnly(data.returnCoordinatesOnly);
+        if (data.history) setHistory(data.history);
+        if (data.result) setResult(data.result);
+      });
+    },
+    getState: () => ({
+      videoUrl,
+      numHighlights,
+      aspectRatio,
+      returnCoordinatesOnly,
+      history,
+      result,
+    }),
+    deps: [videoUrl, numHighlights, aspectRatio, returnCoordinatesOnly, history, result],
+  });
 
   // ── Handle Dropped Files ────────────────────────────────────────────────
   useEffect(() => {
@@ -499,8 +488,7 @@ export default function ClippingStudio({
     }
 
     onGenerationStart?.();
-    setIsGenerating(true);
-    setGenerateError(null);
+    const signal = generation.start();
     setResult(null);
 
     try {
@@ -554,6 +542,7 @@ export default function ClippingStudio({
       }
     } catch (err) {
       console.error("[ClippingStudio] Error generating clips:", err);
+      generation.fail(err);
       const errMsg = formatErrorMessage(err, copy.errors.generationFailed);
       const notificationMessage = isFileSizeError(err)
         ? copy.errors.videoTooLarge
@@ -561,7 +550,7 @@ export default function ClippingStudio({
       if (onGenerationError) onGenerationError(notificationMessage);
       else showErrorToast(notificationMessage, copy);
     } finally {
-      setIsGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -582,9 +571,9 @@ export default function ClippingStudio({
       <div className="flex-1 w-full max-w-7xl mx-auto overflow-y-auto custom-scrollbar pb-40 lg:pb-32 px-2">
         
         {/* Error Message */}
-        {generateError && (
+        {clipErrorMsg && (
           <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded text-xs font-semibold leading-relaxed mb-6">
-            {generateError}
+            {clipErrorMsg}
           </div>
         )}
 
@@ -1142,9 +1131,9 @@ export default function ClippingStudio({
             {/* Generate button */}
             <PromptAction
               onClick={handleGenerate}
-              disabled={isGenerating}
+              disabled={generation.isRunning}
             >
-              {isGenerating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">◌</span>
                   <span>{copy.buttons.generating}</span>

@@ -7,6 +7,7 @@ import { generateAudio, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import usePersistentObject from "../hooks/usePersistentObject";
+import useGeneration from "../hooks/useGeneration";
 import { audioModels, getAudioModelById } from "../models";
 import { getStudioCopy } from '../messages/studioCopy';
 
@@ -576,9 +577,11 @@ export default function AudioStudio({
     return () => window.removeEventListener("click", handler);
   }, []);
 
-  // ── Generation state ──────────────────────────────────────────────────
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generateError, setGenerateError] = useState(null);
+  // ── Generation state (shared hook) ────────────────────────────────────
+  const generation = useGeneration();
+  const errorMessage = generation.error
+    ? formatErrorMessage(generation.error, copy.generate.genericError)
+    : null;
   const [activeResultUrl, setActiveResultUrl] = useState(null);
   const [activeResultTitle, setActiveResultTitle] = useState("");
   const [view, setView] = useState("input"); // 'input' | 'result'
@@ -698,8 +701,7 @@ export default function AudioStudio({
     }
 
     onGenerationStart?.();
-    setIsGenerating(true);
-    setGenerateError(null);
+    const signal = generation.start();
 
     try {
       const audioParams = {
@@ -739,13 +741,14 @@ export default function AudioStudio({
           type: "audio",
         });
       }
+      generation.finish();
     } catch (e) {
       console.error("[AudioStudio]", e);
+      generation.fail(e);
       const errMsg = formatErrorMessage(e, copy.generate.genericError);
       if (onGenerationError) onGenerationError(errMsg);
       else toast.error(errMsg);
     } finally {
-      setIsGenerating(false);
       onGenerationEnd?.();
     }
   };
@@ -1028,10 +1031,10 @@ export default function AudioStudio({
           <button
             type="button"
             onClick={handleGenerate}
-            disabled={isGenerating || !selectedModel}
+            disabled={generation.isRunning || !selectedModel}
             className="w-full py-4 bg-primary text-black text-base font-bold rounded hover:bg-white transition-all transform hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:grayscale shadow-glow flex items-center justify-center gap-3"
           >
-            {isGenerating ? (
+            {generation.isRunning ? (
               <>
                 <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                 <span>{copy.generate.generating}</span>
@@ -1056,7 +1059,7 @@ export default function AudioStudio({
           <div className="flex-1 flex items-center justify-center min-h-[400px] mb-8">
             
             {/* 1. Error Display */}
-            {generateError && (
+            {errorMessage && (
               <div className="w-full max-w-md p-6 bg-red-500/10 border border-red-500/20 rounded flex flex-col items-center gap-4 animate-shake">
                 <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center text-red-500 border border-red-500/30 shadow-lg">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -1070,14 +1073,14 @@ export default function AudioStudio({
                     {copy.result.errorHeading}
                   </span>
                   <p className="text-white font-medium text-sm leading-relaxed">
-                    {generateError}
+                    {errorMessage}
                   </p>
                 </div>
               </div>
             )}
 
             {/* 2. Generating / Loading View */}
-            {isGenerating && !generateError && (
+            {generation.isRunning && !errorMessage && (
               <div className="flex flex-col items-center gap-6 animate-fade-in">
                 <div className="relative">
                   <div className="w-24 h-24 border-[3px] border-zinc-800 border-t-primary rounded-full animate-spin shadow-glow" />
@@ -1097,7 +1100,7 @@ export default function AudioStudio({
             )}
 
             {/* 3. Empty State (no audio, not loading, no error) */}
-            {view === "input" && !isGenerating && !generateError && (
+            {view === "input" && !generation.isRunning && !errorMessage && (
               <div className="flex flex-col items-center gap-6 max-w-md text-center p-8 bg-zinc-900/40 border border-zinc-800 rounded backdrop-blur-sm relative group animate-fade-in-up">
                 {/* Glow behind the icon */}
                 <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full opacity-25 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none" />
@@ -1114,7 +1117,7 @@ export default function AudioStudio({
             )}
 
             {/* 4. Active Result Player Display */}
-            {view === "result" && activeResultUrl && !isGenerating && !generateError && (
+            {view === "result" && activeResultUrl && !generation.isRunning && !errorMessage && (
               <div className="w-full max-w-2xl animate-fade-in-up space-y-4">
                 <div className="flex items-center justify-between px-1">
                   <button

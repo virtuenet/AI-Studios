@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useState, useEffect, useRef, useCallback } from "react";
+import useGeneration from "../hooks/useGeneration";
 import { uploadFile, generateMarketingStudioAd } from "../muapi.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
@@ -346,7 +347,7 @@ export default function MarketingStudio({
 
   const [localHistory, setLocalHistory] = useState([]);
   const history = historyItems ?? localHistory;
-  const [isGenerating, setIsGenerating] = useState(false);
+  const generation = useGeneration();
   const [dropdown, setDropdown] = useState(null); // 'format' | 'avatar' | 'ratio' | 'res' | 'duration'
   const [uploadProgress, setUploadProgress] = useState({ product: 0, avatar: 0, additional: 0 });
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
@@ -430,7 +431,7 @@ export default function MarketingStudio({
     if (!productImage) return alert(copy.errors.missingProductImage);
 
     onGenerationStart?.();
-    setIsGenerating(true);
+    generation.start();
     try {
       const result = await generateMarketingStudioAd(apiKey, {
         prompt,
@@ -458,7 +459,7 @@ export default function MarketingStudio({
     } catch (err) {
       onGenerationError?.(err.message?.slice(0, 120) || copy.errors.generationFailed);
     } finally {
-      setIsGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -804,9 +805,9 @@ export default function MarketingStudio({
 
             <PromptAction
               onClick={handleGenerate}
-              disabled={isGenerating}
+              disabled={generation.isRunning}
             >
-              {isGenerating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">◌</span>
                   {copy.buttons.generating}

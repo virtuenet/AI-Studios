@@ -4,6 +4,7 @@ import { startTransition, useState, useEffect, useRef, useCallback } from "react
 import toast, { Toaster } from "react-hot-toast";
 import { processRecast, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
+import useGeneration from "../hooks/useGeneration";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -559,8 +560,10 @@ export default function RecastStudio({
   });
 
   // ── Generation / UI state ─────────────────────────────────────────────────
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generateError, setGenerateError] = useState(null);
+  const generation = useGeneration();
+  const recastErrorMsg = generation.error
+    ? formatErrorMessage(generation.error, copy.errors.generationFailed)
+    : null;
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
 
   // ── History ───────────────────────────────────────────────────────────────
@@ -705,7 +708,7 @@ export default function RecastStudio({
         setVideoProgress(0);
       }
     },
-    [apiKey, copy.errors.videoTooLarge, copy.errors.videoUploadFailed],
+    [apiKey, copy.errors.videoTooLarge, copy.errors.videoUploadFailed, setVideoUrl, setVideoName, setVideoState, setVideoProgress, setAssetVideos],
   );
 
   const handlePromptInput = (e) => {
@@ -739,7 +742,7 @@ export default function RecastStudio({
         setImageProgress(0);
       }
     },
-    [apiKey, copy.errors.imageTooLarge, copy.errors.imageUploadFailed],
+    [apiKey, copy.errors.imageTooLarge, copy.errors.imageUploadFailed, setImageUrl, setImageName, setImageState, setImageProgress, setAssetImages],
   );
 
   // ── Handle Dropped Files ────────────────────────────────────────────────────
@@ -798,8 +801,7 @@ export default function RecastStudio({
     }
 
     onGenerationStart?.();
-    setIsGenerating(true);
-    setGenerateError(null);
+    const signal = generation.start();
 
     try {
       const params = {
@@ -847,11 +849,12 @@ export default function RecastStudio({
       }
     } catch (e) {
       console.error("[RecastStudio]", e);
+      generation.fail(e);
       const errMsg = formatErrorMessage(e, copy.errors.generationFailed);
       if (onGenerationError) onGenerationError(errMsg);
       else toast.error(errMsg);
     } finally {
-      setIsGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1238,9 +1241,9 @@ export default function RecastStudio({
             {/* Generate button */}
             <PromptAction
               onClick={handleGenerate}
-              disabled={isGenerating}
+              disabled={generation.isRunning}
             >
-              {isGenerating ? (
+              {generation.isRunning ? (
                 <>
                   <span className="animate-spin inline-block text-black">◌</span>{" "}
                   {copy.buttons.swapping}
