@@ -146,9 +146,9 @@
     "axios": "^1.21.1",
     "electron-updater": "^6.8.11",
     "next": "^16.4.6",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-hot-toast": "^2.4.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-hot-toast": "^2.6.1",
     "studio": "*",
     "workflow-builder": "file:./packages/Vibe-Workflow/packages/workflow-builder",
     "xtend": "^4.0.2"
