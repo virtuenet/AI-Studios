@@ -1,9 +1,9 @@
 {
   "name": "ai-studios",
-  "description": "Open-source alternative to HF AI \u2014 AI image, video, cinema and lip sync studio",
+  "description": "Open-source alternative to HF AI — AI image, video, cinema and lip sync studio",
   "homepage": "",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT",
   "workspaces": [
     "packages/studio",
@@ -56,7 +56,7 @@
   "build": {
     "appId": "ai.generative.open",
     "productName": "AI Studios",
-    "copyright": "Copyright \u00a9 2025",
+    "copyright": "Copyright © 2025",
     "directories": {
       "output": "release"
     },
