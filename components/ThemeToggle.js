@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const STORAGE_KEY = 'theme';
 
@@ -13,11 +13,10 @@ function readStoredTheme() {
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {
-    setTheme(readStoredTheme());
-  }, []);
+  const [theme, setTheme] = useState(() => {
+    if (typeof document === 'undefined') return 'dark';
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  });
 
   const toggle = () => {
     const next = theme === 'light' ? 'dark' : 'light';
@@ -35,6 +34,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
+      suppressHydrationWarning
       onClick={toggle}
       aria-label={label}
       title={label}

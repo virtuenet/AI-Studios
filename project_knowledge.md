@@ -190,9 +190,9 @@ external qualification for accessibility.
 | Components (RTL) | `npm run test:components` | included above |
 | Accessibility (axe-core) | included above | 15 |
 | Electron (Node) | `npm test` | 77 |
-| E2E (Playwright) | `npm run test:e2e` | 17 (production server; smoke, mocked generation, visual, 1 live-generation skipped without key) |
+| E2E (Playwright) | `npm run test:e2e` | 18 (production server; smoke, mocked generation, mocked upload, visual, 1 live skipped) |
 | Typecheck | `npm run typecheck` | `tsc --noEmit` |
-| Lint | `npm run lint` | ESLint flat config, 0 errors enforced |
+| Lint | `npm run lint` | ESLint flat config; compiler rules = errors; 0 problems, `--max-warnings 0` (see `docs/lint-suppressions.md`) |
 | Model catalog | `npm run validate:models` | 624 models |
 | Bundle budget | `npm run check:bundle` | 6 MB JS ceiling |
 

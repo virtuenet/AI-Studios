@@ -88,11 +88,15 @@ function UploadButton({ apiKey, maxImages, onSelect, onClear, initialUrls = [], 
   const [selectedEntries, setSelectedEntries] = useState([]); // [{url, thumbnail}]
   const [uploadHistory, setUploadHistory] = useState(persistedHistory || []); // [{id, name, url, thumbnail}]
   const onSelectRef = useRef(onSelect);
-  onSelectRef.current = onSelect;
+  useEffect(() => {
+    onSelectRef.current = onSelect;
+  }, [onSelect]);
 
   // Notify parent whenever uploadHistory changes (for localStorage persistence)
   const onHistoryChangeRef = useRef(onHistoryChange);
-  onHistoryChangeRef.current = onHistoryChange;
+  useEffect(() => {
+    onHistoryChangeRef.current = onHistoryChange;
+  }, [onHistoryChange]);
   useEffect(() => {
     onHistoryChangeRef.current?.(uploadHistory);
   }, [uploadHistory]);

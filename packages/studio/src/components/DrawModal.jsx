@@ -1053,15 +1053,17 @@ export default function DrawModal({
     }
   };
 
-  // Keep keyboardCallbacksRef up-to-date every render (placed after all handlers are defined)
-  keyboardCallbacksRef.current = {
+  // Keep keyboardCallbacksRef up-to-date after each render (placed after all handlers are defined)
+  useEffect(() => {
+    keyboardCallbacksRef.current = {
     selectedObjectId,
     handleRemoveSelected,
     handleUndo,
     handleRedo,
     handleSelectTool,
     handleInsertImageClick,
-  };
+    };
+  });
 
   if (!isOpen) return null;
 
@@ -1718,7 +1720,7 @@ export default function DrawModal({
                         )}
                       </div>
                       <div className="text-[9px] text-white/30 leading-snug mt-0.5">
-                        Google's Advanced Image Editing Model
+                        Google&apos;s Advanced Image Editing Model
                       </div>
                     </button>
 

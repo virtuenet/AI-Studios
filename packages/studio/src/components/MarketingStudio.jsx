@@ -612,7 +612,7 @@ export default function MarketingStudio({
             <div className="flex items-center gap-1.5">
               {additionalImages.map((img, idx) => (
                 <div key={idx} className="relative group/img flex-shrink-0">
-                  <img loading="lazy" decoding="async" src={img} className="w-9 h-9 rounded-full object-cover border border-white/10" />
+                  <img loading="lazy" decoding="async" src={img} alt="" className="w-9 h-9 rounded-full object-cover border border-white/10" />
                   <button 
                     onClick={() => setAdditionalImages(prev => prev.filter((_, i) => i !== idx))}
                     className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-black/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity border border-white/10"
@@ -711,7 +711,7 @@ export default function MarketingStudio({
                   })}
                 >
                   <div className="w-4 h-4 rounded-full overflow-hidden border border-white/20 shadow-inner">
-                    <img loading="lazy" decoding="async" src={avatarImage || ASSETS.avatar[0].url} className="w-full h-full object-cover" />
+                    <img loading="lazy" decoding="async" src={avatarImage || ASSETS.avatar[0].url} alt="" className="w-full h-full object-cover" />
                   </div>
                   <span className={PROMPT_CONTROL_LABEL_CLASS}>
                     {ASSETS.avatar.find(a => a.url === avatarImage)?.name || copy.dropdowns.selectAvatarFallback}

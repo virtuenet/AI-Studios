@@ -9,9 +9,9 @@
 | 2 | Route-level error/loading/404 | ✅ | `app/error.js`, `app/global-error.js`, `app/not-found.js`, `app/loading.js` + structural tests |
 | 3 | Server route tests | ✅ | `tests/routes/`: middleware (headers, locale, rewrites, request id), session, health, upload-binary (401/SSRF/file-type/204), agent/workflow proxies — 23 tests |
 | 4 | Shared generation hooks | ✅ | `useGeneration` (abort/cancel) used by ImageStudio (Cancel button), `usePersistentObject` used by AudioStudio; 6 hook tests |
-| 5 | TS strictness ladder | ✅ | `strictNullChecks` + `noImplicitAny` enabled; `tsc --noEmit` clean; warning budget ratcheted to 200; `any` removed from exported video-tool APIs |
+| 5 | TS strictness ladder + compiler rules | ✅ | `strictNullChecks` + `noImplicitAny` clean; **React Compiler + exhaustive-deps rules are errors**; 12 legacy violations fixed; reviewed baseline in `eslint-suppressions.json`; CI `--max-warnings 0`; policy in `docs/lint-suppressions.md` |
 | 6 | Model catalog sync/drift | ✅ | `scripts/sync-models.js`, `docs/models-snapshot.json` (633 models), CI `check:models-sync`, `--fetch` against OpenAPI (899 upstream endpoints) |
-| 7 | Mocked generation E2E | ✅ | `tests/e2e/generation-mocked.spec.js`: generate, cancel, locale switch with zero API key (SW blocked) |
+| 7 | Mocked generation E2E | ✅ | generation (generate/cancel/locale) **and upload** (`setInputFiles` + mocked `upload_file`, picker confirm, i2i generate); zero API key, service workers blocked |
 | 8 | Visual + interaction tests | ✅ | platform-agnostic Playwright baselines (dialog/sidebar); ApiKeyModal interaction + a11y label fix; ServiceWorkerUpdater tests |
 | 9 | Perf/UX polish | ✅ | Web Vitals reporting (`components/WebVitals.jsx`), preconnect/dns-prefetch, 88 `<img>` tags lazy/async, `content-visibility` history cards, cancel + offline-queue banners/clear |
 | 10 | Health & observability | ✅ | `/api/health`, request IDs, structured JSON proxy logs, uptime workflow (`HEALTHCHECK_URL`) |
@@ -23,9 +23,9 @@
 ```
 Vitest:      273 passed (27 files)   coverage 78.1 / 66.0 / 88.6 / 81.8
 Electron:     77 passed
-E2E:          16 passed, 1 skipped (live key)
+E2E:          17 passed, 1 skipped (live key)
 Typecheck:    tsc --noEmit clean (strictNullChecks + noImplicitAny)
-Lint:         0 errors, 200 warnings (ratcheted)
+Lint:         0 problems (compiler rules = errors, baseline suppressed, --max-warnings 0)
 Model sync:   catalog matches snapshot (633 models)
 Bundle:       Next 5101/6144 KB; Electron 1872/6144 KB
 Builds:       Next 39 routes; studio dist 86 files

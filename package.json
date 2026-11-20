@@ -16,7 +16,7 @@
     "build": "next build",
     "start": "next start",
     "test": "node --test",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "test:vitest": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -49,7 +49,8 @@
     "prepare": "husky || true",
     "validate:models": "node scripts/validate-models.js",
     "sync:models": "node scripts/sync-models.js",
-    "check:models-sync": "node scripts/sync-models.js"
+    "check:models-sync": "node scripts/sync-models.js",
+    "lint:prune": "eslint . --prune-suppressions"
   },
   "build": {
     "appId": "ai.generative.open",

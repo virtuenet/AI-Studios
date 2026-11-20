@@ -26,7 +26,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci --legacy-peer-deps
-      - run: npx eslint . --max-warnings 200
+      - run: npx eslint . --max-warnings 0
 
   typecheck:
     name: Typecheck

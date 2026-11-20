@@ -45,7 +45,7 @@ test.describe('Generation flow (mocked API)', () => {
     await mockGeneration(page);
     await page.goto('/studio/image');
 
-    const textarea = page.locator('textarea').first();
+    const textarea = page.locator('[data-studio="image"] textarea').first();
     await expect(textarea).toBeVisible({ timeout: 30000 });
     await textarea.fill('a red apple on a wooden table');
 
@@ -73,7 +73,7 @@ test.describe('Generation flow (mocked API)', () => {
     });
     await page.goto('/studio/image');
 
-    const textarea = page.locator('textarea').first();
+    const textarea = page.locator('[data-studio="image"] textarea').first();
     await expect(textarea).toBeVisible({ timeout: 30000 });
     await textarea.fill('cancel me');
     await page.getByRole('button', { name: /generate/i }).first().click();

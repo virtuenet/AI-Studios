@@ -877,33 +877,41 @@ export default function VideoStudio({
   const workflowMenuId = `${workflowControlId}-menu`;
   const hasRestored = useRef(false);
   const selectionRef = useRef(null);
-  selectionRef.current = {
-    selectedFamilyId,
-    selectedModel,
-    selectedWorkflowId,
-    imageMode,
-    v2vMode,
-  };
+  useEffect(() => {
+    selectionRef.current = {
+      selectedFamilyId,
+      selectedModel,
+      selectedWorkflowId,
+      imageMode,
+      v2vMode,
+    };
+  }, [selectedFamilyId, selectedModel, selectedWorkflowId, imageMode, v2vMode]);
   const workflowVariantPreferencesRef = useRef(new Map());
   const workflowUploadSlotRef = useRef(null);
   const workflowDraftSessionRef = useRef(0);
   const mediaRef = useRef(null);
-  mediaRef.current = {
-    imageUrls: uploadedImageUrls,
-    endImageUrl: uploadedEndImageUrl,
-    videoUrls: uploadedVideoUrls,
-    audioUrls: uploadedAudioUrls,
-  };
+  useEffect(() => {
+    mediaRef.current = {
+      imageUrls: uploadedImageUrls,
+      endImageUrl: uploadedEndImageUrl,
+      videoUrls: uploadedVideoUrls,
+      audioUrls: uploadedAudioUrls,
+    };
+  }, [uploadedImageUrls, uploadedEndImageUrl, uploadedVideoUrls, uploadedAudioUrls]);
   const workflowMediaDraftsRef = useRef(workflowMediaDrafts);
-  workflowMediaDraftsRef.current = workflowMediaDrafts;
+  useEffect(() => {
+    workflowMediaDraftsRef.current = workflowMediaDrafts;
+  }, [workflowMediaDrafts]);
   const commonParameterValuesRef = useRef(null);
-  commonParameterValuesRef.current = {
-    ...modelParameterValues,
-    aspectRatio: selectedAr,
-    duration: selectedDuration,
-    resolution: selectedResolution,
-    quality: selectedQuality,
-  };
+  useEffect(() => {
+    commonParameterValuesRef.current = {
+      ...modelParameterValues,
+      aspectRatio: selectedAr,
+      duration: selectedDuration,
+      resolution: selectedResolution,
+      quality: selectedQuality,
+    };
+  }, [modelParameterValues, selectedAr, selectedDuration, selectedResolution, selectedQuality]);
 
   // ── derived data ──
   const history = historyItems ?? localHistory;

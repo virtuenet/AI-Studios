@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ImageStudio, VideoStudio, getUserBalance } from 'studio';
@@ -293,6 +293,22 @@ const getNavigationCategory = (tabId) => (
 
 const STORAGE_KEY = 'muapi_key';
 
+// Balance lives in a tiny external store so effects can refresh it without
+// setState-in-effect cascades (React Compiler friendly).
+let balanceValue = null;
+const balanceListeners = new Set();
+function setBalanceValue(next) {
+  balanceValue = next;
+  for (const listener of balanceListeners) listener();
+}
+function subscribeBalance(listener) {
+  balanceListeners.add(listener);
+  return () => balanceListeners.delete(listener);
+}
+function getBalanceSnapshot() {
+  return balanceValue;
+}
+
 // Mirrors the BYOK key into an HttpOnly, encrypted, SameSite=Strict session
 // cookie so server-rendered routes (/agents/*) never trust a JS-writable cookie.
 async function syncServerSession(apiKey) {
@@ -348,7 +364,8 @@ const persistNotifications = (notifications) => {
 export default function StandaloneShell({ locale = 'en' }) {
   const params = useParams();
   const router = useRouter();
-  const slug = params?.slug || [];
+  const paramsSlug = params?.slug;
+  const slug = useMemo(() => paramsSlug || [], [paramsSlug]);
   const idFromParams = params?.id;
   const tabFromParams = params?.tab;
 
@@ -395,13 +412,18 @@ export default function StandaloneShell({ locale = 'en' }) {
     return 'image';
   };
   
-  const [apiKey, setApiKey] = useState(null);
+  const [apiKey, setApiKey] = useState(() => {
+    try {
+      return typeof window === 'undefined' ? null : window.localStorage.getItem(STORAGE_KEY);
+    } catch {
+      return null;
+    }
+  });
   const [activeTab, setActiveTab] = useState(getInitialTab());
 
-  const [balance, setBalance] = useState(null);
+  const balance = useSyncExternalStore(subscribeBalance, getBalanceSnapshot, () => null);
   const [showSettings, setShowSettings] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [hasMounted, setHasMounted] = useState(false);
   const [showVadooBanner, setShowVadooBanner] = useState(() => {
     if (typeof window !== 'undefined') return localStorage.getItem('vadoo_banner_dismissed') !== '1';
     return true;
@@ -440,25 +462,17 @@ export default function StandaloneShell({ locale = 'en' }) {
     toggleSidebar();
   }, [isMobileOpen, isSidebarCollapsed, toggleSidebar]);
 
-  useEffect(() => {
-    if (activeCategory?.id) {
-      setExpandedCategoryId(activeCategory.id);
-    }
-  }, [activeCategory?.id]);
-
   // Drag and Drop State
   const [isDragging, setIsDragging] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState(null);
 
   // Global generation notifications remain mounted while users switch studios.
-  const [notifications, setNotifications] = useState([]);
-  const [notificationsHydrated, setNotificationsHydrated] = useState(false);
+  // Initialized lazily; the app renders a loading shell until mounted, so this
+  // cannot cause a hydration mismatch.
+  const [notifications, setNotifications] = useState(() =>
+    typeof window === 'undefined' ? [] : loadStoredNotifications()
+  );
   const [generationCounts, setGenerationCounts] = useState({});
-
-  useEffect(() => {
-    setNotifications(loadStoredNotifications());
-    setNotificationsHydrated(true);
-  }, []);
 
   const pushNotification = useCallback((notif) => {
     const now = Date.now();
@@ -484,10 +498,8 @@ export default function StandaloneShell({ locale = 'en' }) {
   }, []);
 
   useEffect(() => {
-    if (!notificationsHydrated) return;
-
     persistNotifications(notifications);
-  }, [notifications, notificationsHydrated]);
+  }, [notifications]);
 
   useEffect(() => {
     if (notifications.length === 0) return undefined;
@@ -504,7 +516,7 @@ export default function StandaloneShell({ locale = 'en' }) {
   const fetchBalance = useCallback(async (key) => {
     try {
       const data = await getUserBalance(key);
-      setBalance(data.balance);
+      setBalanceValue(data.balance);
     } catch (err) {
       console.error('Balance fetch failed:', err);
     }
@@ -587,6 +599,8 @@ export default function StandaloneShell({ locale = 'en' }) {
   const handleTabChange = useCallback((tabId) => {
     window.history.pushState(null, '', studioPath(tabId));
     setActiveTab(tabId);
+    const category = getNavigationCategory(tabId);
+    if (category) setExpandedCategoryId(category.id);
   }, [studioPath]);
 
   const handleOpenNotification = useCallback((notification) => {
@@ -609,17 +623,11 @@ export default function StandaloneShell({ locale = 'en' }) {
     }
   };
 
-  // Auto-hide header when inside a specific workflow view or design agent
-  useEffect(() => {
-    const isEditingWorkflow = (activeTab === 'workflows' || !!idFromParams) && urlWorkflowId;
-    const isDesignAgent = activeTab === 'design-agent';
-    
-    if (isEditingWorkflow || isDesignAgent) {
-      setIsHeaderVisible(false);
-    } else {
-      setIsHeaderVisible(true);
-    }
-  }, [activeTab, urlWorkflowId, idFromParams]);
+  // Header auto-hides inside a specific workflow view or the design agent.
+  const shouldHideHeader =
+    ((activeTab === 'workflows' || Boolean(idFromParams)) && Boolean(urlWorkflowId)) ||
+    activeTab === 'design-agent';
+  const headerVisible = isHeaderVisible && !shouldHideHeader;
 
   // Global builder CSS cleanup when switching away from Workflows or Design Agent tabs
   useEffect(() => {
@@ -633,16 +641,19 @@ export default function StandaloneShell({ locale = 'en' }) {
     }
   }, [activeTab]);
 
+  // Client-only after hydration without a setState-in-effect cascade.
+  const hasMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+
   useEffect(() => {
-    setHasMounted(true);
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      setApiKey(stored);
-      fetchBalance(stored);
-      // Establish/refresh the encrypted server session for SSR agent routes.
-      void syncServerSession(stored);
-    }
-  }, [fetchBalance]);
+    if (!apiKey) return;
+    fetchBalance(apiKey);
+    // Establish/refresh the encrypted server session for SSR agent routes.
+    void syncServerSession(apiKey);
+  }, [apiKey, fetchBalance]);
 
   const handleKeySave = useCallback((key) => {
     localStorage.setItem(STORAGE_KEY, key);
@@ -654,7 +665,7 @@ export default function StandaloneShell({ locale = 'en' }) {
   const handleKeyChange = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
     setApiKey(null);
-    setBalance(null);
+    setBalanceValue(null);
     void clearServerSession();
   }, []);
 
@@ -801,7 +812,7 @@ export default function StandaloneShell({ locale = 'en' }) {
       )}
 
       {/* Header */}
-      {isHeaderVisible && (
+      {headerVisible && (
         <header className="flex-shrink-0 h-14 border-b border-white/[0.05] flex items-center justify-between px-4 bg-[#0a0a0b]/80 backdrop-blur-md z-50 gap-4">
           {/* Left: Mobile menu toggle + Logo + Desktop Sidebar Toggle */}
           <div className="flex items-center gap-3">
@@ -875,7 +886,7 @@ export default function StandaloneShell({ locale = 'en' }) {
               onChange={(e) => {
                 const target = e.target.value;
                 const { rootPath } = getLocaleConfig(target);
-                window.location.href = `${rootPath}/studio/${activeTab}`;
+                router.push(`${rootPath}/studio/${activeTab}`);
               }}
               className="bg-white/5 border border-white/10 text-white/80 text-xs font-bold rounded-md px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#22d3ee]/50"
               aria-label="Language"
@@ -920,7 +931,7 @@ export default function StandaloneShell({ locale = 'en' }) {
         )}
 
         {/* Left Sidebar Navigation */}
-        {isHeaderVisible && (
+        {headerVisible && (
           <aside
             className={`
               fixed top-14 bottom-0 left-0 md:static md:h-full z-30 bg-[#0a0a0b]/95 backdrop-blur-md border-r border-white/[0.06] flex flex-col transition-all duration-300 ease-in-out flex-shrink-0 select-none
@@ -1066,62 +1077,62 @@ export default function StandaloneShell({ locale = 'en' }) {
 
         {/* Studio Content */}
         <div id="studio-content" role="main" aria-label="Studio workspace" className="flex-1 min-h-0 h-full relative overflow-hidden bg-[#030303]">
-        <div className={activeTab === 'image' ? "h-full w-full" : "hidden"}>
+        <div data-studio="image" className={activeTab === 'image' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('image',
           <ImageStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('image')} onGenerationEnd={makeGenerationEndCallback('image')} onGenerationComplete={makeSuccessCallback('image')} onGenerationError={makeErrorCallback('image')} />
           )}
         </div>
-        <div className={activeTab === 'layers' ? "h-full w-full" : "hidden"}>
+        <div data-studio="layers" className={activeTab === 'layers' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('layers',
           <LayersStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('layers')} onGenerationEnd={makeGenerationEndCallback('layers')} onGenerationComplete={makeSuccessCallback('layers')} onGenerationError={makeErrorCallback('layers')} />
           )}
         </div>
-        <div className={activeTab === 'video' ? "h-full w-full" : "hidden"}>
+        <div data-studio="video" className={activeTab === 'video' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('video',
           <VideoStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('video')} onGenerationEnd={makeGenerationEndCallback('video')} onGenerationComplete={makeSuccessCallback('video')} onGenerationError={makeErrorCallback('video')} />
           )}
         </div>
-        <div className={activeTab === 'clipping' ? "h-full w-full" : "hidden"}>
+        <div data-studio="clipping" className={activeTab === 'clipping' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('clipping',
           <ClippingStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('clipping')} onGenerationEnd={makeGenerationEndCallback('clipping')} onGenerationComplete={makeSuccessCallback('clipping')} onGenerationError={makeErrorCallback('clipping')} />
           )}
         </div>
-        <div className={activeTab === 'motion-control' ? "h-full w-full" : "hidden"}>
+        <div data-studio="motion-control" className={activeTab === 'motion-control' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('motion-control',
           <MotionControlStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('motion-control')} onGenerationEnd={makeGenerationEndCallback('motion-control')} onGenerationComplete={makeSuccessCallback('motion-control')} onGenerationError={makeErrorCallback('motion-control')} />
           )}
         </div>
-        <div className={activeTab === 'vibe-motion' ? "h-full w-full" : "hidden"}>
+        <div data-studio="vibe-motion" className={activeTab === 'vibe-motion' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('vibe-motion',
           <VibeMotionStudio apiKey={apiKey} locale={locale} onGenerationStart={makeGenerationStartCallback('vibe-motion')} onGenerationEnd={makeGenerationEndCallback('vibe-motion')} onGenerationComplete={makeSuccessCallback('vibe-motion')} onGenerationError={makeErrorCallback('vibe-motion')} />
           )}
         </div>
-        <div className={activeTab === 'lipsync' ? "h-full w-full" : "hidden"}>
+        <div data-studio="lipsync" className={activeTab === 'lipsync' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('lipsync',
           <LipSyncStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('lipsync')} onGenerationEnd={makeGenerationEndCallback('lipsync')} onGenerationComplete={makeSuccessCallback('lipsync')} onGenerationError={makeErrorCallback('lipsync')} />
           )}
         </div>
-        <div className={activeTab === 'body-swap' ? "h-full w-full" : "hidden"}>
+        <div data-studio="body-swap" className={activeTab === 'body-swap' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('body-swap',
           <RecastStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('body-swap')} onGenerationEnd={makeGenerationEndCallback('body-swap')} onGenerationComplete={makeSuccessCallback('body-swap')} onGenerationError={makeErrorCallback('body-swap')} />
           )}
         </div>
-        <div className={activeTab === 'cinema' ? "h-full w-full" : "hidden"}>
+        <div data-studio="cinema" className={activeTab === 'cinema' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('cinema',
           <CinemaStudio apiKey={apiKey} locale={locale} onGenerationStart={makeGenerationStartCallback('cinema')} onGenerationEnd={makeGenerationEndCallback('cinema')} onGenerationComplete={makeSuccessCallback('cinema')} onGenerationError={makeErrorCallback('cinema')} />
           )}
         </div>
-        <div className={activeTab === 'audio' ? "h-full w-full" : "hidden"}>
+        <div data-studio="audio" className={activeTab === 'audio' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('audio',
           <AudioStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('audio')} onGenerationEnd={makeGenerationEndCallback('audio')} onGenerationComplete={makeSuccessCallback('audio')} onGenerationError={makeErrorCallback('audio')} />
           )}
         </div>
-        <div className={activeTab === 'marketing' ? "h-full w-full" : "hidden"}>
+        <div data-studio="marketing" className={activeTab === 'marketing' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('marketing',
           <MarketingStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('marketing')} onGenerationEnd={makeGenerationEndCallback('marketing')} onGenerationComplete={makeSuccessCallback('marketing')} onGenerationError={makeErrorCallback('marketing')} />
           )}
         </div>
-        <div className={activeTab === 'workflows' ? "h-full w-full" : "hidden"}>
+        <div data-studio="workflows" className={activeTab === 'workflows' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('workflows',
           <WorkflowStudio
             apiKey={apiKey}
@@ -1134,12 +1145,12 @@ export default function StandaloneShell({ locale = 'en' }) {
           />
           )}
         </div>
-        <div className={activeTab === 'agents' ? "h-full w-full" : "hidden"}>
+        <div data-studio="agents" className={activeTab === 'agents' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('agents',
           <AgentStudio apiKey={apiKey} locale={locale} isHeaderVisible={isHeaderVisible} onToggleHeader={setIsHeaderVisible} />
           )}
         </div>
-        <div className={activeTab === 'design-agent' ? "h-full w-full" : "hidden"}>
+        <div data-studio="design-agent" className={activeTab === 'design-agent' ? "h-full w-full" : "hidden"}>
           {activeTab === 'design-agent' && wrapWithErrorBoundary('design-agent',
             <DesignAgentStudio
               apiKey={apiKey}
@@ -1152,12 +1163,12 @@ export default function StandaloneShell({ locale = 'en' }) {
             />
           )}
         </div>
-        <div className={activeTab === 'apps' ? "h-full w-full" : "hidden"}>
+        <div data-studio="apps" className={activeTab === 'apps' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('apps',
           <AppsStudio apiKey={apiKey} locale={locale} />
           )}
         </div>
-        <div className={activeTab === 'ai-influencer' ? "h-full w-full" : "hidden"}>
+        <div data-studio="ai-influencer" className={activeTab === 'ai-influencer' ? "h-full w-full" : "hidden"}>
           {wrapWithErrorBoundary('ai-influencer',
           <AiInfluencerStudio
             apiKey={apiKey}
