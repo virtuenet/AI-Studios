@@ -1,4 +1,4 @@
-import StandaloneShell from '@/components/StandaloneShell';
+import StandaloneShell from '@/app/shell/StandaloneShell';
 
 export const metadata = {
   title: 'Studio — AI Studios',

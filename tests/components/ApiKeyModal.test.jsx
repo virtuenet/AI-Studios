@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent, screen } from '@testing-library/react';
-import ApiKeyModal from '../../components/ApiKeyModal.jsx';
+import ApiKeyModal from '../../app/shell/ApiKeyModal.jsx';
 
 vi.mock('react-hot-toast', () => ({ default: { error: vi.fn() }, Toaster: () => null }));
 

@@ -80,7 +80,7 @@ vi.mock('react-hot-toast', () => ({
 describe('Accessibility Audit', () => {
   describe('ApiKeyModal — axe-core audit', () => {
     it('has zero critical a11y violations', async () => {
-      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { default: ApiKeyModal } = await import('../../app/shell/ApiKeyModal.jsx');
       const { container } = render(
         <ApiKeyModal onSave={vi.fn()} locale="en" overlay={true} />
       );
@@ -88,7 +88,7 @@ describe('Accessibility Audit', () => {
     });
 
     it('has associated label and input', async () => {
-      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { default: ApiKeyModal } = await import('../../app/shell/ApiKeyModal.jsx');
       const { container } = render(
         <ApiKeyModal onSave={vi.fn()} locale="en" overlay={true} />
       );
@@ -97,7 +97,7 @@ describe('Accessibility Audit', () => {
     });
 
     it('has accessible dialog role when overlay', async () => {
-      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { default: ApiKeyModal } = await import('../../app/shell/ApiKeyModal.jsx');
       const { container } = render(
         <ApiKeyModal onSave={vi.fn()} locale="en" overlay={true} />
       );
@@ -131,7 +131,7 @@ describe('Accessibility Audit', () => {
 
   describe('Structural checks — source code audit', () => {
     it('StandaloneShell has skip-to-content link', () => {
-      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/StandaloneShell.js'), 'utf-8');
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'app/shell/StandaloneShell.js'), 'utf-8');
       expect(src).toContain('Skip to content');
       expect(src).toContain('sr-only');
       expect(src).toContain('focus:not-sr-only');
@@ -139,13 +139,13 @@ describe('Accessibility Audit', () => {
     });
 
     it('StandaloneShell has ARIA role on main container', () => {
-      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/StandaloneShell.js'), 'utf-8');
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'app/shell/StandaloneShell.js'), 'utf-8');
       expect(src).toContain('role="application"');
       expect(src).toContain('aria-label');
     });
 
     it('StandaloneShell exposes a document heading and main landmark', () => {
-      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/StandaloneShell.js'), 'utf-8');
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'app/shell/StandaloneShell.js'), 'utf-8');
       expect(src).toContain('<h1 className="sr-only">AI Studios</h1>');
       expect(src).toContain('role="main"');
       expect(src).toContain('aria-label="Studio workspace"');
@@ -161,7 +161,7 @@ describe('Accessibility Audit', () => {
       const layout = fs.readFileSync(path.join(REPO_ROOT, 'app/layout.js'), 'utf-8');
       expect(layout).toContain('WebVitals');
       expect(layout).toContain('preconnect');
-      const vitals = fs.readFileSync(path.join(REPO_ROOT, 'components/WebVitals.jsx'), 'utf-8');
+      const vitals = fs.readFileSync(path.join(REPO_ROOT, 'app/shell/WebVitals.jsx'), 'utf-8');
       expect(vitals).toContain('useReportWebVitals');
     });
 
@@ -176,7 +176,7 @@ describe('Accessibility Audit', () => {
     });
 
     it('ApiKeyModal has focus trapping', () => {
-      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/ApiKeyModal.jsx'), 'utf-8');
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'app/shell/ApiKeyModal.jsx'), 'utf-8');
       expect(src).toContain('useRef');
       expect(src).toContain('aria-modal');
       expect(src).toContain('focus');
@@ -194,7 +194,7 @@ describe('Accessibility Audit', () => {
 
   describe('Color contrast (WCAG 2.1 AA)', () => {
     it('ApiKeyModal has no color-contrast violations', async () => {
-      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { default: ApiKeyModal } = await import('../../app/shell/ApiKeyModal.jsx');
       const { container } = render(
         <ApiKeyModal onSave={vi.fn()} locale="en" overlay={true} />
       );
@@ -211,7 +211,7 @@ describe('Accessibility Audit', () => {
     });
 
     it('modal body text uses sufficient-opacity utilities', () => {
-      const src = fs.readFileSync(path.join(REPO_ROOT, 'components/ApiKeyModal.jsx'), 'utf-8');
+      const src = fs.readFileSync(path.join(REPO_ROOT, 'app/shell/ApiKeyModal.jsx'), 'utf-8');
       // Guard against low-contrast text utilities (text-white/10–/30) in body copy.
       expect(src).not.toMatch(/text-white\/(10|20|30)\b/);
     });
@@ -252,7 +252,7 @@ describe('Accessibility Audit', () => {
 
   describe('Keyboard navigation', () => {
     it('ApiKeyModal interactive elements are natively focusable', async () => {
-      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { default: ApiKeyModal } = await import('../../app/shell/ApiKeyModal.jsx');
       const { container } = render(
         <ApiKeyModal onSave={vi.fn()} locale="en" overlay={true} />
       );
@@ -265,7 +265,7 @@ describe('Accessibility Audit', () => {
     });
 
     it('close button has accessible name', async () => {
-      const { default: ApiKeyModal } = await import('../../components/ApiKeyModal.jsx');
+      const { default: ApiKeyModal } = await import('../../app/shell/ApiKeyModal.jsx');
       const { container } = render(
         <ApiKeyModal onSave={vi.fn()} onClose={vi.fn()} locale="en" overlay={true} />
       );

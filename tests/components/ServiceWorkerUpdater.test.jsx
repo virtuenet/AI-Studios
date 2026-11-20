@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ServiceWorkerUpdater from '../../components/ServiceWorkerUpdater.jsx';
+import ServiceWorkerUpdater from '../../app/shell/ServiceWorkerUpdater.jsx';
 
 function installServiceWorker({ waiting = null, online = true } = {}) {
   const registration = {

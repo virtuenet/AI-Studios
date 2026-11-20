@@ -2,8 +2,8 @@ import './globals.css';
 import { Inter } from "next/font/google";
 import { headers } from 'next/headers';
 import { getLocaleConfig } from '@/lib/locales';
-import ServiceWorkerUpdater from '@/components/ServiceWorkerUpdater';
-import WebVitals from '@/components/WebVitals';
+import ServiceWorkerUpdater from '@/app/shell/ServiceWorkerUpdater';
+import WebVitals from '@/app/shell/WebVitals';
 
 const inter = Inter({
   variable: "--font-inter",

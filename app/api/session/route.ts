@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { validateApiKey } from '@/components/apiKeyValidation.mjs';
+import { validateApiKey } from '@/app/shell/apiKeyValidation.mjs';
 import {
   buildClearSessionCookie,
   buildSessionCookie,
