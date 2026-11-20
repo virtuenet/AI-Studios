@@ -44,3 +44,9 @@ test-results/
 # Test/build artifacts
 coverage/
 tsconfig.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/

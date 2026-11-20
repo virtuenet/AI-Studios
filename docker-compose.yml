@@ -7,6 +7,9 @@ services:
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
+      # Set to http://qc:8001 and start with `--profile qc` to enable the
+      # product-size and face-identity checks. Empty hides the ML controls.
+      - ML_QC_URL=${ML_QC_URL:-}
     restart: unless-stopped
     init: true
     healthcheck:
@@ -14,4 +17,26 @@ services:
       interval: 30s
       timeout: 5s
       start_period: 40s
+      retries: 3
+
+  qc:
+    profiles: ["qc"]
+    build: ./services/qc
+    container_name: ai-studios-qc
+    environment:
+      - QC_IDENTITY_THRESHOLD=${QC_IDENTITY_THRESHOLD:-0.52}
+      - QC_SIZE_TOLERANCE=${QC_SIZE_TOLERANCE:-0.2}
+    restart: unless-stopped
+    init: true
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health')",
+        ]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
       retries: 3

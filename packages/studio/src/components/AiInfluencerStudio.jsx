@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { generateImage } from "../muapi.js";
-import { formatErrorMessage } from "../utils/formatError.js";
+import { formatErrorMessage } from "../utils/formatError";
 import MobileGenerationActions, {
   GenerationCopyButtons,
 } from "./MobileGenerationActions.jsx";

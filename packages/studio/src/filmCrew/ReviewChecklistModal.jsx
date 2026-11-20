@@ -1,27 +1,86 @@
 "use client";
 
-import { useMemo, useState } from 'react';
+import { startTransition, useEffect, useMemo, useState } from 'react';
 import { gradeChecklist, questionsFor } from './qaChecklist';
 import { lintShotPrompt } from './promptQa';
-import { getMlEndpoint, runMlChecks } from './mlChecks';
+import { checkMlAvailability, runMlChecks } from './mlChecks';
 
 /**
  * Blind-review panel adapted from ai-film-crew's "test audience": fixed-answer
  * questions, code decides PASS/FAIL, and a pre-flight shot-prompt audit.
+ *
+ * When the server-side QC service is enabled, the panel also exposes the real
+ * product-size and face-identity checks. Results are advisory and never block
+ * the human review.
  */
 export default function ReviewChecklistModal({ open, type = 'image', prompt = '', imageUrl, onClose }) {
   const questions = useMemo(() => questionsFor(type), [type]);
   const [answers, setAnswers] = useState({});
-  const [ml, setMl] = useState(null);
+  const [mlAvailable, setMlAvailable] = useState(false);
   const [mlBusy, setMlBusy] = useState(false);
-  const mlEnabled = Boolean(getMlEndpoint());
+  const [mlResults, setMlResults] = useState(null);
+  const [productSizeMm, setProductSizeMm] = useState('');
+  const [referenceUrl, setReferenceUrl] = useState('');
   const grade = useMemo(() => gradeChecklist(type, answers), [type, answers]);
   const promptAudit = useMemo(
     () => (prompt ? lintShotPrompt(prompt) : null),
     [prompt]
   );
 
+  useEffect(() => {
+    if (!open) return undefined;
+    let cancelled = false;
+    checkMlAvailability().then((result) => {
+      if (cancelled) return;
+      startTransition(() => {
+        setMlAvailable(result.enabled);
+        setMlResults(null);
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
+
   if (!open) return null;
+
+  const runChecks = async () => {
+    const tasks = [];
+    const size = Number(productSizeMm);
+    if (Number.isFinite(size) && size > 0) {
+      tasks.push(
+        runMlChecks({ check: 'product-size', imageUrl, productSizeMm: size, prompt })
+      );
+    }
+    if (referenceUrl.trim()) {
+      tasks.push(
+        runMlChecks({
+          check: 'face-identity',
+          imageUrl,
+          referenceUrl: referenceUrl.trim(),
+          prompt,
+        })
+      );
+    }
+    if (tasks.length === 0) {
+      setMlResults([
+        {
+          ok: false,
+          checks: [],
+          error: 'Enter the real product width in mm or a reference image URL first.',
+        },
+      ]);
+      return;
+    }
+    setMlBusy(true);
+    const results = await Promise.all(tasks);
+    startTransition(() => {
+      setMlResults(results);
+      setMlBusy(false);
+    });
+  };
+
+  const showMl = mlAvailable && Boolean(imageUrl);
 
   return (
     <div className="fixed inset-0 z-[400] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Crew review checklist">
@@ -45,32 +104,74 @@ export default function ReviewChecklistModal({ open, type = 'image', prompt = ''
           </div>
         )}
 
-        {mlEnabled && imageUrl && (
+        {showMl && (
           <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
-            <div className="flex items-center justify-between gap-2">
+            <div className="mb-2 flex items-center justify-between gap-2">
               <span className="font-bold text-white/80">ML checks</span>
+              <span className="text-[10px] uppercase tracking-wide text-emerald-300">server-side</span>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <label className="block">
+                <span className="mb-1 block font-semibold text-white/60">Real product width (mm)</span>
+                <input
+                  type="number"
+                  min="1"
+                  inputMode="decimal"
+                  value={productSizeMm}
+                  onChange={(event) => setProductSizeMm(event.target.value)}
+                  placeholder="e.g. 48"
+                  className="w-full rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-xs text-white placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-[#22d3ee]/50"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1 block font-semibold text-white/60">Reference face URL</span>
+                <input
+                  type="url"
+                  value={referenceUrl}
+                  onChange={(event) => setReferenceUrl(event.target.value)}
+                  placeholder="https://…"
+                  className="w-full rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-xs text-white placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-[#22d3ee]/50"
+                />
+              </label>
+            </div>
+            <div className="mt-2 flex items-center justify-between gap-2">
+              <p className="text-[10px] text-white/40">
+                Product size uses the face as a scale reference. Identity compares the shot with the reference face.
+              </p>
               <button
                 type="button"
                 disabled={mlBusy}
-                onClick={async () => {
-                  setMlBusy(true);
-                  setMl(await runMlChecks({ imageUrl, prompt }));
-                  setMlBusy(false);
-                }}
-                className="rounded-md border border-white/15 px-2 py-1 font-bold text-white/70 hover:bg-white/10 disabled:opacity-50"
+                onClick={runChecks}
+                className="shrink-0 rounded-md border border-white/15 px-2 py-1 font-bold text-white/70 hover:bg-white/10 disabled:opacity-50"
               >
-                {mlBusy ? 'Running…' : 'Run'}
+                {mlBusy ? 'Running…' : 'Run checks'}
               </button>
             </div>
-            {ml && (
+            {mlResults && (
               <ul className="mt-2 space-y-1">
-                {ml.ok && ml.checks.length === 0 && <li className="text-white/50">Service returned no checks.</li>}
-                {ml.checks.map((check) => (
-                  <li key={check.id || check.name} className={check.pass ? 'text-emerald-300' : 'text-red-300'}>
-                    {check.pass ? 'PASS' : 'FAIL'} · {check.name || check.id}{check.detail ? ` — ${check.detail}` : ''}
+                {mlResults.map((result, index) => (
+                  <li key={index}>
+                    {result.ok && result.checks.length === 0 && (
+                      <span className="text-white/50">Service returned no checks.</span>
+                    )}
+                    {result.checks.map((check) => (
+                      <span
+                        key={check.id || check.name}
+                        className={`block ${check.pass ? 'text-emerald-300' : 'text-red-300'}`}
+                      >
+                        {check.pass ? 'PASS' : 'FAIL'} · {check.name || check.id}
+                        {check.detail ? ` — ${check.detail}` : ''}
+                        {Number.isFinite(check.measured_mm) && Number.isFinite(check.real_mm)
+                          ? ` — measured ${check.measured_mm} mm vs ${check.real_mm} mm`
+                          : ''}
+                        {Number.isFinite(check.score) ? ` — similarity ${check.score}` : ''}
+                      </span>
+                    ))}
+                    {!result.ok && (
+                      <span className="block text-red-300">{result.error || 'ML QC failed'}</span>
+                    )}
                   </li>
                 ))}
-                {!ml.ok && <li className="text-red-300">{ml.error || 'ML QC failed'}</li>}
               </ul>
             )}
           </div>

@@ -11,7 +11,7 @@ import {
   removeBackground,
   expandImage,
 } from "../muapi.js";
-import { formatErrorMessage } from "../utils/formatError.js";
+import { formatErrorMessage } from "../utils/formatError";
 import { getStudioCopy } from '../messages/studioCopy';
 
 // Upscale Models Definition from schema_data.json

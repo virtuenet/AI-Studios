@@ -4,7 +4,7 @@ import { startTransition, useState, useEffect, useRef, useCallback } from "react
 import toast, { Toaster } from "react-hot-toast";
 import { analyzeAudioFile, audioQcHints } from "../filmCrew/audioQc";
 import { processLipSync, uploadFile } from "../muapi.js";
-import { formatErrorMessage } from "../utils/formatError.js";
+import { formatErrorMessage } from "../utils/formatError";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,

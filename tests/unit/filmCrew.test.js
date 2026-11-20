@@ -86,7 +86,12 @@ import {
   saveCast,
 } from '../../packages/studio/src/filmCrew/castLibrary';
 import { composeScenePrompt, sceneSetSummary, EMPTY_SCENE } from '../../packages/studio/src/filmCrew/sceneSet';
-import { runMlChecks } from '../../packages/studio/src/filmCrew/mlChecks';
+import {
+  checkMlAvailability,
+  DEFAULT_ML_ENDPOINT,
+  getMlEndpoint,
+  runMlChecks,
+} from '../../packages/studio/src/filmCrew/mlChecks';
 import { analyzeAudioFile } from '../../packages/studio/src/filmCrew/audioQc';
 
 describe('cast library', () => {
@@ -137,17 +142,72 @@ describe('scene set', () => {
 });
 
 describe('ML checks client', () => {
+  it('defaults to the internal proxy endpoint', () => {
+    expect(DEFAULT_ML_ENDPOINT).toBe('/api/qc');
+    expect(getMlEndpoint()).toBe('/api/qc');
+  });
+
   it('is disabled without an endpoint', async () => {
     const result = await runMlChecks({ imageUrl: 'x.png' }, { endpoint: null });
     expect(result.enabled).toBe(false);
   });
 
-  it('posts and returns checks', async () => {
-    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ checks: [{ id: 'face', pass: true }] }) });
-    const result = await runMlChecks({ imageUrl: 'x.png', prompt: 'p' }, { endpoint: 'https://qc', fetchImpl });
+  it('checks service availability', async () => {
+    const enabled = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ enabled: true }) });
+    expect(await checkMlAvailability({ endpoint: '/api/qc', fetchImpl: enabled })).toEqual({
+      enabled: true,
+      error: null,
+    });
+
+    const disabled = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ enabled: false }) });
+    expect((await checkMlAvailability({ endpoint: '/api/qc', fetchImpl: disabled })).enabled).toBe(false);
+
+    const down = vi.fn().mockRejectedValue(new Error('down'));
+    expect(await checkMlAvailability({ endpoint: '/api/qc', fetchImpl: down })).toEqual({
+      enabled: false,
+      error: 'down',
+    });
+  });
+
+  it('posts the selected check and returns normalized service rows', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ checks: [{ name: 'face-identity', pass: true, score: 0.91 }] }),
+    });
+    const result = await runMlChecks(
+      {
+        check: 'face-identity',
+        imageUrl: 'https://cdn/shot.png',
+        referenceUrl: 'https://cdn/ref.png',
+        prompt: 'p',
+      },
+      { endpoint: 'https://qc', fetchImpl }
+    );
     expect(result.ok).toBe(true);
-    expect(result.checks[0].id).toBe('face');
+    expect(result.checks[0].name).toBe('face-identity');
     expect(fetchImpl.mock.calls[0][0]).toBe('https://qc');
+    expect(JSON.parse(fetchImpl.mock.calls[0][1].body)).toEqual({
+      check: 'face-identity',
+      imageUrl: 'https://cdn/shot.png',
+      referenceUrl: 'https://cdn/ref.png',
+      productSizeMm: null,
+      prompt: 'p',
+    });
+  });
+
+  it('sends product size and surfaces proxy error details', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 503,
+      json: async () => ({ error: 'ML QC service is not configured' }),
+    });
+    const result = await runMlChecks(
+      { check: 'product-size', imageUrl: 'https://cdn/x.png', productSizeMm: 48 },
+      { endpoint: '/api/qc', fetchImpl }
+    );
+    expect(result.ok).toBe(false);
+    expect(result.error).toBe('ML QC service is not configured');
+    expect(JSON.parse(fetchImpl.mock.calls[0][1].body).productSizeMm).toBe(48);
   });
 
   it('reports transport failures without throwing', async () => {

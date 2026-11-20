@@ -3,7 +3,7 @@
 import { startTransition, useState, useEffect, useRef, useCallback, useMemo, useId } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { generateVideo, generateI2V, processV2V, uploadFile } from "../muapi.js";
-import { formatErrorMessage } from "../utils/formatError.js";
+import { formatErrorMessage } from "../utils/formatError";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";

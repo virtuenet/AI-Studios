@@ -3,7 +3,7 @@
 import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { generateImage, generateI2I, uploadFile } from "../muapi.js";
-import { formatErrorMessage } from "../utils/formatError.js";
+import { formatErrorMessage } from "../utils/formatError";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import useGeneration from "../hooks/useGeneration";
 import useWindowedGrid from "../hooks/useWindowedGrid";

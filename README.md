@@ -589,16 +589,20 @@ The `packages/studio` library is also consumed by the hosted version on [muapi.a
 ## 🎬 Film-Crew QA
 
 Quality gates adapted from the open-source **ai-film-crew** methodology:
-blind-review checklists with fixed answers, shot-prompt continuity linting, and
-pure-sample audio QC (clipping/quiet/DC offset). Use the **QC** button on a
-generated image or read `docs/film-crew-qa.md`.
+blind-review checklists with fixed answers, shot-prompt continuity linting,
+pure-sample audio QC (clipping/quiet/DC offset), a recurring-cast library, a
+scene/set continuity builder, and optional server-side ML checks. The ML
+service (`services/qc`) uses YuNet + SFace for real product-size and
+face-identity results; it is enabled with `ML_QC_URL` and runs in Docker via
+`docker compose --profile qc`. Use the **QC** button on a generated image or
+read `docs/film-crew-qa.md`.
 
 ## 🧪 Testing & Quality Gates
 
 ```bash
 npm run lint           # ESLint (flat config, next/core-web-vitals)
 npm run typecheck      # tsc --noEmit (TypeScript modules)
-npm run test:vitest    # 273 unit / component / route / accessibility tests (Vitest)
+npm run test:vitest    # 322 unit / component / route / accessibility tests (Vitest)
 npm run test:coverage  # Coverage gate (75%/64%/86%/79% thresholds)
 npm test               # 77 Electron local-inference tests (Node)
 npm run test:e2e       # Playwright: smoke + mocked generation + visual (production build)

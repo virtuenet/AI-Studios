@@ -31,8 +31,72 @@ Runs in the browser or tests without ffmpeg.
 
 ## Tests
 
-`tests/unit/filmCrew.test.js` — 10 tests covering grading, prompt anchors,
-multi-person eyeline detection, clipping/quiet/healthy/empty audio.
+`tests/unit/filmCrew.test.js` covers grading, prompt anchors, multi-person
+eyeline detection, clipping/quiet/healthy/empty audio, cast/scene continuity,
+and the ML client. `services/qc/tests` covers the service geometry, request
+validation and endpoints, plus an opt-in real-model test.
+
+## Server-side ML QC (`services/qc`)
+
+The heavy checks run in a small FastAPI service, not in the browser:
+
+| Check | How it works |
+|-------|--------------|
+| `product-size` | **YuNet** finds the holder's face and its eye landmarks. The eye distance (adult average 63 mm) is the ruler; the largest contour outside the face approximates the product's short side. The measured width is compared with the real width supplied by the user (default ±20%). |
+| `face-identity` | **YuNet** aligns both faces and **SFace** (Apache 2.0 face-recognition embedding) compares them with cosine similarity. Default threshold `0.52`; calibrate it on your own judged stills. |
+
+Both models are downloaded once from the OpenCV Zoo, SHA-256 verified, and
+cached (`QC_MODELS_DIR`, default `~/.cache/ai-studios-qc`). The Docker image
+bakes them in at build time. The browser never downloads model weights.
+
+### Run it
+
+```bash
+cd services/qc
+python3 -m venv .venv && . .venv/bin/activate
+pip install -r requirements-dev.txt
+uvicorn main:app --host 0.0.0.0 --port 8001
+```
+
+Then point the app at it:
+
+```bash
+ML_QC_URL=http://127.0.0.1:8001 npm run dev
+```
+
+`GET /api/qc` reports whether the service is configured; the QC dialog only
+shows the ML panel when it is. `POST /api/qc` validates the request and proxies
+to `/qc/product-size` or `/qc/face-identity`; the service URL stays server-side.
+Set `NEXT_PUBLIC_FILM_CREW_ML_ENDPOINT` (or
+`window.__FILM_CREW_ML_ENDPOINT__`) only if you need to bypass the proxy.
+
+### Docker
+
+```bash
+ML_QC_URL=http://qc:8001 docker compose --profile qc up -d --build
+```
+
+The `qc` profile exposes the service only on the compose network and sets
+`QC_IDENTITY_THRESHOLD` / `QC_SIZE_TOLERANCE` from the environment.
+
+### Limits
+
+No face in frame (an insert) gives no scale; a product held well in front of the
+eyes reads up to ~15% big; a face turned past ~60 degrees gives no usable eye
+distance. The product contour is a heuristic, not a segmentation model, so
+glass and thin objects are less reliable. Scores screen a take; they never
+replace the human review.
+
+### Tests
+
+```bash
+cd services/qc
+python -m pytest tests -q                    # geometry + API (offline)
+QC_MODEL_TESTS=1 python -m pytest tests -q   # also downloads and runs YuNet/SFace
+```
+
+CI runs the full suite including the real-model test, and caches the models
+between runs.
 
 ## Optional features (implemented)
 
@@ -51,9 +115,8 @@ set for the next shot.
 Audio Studio and Lip Sync decode uploads with Web Audio and show a non-blocking
 toast when clipping, excessive quiet, DC offset or too-short duration is found.
 
-### Pluggable ML checks (`mlChecks.js`)
-Configure `NEXT_PUBLIC_FILM_CREW_ML_ENDPOINT` (or
-`window.__FILM_CREW_ML_ENDPOINT__`) to call an external QC service for
-product-size/face-identity checks. The QC dialog shows a "Run" button and
-renders PASS/FAIL rows; without an endpoint it is hidden (no 1 GB model
-downloads in the browser).
+### ML client (`mlChecks.js`)
+`checkMlAvailability()` hides the ML panel unless `/api/qc` reports the service
+is enabled. `runMlChecks()` posts the selected check and renders PASS/FAIL rows
+with the measured size or similarity score. No unconfigured external endpoint
+is contacted.

@@ -1,24 +1,24 @@
-const IMAGE_EXTENSION_BY_MIME_TYPE = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-  "image/webp": "webp",
+const IMAGE_EXTENSION_BY_MIME_TYPE: Record<string, string> = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
 };
 
-export function getImageDownloadFilename(filename, mimeType) {
+export function getImageDownloadFilename(filename: string, mimeType: string): string {
   const extension = IMAGE_EXTENSION_BY_MIME_TYPE[mimeType];
   if (!extension) return filename;
 
-  const extensionIndex = filename.lastIndexOf(".");
+  const extensionIndex = filename.lastIndexOf('.');
   const basename = extensionIndex > 0 ? filename.slice(0, extensionIndex) : filename;
   return `${basename}.${extension}`;
 }
 
-export async function downloadImage(url, filename) {
+export async function downloadImage(url: string, filename: string): Promise<void> {
   try {
     const response = await fetch(url);
     const blob = await response.blob();
     const blobUrl = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
+    const anchor = document.createElement('a');
     anchor.href = blobUrl;
     anchor.download = getImageDownloadFilename(filename, blob.type);
     document.body.appendChild(anchor);
@@ -26,6 +26,6 @@ export async function downloadImage(url, filename) {
     document.body.removeChild(anchor);
     URL.revokeObjectURL(blobUrl);
   } catch {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 }
