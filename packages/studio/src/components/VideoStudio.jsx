@@ -27,7 +27,7 @@ import {
   videoModelCatalog,
   videoModelMenuEntries as videoModelPickerEntries,
   videoModelMenuEntryByVariantId as videoModelPickerEntryByVariantId,
-} from "../modelFamilies.js";
+} from "../modelFamilies";
 import { getSeedanceEndpointResolution, getSeedanceToolConfiguration } from "../seedanceModels.js";
 import { getVeoToolConfiguration } from "../veoModels.js";
 import { getGroupedVideoConfiguration, getGroupedVideoCopyKey, getGroupedVideoVariantOptions } from "../groupedVideoModels.js";

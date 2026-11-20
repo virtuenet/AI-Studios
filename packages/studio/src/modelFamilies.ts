@@ -1,6 +1,4 @@
-/**
- * @typedef {import('./types/models').ModelDefinition} ModelDefinition
- */
+import type { ModelDefinition } from './types/models';
 import {
   i2iModels,
   i2vModels,
@@ -8,14 +6,69 @@ import {
   t2vModels,
   v2vModels,
 } from "./models";
-import { getModelMediaCapabilities } from "./modelCapabilities";
+import { getModelMediaCapabilities, type ModelInfo } from "./modelCapabilities";
 import {
   getGroupedVideoConfiguration,
   resolveGroupedVideoVariant,
   GROUPED_VIDEO_FAMILY_NAMES,
 } from "./groupedVideoModels.js";
 
-const IMAGE_FAMILY_ALIASES = {
+type Mode = 't2i' | 'i2i' | 't2v' | 'i2v' | 'v2v';
+
+interface ModeList {
+  mode: string;
+  models: ModelDefinition[];
+}
+
+interface FamilyVariant {
+  model: ModelDefinition;
+  mode: string;
+  freshness: number;
+  familyId: string;
+}
+
+interface Family {
+  id: string;
+  name: string;
+  provider: string;
+  provider_name: string;
+  rawVariants: Record<string, FamilyVariant[]>;
+  variants: Record<string, FamilyVariant[]>;
+  supports: Record<string, boolean>;
+  freshness: number;
+  sortFreshness: number;
+  searchText: string;
+}
+
+interface CatalogConfig {
+  familyId: (model: ModelDefinition) => string;
+  familyName: (id: string, fallback: string) => string;
+  namingModes: string[];
+  preferredVariants?: Record<string, Record<string, string>>;
+  seriesVersion?: (family: Family) => { series: string; version: number } | null;
+  variantKey?: (model: ModelDefinition) => string;
+}
+
+interface Catalog {
+  families: Family[];
+  familyById: Map<string, Family>;
+  familyByVariantId: Map<string, Family>;
+  variantById: Map<string, FamilyVariant>;
+  preferredVariants: Record<string, Record<string, string>>;
+}
+
+interface PickerEntry {
+  id: string;
+  family: Family;
+  name: string;
+  variantIds: Set<string>;
+  variantsByMode: Record<string, FamilyVariant>;
+  defaultVariant: FamilyVariant | null;
+  searchText: string;
+  groupedVideo?: boolean;
+}
+
+const IMAGE_FAMILY_ALIASES: Record<string, string> = {
   "bytedance-seededit-v3": "bytedance-seedream-v3",
   "bytedance-seedream-edit-v4": "bytedance-seedream-v4",
   "bytedance-seedream-v4-edit": "bytedance-seedream-v4",
@@ -102,7 +155,7 @@ const IMAGE_FAMILY_ALIASES = {
   "wan2.7-text-to-image-pro": "wan2.7",
 };
 
-const IMAGE_FAMILY_NAMES = {
+const IMAGE_FAMILY_NAMES: Record<string, string> = {
   "flux-2-klein": "Flux 2 Klein",
   "flux-dev": "Flux Dev",
   "gemini-omni": "Gemini Omni",
@@ -123,7 +176,7 @@ const IMAGE_FAMILY_NAMES = {
   "wan2.7": "Wan 2.7",
 };
 
-const VIDEO_FAMILY_ALIASES = {
+const VIDEO_FAMILY_ALIASES: Record<string, string> = {
   "ai-video-upscaler-pro": "ai-video-upscaler",
   "hunyuan-fast-text-to-video": "hunyuan",
   "hunyuan-image-to-video": "hunyuan",
@@ -134,14 +187,14 @@ const VIDEO_FAMILY_ALIASES = {
   "topaz-upscale-video-precision": "topaz-upscale-video",
 };
 
-const VIDEO_FAMILY_NAMES = {
+const VIDEO_FAMILY_NAMES: Record<string, string> = {
   "ai-video-upscaler": "AI Video Upscaler",
   hunyuan: "Hunyuan",
   "minimax-h3-max": "MiniMax H3 Max",
   "topaz-upscale-video": "Topaz Video Upscale",
 };
 
-function videoVariantKey(model) {
+function videoVariantKey(model: ModelDefinition): string {
   const endpoint = model.endpoint || model.id;
   const effectOptions = model.inputs?.name?.enum;
   return effectOptions?.length
@@ -149,7 +202,7 @@ function videoVariantKey(model) {
     : endpoint;
 }
 
-const PREFERRED_IMAGE_VARIANTS = {
+const PREFERRED_IMAGE_VARIANTS: Record<string, Record<string, string>> = {
   "gpt-image-2": {
     t2i: "gpt-image-2",
     i2i: "gpt-image-2-edit",
@@ -198,7 +251,7 @@ const PREFERRED_IMAGE_VARIANTS = {
   },
 };
 
-const PREFERRED_VIDEO_VARIANTS = {
+const PREFERRED_VIDEO_VARIANTS: Record<string, Record<string, string>> = {
   "kling-v3": {
     t2v: "kling-v3.0-standard-text-to-video",
     i2v: "kling-v3.0-standard-image-to-video",
@@ -233,11 +286,11 @@ const PREFERRED_VIDEO_VARIANTS = {
   },
 };
 
-function normalizeVersion(value) {
+function normalizeVersion(value: string): string {
   return value.replace(/^v/i, "").replace(/\.0$/, "");
 }
 
-function imageFamilyId(model) {
+function imageFamilyId(model: ModelDefinition): string {
   return (IMAGE_FAMILY_ALIASES[model.id] || model.id)
     .toLowerCase()
     .replace(/-(text-to-image|image-to-image|image-edit)(?=-|$)/g, "")
@@ -247,37 +300,37 @@ function imageFamilyId(model) {
     .replace(/^-|-$/g, "");
 }
 
-function videoFamilyId(model) {
+function videoFamilyId(model: ModelDefinition): string {
   const grouped = getGroupedVideoConfiguration(model.id);
   if (grouped) return grouped.familyId;
   const modelId = model.id.toLowerCase();
   const id = VIDEO_FAMILY_ALIASES[modelId] || modelId;
   let match = id.match(/^kling-(v?\d+(?:\.\d+)?|o1)(?:-|$)/);
-  if (match) return `kling-${match[1].toLowerCase() === "o1" ? "o1" : `v${normalizeVersion(match[1])}`}`;
+  if (match) return `kling-${match[1]!.toLowerCase() === "o1" ? "o1" : `v${normalizeVersion(match[1]!)}`}`;
 
   match = id.match(/^seedance-(v?\d+(?:\.\d+)?|lite|pro)(?:-|$)/);
-  if (match) return `seedance-${normalizeVersion(match[1])}`;
+  if (match) return `seedance-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^wan(\d+(?:\.\d+)?)(?:-|$)/);
-  if (match) return `wan-${normalizeVersion(match[1])}`;
+  if (match) return `wan-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^veo-?(\d+(?:\.\d+)?)(?:-|$)/);
-  if (match) return `veo-${normalizeVersion(match[1])}`;
+  if (match) return `veo-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^pixverse-v?(\d+(?:\.\d+)?)(?:-|$)/);
-  if (match) return `pixverse-${normalizeVersion(match[1])}`;
+  if (match) return `pixverse-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^vidu-(v?\d+(?:\.\d+)?|q\d+)(?:-|$)/);
-  if (match) return `vidu-${normalizeVersion(match[1])}`;
+  if (match) return `vidu-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^ltx-(\d+(?:\.\d+)?)(?:-|$)/);
-  if (match) return `ltx-${normalizeVersion(match[1])}`;
+  if (match) return `ltx-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^happy-horse-(\d+(?:\.\d+)?)(?:-|$)/);
-  if (match) return `happy-horse-${normalizeVersion(match[1])}`;
+  if (match) return `happy-horse-${normalizeVersion(match[1]!)}`;
 
   match = id.match(/^minimax-hailuo-(\d+(?:\.\d+)?)(?:-|$)/);
-  if (match) return `minimax-hailuo-${normalizeVersion(match[1])}`;
+  if (match) return `minimax-hailuo-${normalizeVersion(match[1]!)}`;
 
   if (id.startsWith("minimax-h3-max")) return "minimax-h3-max";
   if (id.startsWith("minimax-h3")) return "minimax-h3";
@@ -292,15 +345,15 @@ function videoFamilyId(model) {
     .replace(/^-|-$/g, "");
 }
 
-function cleanImageFamilyName(name) {
+function cleanImageFamilyName(name: string): string {
   return name
     .replace(/\s+(Text To Image|Image To Image|Text to Image|Image to Image|T2I|I2I)$/i, "")
     .replace(/\s+Edit$/i, "")
     .trim();
 }
 
-function videoFamilyName(familyId, fallbackName) {
-  const versionedNames = [
+function videoFamilyName(familyId: string, fallbackName: string): string {
+  const versionedNames: Array<[RegExp, string]> = [
     [/^kling-v(.+)$/, "Kling v"],
     [/^seedance-(.+)$/, "Seedance "],
     [/^wan-(.+)$/, "Wan "],
@@ -314,10 +367,10 @@ function videoFamilyName(familyId, fallbackName) {
 
   for (const [pattern, prefix] of versionedNames) {
     const match = familyId.match(pattern);
-    if (match) return `${prefix}${match[1].replace(/^q/i, "Q")}`;
+    if (match) return `${prefix}${match[1]!.replace(/^q/i, "Q")}`;
   }
 
-  const names = {
+  const names: Record<string, string> = {
     "gemini-omni": "Gemini Omni",
     "grok-imagine-video": "Grok Imagine",
     "kling-o1": "Kling O1",
@@ -327,15 +380,15 @@ function videoFamilyName(familyId, fallbackName) {
   return VIDEO_FAMILY_NAMES[familyId] || names[familyId] || fallbackName;
 }
 
-function videoSeriesVersion(family) {
+function videoSeriesVersion(family: Family): { series: string; version: number } | null {
   const match = family.id.match(
     /^(kling-v|seedance-|wan-|veo-|pixverse-|vidu-q|ltx-|happy-horse-|minimax-hailuo-)(\d+(?:\.\d+)?)/,
   );
-  return match ? { series: match[1], version: Number(match[2]) } : null;
+  return match ? { series: match[1]!, version: Number(match[2]!) } : null;
 }
 
-function imageSeriesVersion(family) {
-  const patterns = [
+function imageSeriesVersion(family: Family): { series: string; version: number } | null {
+  const patterns: Array<[RegExp, string]> = [
     [/^gpt-image-(\d+(?:\.\d+)?)/, "gpt-image"],
     [/^hunyuan-image-(\d+(?:\.\d+)?)/, "hunyuan-image"],
     [/^midjourney-v(\d+(?:\.\d+)?)/, "midjourney"],
@@ -345,22 +398,23 @@ function imageSeriesVersion(family) {
   ];
   for (const [pattern, series] of patterns) {
     const match = family.id.match(pattern);
-    if (match) return { series, version: Number(match[1]) };
+    if (match) return { series, version: Number(match[1]!) };
   }
   return null;
 }
 
-function stripFamilyPrefix(name, family) {
-  const patterns = {
+function stripFamilyPrefix(name: string, family: Family): string {
+  const patterns: Record<string, RegExp> = {
     "grok-imagine-video": /^Grok Imagine\s*/i,
     "minimax-h3": /^MiniMax H3\s*/i,
     "sora-2": /^(?:Openai\s+)?Sora 2\s*/i,
   };
-  if (patterns[family.id]) return name.replace(patterns[family.id], "");
+  const namedPattern = patterns[family.id];
+  if (namedPattern) return name.replace(namedPattern, "");
 
   if (family.id === "kling-v3") return name.replace(/^Kling\s+v?3(?:\.0)?\s*/i, "");
 
-  const versionPatterns = [
+  const versionPatterns: Array<[RegExp, (version: string) => RegExp]> = [
     [/^kling-v(.+)$/, (version) => new RegExp(`^Kling\\s+v?${version.replace(".", "\\.")}(?:\\.0)?\\s*`, "i")],
     [/^seedance-(.+)$/, (version) => new RegExp(`^Seedance\\s+v?${version.replace(".", "\\.")}(?:\\.0)?\\s*`, "i")],
     [/^wan-(.+)$/, (version) => new RegExp(`^Wan\\s*${version.replace(".", "\\.")}\\s*`, "i")],
@@ -373,31 +427,36 @@ function stripFamilyPrefix(name, family) {
   ];
   for (const [familyPattern, createNamePattern] of versionPatterns) {
     const match = family.id.match(familyPattern);
-    if (match) return name.replace(createNamePattern(match[1]), "");
+    if (match) return name.replace(createNamePattern(match[1]!), "");
   }
 
   const escapedName = family.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return name.replace(new RegExp(`^${escapedName}\\s*`, "i"), "");
 }
 
-function buildCatalog(modeLists, config) {
-  const sourceEntries = [];
-  const familyParents = new Map();
-  const endpointOwners = new Map();
+function buildCatalog(modeLists: ModeList[], config: CatalogConfig): Catalog {
+  const sourceEntries: FamilyVariant[] = [];
+  const familyParents = new Map<string, string>();
+  const endpointOwners = new Map<string, string>();
 
-  const findFamily = (id) => {
+  const findFamily = (id: string): string => {
     let root = id;
-    while (familyParents.get(root) !== root) root = familyParents.get(root);
+    for (;;) {
+      const parent = familyParents.get(root);
+      if (!parent || parent === root) break;
+      root = parent;
+    }
     let current = id;
-    while (familyParents.get(current) !== current) {
-      const next = familyParents.get(current);
+    for (;;) {
+      const parent = familyParents.get(current);
+      if (!parent || parent === current) break;
       familyParents.set(current, root);
-      current = next;
+      current = parent;
     }
     return root;
   };
 
-  const unionFamilies = (ownerId, duplicateId) => {
+  const unionFamilies = (ownerId: string, duplicateId: string): void => {
     const ownerRoot = findFamily(ownerId);
     const duplicateRoot = findFamily(duplicateId);
     if (ownerRoot !== duplicateRoot) familyParents.set(duplicateRoot, ownerRoot);
@@ -416,38 +475,43 @@ function buildCatalog(modeLists, config) {
     });
   });
 
-  const familyMap = new Map();
+  const familyMap = new Map<string, Family>();
   sourceEntries.forEach((entry) => {
-      const id = findFamily(entry.familyId);
-      entry.familyId = id;
-      const { model, mode, freshness } = entry;
-      const family = familyMap.get(id) || {
-        id,
-        name: "",
-        provider: model.provider || "muapi",
-        provider_name: model.provider_name || "Muapi",
-        rawVariants: {},
-        freshness: 0,
-      };
-      (family.rawVariants[mode] ||= []).push(entry);
-      family.freshness = Math.max(family.freshness, freshness);
-      familyMap.set(id, family);
+    const id = findFamily(entry.familyId);
+    entry.familyId = id;
+    const { model, mode, freshness } = entry;
+    const family: Family = familyMap.get(id) || {
+      id,
+      name: "",
+      provider: model.provider || "muapi",
+      provider_name: model.provider_name || "Muapi",
+      rawVariants: {},
+      variants: {},
+      supports: {},
+      freshness: 0,
+      sortFreshness: 0,
+      searchText: "",
+    };
+    (family.rawVariants[mode] ||= []).push(entry);
+    family.freshness = Math.max(family.freshness, freshness);
+    familyMap.set(id, family);
   });
 
   const families = [...familyMap.values()].map((family) => {
-    const preferredMode = config.namingModes.find((mode) => family.rawVariants[mode]?.length);
-    const namingEntry = [...family.rawVariants[preferredMode]].sort(
-      (a, b) => b.freshness - a.freshness,
-    )[0];
-    family.name = config.familyName(family.id, namingEntry.model.name);
-    family.provider = namingEntry.model.provider || family.provider;
-    family.provider_name = namingEntry.model.provider_name || family.provider_name;
+    const preferredMode = config.namingModes.find((mode) => (family.rawVariants[mode]?.length ?? 0) > 0);
+    const namingVariants = preferredMode ? family.rawVariants[preferredMode] ?? [] : [];
+    const namingEntry = [...namingVariants].sort((a, b) => b.freshness - a.freshness)[0];
+    family.name = config.familyName(family.id, namingEntry?.model.name || family.id);
+    if (namingEntry) {
+      family.provider = namingEntry.model.provider || family.provider;
+      family.provider_name = namingEntry.model.provider_name || family.provider_name;
+    }
     family.variants = {};
     family.supports = {};
 
     modeLists.forEach(({ mode }) => {
-      const seenIds = new Set();
-      const seenEndpoints = new Set();
+      const seenIds = new Set<string>();
+      const seenEndpoints = new Set<string>();
       const variants = (family.rawVariants[mode] || [])
         .sort((a, b) => b.freshness - a.freshness)
         .filter(({ model }) => {
@@ -468,22 +532,23 @@ function buildCatalog(modeLists, config) {
       family.id,
       family.name,
       ...Object.values(family.rawVariants).flatMap((variants) =>
-        variants.flatMap(({ model }) => [model.id, model.name]),
+        variants.flatMap(({ model }) => [model.id, model.name || ""]),
       ),
     ]
       .join(" ")
       .toLowerCase();
-    delete family.rawVariants;
+    family.rawVariants = {};
     return family;
   });
 
   families.forEach((family) => {
     family.sortFreshness = family.freshness;
   });
-  if (config.seriesVersion) {
-    const seriesGroups = new Map();
+  const seriesVersionFor = config.seriesVersion;
+  if (seriesVersionFor) {
+    const seriesGroups = new Map<string, Array<{ family: Family; version: number }>>();
     families.forEach((family) => {
-      const versionInfo = config.seriesVersion(family);
+      const versionInfo = seriesVersionFor(family);
       if (!versionInfo) return;
       let entries = seriesGroups.get(versionInfo.series);
       if (!entries) {
@@ -502,7 +567,7 @@ function buildCatalog(modeLists, config) {
             b.version - a.version || b.family.freshness - a.family.freshness,
         )
         .forEach(({ family }, index) => {
-          family.sortFreshness = freshnessSlots[index];
+          family.sortFreshness = freshnessSlots[index] ?? family.freshness;
         });
     });
   }
@@ -510,9 +575,9 @@ function buildCatalog(modeLists, config) {
     (a, b) => b.sortFreshness - a.sortFreshness || a.name.localeCompare(b.name),
   );
 
-  const familyById = new Map(families.map((family) => [family.id, family]));
-  const familyByVariantId = new Map();
-  const variantById = new Map();
+  const familyById = new Map<string, Family>(families.map((family) => [family.id, family]));
+  const familyByVariantId = new Map<string, Family>();
+  const variantById = new Map<string, FamilyVariant>();
   families.forEach((family) => {
     Object.values(family.variants).forEach((variants) => {
       variants.forEach((variant) => {
@@ -523,7 +588,7 @@ function buildCatalog(modeLists, config) {
   });
   sourceEntries.forEach((entry) => {
     const family = familyById.get(entry.familyId);
-    familyByVariantId.set(entry.model.id, family);
+    if (family) familyByVariantId.set(entry.model.id, family);
     if (!variantById.has(entry.model.id)) {
       variantById.set(entry.model.id, { ...entry });
     }
@@ -538,25 +603,30 @@ function buildCatalog(modeLists, config) {
   };
 }
 
-function getPickerEntryByVariantId(catalog, variantId) {
+function getPickerEntryByVariantId(catalog: Catalog, variantId: string) {
   return catalog === imageModelCatalog
     ? imageModelPickerEntryByVariantId.get(variantId)
     : videoModelPickerEntryByVariantId.get(variantId);
 }
 
-export function getFamilyVariant(catalog, familyOrId, mode, currentVariantId = null) {
+export function getFamilyVariant(
+  catalog: Catalog,
+  familyOrId: string | Family | null | undefined,
+  mode: string,
+  currentVariantId: string | null = null
+): FamilyVariant | null {
   const family =
     typeof familyOrId === "string" ? catalog.familyById.get(familyOrId) : familyOrId;
   const variants = family?.variants[mode] || [];
-  if (variants.length === 0) return null;
+  if (!family || variants.length === 0) return null;
 
   const currentFamily = currentVariantId
     ? catalog.familyByVariantId.get(currentVariantId)
     : null;
-  if (currentFamily?.id === family.id) {
-    const currentVariant = catalog.variantById.get(currentVariantId);
+  if (family && currentFamily?.id === family.id) {
+    const currentVariant = currentVariantId ? catalog.variantById.get(currentVariantId) : undefined;
     if (currentVariant?.mode === mode) return currentVariant;
-    const currentEntry = getPickerEntryByVariantId(catalog, currentVariantId);
+    const currentEntry = currentVariantId ? getPickerEntryByVariantId(catalog, currentVariantId) : undefined;
     return currentEntry?.variantsByMode[mode] || null;
   }
 
@@ -564,19 +634,24 @@ export function getFamilyVariant(catalog, familyOrId, mode, currentVariantId = n
   const preferred = preferredId ? catalog.variantById.get(preferredId) : null;
   if (preferred) return preferred;
 
-  return variants[0];
+  return variants[0] ?? null;
 }
 
-export function getImageReferenceVariant(catalog, familyOrId, currentVariantId) {
+export function getImageReferenceVariant(
+  catalog: Catalog,
+  familyOrId: string | Family | null | undefined,
+  currentVariantId: string | null
+): FamilyVariant | null {
   const family =
     typeof familyOrId === "string" ? catalog.familyById.get(familyOrId) : familyOrId;
-  const currentVariant = catalog.variantById.get(currentVariantId);
+  const currentVariant = currentVariantId ? catalog.variantById.get(currentVariantId) : undefined;
   if (
     family &&
-    catalog.familyByVariantId.get(currentVariantId)?.id === family.id &&
-    getModelMediaCapabilities(currentVariant?.model).image.maxItems > 0
+    currentVariant &&
+    currentVariantId && catalog.familyByVariantId.get(currentVariantId)?.id === family.id &&
+    getModelMediaCapabilities(currentVariant.model as ModelInfo).image.maxItems > 0
   ) {
-    return currentVariant;
+    return currentVariant ?? null;
   }
   return getFamilyVariant(catalog, family, "i2i", currentVariantId);
 }
@@ -634,16 +709,16 @@ const PICKER_MEDIA_FIELDS = new Set([
 ]);
 const PICKER_SCHEMA_METADATA = new Set(["name", "title", "description", "examples"]);
 
-function normalizePickerName(value) {
+function normalizePickerName(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
 }
 
-function pickerBaseName(model, isAlias) {
-  const name = model.name.replace(PICKER_INPUT_SUFFIX, "").trim();
+function pickerBaseName(model: ModelDefinition, isAlias: boolean): string {
+  const name = (model.name || model.id).replace(PICKER_INPUT_SUFFIX, "").trim();
   return isAlias ? name.replace(/\s+Edit$/i, "").trim() : name;
 }
 
-function pickerDisplayName(model, family, isAlias) {
+function pickerDisplayName(model: ModelDefinition, family: Family, isAlias: boolean): string {
   const baseName = pickerBaseName(model, isAlias);
   const suffix = stripFamilyPrefix(baseName, family).trim();
   return suffix !== baseName
@@ -651,7 +726,7 @@ function pickerDisplayName(model, family, isAlias) {
     : baseName;
 }
 
-function aliasProfile(modelId, alias) {
+function aliasProfile(modelId: string, alias: string): string {
   const ignoredTokens = new Set([
     "bytedance",
     "edit",
@@ -666,7 +741,7 @@ function aliasProfile(modelId, alias) {
     "i2v",
     "v2v",
   ]);
-  const tokens = (value) => value
+  const tokens = (value: string): string[] => value
     .toLowerCase()
     .replace(/\bv(?=\d)/g, "")
     .split(/[^a-z0-9]+/)
@@ -677,35 +752,36 @@ function aliasProfile(modelId, alias) {
     .join("-");
 }
 
-function formatAliasProfile(profile) {
-  const special = { lora: "LoRA" };
+function formatAliasProfile(profile: string): string {
+  const special: Record<string, string> = { lora: "LoRA" };
   return profile
     .split("-")
     .filter(Boolean)
     .map((token) => special[token] || (/^\d+b$/.test(token)
       ? token.toUpperCase()
-      : token[0].toUpperCase() + token.slice(1)))
+      : token.charAt(0).toUpperCase() + token.slice(1)))
     .join(" ");
 }
 
-function normalizePickerSchema(value) {
+function normalizePickerSchema(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(normalizePickerSchema);
   if (!value || typeof value !== "object") return value;
+  const record = value as Record<string, unknown>;
   return Object.fromEntries(
-    Object.keys(value)
+    Object.keys(record)
       .filter((key) => !PICKER_SCHEMA_METADATA.has(key))
       .sort()
-      .map((key) => [key, normalizePickerSchema(value[key])]),
+      .map((key) => [key, normalizePickerSchema(record[key])]),
   );
 }
 
-function pickerContractKey(model) {
+function pickerContractKey(model: ModelDefinition): string {
   const inputs = Object.fromEntries(
     Object.entries(model.inputs || {})
       .filter(
         ([name, input]) =>
           !PICKER_MEDIA_FIELDS.has(name) &&
-          !["image", "video", "audio"].includes(input?.field),
+          !["image", "video", "audio"].includes(input?.field ?? ""),
       )
       .map(([name, input]) => [name, normalizePickerSchema(input)]),
   );
@@ -716,7 +792,7 @@ function pickerContractKey(model) {
   });
 }
 
-function pickerIdentity(model, aliases, aliasTargets) {
+function pickerIdentity(model: ModelDefinition, aliases: Record<string, string>, aliasTargets: Set<string>): { key: string; profile: string | null } {
   const alias = aliases[model.id] || (aliasTargets.has(model.id) ? model.id : null);
   if (alias) {
     const profile = aliasProfile(model.id, alias);
@@ -730,12 +806,12 @@ function pickerIdentity(model, aliases, aliasTargets) {
   return { key: `model:${model.id}`, profile: null };
 }
 
-function buildModelPickerEntries(catalog, modes, aliases) {
-  const entries = [];
+function buildModelPickerEntries(catalog: Catalog, modes: string[], aliases: Record<string, string>): readonly PickerEntry[] {
+  const entries: PickerEntry[] = [];
   const aliasTargets = new Set(Object.values(aliases));
 
   for (const family of catalog.families) {
-    const familyEntries = new Map();
+    const familyEntries = new Map<string, PickerEntry>();
     for (const mode of modes) {
       for (const variant of family.variants[mode] || []) {
         const identity = pickerIdentity(variant.model, aliases, aliasTargets);
@@ -746,10 +822,12 @@ function buildModelPickerEntries(catalog, modes, aliases) {
             id: `${family.id}:${variant.model.id}`,
             family,
             name: isAlias
-              ? [family.name, formatAliasProfile(identity.profile)].filter(Boolean).join(" ")
+              ? [family.name, formatAliasProfile(identity.profile || "")].filter(Boolean).join(" ")
               : pickerDisplayName(variant.model, family, false),
-            variantIds: new Set(),
+            variantIds: new Set<string>(),
             variantsByMode: {},
+            defaultVariant: null,
+            searchText: "",
           };
           familyEntries.set(identity.key, entry);
         }
@@ -758,7 +836,7 @@ function buildModelPickerEntries(catalog, modes, aliases) {
       }
     }
 
-    const nameCounts = new Map();
+    const nameCounts = new Map<string, number>();
     for (const entry of familyEntries.values()) {
       const key = normalizePickerName(entry.name);
       nameCounts.set(key, (nameCounts.get(key) || 0) + 1);
@@ -768,15 +846,15 @@ function buildModelPickerEntries(catalog, modes, aliases) {
       entry.defaultVariant = modes
         .map((mode) => entry.variantsByMode[mode])
         .find(Boolean) || null;
-      const duplicateName = nameCounts.get(normalizePickerName(entry.name)) > 1;
+      const duplicateName = (nameCounts.get(normalizePickerName(entry.name)) ?? 0) > 1;
       if (duplicateName) {
         const entryModes = Object.keys(entry.variantsByMode);
-        if (entryModes.length === 1 && ["i2i", "i2v"].includes(entryModes[0])) {
+        if (entryModes.length === 1 && entryModes[0] !== undefined && ["i2i", "i2v"].includes(entryModes[0])) {
           entry.name = `${entry.name} Image`;
         } else if (entryModes.length === 1 && entryModes[0] === "v2v") {
           entry.name = `${entry.name} Video`;
         } else {
-          entry.name = entry.defaultVariant.model.name;
+          entry.name = entry.defaultVariant?.model.name || entry.name;
         }
       }
       if (normalizePickerName(entry.name) === normalizePickerName(family.name)) {
@@ -802,9 +880,9 @@ export const videoModelPickerEntries = buildModelPickerEntries(
   VIDEO_FAMILY_ALIASES,
 );
 
-function indexModelPickerEntries(entries, catalog) {
-  const entryByVariantId = new Map();
-  const entryByModeEndpoint = new Map();
+function indexModelPickerEntries(entries: readonly PickerEntry[], catalog: Catalog): Map<string, PickerEntry> {
+  const entryByVariantId = new Map<string, PickerEntry>();
+  const entryByModeEndpoint = new Map<string, PickerEntry>();
 
   for (const entry of entries) {
     for (const variantId of entry.variantIds) {
@@ -835,16 +913,16 @@ export const videoModelPickerEntryByVariantId = indexModelPickerEntries(
   videoModelCatalog,
 );
 
-function buildVideoModelMenuEntries() {
-  const entries = [];
-  const groupedFamilies = new Set();
-  const variantIdsByFamily = new Map();
+function buildVideoModelMenuEntries(): readonly PickerEntry[] {
+  const entries: PickerEntry[] = [];
+  const groupedFamilies = new Set<string>();
+  const variantIdsByFamily = new Map<string, Set<string>>();
   for (const variantId of videoModelCatalog.variantById.keys()) {
     const config = getGroupedVideoConfiguration(variantId);
     if (!config) continue;
     let variantIds = variantIdsByFamily.get(config.familyId);
     if (!variantIds) {
-      variantIds = new Set();
+      variantIds = new Set<string>();
       variantIdsByFamily.set(config.familyId, variantIds);
     }
     variantIds.add(variantId);
@@ -859,7 +937,7 @@ function buildVideoModelMenuEntries() {
     groupedFamilies.add(config.familyId);
     const family = entry.family;
     const variantIds = variantIdsByFamily.get(config.familyId);
-    const variantsByMode = {};
+    const variantsByMode: Record<string, FamilyVariant> = {};
     for (const [mode, workflowIds] of Object.entries({
       t2v: [null],
       i2v: ["animate_image", "keyframes", "references"],
@@ -867,22 +945,23 @@ function buildVideoModelMenuEntries() {
     })) {
       for (const workflowId of workflowIds) {
         const variantId = resolveGroupedVideoVariant({ familyId: config.familyId, workflowId });
-        const variant = videoModelCatalog.variantById.get(variantId);
+        const variant = variantId ? videoModelCatalog.variantById.get(variantId) : undefined;
         if (variant?.mode === mode) {
           variantsByMode[mode] = variant;
           break;
         }
       }
     }
-    const name = GROUPED_VIDEO_FAMILY_NAMES[config.familyId];
+    const groupedNames = GROUPED_VIDEO_FAMILY_NAMES as Record<string, string>;
+    const name = groupedNames[config.familyId] || config.familyId;
     entries.push(Object.freeze({
       id: `${config.familyId}:grouped`,
       family,
       name,
       groupedVideo: true,
-      variantIds,
+      variantIds: variantIds || new Set<string>(),
       variantsByMode,
-      defaultVariant: variantsByMode.t2v || variantsByMode.i2v || variantsByMode.v2v,
+      defaultVariant: variantsByMode.t2v || variantsByMode.i2v || variantsByMode.v2v || null,
       searchText: `${family.searchText} ${name}`.toLowerCase(),
     }));
   }

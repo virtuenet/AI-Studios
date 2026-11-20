@@ -8,6 +8,8 @@
  * @module modelCapabilities
  */
 
+import type { GenerationParams } from './types/models';
+
 // ─── Types ─────────────────────────────────────────────────────
 
 /** Supported media types for model inputs. */
@@ -79,11 +81,6 @@ interface ReferenceParams {
   endImageUrl?: string | null;
   videoUrls?: string[];
   audioUrls?: string[];
-}
-
-/** Generic generation parameters passed by studio components. */
-interface GenerationParams {
-  [key: string]: unknown;
 }
 
 /** Record of generation sources keyed by model family. */

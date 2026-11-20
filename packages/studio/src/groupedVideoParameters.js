@@ -28,7 +28,7 @@ import {
   planMiniMaxSelection,
 } from "./minimaxParameters.js";
 import { getGroupedVideoConfiguration } from "./groupedVideoModels.js";
-import { videoModelCatalog } from "./modelFamilies.js";
+import { videoModelCatalog } from "./modelFamilies";
 import { getVideoWorkflowMediaAdjustments } from "./videoWorkflows.js";
 import {
   getVeoResolutionOptions,

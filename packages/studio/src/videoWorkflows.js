@@ -2,7 +2,7 @@ import { getModelMediaCapabilities } from "./modelCapabilities";
 import {
   videoModelCatalog,
   videoModelPickerEntryByVariantId,
-} from "./modelFamilies.js";
+} from "./modelFamilies";
 import { getSeedanceConfiguration } from "./seedanceModels.js";
 import {
   GROUPED_VIDEO_WORKFLOW_VARIANTS,

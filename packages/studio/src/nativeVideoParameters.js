@@ -1,4 +1,4 @@
-import { videoModelCatalog } from "./modelFamilies.js";
+import { videoModelCatalog } from "./modelFamilies";
 import {
   formatVideoResolution,
   getVideoCommonOptions,

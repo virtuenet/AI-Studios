@@ -33,7 +33,7 @@ import {
   imageModelCatalog,
   imageModelPickerEntries,
   imageModelPickerEntryByVariantId,
-} from "../modelFamilies.js";
+} from "../modelFamilies";
 import {
   buildReferenceParams,
   getModelMediaCapabilities,
