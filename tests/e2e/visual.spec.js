@@ -11,7 +11,9 @@ test.describe('Visual smoke', () => {
     // Platform focus-visible heuristics differ (Linux draws the autofocus ring,
     // macOS does not) — blur so the baseline is deterministic.
     await page.evaluate(() => document.activeElement?.blur?.());
-    await expect(dialog).toHaveScreenshot('api-key-dialog.png', {
+    // Capture a fixed-size viewport rather than the auto-sized dialog: system
+    // font fallback changes the dialog height by a line across platforms.
+    await expect(page).toHaveScreenshot('api-key-page.png', {
       maxDiffPixelRatio: 0.2,
       animations: 'disabled',
     });
