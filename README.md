@@ -586,6 +586,13 @@ AI-Studios/
 
 The `packages/studio` library is also consumed by the hosted version on [muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=ai-studios) — model updates made in `packages/studio/src/models/*` apply to both the self-hosted app and the hosted version automatically.
 
+## 🎬 Film-Crew QA
+
+Quality gates adapted from the open-source **ai-film-crew** methodology:
+blind-review checklists with fixed answers, shot-prompt continuity linting, and
+pure-sample audio QC (clipping/quiet/DC offset). Use the **QC** button on a
+generated image or read `docs/film-crew-qa.md`.
+
 ## 🧪 Testing & Quality Gates
 
 ```bash

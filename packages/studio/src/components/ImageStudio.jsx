@@ -7,6 +7,7 @@ import { formatErrorMessage } from "../utils/formatError.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import useGeneration from "../hooks/useGeneration";
 import useWindowedGrid from "../hooks/useWindowedGrid";
+import ReviewChecklistModal from "../filmCrew/ReviewChecklistModal";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
 import MobileGenerationActions, {
@@ -1018,6 +1019,7 @@ export default function ImageStudio({
   const generating = generation.isRunning;
   const [generateError, setGenerateError] = useState(null);
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
+  const [reviewEntry, setReviewEntry] = useState(null);
   const [isDrawModalOpen, setIsDrawModalOpen] = useState(false);
 
   // ── Canvas / history state ──────────────────────────────────────────────
@@ -1547,6 +1549,17 @@ export default function ImageStudio({
 
                 {/* Overlay actions */}
                 <div className="absolute top-2 right-2 hidden md:flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button
+                    type="button"
+                    title="Crew check"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setReviewEntry(entry);
+                    }}
+                    className="p-2 bg-black/60 backdrop-blur-md rounded-full text-white hover:bg-primary hover:text-black transition-all border border-white/10 text-[10px] font-bold"
+                  >
+                    QC
+                  </button>
                   <GenerationCopyButtons
                     prompt={entry.prompt}
                     imageUrl={entry.url}
@@ -2017,6 +2030,12 @@ export default function ImageStudio({
         onAddHistoryItem={addToHistory}
       />
       <Toaster position="top-right" containerStyle={{ zIndex: 99999 }} toastOptions={{ duration: 5000, style: { background: '#18181b', color: '#ffffff', border: '1px solid rgba(255,255,255,0.15)', fontSize: '13px', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.6)', maxWidth: '440px', wordBreak: 'break-word', whiteSpace: 'pre-wrap', padding: '12px 16px' } }} />
+      <ReviewChecklistModal
+        open={Boolean(reviewEntry)}
+        type="image"
+        prompt={reviewEntry?.prompt || ''}
+        onClose={() => setReviewEntry(null)}
+      />
     </div>
   );
 }

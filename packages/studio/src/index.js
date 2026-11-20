@@ -43,3 +43,9 @@ export const LayersStudio = memo(LayersStudioBase);
 export const MotionControlStudio = memo(MotionControlStudioBase);
 
 export * from './muapi';
+
+// Film-crew QA (adapted from ai-film-crew): pre-flight and blind-review checks.
+export { default as ReviewChecklistModal } from './filmCrew/ReviewChecklistModal';
+export { gradeChecklist, questionsFor } from './filmCrew/qaChecklist';
+export { lintShotPrompt } from './filmCrew/promptQa';
+export { analyzeAudio, audioQcHints } from './filmCrew/audioQc';
