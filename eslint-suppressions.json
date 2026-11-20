@@ -1,18 +1,5 @@
 {
-  "packages/studio/src/components/DrawModal.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 1
-    }
-  },
   "packages/studio/src/components/ImageStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 1
-    },
-    "react-hooks/preserve-manual-memoization": {
-      "count": 3
-    }
-  },
-  "packages/studio/src/components/LayersStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 1
     }
@@ -20,16 +7,6 @@
   "packages/studio/src/components/LipSyncStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 2
-    }
-  },
-  "packages/studio/src/components/MotionControlStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 3
-    }
-  },
-  "packages/studio/src/components/WorkflowStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 1
     }
   }
 }

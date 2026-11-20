@@ -570,7 +570,10 @@ export default function MotionControlStudio({
 
   const maxImagesAllowed = selectedModel.maxImages || 30;
   const maxDurationAllowed = selectedModel.maxDuration || 30;
-  const availableAspectRatios = selectedModel.aspectRatios || ["16:9", "9:16", "1:1", "4:3", "3:4", "21:9"];
+  const availableAspectRatios = useMemo(
+    () => selectedModel.aspectRatios || ["16:9", "9:16", "1:1", "4:3", "3:4", "21:9"],
+    [selectedModel],
+  );
 
   // ── Parameters ──────────────────────────────────────────────────────────────
   const [prompt, setPrompt] = useState("");
@@ -725,7 +728,7 @@ export default function MotionControlStudio({
   };
 
   // ── Video Upload ────────────────────────────────────────────────────────────
-  const handleUploadVideo = async (file) => {
+  const handleUploadVideoImpl = async (file) => {
     if (file.size > 100 * 1024 * 1024) {
       toast.error(copy.errors.videoTooLarge);
       return;
@@ -747,6 +750,13 @@ export default function MotionControlStudio({
     }
   };
 
+  const handleUploadVideoRef = useRef(handleUploadVideoImpl);
+  useEffect(() => {
+    handleUploadVideoRef.current = handleUploadVideoImpl;
+  });
+  const handleUploadVideo = useCallback((...args) => handleUploadVideoRef.current(...args), []);
+
+
   const handleClearVideo = () => {
     setVideoState(UPLOAD_STATE.IDLE);
     setVideoName("");
@@ -755,7 +765,7 @@ export default function MotionControlStudio({
   };
 
   // ── Character Images Upload ─────────────────────────────────────────────────
-  const handleAddImage = async (file) => {
+  const handleAddImageImpl = async (file) => {
     if (characterImages.length >= maxImagesAllowed) {
       toast.error(copy.errors.maxImagesExceeded.replace("{max}", String(maxImagesAllowed)));
       return;
@@ -777,6 +787,13 @@ export default function MotionControlStudio({
       setIsImageUploading(false);
     }
   };
+
+  const handleAddImageRef = useRef(handleAddImageImpl);
+  useEffect(() => {
+    handleAddImageRef.current = handleAddImageImpl;
+  });
+  const handleAddImage = useCallback((...args) => handleAddImageRef.current(...args), []);
+
 
   const handleRemoveImage = (index) => {
     setCharacterImages((prev) => prev.filter((_, idx) => idx !== index));

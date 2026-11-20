@@ -282,7 +282,7 @@ export default function LayersStudio({
     saveCanvasState();
   };
 
-  async function handleUploadFile(file) {
+  const handleUploadFileImpl = async (file) => {
     if (!apiKey) {
       toast.error(copy.toasts.enterApiKeyUpload);
       return;
@@ -305,7 +305,14 @@ export default function LayersStudio({
     } finally {
       setUploading(false);
     }
-  }
+    };
+
+  const handleUploadFileRef = useRef(handleUploadFileImpl);
+  useEffect(() => {
+    handleUploadFileRef.current = handleUploadFileImpl;
+  });
+  const handleUploadFile = useCallback((...args) => handleUploadFileRef.current(...args), []);
+
 
   // Handle external dropped files passed from parent shell
   useEffect(() => {

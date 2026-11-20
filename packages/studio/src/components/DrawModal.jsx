@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { uploadFile, generateI2I } from "../muapi.js";
+import { createClientId, randomUnit } from "../utils/clientIds";
 
 export default function DrawModal({
   isOpen,
@@ -259,7 +260,7 @@ export default function DrawModal({
   }, [viewState, bgImageUrl]);
 
   // Redraw main drawing ink canvas when objects or active sketch changes
-  const redrawCanvas = () => {
+  const redrawCanvasImpl = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -384,6 +385,13 @@ export default function DrawModal({
       }
     }
   };
+
+  const redrawCanvasRef = useRef(redrawCanvasImpl);
+  useEffect(() => {
+    redrawCanvasRef.current = redrawCanvasImpl;
+  });
+  const redrawCanvas = useCallback((...args) => redrawCanvasRef.current(...args), []);
+
 
   // Trigger redraw on object updates
   useEffect(() => {

@@ -141,7 +141,10 @@ export default function WorkflowStudio({
   // Catch-all routes (/studio/[brandSlug]/[[...tab]], /ai-studios/[[...tab]]) expose the
   // whole remaining path as params.tab (an array) — NOT params.slug, which doesn't exist on either
   // route and previously made this whole fallback branch permanently dead.
-  const catchAllSegments = Array.isArray(tabFromParams) ? tabFromParams : [];
+  const catchAllSegments = useMemo(
+    () => (Array.isArray(tabFromParams) ? tabFromParams : []),
+    [tabFromParams],
+  );
 
   // Robustly extract ID and Tab from either route structure
   const getWorkflowInfo = useCallback(() => {

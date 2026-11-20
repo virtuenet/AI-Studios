@@ -1241,7 +1241,7 @@ export default function ImageStudio({
     ? getModelMediaCapabilities(referenceVariant.model).image.maxItems
     : 1;
 
-  const applySelectedVariant = useCallback((variant, mode, family) => {
+  const applySelectedVariantImpl = (variant, mode, family) => {
     const model = variant.model;
     const nextImageMode = mode === "i2i";
     const ars = nextImageMode
@@ -1275,7 +1275,18 @@ export default function ImageStudio({
     } else {
       setSelectedEffect("");
     }
-  }, [setModelParameterValues]);
+  };
+
+  // Stable facade so dependents don't re-create on every render (React
+  // Compiler friendly) while the implementation always sees latest state.
+  const applySelectedVariantRef = useRef(applySelectedVariantImpl);
+  useEffect(() => {
+    applySelectedVariantRef.current = applySelectedVariantImpl;
+  });
+  const applySelectedVariant = useCallback(
+    (...args) => applySelectedVariantRef.current(...args),
+    [],
+  );
 
   const applyUserSelectedVariant = useCallback((variant, mode, family) => {
     if (mode === "t2i") {
