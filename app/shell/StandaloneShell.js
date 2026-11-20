@@ -293,22 +293,6 @@ const getNavigationCategory = (tabId) => (
 
 const STORAGE_KEY = 'muapi_key';
 
-// Balance lives in a tiny external store so effects can refresh it without
-// setState-in-effect cascades (React Compiler friendly).
-let balanceValue = null;
-const balanceListeners = new Set();
-function setBalanceValue(next) {
-  balanceValue = next;
-  for (const listener of balanceListeners) listener();
-}
-function subscribeBalance(listener) {
-  balanceListeners.add(listener);
-  return () => balanceListeners.delete(listener);
-}
-function getBalanceSnapshot() {
-  return balanceValue;
-}
-
 // Mirrors the BYOK key into an HttpOnly, encrypted, SameSite=Strict session
 // cookie so server-rendered routes (/agents/*) never trust a JS-writable cookie.
 async function syncServerSession(apiKey) {
@@ -421,7 +405,7 @@ export default function StandaloneShell({ locale = 'en' }) {
   });
   const [activeTab, setActiveTab] = useState(getInitialTab());
 
-  const balance = useSyncExternalStore(subscribeBalance, getBalanceSnapshot, () => null);
+  const balance = useBalance();
   const [showSettings, setShowSettings] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [showVadooBanner, setShowVadooBanner] = useState(() => {
@@ -516,7 +500,7 @@ export default function StandaloneShell({ locale = 'en' }) {
   const fetchBalance = useCallback(async (key) => {
     try {
       const data = await getUserBalance(key);
-      setBalanceValue(data.balance);
+      setBalance(data.balance);
     } catch (err) {
       console.error('Balance fetch failed:', err);
     }
