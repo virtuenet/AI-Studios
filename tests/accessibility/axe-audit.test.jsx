@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, screen } from '@testing-library/react';
 import axe from 'axe-core';
 import fs from 'fs';
 import path from 'path';
@@ -36,6 +36,7 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
+  vi.unstubAllGlobals();
 });
 
 async function auditAccessibility(container) {
@@ -213,6 +214,39 @@ describe('Accessibility Audit', () => {
       const src = fs.readFileSync(path.join(REPO_ROOT, 'components/ApiKeyModal.jsx'), 'utf-8');
       // Guard against low-contrast text utilities (text-white/10–/30) in body copy.
       expect(src).not.toMatch(/text-white\/(10|20|30)\b/);
+    });
+  });
+
+  describe('Film crew dialogs — axe-core audit', () => {
+    it('CrewPanel has zero critical a11y violations', async () => {
+      const { default: CrewPanel } = await import(
+        '../../packages/studio/src/filmCrew/CrewPanel'
+      );
+      const { container } = render(
+        <CrewPanel open initialPrompt="a shot" onApply={vi.fn()} onClose={vi.fn()} />
+      );
+      await expectNoCriticalViolations(container, 'CrewPanel');
+    });
+
+    it('ReviewChecklistModal has zero critical a11y violations', async () => {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ enabled: true }),
+      }));
+      const { default: ReviewChecklistModal } = await import(
+        '../../packages/studio/src/filmCrew/ReviewChecklistModal'
+      );
+      const { container } = render(
+        <ReviewChecklistModal
+          open
+          type="image"
+          prompt="85mm close-up, window light from camera left, Ana wearing a navy shirt in a loft studio"
+          imageUrl="https://cdn.example/shot.png"
+          onClose={vi.fn()}
+        />
+      );
+      await screen.findByText('ML checks');
+      await expectNoCriticalViolations(container, 'ReviewChecklistModal');
     });
   });
 

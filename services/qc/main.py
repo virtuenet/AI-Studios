@@ -24,11 +24,12 @@ import ipaddress
 import os
 import socket
 import urllib.request
+from typing import Optional
 from urllib.parse import urlparse
 
 import cv2
 import numpy as np
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field, field_validator
 
 from geometry import (
@@ -118,6 +119,19 @@ def _models() -> FaceModels:
         ) from exc
 
 
+def _require_qc_token(authorization: Optional[str] = Header(default=None)) -> None:
+    """Optional bearer-token auth for /qc/* when QC_API_TOKEN is configured."""
+    token = os.environ.get("QC_API_TOKEN", "").strip()
+    if not token:
+        return
+    if authorization != f"Bearer {token}":
+        raise HTTPException(
+            status_code=401,
+            detail="invalid QC token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+
 def _faces(image: np.ndarray) -> list[DetectedFace]:
     try:
         return _models().detect(image)
@@ -163,7 +177,7 @@ def health():
 
 
 @app.post("/qc/product-size")
-def qc_product_size(request: ProductSizeRequest):
+def qc_product_size(request: ProductSizeRequest, _: None = Depends(_require_qc_token)):
     image = _fetch_image(request.image_url)
     face = _largest_face(_faces(image))
     if face is None:
@@ -208,7 +222,7 @@ def qc_product_size(request: ProductSizeRequest):
 
 
 @app.post("/qc/face-identity")
-def qc_face_identity(request: IdentityRequest):
+def qc_face_identity(request: IdentityRequest, _: None = Depends(_require_qc_token)):
     image = _fetch_image(request.image_url)
     reference = _fetch_image(request.reference_url)
     face = _largest_face(_faces(image))

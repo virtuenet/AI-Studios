@@ -98,6 +98,26 @@ describe('/api/qc', () => {
     });
   });
 
+  it('forwards the optional QC bearer token', async () => {
+    process.env.ML_QC_URL = 'http://qc:8001';
+    process.env.QC_API_TOKEN = 'secret-token';
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ pass: true, name: 'product-size' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await POST(
+      jsonRequest({ check: 'product-size', imageUrl: 'https://cdn/x.png', productSizeMm: 48 })
+    );
+    expect(response.status).toBe(200);
+    expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe('Bearer secret-token');
+
+    delete process.env.QC_API_TOKEN;
+  });
+
   it('proxies face-identity with the reference URL', async () => {
     process.env.ML_QC_URL = 'http://qc:8001';
     const fetchMock = vi.fn().mockResolvedValue(

@@ -1,9 +1,17 @@
 "use client";
 
 import { startTransition, useEffect, useMemo, useState } from 'react';
-import { gradeChecklist, questionsFor } from './qaChecklist';
+import { gradeChecklist, questionsFor, type ChecklistType } from './qaChecklist';
 import { lintShotPrompt } from './promptQa';
-import { checkMlAvailability, runMlChecks } from './mlChecks';
+import { checkMlAvailability, runMlChecks, type MlResult } from './mlChecks';
+
+interface ReviewChecklistModalProps {
+  open: boolean;
+  type?: ChecklistType;
+  prompt?: string;
+  imageUrl?: string;
+  onClose?: () => void;
+}
 
 /**
  * Blind-review panel adapted from ai-film-crew's "test audience": fixed-answer
@@ -13,12 +21,18 @@ import { checkMlAvailability, runMlChecks } from './mlChecks';
  * product-size and face-identity checks. Results are advisory and never block
  * the human review.
  */
-export default function ReviewChecklistModal({ open, type = 'image', prompt = '', imageUrl, onClose }) {
+export default function ReviewChecklistModal({
+  open,
+  type = 'image',
+  prompt = '',
+  imageUrl,
+  onClose,
+}: ReviewChecklistModalProps) {
   const questions = useMemo(() => questionsFor(type), [type]);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [mlAvailable, setMlAvailable] = useState(false);
   const [mlBusy, setMlBusy] = useState(false);
-  const [mlResults, setMlResults] = useState(null);
+  const [mlResults, setMlResults] = useState<MlResult[] | null>(null);
   const [productSizeMm, setProductSizeMm] = useState('');
   const [referenceUrl, setReferenceUrl] = useState('');
   const grade = useMemo(() => gradeChecklist(type, answers), [type, answers]);
@@ -45,7 +59,7 @@ export default function ReviewChecklistModal({ open, type = 'image', prompt = ''
   if (!open) return null;
 
   const runChecks = async () => {
-    const tasks = [];
+    const tasks: Promise<MlResult>[] = [];
     const size = Number(productSizeMm);
     if (Number.isFinite(size) && size > 0) {
       tasks.push(
@@ -65,6 +79,7 @@ export default function ReviewChecklistModal({ open, type = 'image', prompt = ''
     if (tasks.length === 0) {
       setMlResults([
         {
+          enabled: true,
           ok: false,
           checks: [],
           error: 'Enter the real product width in mm or a reference image URL first.',
@@ -149,22 +164,22 @@ export default function ReviewChecklistModal({ open, type = 'image', prompt = ''
             </div>
             {mlResults && (
               <ul className="mt-2 space-y-1">
-                {mlResults.map((result, index) => (
-                  <li key={index}>
+                {mlResults.map((result, resultIndex) => (
+                  <li key={resultIndex}>
                     {result.ok && result.checks.length === 0 && (
                       <span className="text-white/50">Service returned no checks.</span>
                     )}
-                    {result.checks.map((check) => (
+                    {result.checks.map((check, checkIndex) => (
                       <span
-                        key={check.id || check.name}
+                        key={check.id || check.name || checkIndex}
                         className={`block ${check.pass ? 'text-emerald-300' : 'text-red-300'}`}
                       >
                         {check.pass ? 'PASS' : 'FAIL'} · {check.name || check.id}
                         {check.detail ? ` — ${check.detail}` : ''}
-                        {Number.isFinite(check.measured_mm) && Number.isFinite(check.real_mm)
+                        {typeof check.measured_mm === 'number' && typeof check.real_mm === 'number'
                           ? ` — measured ${check.measured_mm} mm vs ${check.real_mm} mm`
                           : ''}
-                        {Number.isFinite(check.score) ? ` — similarity ${check.score}` : ''}
+                        {typeof check.score === 'number' ? ` — similarity ${check.score}` : ''}
                       </span>
                     ))}
                     {!result.ok && (

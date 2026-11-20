@@ -204,3 +204,29 @@ def test_image_fetcher_blocks_private_and_loopback_targets(monkeypatch):
     with pytest.raises(HTTPException) as private:
         main._ensure_public_url("https://internal.example/x.png")
     assert private.value.status_code == 400
+
+
+def test_qc_token_is_optional_but_enforced_when_configured(monkeypatch):
+    use_models(monkeypatch)
+    monkeypatch.setattr(main, "_fetch_image", lambda url: product_image())
+    monkeypatch.delenv("QC_API_TOKEN", raising=False)
+    open_response = client.post(
+        "/qc/product-size",
+        json={"image_url": "https://cdn/x.png", "product_size_mm": [64]},
+    )
+    assert open_response.status_code == 200
+
+    monkeypatch.setenv("QC_API_TOKEN", "secret-token")
+    locked = client.post(
+        "/qc/product-size",
+        json={"image_url": "https://cdn/x.png", "product_size_mm": [64]},
+    )
+    assert locked.status_code == 401
+    assert locked.headers.get("www-authenticate") == "Bearer"
+
+    unlocked = client.post(
+        "/qc/product-size",
+        json={"image_url": "https://cdn/x.png", "product_size_mm": [64]},
+        headers={"Authorization": "Bearer secret-token"},
+    )
+    assert unlocked.status_code == 200

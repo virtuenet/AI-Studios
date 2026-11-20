@@ -1,6 +1,23 @@
 "use client";
 
-import { startTransition, useEffect, useMemo, useState } from 'react';
+import { startTransition, useEffect, useMemo, useState, type RefObject } from 'react';
+
+export interface WindowedGridOptions {
+  count: number;
+  columns?: number;
+  rowHeight?: number;
+  scrollRef?: RefObject<HTMLElement | null>;
+  overscan?: number;
+  threshold?: number;
+}
+
+export interface WindowedGridState {
+  enabled: boolean;
+  startIndex: number;
+  endIndex: number;
+  topSpacer: number;
+  bottomSpacer: number;
+}
 
 /**
  * Minimal windowed grid: renders only rows intersecting the scroll viewport
@@ -13,7 +30,7 @@ export default function useWindowedGrid({
   scrollRef,
   overscan = 2,
   threshold = 40,
-}) {
+}: WindowedGridOptions): WindowedGridState {
   const [scrollTop, setScrollTop] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(800);
 

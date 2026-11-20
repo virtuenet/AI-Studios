@@ -52,15 +52,15 @@ jobs:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: |
-            services/qc/requirements.txt
-            services/qc/requirements-dev.txt
+            services/qc/requirements.lock
+            services/qc/requirements-dev.lock
       - name: Cache QC models
         uses: actions/cache@v4
         with:
           path: ~/.cache/ai-studios-qc
           key: qc-models-${{ hashFiles('services/qc/models.py') }}
       - name: Install QC dependencies
-        run: pip install -r requirements-dev.txt
+        run: pip install -r requirements-dev.lock
         working-directory: services/qc
       - name: Download and verify models
         run: python download_models.py
@@ -68,6 +68,26 @@ jobs:
       - name: Run geometry, API and real-model tests
         run: QC_MODEL_TESTS=1 python -m pytest tests -q
         working-directory: services/qc
+
+  qc-docker:
+    name: QC Docker Image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the QC image
+        run: docker build -t ai-studios-qc:ci services/qc
+      - name: Smoke-test health and baked models
+        run: |
+          docker run -d --name qc-ci -p 8001:8001 ai-studios-qc:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8001/health; then break; fi
+            sleep 1
+          done
+          docker exec qc-ci test -f /models/face_detection_yunet_2023mar.onnx
+          docker exec qc-ci test -f /models/face_recognition_sface_2021dec.onnx
+          docker exec qc-ci id -u | grep -v '^0$'
+          docker stop qc-ci
 
   test-unit:
     name: Unit Tests (Node ${{ matrix.node }})

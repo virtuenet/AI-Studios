@@ -18,6 +18,13 @@ import { motionControlModels } from './models/motionControlModels.js';
 import { audioModels } from './models/audioModels.js';
 import { dedupeSharedModels } from './models/sharedModels';
 
+/**
+ * The catalog data stays plain JS (tens of thousands of lines); these typedefs
+ * are the typed boundary used by TypeScript consumers.
+ * @typedef {import('./types/models').ModelDefinition} ModelDefinition
+ * @typedef {import('./types/models').ModelInput} ModelInput
+ */
+
 // Keep one canonical object per cross-category model (shared references).
 dedupeSharedModels({
   t2iModels, t2vModels, i2iModels, i2vModels, v2vModels,

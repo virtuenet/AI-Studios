@@ -12,12 +12,25 @@ export const SCENE_FIELDS = [
   { id: 'camera', label: 'Camera', placeholder: 'over-the-shoulder medium shot' },
   { id: 'lens', label: 'Lens', placeholder: '85mm, f/2' },
   { id: 'eyeline', label: 'Eyeline', placeholder: 'Ana looks at Jo, never into the lens' },
-];
+] as const;
 
-export const EMPTY_SCENE = Object.fromEntries(SCENE_FIELDS.map((field) => [field.id, '']));
+export type SceneField = (typeof SCENE_FIELDS)[number];
+export type SceneFieldId = SceneField['id'];
+export type SceneSet = Record<SceneFieldId, string>;
 
-export function composeScenePrompt(scene = {}, shotPrompt = '') {
-  const parts = [];
+export type SceneSummaryItem = SceneField & { value: string };
+
+export interface SceneStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+}
+
+export const EMPTY_SCENE: SceneSet = Object.fromEntries(
+  SCENE_FIELDS.map((field) => [field.id, ''])
+) as SceneSet;
+
+export function composeScenePrompt(scene: Partial<SceneSet> = {}, shotPrompt = ''): string {
+  const parts: string[] = [];
   if (shotPrompt.trim()) parts.push(shotPrompt.trim());
   for (const field of SCENE_FIELDS) {
     const value = String(scene[field.id] || '').trim();
@@ -27,13 +40,15 @@ export function composeScenePrompt(scene = {}, shotPrompt = '') {
   return `${parts.join('. ')}.`;
 }
 
-export function sceneSetSummary(scene = {}) {
+export function sceneSetSummary(scene: Partial<SceneSet> = {}): SceneSummaryItem[] {
   return SCENE_FIELDS
     .map((field) => ({ ...field, value: String(scene[field.id] || '').trim() }))
     .filter((field) => field.value);
 }
 
-export function loadSceneSet(storage = typeof window !== 'undefined' ? window.localStorage : null) {
+export function loadSceneSet(
+  storage: SceneStorage | null = typeof window !== 'undefined' ? window.localStorage : null
+): SceneSet {
   if (!storage) return { ...EMPTY_SCENE };
   try {
     return { ...EMPTY_SCENE, ...JSON.parse(storage.getItem('ai_studios_scene_set_v1') || '{}') };
@@ -42,7 +57,10 @@ export function loadSceneSet(storage = typeof window !== 'undefined' ? window.lo
   }
 }
 
-export function saveSceneSet(scene = {}, storage = typeof window !== 'undefined' ? window.localStorage : null) {
+export function saveSceneSet(
+  scene: Partial<SceneSet> = {},
+  storage: SceneStorage | null = typeof window !== 'undefined' ? window.localStorage : null
+): void {
   if (!storage) return;
   try {
     storage.setItem('ai_studios_scene_set_v1', JSON.stringify(scene));

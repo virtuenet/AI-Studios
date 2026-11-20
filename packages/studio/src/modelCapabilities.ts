@@ -233,26 +233,34 @@ export function buildReferenceParams(
   const images = uniqueUrls(imageUrls).slice(0, capabilities.image.maxItems);
   if (capabilities.image.field && images.length > 0) {
     if (capabilities.image.separateLastItem) {
-      params.image_url = images[0];
+      const firstImage = images[0];
+      if (firstImage) params.image_url = firstImage;
       const lastImage = endImageUrl || images[1];
       if (lastImage) params.last_image = lastImage;
     } else if (capabilities.image.isArray) {
       params.images_list = images;
     } else {
-      params.image_url = images[0];
+      const firstImage = images[0];
+      if (firstImage) params.image_url = firstImage;
     }
   }
 
   const videos = uniqueUrls(videoUrls).slice(0, capabilities.video.maxItems);
   if (capabilities.video.field && videos.length > 0) {
-    params[capabilities.video.isArray ? 'videos_list' : 'video_url'] =
-      capabilities.video.isArray ? videos : videos[0];
+    const firstVideo = videos[0];
+    if (firstVideo) {
+      params[capabilities.video.isArray ? 'videos_list' : 'video_url'] =
+        capabilities.video.isArray ? videos : firstVideo;
+    }
   }
 
   const audios = uniqueUrls(audioUrls).slice(0, capabilities.audio.maxItems);
   if (capabilities.audio.field && audios.length > 0) {
-    params[capabilities.audio.isArray ? 'audios_list' : 'audio_url'] =
-      capabilities.audio.isArray ? audios : audios[0];
+    const firstAudio = audios[0];
+    if (firstAudio) {
+      params[capabilities.audio.isArray ? 'audios_list' : 'audio_url'] =
+        capabilities.audio.isArray ? audios : firstAudio;
+    }
   }
 
   return params;

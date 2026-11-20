@@ -10,6 +10,7 @@ services:
       # Set to http://qc:8001 and start with `--profile qc` to enable the
       # product-size and face-identity checks. Empty hides the ML controls.
       - ML_QC_URL=${ML_QC_URL:-}
+      - QC_API_TOKEN=${QC_API_TOKEN:-}
     restart: unless-stopped
     init: true
     healthcheck:
@@ -24,6 +25,7 @@ services:
     build: ./services/qc
     container_name: ai-studios-qc
     environment:
+      - QC_API_TOKEN=${QC_API_TOKEN:-}
       - QC_IDENTITY_THRESHOLD=${QC_IDENTITY_THRESHOLD:-0.52}
       - QC_SIZE_TOLERANCE=${QC_SIZE_TOLERANCE:-0.2}
     restart: unless-stopped

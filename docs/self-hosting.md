@@ -30,8 +30,9 @@ uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
 Set `ML_QC_URL` on the app to enable the ML panel (`GET /api/qc` reports
-`enabled: true`). Leave it empty to hide the checks. See
-`docs/film-crew-qa.md` for thresholds, limits and tests.
+`enabled: true`). Leave it empty to hide the checks. Set `QC_API_TOKEN` on both
+the app and the service to require a bearer token. See
+`docs/film-crew-qa.md` for thresholds, calibration, limits and tests.
 
 ## Workflows, Agents, and Design Agent backends
 
@@ -62,6 +63,7 @@ function in a self-hosted deployment.
 | `QC_IDENTITY_THRESHOLD` | Optional | SFace cosine threshold (default `0.52`). Calibrate on judged stills. |
 | `QC_SIZE_TOLERANCE` | Optional | Allowed product-size ratio error (default `0.2` = ±20%). |
 | `QC_MODELS_DIR` | Optional | Where YuNet/SFace models are cached (default `~/.cache/ai-studios-qc`). |
+| `QC_API_TOKEN` | Optional | Bearer token required by `/qc/*` and sent by the Next proxy. Recommended whenever the service is reachable outside the compose network. |
 | `QC_ALLOW_PRIVATE_URLS` | Optional | Set to `1` to let the QC fetcher read images from private/internal hosts. Off by default (SSRF protection). |
 | `APPLE_ID` / `APPLE_APP_SPECIFIC_PASSWORD` / `APPLE_TEAM_ID` / `CSC_LINK` / `CSC_KEY_PASSWORD` | Optional | Desktop signing/notarization (see `docs/release-signing.md`). |
 

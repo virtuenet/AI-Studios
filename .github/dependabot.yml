@@ -18,3 +18,11 @@ updates:
     directory: /
     schedule:
       interval: monthly
+  - package-ecosystem: pip
+    directory: /services/qc
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /services/qc
+    schedule:
+      interval: weekly

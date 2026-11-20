@@ -73,11 +73,27 @@ Set `NEXT_PUBLIC_FILM_CREW_ML_ENDPOINT` (or
 ### Docker
 
 ```bash
-ML_QC_URL=http://qc:8001 docker compose --profile qc up -d --build
+ML_QC_URL=http://qc:8001 QC_API_TOKEN=change-me docker compose --profile qc up -d --build
 ```
 
-The `qc` profile exposes the service only on the compose network and sets
-`QC_IDENTITY_THRESHOLD` / `QC_SIZE_TOLERANCE` from the environment.
+The `qc` profile exposes the service only on the compose network, runs as a
+non-root user, and sets `QC_API_TOKEN`, `QC_IDENTITY_THRESHOLD` and
+`QC_SIZE_TOLERANCE` from the environment. The token is optional but recommended;
+when set, `/qc/*` rejects requests without `Authorization: Bearer <token>`.
+
+### Calibrating the identity threshold
+
+`0.52` is a starting point, not a universal threshold. Score your own judged
+stills and move the threshold into the gap:
+
+```bash
+cd services/qc
+python calibrate.py --same cast/ana --other cast/other
+# set QC_IDENTITY_THRESHOLD=<printed value>
+```
+
+If the same-person and different-person ranges overlap, the script says so and
+exits 1; collect clearer references or use a stronger face model.
 
 ### Limits
 

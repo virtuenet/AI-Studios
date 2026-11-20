@@ -5,11 +5,21 @@
  * This is a lightweight runtime checker that complements axe-core.
  * For full automated testing, use @axe-core/react or axe DevTools browser extension.
  */
+export type A11ySeverity = 'high' | 'medium';
+
+export interface A11yIssue {
+  type: string;
+  severity: A11ySeverity;
+  count: number;
+  message: string;
+  elements?: string[];
+}
+
 const a11yAudit = {
-  issues: [],
+  issues: [] as A11yIssue[],
 
   /** Check for images without alt text */
-  checkImages() {
+  checkImages(): void {
     const images = document.querySelectorAll('img:not([alt])');
     if (images.length > 0) {
       this.issues.push({
@@ -17,30 +27,30 @@ const a11yAudit = {
         severity: 'high',
         count: images.length,
         message: `${images.length} images missing alt attribute`,
-        elements: [...images].slice(0, 5).map(el => el.outerHTML.substring(0, 100)),
+        elements: [...images].slice(0, 5).map((el) => el.outerHTML.substring(0, 100)),
       });
     }
   },
 
   /** Check for buttons without accessible names */
-  checkButtons() {
+  checkButtons(): void {
     const buttons = document.querySelectorAll('button:not([aria-label]):not([aria-labelledby])');
-    const unnamed = [...buttons].filter(btn => !btn.textContent.trim() && !btn.getAttribute('title'));
+    const unnamed = [...buttons].filter((btn) => !btn.textContent?.trim() && !btn.getAttribute('title'));
     if (unnamed.length > 0) {
       this.issues.push({
         type: 'unnamed-button',
         severity: 'high',
         count: unnamed.length,
         message: `${unnamed.length} buttons lack accessible names`,
-        elements: unnamed.slice(0, 5).map(el => el.outerHTML.substring(0, 100)),
+        elements: unnamed.slice(0, 5).map((el) => el.outerHTML.substring(0, 100)),
       });
     }
   },
 
   /** Check for form inputs without labels */
-  checkInputs() {
+  checkInputs(): void {
     const inputs = document.querySelectorAll('input:not([type="hidden"]):not([aria-label]):not([aria-labelledby])');
-    const unlabeled = [...inputs].filter(input => {
+    const unlabeled = [...inputs].filter((input) => {
       const id = input.getAttribute('id');
       return !id || !document.querySelector(`label[for="${id}"]`);
     });
@@ -50,13 +60,13 @@ const a11yAudit = {
         severity: 'high',
         count: unlabeled.length,
         message: `${unlabeled.length} inputs lack associated labels`,
-        elements: unlabeled.slice(0, 5).map(el => el.outerHTML.substring(0, 100)),
+        elements: unlabeled.slice(0, 5).map((el) => el.outerHTML.substring(0, 100)),
       });
     }
   },
 
   /** Check for sufficient color contrast (heuristic) */
-  checkContrast() {
+  checkContrast(): void {
     // Check for light text on dark backgrounds — common in dark themes
     const elements = document.querySelectorAll('[class*="text-white/30"], [class*="text-white/20"], [class*="text-white/10"]');
     if (elements.length > 0) {
@@ -70,7 +80,7 @@ const a11yAudit = {
   },
 
   /** Check for focusable elements without visible focus indicators */
-  checkFocusIndicators() {
+  checkFocusIndicators(): void {
     const styleEl = document.getElementById('a11y-focus-test');
     const hasOutlineNone = styleEl?.textContent?.includes('outline: none') || styleEl?.textContent?.includes('outline:none');
     if (hasOutlineNone) {
@@ -84,7 +94,7 @@ const a11yAudit = {
   },
 
   /** Check for missing lang attribute */
-  checkLang() {
+  checkLang(): void {
     const html = document.documentElement;
     if (!html.getAttribute('lang')) {
       this.issues.push({
@@ -97,7 +107,7 @@ const a11yAudit = {
   },
 
   /** Run all checks and return report */
-  report() {
+  report(): A11yIssue[] {
     this.issues = [];
     this.checkImages();
     this.checkButtons();
@@ -110,12 +120,12 @@ const a11yAudit = {
     if (this.issues.length === 0) {
       console.log('✅ No common issues detected');
     } else {
-      const bySeverity = {};
-      this.issues.forEach(issue => {
+      const bySeverity: Record<string, number> = {};
+      this.issues.forEach((issue) => {
         bySeverity[issue.severity] = (bySeverity[issue.severity] || 0) + issue.count;
       });
-      console.log(`Found ${this.issues.length} issue categories (${Object.values(bySeverity).reduce((a,b)=>a+b,0)} total elements):`);
-      this.issues.forEach(issue => {
+      console.log(`Found ${this.issues.length} issue categories (${Object.values(bySeverity).reduce((a, b) => a + b, 0)} total elements):`);
+      this.issues.forEach((issue) => {
         console.warn(`[${issue.severity.toUpperCase()}] ${issue.message}`);
       });
     }

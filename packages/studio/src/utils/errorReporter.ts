@@ -12,22 +12,37 @@
  * The payload format is intentionally vendor-neutral so it can be pointed at
  * Sentry's envelope proxy, a custom collector, or a serverless function.
  */
+export interface ErrorReportEntry {
+  id: string;
+  timestamp: string;
+  source: string;
+  message: string;
+  stack: string | undefined;
+  context: Record<string, unknown>;
+  url: string | undefined;
+  userAgent: string | undefined;
+}
+
+export interface ErrorReportInput {
+  source?: string;
+  error: unknown;
+  context?: Record<string, unknown>;
+}
 
 const MAX_BUFFER = 50;
 const STORAGE_KEY = 'ai_studios_error_buffer_v1';
 
-/** @type {Array<Object>} */
-let buffer = [];
+let buffer: ErrorReportEntry[] = [];
 // Dedupe/rate-limit state: identical source+message within 5s is suppressed,
 // and at most 10 reports may be recorded per rolling minute.
 const RECENT_WINDOW_MS = 5000;
 const RATE_WINDOW_MS = 60000;
 const MAX_PER_MINUTE = 10;
-const recent = new Map();
+const recent = new Map<string, number>();
 let minuteWindowStart = 0;
 let minuteCount = 0;
 
-function getEndpoint() {
+function getEndpoint(): string | null {
   if (typeof window === 'undefined') return null;
   if (typeof window.__AI_STUDIOS_ERROR_ENDPOINT__ === 'string') {
     return window.__AI_STUDIOS_ERROR_ENDPOINT__;
@@ -39,17 +54,17 @@ function getEndpoint() {
   return null;
 }
 
-function hydrateBuffer() {
+function hydrateBuffer(): void {
   if (typeof window === 'undefined' || buffer.length > 0) return;
   try {
-    const stored = JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || '[]');
-    if (Array.isArray(stored)) buffer = stored.slice(-MAX_BUFFER);
+    const stored: unknown = JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || '[]');
+    if (Array.isArray(stored)) buffer = (stored as ErrorReportEntry[]).slice(-MAX_BUFFER);
   } catch {
     // Corrupt storage — start fresh.
   }
 }
 
-function persistBuffer() {
+function persistBuffer(): void {
   if (typeof window === 'undefined') return;
   try {
     window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(buffer.slice(-MAX_BUFFER)));
@@ -60,18 +75,17 @@ function persistBuffer() {
 
 /**
  * Report an error to the buffer and, when configured, to the remote endpoint.
- *
- * @param {Object} report
- * @param {string} report.source   Where the error originated (e.g. "studio", "api", "boundary")
- * @param {Error|string} report.error
- * @param {Object} [report.context] Extra structured data (studio id, model id, request id…)
- * @returns {Promise<boolean>} true when the report was accepted by the endpoint
+ * Returns true when the report was accepted by the endpoint.
  */
-export async function reportError({ source = 'unknown', error, context = {} }) {
+export async function reportError({
+  source = 'unknown',
+  error,
+  context = {},
+}: ErrorReportInput): Promise<boolean> {
   const message = error instanceof Error ? error.message : String(error);
   const stack = error instanceof Error ? error.stack : undefined;
 
-  const entry = {
+  const entry: ErrorReportEntry = {
     id: `err-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     timestamp: new Date().toISOString(),
     source,
@@ -124,13 +138,13 @@ export async function reportError({ source = 'unknown', error, context = {} }) {
 }
 
 /** Return a copy of the current error buffer (most recent last). */
-export function getErrorBuffer() {
+export function getErrorBuffer(): ErrorReportEntry[] {
   hydrateBuffer();
   return [...buffer];
 }
 
 /** Clear the in-memory + session buffer. */
-export function clearErrorBuffer() {
+export function clearErrorBuffer(): void {
   buffer = [];
   recent.clear();
   minuteWindowStart = 0;

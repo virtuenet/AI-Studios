@@ -23,9 +23,11 @@ export function mergeCopy<T extends CopyObject>(base: T, override?: CopyObject |
 
   const merged: CopyObject = { ...base };
   for (const key of Object.keys(override)) {
-    merged[key] = isPlainObject(base[key]) && isPlainObject(override[key])
-      ? mergeCopy(base[key] as CopyObject, override[key] as CopyObject)
-      : override[key];
+    const baseValue = base[key];
+    const overrideValue = override[key];
+    merged[key] = isPlainObject(baseValue) && isPlainObject(overrideValue)
+      ? mergeCopy(baseValue, overrideValue)
+      : (overrideValue ?? null);
   }
   return merged as T;
 }

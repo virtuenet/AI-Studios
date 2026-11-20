@@ -1,4 +1,5 @@
 """Pure geometry/identity math for the QC service (unit-tested without models)."""
+from __future__ import annotations
 
 PUPIL_DISTANCE_MM = 63.0
 # Face width is about 2.2x the pupil distance; used only when YuNet landmarks
@@ -71,3 +72,24 @@ def identity_verdict(
         "threshold": threshold,
         "name": "face-identity",
     }
+
+
+def separating_threshold(
+    same_scores: list[float],
+    other_scores: list[float],
+    fallback: float = DEFAULT_IDENTITY_THRESHOLD,
+) -> tuple[float | None, float | None]:
+    """Midpoint between the lowest same-person and highest different-person score.
+
+    Returns ``(threshold, gap)``. A non-positive gap means the model cannot
+    separate these samples, so the threshold is ``None`` and the caller should
+    keep the fallback / collect better references.
+    """
+    if not same_scores or not other_scores:
+        return None, None
+    low_same = min(same_scores)
+    high_other = max(other_scores)
+    gap = low_same - high_other
+    if gap <= 0:
+        return None, gap
+    return (low_same + high_other) / 2, gap

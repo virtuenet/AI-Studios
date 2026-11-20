@@ -26,7 +26,7 @@ export const viewport = {
 };
 
 export default async function RootLayout({ children }) {
-  // Locale is derived from the URL path by middleware.js and passed
+  // Locale is derived from the URL path by middleware.ts and passed
   // through as a plain response header — the root layout is shared by
   // every locale's route tree, so it can't take a `locale` prop directly.
   const headerList = await headers();

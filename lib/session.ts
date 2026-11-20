@@ -22,7 +22,19 @@ const ALGORITHM = 'aes-256-gcm';
 const FALLBACK_SECRET = crypto.randomBytes(32).toString('hex');
 let warnedMissingSecret = false;
 
-function getSecret() {
+interface CookieStoreLike {
+  get(name: string): { value: string } | undefined;
+}
+
+interface RequestLike {
+  headers?: { get(name: string): string | null };
+}
+
+interface CookieOptions {
+  maxAge?: number;
+}
+
+function getSecret(): string {
   const secret = process.env.SESSION_SECRET;
   if (secret && secret.length >= 32) return secret;
   if (process.env.NODE_ENV === 'production') {
@@ -38,12 +50,12 @@ function getSecret() {
   return DEV_SECRET;
 }
 
-function deriveKey() {
+function deriveKey(): Buffer {
   return crypto.createHash('sha256').update(getSecret()).digest();
 }
 
 /** Encrypt an API key into a compact URL-safe token (iv.tag.ciphertext). */
-export function encryptApiKey(apiKey) {
+export function encryptApiKey(apiKey: string): string {
   const iv = crypto.randomBytes(12);
   const cipher = crypto.createCipheriv(ALGORITHM, deriveKey(), iv);
   const ciphertext = Buffer.concat([cipher.update(apiKey, 'utf8'), cipher.final()]);
@@ -52,10 +64,15 @@ export function encryptApiKey(apiKey) {
 }
 
 /** Decrypt a session token; returns null for malformed/tampered input. */
-export function decryptApiKey(token) {
+export function decryptApiKey(token: unknown): string | null {
   if (typeof token !== 'string' || token.split('.').length !== 3) return null;
   try {
-    const [iv, tag, ciphertext] = token.split('.').map((part) => Buffer.from(part, 'base64url'));
+    const parts = token.split('.');
+    const [ivPart, tagPart, cipherPart] = parts;
+    if (!ivPart || !tagPart || !cipherPart) return null;
+    const iv = Buffer.from(ivPart, 'base64url');
+    const tag = Buffer.from(tagPart, 'base64url');
+    const ciphertext = Buffer.from(cipherPart, 'base64url');
     const decipher = crypto.createDecipheriv(ALGORITHM, deriveKey(), iv);
     decipher.setAuthTag(tag);
     const plaintext = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
@@ -66,7 +83,10 @@ export function decryptApiKey(token) {
 }
 
 /** Build the Set-Cookie value for a session. */
-export function buildSessionCookie(apiKey, { maxAge = SESSION_MAX_AGE_SECONDS } = {}) {
+export function buildSessionCookie(
+  apiKey: string,
+  { maxAge = SESSION_MAX_AGE_SECONDS }: CookieOptions = {}
+): string {
   const token = encryptApiKey(apiKey);
   const attributes = [
     `${SESSION_COOKIE}=${token}`,
@@ -80,7 +100,7 @@ export function buildSessionCookie(apiKey, { maxAge = SESSION_MAX_AGE_SECONDS } 
 }
 
 /** Build the Set-Cookie value that clears the session. */
-export function buildClearSessionCookie() {
+export function buildClearSessionCookie(): string {
   return `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0${
     process.env.NODE_ENV === 'production' ? '; Secure' : ''
   }`;
@@ -90,14 +110,14 @@ export function buildClearSessionCookie() {
  * Read the API key from a Next.js cookie store (or any object with `get`).
  * Returns null when absent or tampered with.
  */
-export function readApiKeyFromCookieStore(cookieStore) {
+export function readApiKeyFromCookieStore(cookieStore: CookieStoreLike | null | undefined): string | null {
   const raw = cookieStore?.get?.(SESSION_COOKIE)?.value;
   if (!raw) return null;
   return decryptApiKey(raw);
 }
 
 /** Extract the session API key from a Request's Cookie header. */
-export function readApiKeyFromRequest(request) {
+export function readApiKeyFromRequest(request: RequestLike | null | undefined): string | null {
   const header = request?.headers?.get?.('cookie');
   if (!header) return null;
   const match = header

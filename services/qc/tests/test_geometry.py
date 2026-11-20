@@ -5,6 +5,7 @@ from geometry import (
     fallback_pupil_distance_px,
     identity_verdict,
     product_width_mm,
+    separating_threshold,
     size_verdict,
     unit_vector,
 )
@@ -38,3 +39,13 @@ def test_unit_vector_and_cosine_identity():
     assert identity_verdict(0.52)["pass"] is True  # threshold is inclusive
     with pytest.raises(ValueError):
         cosine_similarity([1], [1, 2])
+
+
+def test_calibrating_threshold():
+    threshold, gap = separating_threshold([0.9, 0.8], [0.3, 0.4])
+    assert threshold == pytest.approx(0.6)
+    assert gap == pytest.approx(0.4)
+    threshold, gap = separating_threshold([0.5], [0.6])
+    assert threshold is None
+    assert gap == pytest.approx(-0.1)
+    assert separating_threshold([], [0.5]) == (None, None)

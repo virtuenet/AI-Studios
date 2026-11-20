@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('./types/models').ModelDefinition} ModelDefinition
+ */
 import {
   i2iModels,
   i2vModels,

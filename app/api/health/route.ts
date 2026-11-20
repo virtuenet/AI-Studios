@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 const UPSTREAM = 'https://api.muapi.ai';
 
-async function checkUpstream() {
+async function checkUpstream(): Promise<string> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 2500);
   try {
@@ -17,7 +17,7 @@ async function checkUpstream() {
   }
 }
 
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   const upstream = await checkUpstream();
   const commit =
     process.env.NEXT_PUBLIC_BUILD_SHA ||

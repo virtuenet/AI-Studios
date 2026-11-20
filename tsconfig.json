@@ -9,7 +9,9 @@
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -52,7 +54,10 @@
     "packages/studio/src/**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "lib/**/*.ts",
+    "middleware.ts",
+    "app/api/**/*.ts"
   ],
   "exclude": [
     "node_modules",

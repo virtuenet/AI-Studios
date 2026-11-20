@@ -2,6 +2,15 @@
 
 import { useEffect, useRef } from 'react';
 
+export interface PersistentObjectOptions<T> {
+  storageKey: string;
+  onLoad: (data: T | null) => void;
+  getState: () => T;
+  deps?: unknown[];
+  delayMs?: number;
+  enabled?: boolean;
+}
+
 /**
  * Persist a studio's composite state to localStorage without repeating the
  * load/debounce-save effects in every studio.
@@ -11,14 +20,14 @@ import { useEffect, useRef } from 'react';
  * - Saves are debounced by `delayMs` and skipped until the first load ran, so
  *   a fresh mount never overwrites stored data with initial values.
  */
-export default function usePersistentObject({
+export default function usePersistentObject<T>({
   storageKey,
   onLoad,
   getState,
   deps,
   delayMs = 500,
   enabled = true,
-}) {
+}: PersistentObjectOptions<T>): void {
   const loadedRef = useRef(false);
   const onLoadRef = useRef(onLoad);
   const getStateRef = useRef(getState);
@@ -34,10 +43,10 @@ export default function usePersistentObject({
     if (!enabled || !storageKey || typeof window === 'undefined') return;
     try {
       const raw = window.localStorage.getItem(storageKey);
-      onLoadRef.current?.(raw ? JSON.parse(raw) : null);
+      onLoadRef.current(raw ? (JSON.parse(raw) as T) : null);
     } catch (error) {
       console.warn(`[usePersistentObject] failed to load ${storageKey}:`, error);
-      onLoadRef.current?.(null);
+      onLoadRef.current(null);
     } finally {
       loadedRef.current = true;
     }
@@ -48,7 +57,7 @@ export default function usePersistentObject({
     const timer = setTimeout(() => {
       if (!loadedRef.current) return; // don't clobber stored state before load
       try {
-        window.localStorage.setItem(storageKey, JSON.stringify(getStateRef.current?.()));
+        window.localStorage.setItem(storageKey, JSON.stringify(getStateRef.current()));
       } catch (error) {
         console.warn(`[usePersistentObject] failed to save ${storageKey}:`, error);
       }

@@ -602,7 +602,7 @@ read `docs/film-crew-qa.md`.
 ```bash
 npm run lint           # ESLint (flat config, next/core-web-vitals)
 npm run typecheck      # tsc --noEmit (TypeScript modules)
-npm run test:vitest    # 322 unit / component / route / accessibility tests (Vitest)
+npm run test:vitest    # 325 unit / component / route / accessibility tests (Vitest)
 npm run test:coverage  # Coverage gate (75%/64%/86%/79% thresholds)
 npm test               # 77 Electron local-inference tests (Node)
 npm run test:e2e       # Playwright: smoke + mocked generation + visual (production build)

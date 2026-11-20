@@ -118,7 +118,7 @@ export function getImageInputContract(
 ): ImageInputContract {
   const contractKey = `${mode}:${model?.id}`;
   const patch: ContractPatch = Object.hasOwn(CONTRACTS, contractKey)
-    ? CONTRACTS[contractKey]
+    ? CONTRACTS[contractKey] ?? {}
     : {};
   const isTextToImage = mode === 't2i';
   const promptRequired =

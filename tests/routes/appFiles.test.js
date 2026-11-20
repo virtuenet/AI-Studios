@@ -27,7 +27,7 @@ describe('App Router resilience files', () => {
   });
 
   it('exposes a health endpoint', () => {
-    const src = read('app/api/health/route.js');
+    const src = read('app/api/health/route.ts');
     expect(src).toContain('export async function GET');
     expect(src).toContain('Cache-Control');
   });

@@ -9,19 +9,49 @@ import {
   removeCastMember,
   saveCast,
   upsertCastMember,
+  type CastMember,
 } from './castLibrary';
-import { EMPTY_SCENE, SCENE_FIELDS, composeScenePrompt, loadSceneSet, saveSceneSet } from './sceneSet';
+import {
+  EMPTY_SCENE,
+  SCENE_FIELDS,
+  composeScenePrompt,
+  loadSceneSet,
+  saveSceneSet,
+  type SceneSet,
+} from './sceneSet';
+
+export interface CrewApplyResult {
+  prompt: string;
+  referenceUrls: string[];
+  castCount: number;
+  sceneFields: number;
+}
+
+interface CrewPanelProps {
+  open: boolean;
+  initialPrompt?: string;
+  onApply?: (result: CrewApplyResult) => void;
+  onClose?: () => void;
+}
+
+interface CastDraft {
+  name: string;
+  description: string;
+  urls: string;
+}
+
+const EMPTY_DRAFT: CastDraft = { name: '', description: '', urls: '' };
 
 /**
  * Combined Cast + Scene panel (adapted from ai-film-crew's recurring-cast and
  * scene-set skills). Applies a continuity prompt prefix and cast reference
  * images to the current shot.
  */
-export default function CrewPanel({ open, initialPrompt = '', onApply, onClose }) {
-  const [tab, setTab] = useState('cast');
-  const [cast, setCast] = useState([]);
-  const [scene, setScene] = useState(EMPTY_SCENE);
-  const [draft, setDraft] = useState({ name: '', description: '', urls: '' });
+export default function CrewPanel({ open, initialPrompt = '', onApply, onClose }: CrewPanelProps) {
+  const [tab, setTab] = useState<'cast' | 'scene'>('cast');
+  const [cast, setCast] = useState<CastMember[]>([]);
+  const [scene, setScene] = useState<SceneSet>(EMPTY_SCENE);
+  const [draft, setDraft] = useState<CastDraft>(EMPTY_DRAFT);
 
   useEffect(() => {
     if (!open) return;
@@ -41,10 +71,10 @@ export default function CrewPanel({ open, initialPrompt = '', onApply, onClose }
     const next = upsertCastMember(cast, member);
     setCast(next);
     saveCast(next);
-    setDraft({ name: '', description: '', urls: '' });
+    setDraft(EMPTY_DRAFT);
   };
 
-  const deleteMember = (id) => {
+  const deleteMember = (id: string) => {
     const next = removeCastMember(cast, id);
     setCast(next);
     saveCast(next);
@@ -77,7 +107,7 @@ export default function CrewPanel({ open, initialPrompt = '', onApply, onClose }
         </div>
 
         <div className="mb-4 flex gap-2">
-          {['cast', 'scene'].map((id) => (
+          {(['cast', 'scene'] as const).map((id) => (
             <button
               key={id}
               type="button"

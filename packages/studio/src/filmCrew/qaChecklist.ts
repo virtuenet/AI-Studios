@@ -5,7 +5,32 @@
  * questions with fixed answers and lets code decide PASS/FAIL. "can't tell"
  * always fails: an unverifiable frame is not shippable.
  */
-export const CHECK_BANK = {
+export type ChecklistType = 'image' | 'video' | 'audio';
+
+export interface ChecklistQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  pass: string;
+}
+
+export interface ChecklistResult {
+  id: string;
+  question: string;
+  answer: string | null;
+  expected: string;
+  pass: boolean;
+}
+
+export interface ChecklistGrade {
+  passed: boolean;
+  total: number;
+  answered: number;
+  failedIds: string[];
+  results: ChecklistResult[];
+}
+
+export const CHECK_BANK: Record<ChecklistType, ChecklistQuestion[]> = {
   image: [
     { id: 'fingers', question: 'How many fingers are visible on each hand?', options: ['five', 'four', 'six', 'can\'t tell'], pass: 'five' },
     { id: 'limbs', question: 'Are there exactly two arms and two legs per person?', options: ['yes', 'extra limb', 'missing limb', 'can\'t tell'], pass: 'yes' },
@@ -29,16 +54,19 @@ export const CHECK_BANK = {
   ],
 };
 
-export function questionsFor(type) {
-  return CHECK_BANK[type] || CHECK_BANK.image;
+export function questionsFor(type: string): ChecklistQuestion[] {
+  return CHECK_BANK[type as ChecklistType] || CHECK_BANK.image;
 }
 
 /**
  * Grade answers against the accepted ones. Any wrong or "can't tell" answer
  * fails the piece before a human sees it.
  */
-export function gradeChecklist(type, answers = {}) {
-  const results = questionsFor(type).map((check) => {
+export function gradeChecklist(
+  type: string,
+  answers: Record<string, string | undefined> = {}
+): ChecklistGrade {
+  const results = questionsFor(type).map((check): ChecklistResult => {
     const answer = answers[check.id];
     return {
       id: check.id,
@@ -48,12 +76,12 @@ export function gradeChecklist(type, answers = {}) {
       pass: answer === check.pass,
     };
   });
-  const failed = results.filter((r) => !r.pass);
+  const failed = results.filter((result) => !result.pass);
   return {
     passed: failed.length === 0,
     total: results.length,
-    answered: results.filter((r) => r.answer != null).length,
-    failedIds: failed.map((r) => r.id),
+    answered: results.filter((result) => result.answer != null).length,
+    failedIds: failed.map((result) => result.id),
     results,
   };
 }

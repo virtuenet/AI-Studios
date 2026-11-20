@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import { getLocaleFromPathname } from './lib/locales';
 
-function addSecurityHeaders(response, requestId) {
+function addSecurityHeaders(response: NextResponse, requestId: string): NextResponse {
     if (requestId) response.headers.set('X-Request-Id', requestId);
     // Prevent MIME type sniffing (CWE-693)
     response.headers.set('X-Content-Type-Options', 'nosniff');
@@ -22,7 +22,7 @@ function addSecurityHeaders(response, requestId) {
     return response;
 }
 
-export function middleware(request) {
+export function middleware(request: NextRequest): NextResponse {
     const url = request.nextUrl;
     // Edge-safe request id (no Node `crypto` import in middleware).
     const requestId =
