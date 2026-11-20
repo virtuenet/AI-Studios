@@ -12,7 +12,7 @@ import {
   recastModels,
   getRecastModelById,
   getAspectRatiosForRecastModel,
-} from "../models.js";
+} from "../models";
 import {
   PROMPT_CONTROL_LABEL_CLASS,
   PromptAspectRatioIcon,

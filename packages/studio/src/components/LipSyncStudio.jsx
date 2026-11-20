@@ -15,7 +15,7 @@ import {
   videoLipSyncModels,
   getLipSyncModelById,
   getResolutionsForLipSyncModel,
-} from "../models.js";
+} from "../models";
 import {
   PROMPT_CONTROL_LABEL_CLASS,
   PromptAction,

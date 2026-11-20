@@ -22,7 +22,7 @@ const CATEGORIES = [
 
 async function loadModels() {
   const result = await esbuild.build({
-    entryPoints: [path.resolve(__dirname, '../packages/studio/src/models.js')],
+    entryPoints: [path.resolve(__dirname, '../packages/studio/src/models.ts')],
     bundle: true,
     platform: 'node',
     format: 'esm',

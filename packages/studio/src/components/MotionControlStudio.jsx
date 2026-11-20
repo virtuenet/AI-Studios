@@ -11,7 +11,7 @@ import MobileGenerationActions, {
 import {
   motionControlModels,
   getMotionControlModelById,
-} from "../models.js";
+} from "../models";
 import {
   PROMPT_CONTROL_LABEL_CLASS,
   PromptAspectRatioIcon,

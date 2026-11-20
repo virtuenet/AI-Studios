@@ -10,7 +10,7 @@ const esbuild = require('esbuild');
 async function loadModels() {
   // Bundle the ESM catalog (extensionless internal imports) for Node.
   const result = await esbuild.build({
-    entryPoints: [path.resolve(__dirname, '../packages/studio/src/models.js')],
+    entryPoints: [path.resolve(__dirname, '../packages/studio/src/models.ts')],
     bundle: true,
     platform: 'node',
     format: 'esm',

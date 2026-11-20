@@ -21,7 +21,7 @@ import {
   getResolutionsForI2VModel,
   getEffectsForI2VModel,
   getDefaultEffectForI2VModel,
-} from "../models.js";
+} from "../models";
 import {
   getFamilyVariant,
   videoModelCatalog,

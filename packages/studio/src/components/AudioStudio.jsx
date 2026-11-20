@@ -7,7 +7,7 @@ import { generateAudio, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import usePersistentObject from "../hooks/usePersistentObject";
-import { audioModels, getAudioModelById } from "../models.js";
+import { audioModels, getAudioModelById } from "../models";
 import { getStudioCopy } from '../messages/studioCopy';
 
 // ---------------------------------------------------------------------------

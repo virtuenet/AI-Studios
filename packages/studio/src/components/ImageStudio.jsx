@@ -26,7 +26,7 @@ import {
   getEffectsForI2IModel,
   getDefaultEffectForI2IModel,
   getI2IModelById,
-} from "../models.js";
+} from "../models";
 import {
   getFamilyVariant,
   getImageReferenceVariant,
