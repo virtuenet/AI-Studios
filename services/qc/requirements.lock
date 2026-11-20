@@ -6,11 +6,12 @@ annotated-types==0.8.0
     # via pydantic
 anyio==4.16.0
     # via
+    #   fastapi
     #   starlette
     #   watchfiles
 click==8.5.1
     # via uvicorn
-fastapi==0.128.8
+fastapi==0.163.1
     # via -r requirements.txt
 h11==0.16.0
     # via uvicorn
@@ -18,17 +19,19 @@ httptools==0.9.0
     # via uvicorn
 idna==3.20
     # via anyio
-numpy==1.26.4
+numpy==2.5.5
     # via
     #   -r requirements.txt
     #   opencv-python-headless
-opencv-python-headless==4.11.0.86
+opencv-python-headless==5.0.0.93
     # via -r requirements.txt
-pydantic==2.13.5
+opentelemetry-api==1.45.2
+    # via fastapi
+pydantic==2.14.3
     # via
     #   -r requirements.txt
     #   fastapi
-pydantic-core==2.46.5
+pydantic-core==2.50.4
     # via pydantic
 python-dotenv==1.2.4
     # via uvicorn
@@ -40,6 +43,7 @@ typing-extensions==4.16.0
     # via
     #   anyio
     #   fastapi
+    #   opentelemetry-api
     #   pydantic
     #   pydantic-core
     #   starlette
@@ -48,7 +52,7 @@ typing-inspection==0.4.5
     # via
     #   fastapi
     #   pydantic
-uvicorn==0.39.0
+uvicorn==0.54.0
     # via -r requirements.txt
 uvloop==0.23.0
     # via uvicorn
