@@ -43,6 +43,48 @@ function summarize(models) {
   return snapshot;
 }
 
+async function fetchUpstreamSpec() {
+  const response = await fetch('https://api.muapi.ai/openapi.json', {
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+/**
+ * Generate docs/models-openapi.json from the upstream OpenAPI document.
+ * This is the OpenAPI-driven half of the catalog pipeline: it records every
+ * /api/v1/<endpoint> route plus its method/summary/input names so catalog
+ * generation and drift review have a machine-readable source.
+ */
+async function writeOpenApiCatalog() {
+  const spec = await fetchUpstreamSpec();
+  const models = {};
+  for (const [path, operations] of Object.entries(spec.paths || {})) {
+    const endpoint = path.match(/^\/api\/v1\/([^/]+)$/)?.[1];
+    if (!endpoint) continue;
+    for (const [method, operation] of Object.entries(operations || {})) {
+      if (!['get', 'post', 'put', 'patch', 'delete'].includes(method)) continue;
+      const schema =
+        operation?.requestBody?.content?.['application/json']?.schema ||
+        operation?.parameters?.[0]?.schema;
+      const inputNames = Object.keys(schema?.properties || {}).sort();
+      models[endpoint] = {
+        method,
+        summary: operation?.summary || operation?.description?.slice(0, 120) || undefined,
+        inputs: inputNames,
+      };
+      break;
+    }
+  }
+  const outPath = path.resolve(__dirname, '../docs/models-openapi.json');
+  fs.writeFileSync(
+    outPath,
+    JSON.stringify({ generatedAt: new Date().toISOString(), endpoints: models }, null, 2) + '\n'
+  );
+  console.log(`Wrote ${outPath} (${Object.keys(models).length} endpoints).`);
+}
+
 async function fetchUpstreamEndpoints() {
   try {
     const response = await fetch('https://api.muapi.ai/openapi.json', {
@@ -65,6 +107,11 @@ async function main() {
   const args = process.argv.slice(2);
   const models = await loadModels();
   const current = summarize(models);
+
+  if (args.includes('--write-openapi')) {
+    await writeOpenApiCatalog();
+    return;
+  }
 
   if (args.includes('--write')) {
     fs.mkdirSync(path.dirname(SNAPSHOT_PATH), { recursive: true });

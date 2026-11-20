@@ -1,0 +1,4500 @@
+{
+  "generatedAt": "2026-11-20T03:58:03.987Z",
+  "endpoints": {
+    "feedback": {
+      "method": "get",
+      "summary": "List Feedback",
+      "inputs": []
+    },
+    "sandboxes": {
+      "method": "post",
+      "summary": "Create Sandbox",
+      "inputs": []
+    },
+    "sandbox-create": {
+      "method": "post",
+      "summary": "Sandbox: create",
+      "inputs": []
+    },
+    "sandbox-get": {
+      "method": "post",
+      "summary": "Sandbox: get",
+      "inputs": []
+    },
+    "sandbox-run-command": {
+      "method": "post",
+      "summary": "Sandbox: run command",
+      "inputs": []
+    },
+    "sandbox-command-status": {
+      "method": "post",
+      "summary": "Sandbox: command status",
+      "inputs": []
+    },
+    "sandbox-write-file": {
+      "method": "post",
+      "summary": "Sandbox: write file",
+      "inputs": []
+    },
+    "sandbox-read-file": {
+      "method": "post",
+      "summary": "Sandbox: read file",
+      "inputs": []
+    },
+    "sandbox-stop": {
+      "method": "post",
+      "summary": "Sandbox: stop",
+      "inputs": []
+    },
+    "sandbox-resume": {
+      "method": "post",
+      "summary": "Sandbox: resume",
+      "inputs": []
+    },
+    "sandbox-delete": {
+      "method": "post",
+      "summary": "Sandbox: delete",
+      "inputs": []
+    },
+    "seo-google-serp": {
+      "method": "post",
+      "summary": "seo-google-serp (balanced)",
+      "inputs": []
+    },
+    "seo-keyword-research": {
+      "method": "post",
+      "summary": "seo-keyword-research (balanced)",
+      "inputs": []
+    },
+    "seo-domain-overview": {
+      "method": "post",
+      "summary": "seo-domain-overview (balanced)",
+      "inputs": []
+    },
+    "seo-backlinks": {
+      "method": "post",
+      "summary": "seo-backlinks (balanced)",
+      "inputs": []
+    },
+    "seo-lighthouse-audit": {
+      "method": "post",
+      "summary": "seo-lighthouse-audit (balanced)",
+      "inputs": []
+    },
+    "seo-rank-track": {
+      "method": "post",
+      "summary": "seo-rank-track (balanced)",
+      "inputs": []
+    },
+    "seo-rank-track-batch": {
+      "method": "post",
+      "summary": "seo-rank-track-batch (balanced)",
+      "inputs": []
+    },
+    "seo-local-serp": {
+      "method": "post",
+      "summary": "seo-local-serp (balanced)",
+      "inputs": []
+    },
+    "seo-business-listings": {
+      "method": "post",
+      "summary": "seo-business-listings (balanced)",
+      "inputs": []
+    },
+    "seo-business-profile": {
+      "method": "post",
+      "summary": "seo-business-profile (balanced)",
+      "inputs": []
+    },
+    "seo-business-reviews": {
+      "method": "post",
+      "summary": "seo-business-reviews (balanced)",
+      "inputs": []
+    },
+    "seo-app-reviews": {
+      "method": "post",
+      "summary": "Seo App Reviews",
+      "inputs": []
+    },
+    "seo-ai-mentions": {
+      "method": "post",
+      "summary": "seo-ai-mentions (best)",
+      "inputs": []
+    },
+    "company-enrich": {
+      "method": "post",
+      "summary": "company-enrich (balanced)",
+      "inputs": []
+    },
+    "people-search": {
+      "method": "post",
+      "summary": "people-search (balanced)",
+      "inputs": []
+    },
+    "email-verify": {
+      "method": "post",
+      "summary": "email-verify (fast)",
+      "inputs": []
+    },
+    "company-technographics": {
+      "method": "post",
+      "summary": "company-technographics (balanced)",
+      "inputs": []
+    },
+    "company-buying-signals": {
+      "method": "post",
+      "summary": "company-buying-signals (balanced)",
+      "inputs": []
+    },
+    "people-rank-decision-makers": {
+      "method": "post",
+      "summary": "people-rank-decision-makers (balanced)",
+      "inputs": []
+    },
+    "company-funding": {
+      "method": "post",
+      "summary": "company-funding (balanced)",
+      "inputs": []
+    },
+    "linkedin-company-profile": {
+      "method": "post",
+      "summary": "linkedin-company-profile (balanced)",
+      "inputs": []
+    },
+    "linkedin-people-search": {
+      "method": "post",
+      "summary": "linkedin-people-search (balanced)",
+      "inputs": []
+    },
+    "linkedin-employees": {
+      "method": "post",
+      "summary": "linkedin-employees (balanced)",
+      "inputs": []
+    },
+    "company-job-postings": {
+      "method": "post",
+      "summary": "company-job-postings (balanced)",
+      "inputs": []
+    },
+    "company-headcount-growth": {
+      "method": "post",
+      "summary": "company-headcount-growth (balanced)",
+      "inputs": []
+    },
+    "research-web-answer": {
+      "method": "post",
+      "summary": "research-web-answer (balanced)",
+      "inputs": []
+    },
+    "ecommerce-marketplace-search": {
+      "method": "post",
+      "summary": "ecommerce-marketplace-search (balanced)",
+      "inputs": []
+    },
+    "ecommerce-product-detail": {
+      "method": "post",
+      "summary": "ecommerce-product-detail (balanced)",
+      "inputs": []
+    },
+    "ecommerce-product-reviews": {
+      "method": "post",
+      "summary": "ecommerce-product-reviews (balanced)",
+      "inputs": []
+    },
+    "ecommerce-keyword-metrics": {
+      "method": "post",
+      "summary": "ecommerce-keyword-metrics (balanced)",
+      "inputs": []
+    },
+    "company-public-financials": {
+      "method": "post",
+      "summary": "company-public-financials (balanced)",
+      "inputs": []
+    },
+    "market-stock-history": {
+      "method": "post",
+      "summary": "market-stock-history (balanced)",
+      "inputs": []
+    },
+    "market-stock-screener": {
+      "method": "post",
+      "summary": "market-stock-screener (balanced)",
+      "inputs": []
+    },
+    "crypto-market-data": {
+      "method": "post",
+      "summary": "crypto-market-data (balanced)",
+      "inputs": []
+    },
+    "social-read-posts": {
+      "method": "post",
+      "summary": "social-read-posts (balanced)",
+      "inputs": []
+    },
+    "ad-library-search": {
+      "method": "post",
+      "summary": "ad-library-search (balanced)",
+      "inputs": []
+    },
+    "social-search-posts": {
+      "method": "post",
+      "summary": "social-search-posts (balanced)",
+      "inputs": []
+    },
+    "seo-yelp-reviews": {
+      "method": "post",
+      "summary": "Seo Yelp Reviews",
+      "inputs": []
+    },
+    "seo-keyword-trends": {
+      "method": "post",
+      "summary": "Seo Keyword Trends",
+      "inputs": []
+    },
+    "news-search": {
+      "method": "post",
+      "summary": "news-search (balanced)",
+      "inputs": []
+    },
+    "company-products": {
+      "method": "post",
+      "summary": "company-products (balanced)",
+      "inputs": []
+    },
+    "creators-search": {
+      "method": "post",
+      "summary": "creators-search (balanced)",
+      "inputs": []
+    },
+    "creators-profile": {
+      "method": "post",
+      "summary": "creators-profile (balanced)",
+      "inputs": []
+    },
+    "creators-analytics": {
+      "method": "post",
+      "summary": "creators-analytics (balanced)",
+      "inputs": []
+    },
+    "creators-lookalike": {
+      "method": "post",
+      "summary": "creators-lookalike (balanced)",
+      "inputs": []
+    },
+    "seo-ai-response": {
+      "method": "post",
+      "summary": "seo-ai-response (best)",
+      "inputs": []
+    },
+    "seo-keywords-search-volume": {
+      "method": "post",
+      "summary": "seo-keywords-search-volume (balanced)",
+      "inputs": []
+    },
+    "seo-keywords-for-keywords": {
+      "method": "post",
+      "summary": "seo-keywords-for-keywords (balanced)",
+      "inputs": []
+    },
+    "seo-related-keywords": {
+      "method": "post",
+      "summary": "seo-related-keywords (balanced)",
+      "inputs": []
+    },
+    "seo-keyword-overview": {
+      "method": "post",
+      "summary": "seo-keyword-overview (balanced)",
+      "inputs": []
+    },
+    "seo-relevant-pages": {
+      "method": "post",
+      "summary": "seo-relevant-pages (balanced)",
+      "inputs": []
+    },
+    "seo-backlinks-pages": {
+      "method": "post",
+      "summary": "seo-backlinks-pages (balanced)",
+      "inputs": []
+    },
+    "seo-backlinks-history": {
+      "method": "post",
+      "summary": "seo-backlinks-history (balanced)",
+      "inputs": []
+    },
+    "seo-ai-mentions-metrics": {
+      "method": "post",
+      "summary": "seo-ai-mentions-metrics (best)",
+      "inputs": []
+    },
+    "seo-google-qa": {
+      "method": "post",
+      "summary": "seo-google-qa (balanced)",
+      "inputs": []
+    },
+    "seo-business-updates": {
+      "method": "post",
+      "summary": "seo-business-updates (balanced)",
+      "inputs": []
+    },
+    "seo-account-status": {
+      "method": "post",
+      "summary": "seo-account-status (fast)",
+      "inputs": []
+    },
+    "seo-youtube-organic": {
+      "method": "post",
+      "summary": "seo-youtube-organic (balanced)",
+      "inputs": []
+    },
+    "seo-youtube-video-info": {
+      "method": "post",
+      "summary": "seo-youtube-video-info (balanced)",
+      "inputs": []
+    },
+    "seo-youtube-video-subtitles": {
+      "method": "post",
+      "summary": "seo-youtube-video-subtitles (balanced)",
+      "inputs": []
+    },
+    "seo-youtube-video-comments": {
+      "method": "post",
+      "summary": "seo-youtube-video-comments (balanced)",
+      "inputs": []
+    },
+    "keys": {
+      "method": "get",
+      "summary": "List or create API keys",
+      "inputs": []
+    },
+    "models": {
+      "method": "get",
+      "summary": "List Models",
+      "inputs": []
+    },
+    "changelog": {
+      "method": "get",
+      "summary": "Get Changelog",
+      "inputs": []
+    },
+    "agent-skills": {
+      "method": "get",
+      "summary": "List Public Agent Skills",
+      "inputs": []
+    },
+    "upload_file": {
+      "method": "post",
+      "summary": "Upload media to Muapi-hosted storage",
+      "inputs": []
+    },
+    "get_upload_url": {
+      "method": "get",
+      "summary": "Get a presigned S3 upload URL",
+      "inputs": []
+    },
+    "generate_video_prompt": {
+      "method": "post",
+      "summary": "Generate Video Prompt",
+      "inputs": []
+    },
+    "tiktok-carousel": {
+      "method": "post",
+      "summary": "Tiktok Carousel",
+      "inputs": []
+    },
+    "generate_video_scene_prompts": {
+      "method": "post",
+      "summary": "Generate Video Scene Prompts",
+      "inputs": []
+    },
+    "ai-clipping": {
+      "method": "post",
+      "summary": "ai-clipping",
+      "inputs": []
+    },
+    "depth-anything": {
+      "method": "post",
+      "summary": "depth-anything",
+      "inputs": []
+    },
+    "ocr-recognize-text": {
+      "method": "post",
+      "summary": "ocr-recognize-text",
+      "inputs": []
+    },
+    "autocrop": {
+      "method": "post",
+      "summary": "Autocrop",
+      "inputs": []
+    },
+    "flux-dev-image": {
+      "method": "post",
+      "summary": "flux-dev (balanced)",
+      "inputs": []
+    },
+    "flux_dev_lora_image": {
+      "method": "post",
+      "summary": "flux-dev-lora",
+      "inputs": []
+    },
+    "flux-schnell-image": {
+      "method": "post",
+      "summary": "flux-schnell (fast)",
+      "inputs": []
+    },
+    "flux-kontext-dev-i2i": {
+      "method": "post",
+      "summary": "flux-kontext-dev-i2i (balanced)",
+      "inputs": []
+    },
+    "flux-kontext-dev-t2i": {
+      "method": "post",
+      "summary": "flux-kontext-dev-t2i (balanced)",
+      "inputs": []
+    },
+    "hidream_i1_fast_image": {
+      "method": "post",
+      "summary": "hidream-i1-fast (fast)",
+      "inputs": []
+    },
+    "hidream_i1_dev_image": {
+      "method": "post",
+      "summary": "hidream-i1-dev (balanced)",
+      "inputs": []
+    },
+    "hidream_i1_full_image": {
+      "method": "post",
+      "summary": "hidream-i1-full (best)",
+      "inputs": []
+    },
+    "generate_wan_video_prompt": {
+      "method": "post",
+      "summary": "Generate Wan Video Prompt",
+      "inputs": []
+    },
+    "generate_wan_ai_effects": {
+      "method": "post",
+      "summary": "ai-video-effects",
+      "inputs": []
+    },
+    "history": {
+      "method": "get",
+      "summary": "Get History",
+      "inputs": []
+    },
+    "veo3-fast-text-to-video": {
+      "method": "post",
+      "summary": "veo3-fast-text-to-video (fast)",
+      "inputs": []
+    },
+    "veo3-fast-image-to-video": {
+      "method": "post",
+      "summary": "veo3-fast-image-to-video (fast)",
+      "inputs": []
+    },
+    "veo3-text-to-video": {
+      "method": "post",
+      "summary": "veo3-text-to-video (balanced)",
+      "inputs": []
+    },
+    "veo3-image-to-video": {
+      "method": "post",
+      "summary": "veo3-image-to-video (balanced)",
+      "inputs": []
+    },
+    "ai-image-upscale": {
+      "method": "post",
+      "summary": "ai-image-upscaler",
+      "inputs": []
+    },
+    "ai-image-face-swap": {
+      "method": "post",
+      "summary": "ai-image-face-swap",
+      "inputs": []
+    },
+    "ai-video-face-swap": {
+      "method": "post",
+      "summary": "ai-video-face-swap",
+      "inputs": []
+    },
+    "ai-dress-change": {
+      "method": "post",
+      "summary": "ai-dress-change",
+      "inputs": []
+    },
+    "flux-lora-trainer": {
+      "method": "post",
+      "summary": "Flux Lora Trainer",
+      "inputs": []
+    },
+    "ai-background-remover": {
+      "method": "post",
+      "summary": "ai-background-remover",
+      "inputs": []
+    },
+    "ai-product-shot": {
+      "method": "post",
+      "summary": "ai-product-shot",
+      "inputs": []
+    },
+    "ai-skin-enhancer": {
+      "method": "post",
+      "summary": "ai-skin-enhancer",
+      "inputs": []
+    },
+    "ai-color-photo": {
+      "method": "post",
+      "summary": "ai-color-photo",
+      "inputs": []
+    },
+    "ai-product-photography": {
+      "method": "post",
+      "summary": "ai-product-photography",
+      "inputs": []
+    },
+    "ai-ghibli-style": {
+      "method": "post",
+      "summary": "ai-ghibli-style",
+      "inputs": []
+    },
+    "ai-anime-generator": {
+      "method": "post",
+      "summary": "ai-anime-generator",
+      "inputs": []
+    },
+    "ai-image-extension": {
+      "method": "post",
+      "summary": "ai-image-extension",
+      "inputs": []
+    },
+    "ai-object-eraser": {
+      "method": "post",
+      "summary": "ai-object-eraser",
+      "inputs": []
+    },
+    "runway-image-to-video": {
+      "method": "post",
+      "summary": "runway-image-to-video (best)",
+      "inputs": []
+    },
+    "runway-text-to-video": {
+      "method": "post",
+      "summary": "runway-text-to-video (balanced)",
+      "inputs": []
+    },
+    "suno-create-music": {
+      "method": "post",
+      "summary": "suno-create-music (balanced)",
+      "inputs": []
+    },
+    "suno-voice-clone": {
+      "method": "post",
+      "summary": "suno-voice-clone (balanced)",
+      "inputs": []
+    },
+    "suno-voices": {
+      "method": "get",
+      "summary": "List Suno Voices",
+      "inputs": []
+    },
+    "suno-remix-music": {
+      "method": "post",
+      "summary": "suno-remix-music",
+      "inputs": []
+    },
+    "suno-extend-music": {
+      "method": "post",
+      "summary": "suno-extend-music",
+      "inputs": []
+    },
+    "suno-convert-to-wav": {
+      "method": "post",
+      "summary": "Suno Convert To Wav",
+      "inputs": []
+    },
+    "suno-generate-sounds": {
+      "method": "post",
+      "summary": "suno-generate-sounds",
+      "inputs": []
+    },
+    "suno-speech": {
+      "method": "post",
+      "summary": "suno-speech",
+      "inputs": []
+    },
+    "suno-generate-lyrics": {
+      "method": "post",
+      "summary": "suno-generate-lyrics",
+      "inputs": []
+    },
+    "suno-boost-music-style": {
+      "method": "post",
+      "summary": "suno-boost-music-style",
+      "inputs": []
+    },
+    "suno-add-vocals": {
+      "method": "post",
+      "summary": "suno-add-vocals",
+      "inputs": []
+    },
+    "suno-generate-mashup": {
+      "method": "post",
+      "summary": "suno-generate-mashup",
+      "inputs": []
+    },
+    "suno-add-instrumental": {
+      "method": "post",
+      "summary": "suno-add-instrumental",
+      "inputs": []
+    },
+    "wan2.1-text-to-image": {
+      "method": "post",
+      "summary": "wan2.1-text-to-image",
+      "inputs": []
+    },
+    "flux-kontext-pro-t2i": {
+      "method": "post",
+      "summary": "flux-kontext-pro-t2i (balanced)",
+      "inputs": []
+    },
+    "flux-kontext-pro-i2i": {
+      "method": "post",
+      "summary": "flux-kontext-pro-i2i (balanced)",
+      "inputs": []
+    },
+    "flux-kontext-max-t2i": {
+      "method": "post",
+      "summary": "flux-kontext-max-t2i (best)",
+      "inputs": []
+    },
+    "flux-kontext-max-i2i": {
+      "method": "post",
+      "summary": "flux-kontext-max-i2i (best)",
+      "inputs": []
+    },
+    "flux-kontext-effects": {
+      "method": "post",
+      "summary": "flux-kontext-effects (balanced)",
+      "inputs": []
+    },
+    "reve-text-to-image": {
+      "method": "post",
+      "summary": "reve-text-to-image",
+      "inputs": []
+    },
+    "reve-image-edit": {
+      "method": "post",
+      "summary": "reve-image-edit",
+      "inputs": []
+    },
+    "muse-image-text-to-image": {
+      "method": "post",
+      "summary": "muse-image-text-to-image (budget)",
+      "inputs": []
+    },
+    "muse-image-edit": {
+      "method": "post",
+      "summary": "muse-image-edit (budget)",
+      "inputs": []
+    },
+    "flux-3-text-to-video": {
+      "method": "post",
+      "summary": "flux-3-text-to-video (balanced)",
+      "inputs": []
+    },
+    "flux-3-image-to-video": {
+      "method": "post",
+      "summary": "flux-3-image-to-video (balanced)",
+      "inputs": []
+    },
+    "flux-3-start-end-to-video": {
+      "method": "post",
+      "summary": "flux-3-start-end-to-video (balanced)",
+      "inputs": []
+    },
+    "flux-3-video-extend": {
+      "method": "post",
+      "summary": "flux-3-video-extend (balanced)",
+      "inputs": []
+    },
+    "flux-3-text-to-video-draft": {
+      "method": "post",
+      "summary": "flux-3-text-to-video-draft (fast)",
+      "inputs": []
+    },
+    "flux-3-video-extend-draft": {
+      "method": "post",
+      "summary": "flux-3-video-extend-draft (fast)",
+      "inputs": []
+    },
+    "flux-3-video-upscaler": {
+      "method": "post",
+      "summary": "flux-3-video-upscaler (balanced)",
+      "inputs": []
+    },
+    "flux-3-klein-text-to-image": {
+      "method": "post",
+      "summary": "flux-3-klein-text-to-image (fast)",
+      "inputs": []
+    },
+    "flux-3-klein-edit-image": {
+      "method": "post",
+      "summary": "flux-3-klein-edit-image (fast)",
+      "inputs": []
+    },
+    "gpt4o-text-to-image": {
+      "method": "post",
+      "summary": "gpt4o-text-to-image (best)",
+      "inputs": []
+    },
+    "gpt4o-image-to-image": {
+      "method": "post",
+      "summary": "gpt4o-image-to-image",
+      "inputs": []
+    },
+    "gpt4o-edit": {
+      "method": "post",
+      "summary": "gpt4o-edit (best)",
+      "inputs": []
+    },
+    "gpt-image-2-text-to-image": {
+      "method": "post",
+      "summary": "gpt-image-2-text-to-image (best)",
+      "inputs": []
+    },
+    "gpt-image-2-image-to-image": {
+      "method": "post",
+      "summary": "gpt-image-2-image-to-image (best)",
+      "inputs": []
+    },
+    "gpt-image-2.5-flare-text-to-image": {
+      "method": "post",
+      "summary": "gpt-image-2.5-flare-text-to-image (fast)",
+      "inputs": []
+    },
+    "gpt-image-2.5-sunburst-text-to-image": {
+      "method": "post",
+      "summary": "gpt-image-2.5-sunburst-text-to-image (best)",
+      "inputs": []
+    },
+    "gpt-image-2.5-flare-image-to-image": {
+      "method": "post",
+      "summary": "gpt-image-2.5-flare-image-to-image (fast)",
+      "inputs": []
+    },
+    "gpt-image-2.5-sunburst-image-to-image": {
+      "method": "post",
+      "summary": "gpt-image-2.5-sunburst-image-to-image (best)",
+      "inputs": []
+    },
+    "gpt-image-2.6-flare-text-to-image": {
+      "method": "post",
+      "summary": "Gpt Image 26 Flare Text To Image",
+      "inputs": []
+    },
+    "gpt-image-2.6-flare-image-to-image": {
+      "method": "post",
+      "summary": "Gpt Image 26 Flare Image To Image",
+      "inputs": []
+    },
+    "gpt-image-2.6-sunburst-text-to-image": {
+      "method": "post",
+      "summary": "Gpt Image 26 Sunburst Text To Image",
+      "inputs": []
+    },
+    "gpt-image-2.6-sunburst-image-to-image": {
+      "method": "post",
+      "summary": "Gpt Image 26 Sunburst Image To Image",
+      "inputs": []
+    },
+    "kling-o3-image": {
+      "method": "post",
+      "summary": "kling-o3-image (best)",
+      "inputs": []
+    },
+    "kling-o3-image-edit": {
+      "method": "post",
+      "summary": "kling-o3-image-edit (best)",
+      "inputs": []
+    },
+    "nano-banana-2-lite": {
+      "method": "post",
+      "summary": "Nano Banana 2 Lite",
+      "inputs": []
+    },
+    "nano-banana-2-lite-edit": {
+      "method": "post",
+      "summary": "Nano Banana 2 Lite Edit",
+      "inputs": []
+    },
+    "tripo3d-p1-text-to-3d": {
+      "method": "post",
+      "summary": "tripo3d-p1-text-to-3d (fast)",
+      "inputs": []
+    },
+    "tripo3d-p1-image-to-3d": {
+      "method": "post",
+      "summary": "tripo3d-p1-image-to-3d (fast)",
+      "inputs": []
+    },
+    "tripo3d-h31-text-to-3d": {
+      "method": "post",
+      "summary": "tripo3d-h31-text-to-3d (best)",
+      "inputs": []
+    },
+    "tripo3d-h31-image-to-3d": {
+      "method": "post",
+      "summary": "tripo3d-h31-image-to-3d (best)",
+      "inputs": []
+    },
+    "tripo3d-h31-multiview-to-3d": {
+      "method": "post",
+      "summary": "tripo3d-h31-multiview-to-3d (best)",
+      "inputs": []
+    },
+    "meshy-6-text-to-3d": {
+      "method": "post",
+      "summary": "meshy-6-text-to-3d (balanced)",
+      "inputs": []
+    },
+    "meshy-6-image-to-3d": {
+      "method": "post",
+      "summary": "meshy-6-image-to-3d (balanced)",
+      "inputs": []
+    },
+    "meshy-6-multi-image-to-3d": {
+      "method": "post",
+      "summary": "meshy-6-multi-image-to-3d (balanced)",
+      "inputs": []
+    },
+    "midjourney-v7-text-to-image": {
+      "method": "post",
+      "summary": "midjourney-v7-text-to-image (best)",
+      "inputs": []
+    },
+    "midjourney-v7-image-to-image": {
+      "method": "post",
+      "summary": "midjourney-v7-image-to-image (best)",
+      "inputs": []
+    },
+    "midjourney-v7-style-reference": {
+      "method": "post",
+      "summary": "midjourney-v7-style-reference (best)",
+      "inputs": []
+    },
+    "midjourney-v7-omni-reference": {
+      "method": "post",
+      "summary": "midjourney-v7-omni-reference (best)",
+      "inputs": []
+    },
+    "midjourney-v7-image-to-video": {
+      "method": "post",
+      "summary": "midjourney-v7-image-to-video (best)",
+      "inputs": []
+    },
+    "midjourney-v7": {
+      "method": "post",
+      "summary": "midjourney-v7 (best)",
+      "inputs": []
+    },
+    "midjourney-v8": {
+      "method": "post",
+      "summary": "midjourney-v8 (best)",
+      "inputs": []
+    },
+    "midjourney-niji": {
+      "method": "post",
+      "summary": "midjourney-niji (balanced)",
+      "inputs": []
+    },
+    "wan2.1-image-to-video": {
+      "method": "post",
+      "summary": "wan2.1-image-to-video (budget)",
+      "inputs": []
+    },
+    "wan2.1-text-to-video": {
+      "method": "post",
+      "summary": "wan2.1-text-to-video (budget)",
+      "inputs": []
+    },
+    "wan2.2-image-to-video": {
+      "method": "post",
+      "summary": "wan2.2-image-to-video (budget)",
+      "inputs": []
+    },
+    "wan2.2-text-to-video": {
+      "method": "post",
+      "summary": "wan2.2-text-to-video (budget)",
+      "inputs": []
+    },
+    "wan2.2-speech-to-video": {
+      "method": "post",
+      "summary": "wan2.2-speech-to-video",
+      "inputs": []
+    },
+    "wan2.1-lora-i2v": {
+      "method": "post",
+      "summary": "wan2.1-lora-i2v",
+      "inputs": []
+    },
+    "wan2.1-lora-t2v": {
+      "method": "post",
+      "summary": "wan2.1-lora-t2v",
+      "inputs": []
+    },
+    "hunyuan-image-to-video": {
+      "method": "post",
+      "summary": "hunyuan-image-to-video (balanced)",
+      "inputs": []
+    },
+    "hunyuan-text-to-video": {
+      "method": "post",
+      "summary": "hunyuan-text-to-video (balanced)",
+      "inputs": []
+    },
+    "hunyuan-fast-text-to-video": {
+      "method": "post",
+      "summary": "hunyuan-fast-text-to-video (fast)",
+      "inputs": []
+    },
+    "z-image-p": {
+      "method": "post",
+      "summary": "z-image-p",
+      "inputs": []
+    },
+    "openai-sora-2-standard-text-to-video": {
+      "method": "post",
+      "summary": "openai-sora-2-standard-text-to-video (balanced)",
+      "inputs": []
+    },
+    "openai-sora-2-standard-image-to-video": {
+      "method": "post",
+      "summary": "openai-sora-2-standard-image-to-video (balanced)",
+      "inputs": []
+    },
+    "seedance-pro-i2v": {
+      "method": "post",
+      "summary": "seedance-pro-i2v (balanced)",
+      "inputs": []
+    },
+    "seedance-pro-t2v": {
+      "method": "post",
+      "summary": "seedance-pro-t2v (balanced)",
+      "inputs": []
+    },
+    "seedance-lite-i2v": {
+      "method": "post",
+      "summary": "seedance-lite-i2v (budget)",
+      "inputs": []
+    },
+    "seedance-lite-t2v": {
+      "method": "post",
+      "summary": "seedance-lite-t2v (budget)",
+      "inputs": []
+    },
+    "bytedance-seedream-image": {
+      "method": "post",
+      "summary": "bytedance-seedream-v3",
+      "inputs": []
+    },
+    "bytedance-seededit-image": {
+      "method": "post",
+      "summary": "bytedance-seededit-v3 (best)",
+      "inputs": []
+    },
+    "kling-v2.1-standard-i2v": {
+      "method": "post",
+      "summary": "kling-v2.1-standard-i2v",
+      "inputs": []
+    },
+    "kling-v2.1-pro-i2v": {
+      "method": "post",
+      "summary": "kling-v2.1-pro-i2v (balanced)",
+      "inputs": []
+    },
+    "kling-v2.1-master-i2v": {
+      "method": "post",
+      "summary": "kling-v2.1-master-i2v",
+      "inputs": []
+    },
+    "kling-v2.1-master-t2v": {
+      "method": "post",
+      "summary": "kling-v2.1-master-t2v (best)",
+      "inputs": []
+    },
+    "runway-act-two-i2v": {
+      "method": "post",
+      "summary": "runway-act-two-i2v",
+      "inputs": []
+    },
+    "runway-act-two-v2v": {
+      "method": "post",
+      "summary": "runway-act-two-v2v",
+      "inputs": []
+    },
+    "runway-aleph-v2v": {
+      "method": "post",
+      "summary": "runway-aleph-v2v",
+      "inputs": []
+    },
+    "pixverse-v4.5-i2v": {
+      "method": "post",
+      "summary": "pixverse-v4.5-i2v (budget)",
+      "inputs": []
+    },
+    "pixverse-v4.5-t2v": {
+      "method": "post",
+      "summary": "pixverse-v4.5-t2v (budget)",
+      "inputs": []
+    },
+    "vidu-v2.0-i2v": {
+      "method": "post",
+      "summary": "vidu-v2.0-i2v",
+      "inputs": []
+    },
+    "vidu-v2.0-t2v": {
+      "method": "post",
+      "summary": "vidu-v2.0-t2v",
+      "inputs": []
+    },
+    "qwen-image": {
+      "method": "post",
+      "summary": "qwen-image",
+      "inputs": []
+    },
+    "qwen-image-edit": {
+      "method": "post",
+      "summary": "qwen-image-edit",
+      "inputs": []
+    },
+    "minimax-01-subject-reference": {
+      "method": "post",
+      "summary": "minimax-image-01-subject-reference",
+      "inputs": []
+    },
+    "ideogram-character": {
+      "method": "post",
+      "summary": "ideogram-character",
+      "inputs": []
+    },
+    "flux-pulid": {
+      "method": "post",
+      "summary": "flux-pulid (balanced)",
+      "inputs": []
+    },
+    "sync-lipsync": {
+      "method": "post",
+      "summary": "sync-lipsync (balanced)",
+      "inputs": []
+    },
+    "latentsync-video": {
+      "method": "post",
+      "summary": "latent-sync (fast)",
+      "inputs": []
+    },
+    "creatify-lipsync": {
+      "method": "post",
+      "summary": "creatify-lipsync (balanced)",
+      "inputs": []
+    },
+    "veed-lipsync": {
+      "method": "post",
+      "summary": "veed-lipsync (fast)",
+      "inputs": []
+    },
+    "luma-modify-video": {
+      "method": "post",
+      "summary": "luma-modify-video",
+      "inputs": []
+    },
+    "luma-flash-reframe": {
+      "method": "post",
+      "summary": "luma-flash-reframe",
+      "inputs": []
+    },
+    "vidu-q1-reference": {
+      "method": "post",
+      "summary": "vidu-q1-reference",
+      "inputs": []
+    },
+    "vidu-q3-pro-text-to-video": {
+      "method": "post",
+      "summary": "vidu-q3-pro-text-to-video (best)",
+      "inputs": []
+    },
+    "vidu-q3-pro-image-to-video": {
+      "method": "post",
+      "summary": "vidu-q3-pro-image-to-video (best)",
+      "inputs": []
+    },
+    "vidu-q4-image-to-video": {
+      "method": "post",
+      "summary": "vidu-q4-image-to-video (best)",
+      "inputs": []
+    },
+    "vidu-q4-reference-to-video": {
+      "method": "post",
+      "summary": "vidu-q4-reference-to-video (best)",
+      "inputs": []
+    },
+    "kling-4.0-text-to-video": {
+      "method": "post",
+      "summary": "kling-4.0-text-to-video (best)",
+      "inputs": []
+    },
+    "kling-4.0-reference-to-video": {
+      "method": "post",
+      "summary": "kling-4.0-reference-to-video (best)",
+      "inputs": []
+    },
+    "kling-4.0-keyframe-to-video": {
+      "method": "post",
+      "summary": "kling-4.0-keyframe-to-video (best)",
+      "inputs": []
+    },
+    "kling-4.0-flash-text-to-video": {
+      "method": "post",
+      "summary": "kling-4.0-flash-text-to-video (fast)",
+      "inputs": []
+    },
+    "kling-4.0-flash-reference-to-video": {
+      "method": "post",
+      "summary": "kling-4.0-flash-reference-to-video (fast)",
+      "inputs": []
+    },
+    "kling-4.0-flash-keyframe-to-video": {
+      "method": "post",
+      "summary": "kling-4.0-flash-keyframe-to-video (fast)",
+      "inputs": []
+    },
+    "vidu-q3-pro-first-last-frames": {
+      "method": "post",
+      "summary": "vidu-q3-pro-first-last-frames (best)",
+      "inputs": []
+    },
+    "vidu-q3-turbo-text-to-video": {
+      "method": "post",
+      "summary": "vidu-q3-turbo-text-to-video (fast)",
+      "inputs": []
+    },
+    "vidu-q3-turbo-image-to-video": {
+      "method": "post",
+      "summary": "vidu-q3-turbo-image-to-video (fast)",
+      "inputs": []
+    },
+    "vidu-q3-turbo-first-last-frames": {
+      "method": "post",
+      "summary": "vidu-q3-turbo-first-last-frames (fast)",
+      "inputs": []
+    },
+    "wan2.2-5b-fast-t2v": {
+      "method": "post",
+      "summary": "wan2.2-5b-fast-t2v (fast)",
+      "inputs": []
+    },
+    "minimax-hailuo-02-standard-i2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-02-standard-i2v (budget)",
+      "inputs": []
+    },
+    "minimax-hailuo-02-standard-t2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-02-standard-t2v (budget)",
+      "inputs": []
+    },
+    "minimax-hailuo-02-pro-i2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-02-pro-i2v (balanced)",
+      "inputs": []
+    },
+    "minimax-hailuo-02-pro-t2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-02-pro-t2v (balanced)",
+      "inputs": []
+    },
+    "ai-dance-effects": {
+      "method": "post",
+      "summary": "ai-dance-effects",
+      "inputs": []
+    },
+    "video-effects": {
+      "method": "post",
+      "summary": "video-effects",
+      "inputs": []
+    },
+    "image-effects": {
+      "method": "post",
+      "summary": "image-effects",
+      "inputs": []
+    },
+    "portrait-stylist": {
+      "method": "post",
+      "summary": "portrait-stylist",
+      "inputs": []
+    },
+    "sdxl-lora-image": {
+      "method": "post",
+      "summary": "sdxl-lora",
+      "inputs": []
+    },
+    "ideogram-v3-t2i": {
+      "method": "post",
+      "summary": "ideogram-v3-t2i (best)",
+      "inputs": []
+    },
+    "nano-banana-edit": {
+      "method": "post",
+      "summary": "nano-banana-edit (balanced)",
+      "inputs": []
+    },
+    "nano-banana": {
+      "method": "post",
+      "summary": "nano-banana (balanced)",
+      "inputs": []
+    },
+    "nano-banana-effects": {
+      "method": "post",
+      "summary": "nano-banana-effects",
+      "inputs": []
+    },
+    "google-imagen4": {
+      "method": "post",
+      "summary": "google-imagen4 (balanced)",
+      "inputs": []
+    },
+    "elevenlabs-text-to-dialogue-v3": {
+      "method": "post",
+      "summary": "Elevenlabs Text To Dialogue V3",
+      "inputs": []
+    },
+    "elevenlabs-tts-turbo-2-5": {
+      "method": "post",
+      "summary": "Elevenlabs Tts Turbo 2 5",
+      "inputs": []
+    },
+    "gemini-3-1-flash-tts": {
+      "method": "post",
+      "summary": "Gemini 3 1 Flash Tts",
+      "inputs": []
+    },
+    "gemini-2-5-pro-tts": {
+      "method": "post",
+      "summary": "Gemini 2 5 Pro Tts",
+      "inputs": []
+    },
+    "gemini-3-8-flash-tts": {
+      "method": "post",
+      "summary": "Gemini 3 8 Flash Tts",
+      "inputs": []
+    },
+    "gemini-3-8-flash-lite-tts": {
+      "method": "post",
+      "summary": "Gemini 3 8 Flash Lite Tts",
+      "inputs": []
+    },
+    "get-template-workflows": {
+      "method": "get",
+      "summary": "Get Template Workflows",
+      "inputs": []
+    },
+    "google-imagen4-fast": {
+      "method": "post",
+      "summary": "google-imagen4-fast (fast)",
+      "inputs": []
+    },
+    "google-imagen4-ultra": {
+      "method": "post",
+      "summary": "google-imagen4-ultra (best)",
+      "inputs": []
+    },
+    "pixverse-v5-i2v": {
+      "method": "post",
+      "summary": "pixverse-v5-i2v",
+      "inputs": []
+    },
+    "pixverse-v5-t2v": {
+      "method": "post",
+      "summary": "pixverse-v5-t2v",
+      "inputs": []
+    },
+    "wan2.1-reference-video": {
+      "method": "post",
+      "summary": "wan2.1-reference-video",
+      "inputs": []
+    },
+    "seedance-lite-reference-to-video": {
+      "method": "post",
+      "summary": "seedance-lite-reference-video (budget)",
+      "inputs": []
+    },
+    "infinitetalk-image-to-video": {
+      "method": "post",
+      "summary": "infinitetalk-image-to-video",
+      "inputs": []
+    },
+    "infinitetalk-video-to-video": {
+      "method": "post",
+      "summary": "infinitetalk-video-to-video",
+      "inputs": []
+    },
+    "ideogram-v4": {
+      "method": "post",
+      "summary": "ideogram-v4 (best)",
+      "inputs": []
+    },
+    "elevenlabs-v4": {
+      "method": "post",
+      "summary": "elevenlabs-v4 (best)",
+      "inputs": []
+    },
+    "elevenlabs-v4-turbo": {
+      "method": "post",
+      "summary": "elevenlabs-v4-turbo (balanced)",
+      "inputs": []
+    },
+    "fish-s2-1-pro": {
+      "method": "post",
+      "summary": "fish-s2-1-pro (balanced)",
+      "inputs": []
+    },
+    "lyria-3-pro": {
+      "method": "post",
+      "summary": "lyria-3-pro (best)",
+      "inputs": []
+    },
+    "lyria-3": {
+      "method": "post",
+      "summary": "lyria-3 (balanced)",
+      "inputs": []
+    },
+    "lyria-2": {
+      "method": "post",
+      "summary": "lyria-2 (balanced)",
+      "inputs": []
+    },
+    "ideogram-v3-reframe": {
+      "method": "post",
+      "summary": "ideogram-v3-reframe",
+      "inputs": []
+    },
+    "sdxl-image": {
+      "method": "post",
+      "summary": "sdxl-image (budget)",
+      "inputs": []
+    },
+    "bytedance-seedream-v4": {
+      "method": "post",
+      "summary": "bytedance-seedream-v4 (balanced)",
+      "inputs": []
+    },
+    "bytedance-seedream-edit-v4": {
+      "method": "post",
+      "summary": "bytedance-seedream-v4-edit",
+      "inputs": []
+    },
+    "hunyuan-image-2.1": {
+      "method": "post",
+      "summary": "hunyuan-image-2.1 (balanced)",
+      "inputs": []
+    },
+    "chroma-image": {
+      "method": "post",
+      "summary": "chroma-image",
+      "inputs": []
+    },
+    "ai-video-upscaler": {
+      "method": "post",
+      "summary": "ai-video-upscaler",
+      "inputs": []
+    },
+    "video-background-remover": {
+      "method": "post",
+      "summary": "video-background-remover (budget)",
+      "inputs": []
+    },
+    "neta-lumina": {
+      "method": "post",
+      "summary": "neta-lumina",
+      "inputs": []
+    },
+    "perfect-pony-xl": {
+      "method": "post",
+      "summary": "perfect-pony-xl",
+      "inputs": []
+    },
+    "flux-krea-dev": {
+      "method": "post",
+      "summary": "flux-krea-dev (balanced)",
+      "inputs": []
+    },
+    "flux-redux": {
+      "method": "post",
+      "summary": "flux-redux (balanced)",
+      "inputs": []
+    },
+    "wan2.2-edit-video": {
+      "method": "post",
+      "summary": "wan2.2-edit-video",
+      "inputs": []
+    },
+    "kling-v1-avatar-standard": {
+      "method": "post",
+      "summary": "kling-v1-avatar-standard (balanced)",
+      "inputs": []
+    },
+    "kling-v1-avatar-pro": {
+      "method": "post",
+      "summary": "kling-v1-avatar-pro (best)",
+      "inputs": []
+    },
+    "wan2.2-animate": {
+      "method": "post",
+      "summary": "wan2.2-animate",
+      "inputs": []
+    },
+    "heygen-video-translate": {
+      "method": "post",
+      "summary": "heygen-video-translate (best)",
+      "inputs": []
+    },
+    "qwen-image-edit-plus": {
+      "method": "post",
+      "summary": "qwen-image-edit-plus (best)",
+      "inputs": []
+    },
+    "kling-v2.5-turbo-std-i2v": {
+      "method": "post",
+      "summary": "kling-v2.5-turbo-std-i2v (fast)",
+      "inputs": []
+    },
+    "kling-v2.5-turbo-pro-i2v": {
+      "method": "post",
+      "summary": "kling-v2.5-turbo-pro-i2v (fast)",
+      "inputs": []
+    },
+    "kling-v2.5-turbo-pro-t2v": {
+      "method": "post",
+      "summary": "kling-v2.5-turbo-pro-t2v (fast)",
+      "inputs": []
+    },
+    "wan2.5-image-to-video": {
+      "method": "post",
+      "summary": "wan2.5-image-to-video (budget)",
+      "inputs": []
+    },
+    "wan2.5-text-to-video": {
+      "method": "post",
+      "summary": "wan2.5-text-to-video (budget)",
+      "inputs": []
+    },
+    "wan2.5-image-to-video-fast": {
+      "method": "post",
+      "summary": "wan2.5-image-to-video-fast (fast)",
+      "inputs": []
+    },
+    "wan2.5-text-to-video-fast": {
+      "method": "post",
+      "summary": "wan2.5-text-to-video-fast (fast)",
+      "inputs": []
+    },
+    "wan2.5-text-to-image": {
+      "method": "post",
+      "summary": "wan2.5-text-to-image (balanced)",
+      "inputs": []
+    },
+    "topaz-video-upscale": {
+      "method": "post",
+      "summary": "topaz-video-upscale (best)",
+      "inputs": []
+    },
+    "topaz-image-upscale": {
+      "method": "post",
+      "summary": "topaz-image-upscale (best)",
+      "inputs": []
+    },
+    "topaz-upscale-image-creative": {
+      "method": "post",
+      "summary": "topaz-upscale-image-creative (balanced)",
+      "inputs": []
+    },
+    "topaz-upscale-image-generative": {
+      "method": "post",
+      "summary": "topaz-upscale-image-generative (best)",
+      "inputs": []
+    },
+    "topaz-upscale-image-precision": {
+      "method": "post",
+      "summary": "topaz-upscale-image-precision (balanced)",
+      "inputs": []
+    },
+    "topaz-upscale-video-creative": {
+      "method": "post",
+      "summary": "topaz-upscale-video-creative (best)",
+      "inputs": []
+    },
+    "topaz-upscale-video-generative": {
+      "method": "post",
+      "summary": "topaz-upscale-video-generative (best)",
+      "inputs": []
+    },
+    "topaz-upscale-video-precision": {
+      "method": "post",
+      "summary": "topaz-upscale-video-precision (balanced)",
+      "inputs": []
+    },
+    "wan2.5-image-edit": {
+      "method": "post",
+      "summary": "wan2.5-image-edit",
+      "inputs": []
+    },
+    "openai-sora": {
+      "method": "post",
+      "summary": "openai-sora",
+      "inputs": []
+    },
+    "hunyuan-image-3.0": {
+      "method": "post",
+      "summary": "hunyuan-image-3.0 (best)",
+      "inputs": []
+    },
+    "openai-sora-2-image-to-video": {
+      "method": "post",
+      "summary": "openai-sora-2-image-to-video (balanced)",
+      "inputs": []
+    },
+    "openai-sora-2-text-to-video": {
+      "method": "post",
+      "summary": "openai-sora-2-text-to-video (balanced)",
+      "inputs": []
+    },
+    "ai-video-upscaler-pro": {
+      "method": "post",
+      "summary": "ai-video-upscaler-pro (best)",
+      "inputs": []
+    },
+    "gemini-3-flash": {
+      "method": "post",
+      "summary": "gemini-3-flash",
+      "inputs": []
+    },
+    "gemini-3-5-flash": {
+      "method": "post",
+      "summary": "gemini-3-5-flash (balanced)",
+      "inputs": []
+    },
+    "gemini-3-5-flash-openai": {
+      "method": "post",
+      "summary": "gemini-3-5-flash-openai (balanced)",
+      "inputs": []
+    },
+    "gemini-3-6-flash": {
+      "method": "post",
+      "summary": "gemini-3-6-flash (balanced)",
+      "inputs": []
+    },
+    "gemini-3-6-flash-openai": {
+      "method": "post",
+      "summary": "gemini-3-6-flash-openai (balanced)",
+      "inputs": []
+    },
+    "gemini-3-8-flash": {
+      "method": "post",
+      "summary": "gemini-3-8-flash (balanced)",
+      "inputs": []
+    },
+    "gemini-4-argon": {
+      "method": "post",
+      "summary": "gemini-4-argon (best)",
+      "inputs": []
+    },
+    "gemini-4-carbon": {
+      "method": "post",
+      "summary": "gemini-4-carbon (best)",
+      "inputs": []
+    },
+    "gemini-4-hydrogen": {
+      "method": "post",
+      "summary": "gemini-4-hydrogen (balanced)",
+      "inputs": []
+    },
+    "gemini-3-7-flash": {
+      "method": "post",
+      "summary": "gemini-3-7-flash (balanced)",
+      "inputs": []
+    },
+    "gemini-3-7-flash-openai": {
+      "method": "post",
+      "summary": "gemini-3-7-flash-openai (balanced)",
+      "inputs": []
+    },
+    "kimi-k3": {
+      "method": "post",
+      "summary": "kimi-k3",
+      "inputs": []
+    },
+    "deepseek-v4-flash": {
+      "method": "post",
+      "summary": "Deepseek V4 Flash",
+      "inputs": []
+    },
+    "deepseek-v4-1-flash": {
+      "method": "post",
+      "summary": "deepseek-v4-1-flash",
+      "inputs": []
+    },
+    "deepseek-v4-pro": {
+      "method": "post",
+      "summary": "Deepseek V4 Pro",
+      "inputs": []
+    },
+    "gemini-3-1-pro": {
+      "method": "post",
+      "summary": "Gemini 3 1 Pro",
+      "inputs": []
+    },
+    "gemini-3-pro": {
+      "method": "post",
+      "summary": "Gemini 3 Pro",
+      "inputs": []
+    },
+    "gemini-2-5-pro": {
+      "method": "post",
+      "summary": "Gemini 2 5 Pro",
+      "inputs": []
+    },
+    "gemini-2-5-flash": {
+      "method": "post",
+      "summary": "Gemini 2 5 Flash",
+      "inputs": []
+    },
+    "gemini-video-vision": {
+      "method": "post",
+      "summary": "gemini-video-vision",
+      "inputs": []
+    },
+    "gemini-audio-vision": {
+      "method": "post",
+      "summary": "gemini-audio-vision",
+      "inputs": []
+    },
+    "claude-sonnet-4-6": {
+      "method": "post",
+      "summary": "claude-sonnet-4-6 (balanced)",
+      "inputs": []
+    },
+    "claude-opus-4-6": {
+      "method": "post",
+      "summary": "claude-opus-4-6 (best)",
+      "inputs": []
+    },
+    "claude-opus-4-8": {
+      "method": "post",
+      "summary": "claude-opus-4-8 (best)",
+      "inputs": []
+    },
+    "claude-opus-5-5": {
+      "method": "post",
+      "summary": "claude-opus-5-5 (best)",
+      "inputs": []
+    },
+    "claude-sonnet-5-5": {
+      "method": "post",
+      "summary": "claude-sonnet-5-5 (best)",
+      "inputs": []
+    },
+    "claude-haiku-5-5": {
+      "method": "post",
+      "summary": "claude-haiku-5-5",
+      "inputs": []
+    },
+    "claude-opus-4-7": {
+      "method": "post",
+      "summary": "Claude Opus 47",
+      "inputs": []
+    },
+    "claude-opus-4-5": {
+      "method": "post",
+      "summary": "Claude Opus 45",
+      "inputs": []
+    },
+    "claude-sonnet-4-5": {
+      "method": "post",
+      "summary": "Claude Sonnet 45",
+      "inputs": []
+    },
+    "claude-haiku-4-5": {
+      "method": "post",
+      "summary": "Claude Haiku 45",
+      "inputs": []
+    },
+    "claude-fable-5": {
+      "method": "post",
+      "summary": "claude-fable-5 (best)",
+      "inputs": []
+    },
+    "claude-fable-5-1": {
+      "method": "post",
+      "summary": "claude-fable-5-1 (best)",
+      "inputs": []
+    },
+    "claude-fable-5-2": {
+      "method": "post",
+      "summary": "claude-fable-5-2 (best)",
+      "inputs": []
+    },
+    "claude-sonnet-5": {
+      "method": "post",
+      "summary": "claude-sonnet-5 (best)",
+      "inputs": []
+    },
+    "claude-opus-5": {
+      "method": "post",
+      "summary": "claude-opus-5 (best)",
+      "inputs": []
+    },
+    "grok-4-3": {
+      "method": "post",
+      "summary": "grok-4-3 (best)",
+      "inputs": []
+    },
+    "grok-4-5": {
+      "method": "post",
+      "summary": "grok-4-5 (best)",
+      "inputs": []
+    },
+    "grok-4-6": {
+      "method": "post",
+      "summary": "grok-4-6 (best)",
+      "inputs": []
+    },
+    "grok-4-7": {
+      "method": "post",
+      "summary": "grok-4-7 (best)",
+      "inputs": []
+    },
+    "gpt-5-4": {
+      "method": "post",
+      "summary": "gpt-5-4 (best)",
+      "inputs": []
+    },
+    "gpt-5-2": {
+      "method": "post",
+      "summary": "Gpt 52",
+      "inputs": []
+    },
+    "gpt-5-5": {
+      "method": "post",
+      "summary": "Gpt 55",
+      "inputs": []
+    },
+    "gpt-5-6-luna": {
+      "method": "post",
+      "summary": "gpt-5-6-luna (fast)",
+      "inputs": []
+    },
+    "gpt-5-6-terra": {
+      "method": "post",
+      "summary": "gpt-5-6-terra (balanced)",
+      "inputs": []
+    },
+    "gpt-5-6-sol": {
+      "method": "post",
+      "summary": "gpt-5-6-sol (best)",
+      "inputs": []
+    },
+    "gpt-6-astra": {
+      "method": "post",
+      "summary": "gpt-6-astra (best)",
+      "inputs": []
+    },
+    "gpt-6-1-sol": {
+      "method": "post",
+      "summary": "gpt-6-1-sol (best)",
+      "inputs": []
+    },
+    "gpt-6-1-terra": {
+      "method": "post",
+      "summary": "gpt-6-1-terra (balanced)",
+      "inputs": []
+    },
+    "gpt-6-2-sol": {
+      "method": "post",
+      "summary": "gpt-6-2-sol (best)",
+      "inputs": []
+    },
+    "gpt-6-2-astra": {
+      "method": "post",
+      "summary": "gpt-6-2-astra (best)",
+      "inputs": []
+    },
+    "gpt-6-sol": {
+      "method": "post",
+      "summary": "gpt-6-sol (best)",
+      "inputs": []
+    },
+    "gpt-6-luna": {
+      "method": "post",
+      "summary": "gpt-6-luna (fast)",
+      "inputs": []
+    },
+    "gpt-codex": {
+      "method": "post",
+      "summary": "gpt-codex",
+      "inputs": []
+    },
+    "gpt-5-nano": {
+      "method": "post",
+      "summary": "gpt-5-nano (fast)",
+      "inputs": []
+    },
+    "gpt-5-mini": {
+      "method": "post",
+      "summary": "gpt-5-mini (balanced)",
+      "inputs": []
+    },
+    "video-watermark-remover": {
+      "method": "post",
+      "summary": "video-watermark-remover",
+      "inputs": []
+    },
+    "seedance-2.0-watermark-remover": {
+      "method": "post",
+      "summary": "sd-2-watermark-remover",
+      "inputs": []
+    },
+    "seedance-2-video-watermark-remover-pro": {
+      "method": "post",
+      "summary": "seedance-2-video-watermark-remover-pro (best)",
+      "inputs": []
+    },
+    "ovi-image-to-video": {
+      "method": "post",
+      "summary": "ovi-image-to-video",
+      "inputs": []
+    },
+    "ovi-text-to-video": {
+      "method": "post",
+      "summary": "ovi-text-to-video",
+      "inputs": []
+    },
+    "openai-sora-2-pro-image-to-video": {
+      "method": "post",
+      "summary": "openai-sora-2-pro-image-to-video (best)",
+      "inputs": []
+    },
+    "openai-sora-2-pro-text-to-video": {
+      "method": "post",
+      "summary": "openai-sora-2-pro-text-to-video (best)",
+      "inputs": []
+    },
+    "hf-soul-image-to-image": {
+      "method": "post",
+      "summary": "hf-soul-image-to-image",
+      "inputs": []
+    },
+    "leonardoai-phoenix-1.0": {
+      "method": "post",
+      "summary": "leonardoai-phoenix-1.0",
+      "inputs": []
+    },
+    "leonardoai-lucid-origin": {
+      "method": "post",
+      "summary": "leonardoai-lucid-origin",
+      "inputs": []
+    },
+    "leonardoai-motion-2.0": {
+      "method": "post",
+      "summary": "leonardoai-motion-2.0",
+      "inputs": []
+    },
+    "hf-dop-image-to-video": {
+      "method": "post",
+      "summary": "hf-dop-image-to-video",
+      "inputs": []
+    },
+    "remix-video": {
+      "method": "post",
+      "summary": "remix-video",
+      "inputs": []
+    },
+    "veo3.1-image-to-video": {
+      "method": "post",
+      "summary": "veo3.1-image-to-video (best)",
+      "inputs": []
+    },
+    "veo3.1-fast-image-to-video": {
+      "method": "post",
+      "summary": "veo3.1-fast-image-to-video (fast)",
+      "inputs": []
+    },
+    "veo3.1-text-to-video": {
+      "method": "post",
+      "summary": "veo3.1-text-to-video (best)",
+      "inputs": []
+    },
+    "veo3.1-fast-text-to-video": {
+      "method": "post",
+      "summary": "veo3.1-fast-text-to-video (fast)",
+      "inputs": []
+    },
+    "veo3.1-lite-text-to-video": {
+      "method": "post",
+      "summary": "veo3.1-lite-text-to-video (fast)",
+      "inputs": []
+    },
+    "veo3.1-lite-image-to-video": {
+      "method": "post",
+      "summary": "veo3.1-lite-image-to-video (fast)",
+      "inputs": []
+    },
+    "veo3.1-reference-to-video": {
+      "method": "post",
+      "summary": "veo3.1-reference-to-video",
+      "inputs": []
+    },
+    "create-story-board-data": {
+      "method": "post",
+      "summary": "sora2-storyboard",
+      "inputs": []
+    },
+    "modify-sora2-storyboard-data": {
+      "method": "post",
+      "summary": "Modify Sora2 Storyboard Data",
+      "inputs": []
+    },
+    "expand-sora2-storyboard-data": {
+      "method": "post",
+      "summary": "Expand Sora2 Storyboard",
+      "inputs": []
+    },
+    "adjust-duration-sora2-storyboard": {
+      "method": "post",
+      "summary": "Adjust Duration Sora2 Storyboard",
+      "inputs": []
+    },
+    "openai-sora-2-pro-storyboard": {
+      "method": "post",
+      "summary": "openai-sora-2-pro-storyboard",
+      "inputs": []
+    },
+    "veo3.1-extend-video": {
+      "method": "post",
+      "summary": "veo3.1-extend-video",
+      "inputs": []
+    },
+    "seedance-pro-i2v-fast": {
+      "method": "post",
+      "summary": "seedance-pro-i2v-fast (fast)",
+      "inputs": []
+    },
+    "seedance-pro-t2v-fast": {
+      "method": "post",
+      "summary": "seedance-pro-t2v-fast (fast)",
+      "inputs": []
+    },
+    "ltx-2-pro-image-to-video": {
+      "method": "post",
+      "summary": "ltx-2-pro-image-to-video (budget)",
+      "inputs": []
+    },
+    "ltx-2-pro-text-to-video": {
+      "method": "post",
+      "summary": "ltx-2-pro-text-to-video (budget)",
+      "inputs": []
+    },
+    "ltx-2-fast-image-to-video": {
+      "method": "post",
+      "summary": "ltx-2-fast-image-to-video (fast)",
+      "inputs": []
+    },
+    "ltx-2-fast-text-to-video": {
+      "method": "post",
+      "summary": "ltx-2-fast-text-to-video (fast)",
+      "inputs": []
+    },
+    "vidu-q2-reference": {
+      "method": "post",
+      "summary": "vidu-q2-reference",
+      "inputs": []
+    },
+    "vidu-q2-turbo-start-end-video": {
+      "method": "post",
+      "summary": "vidu-q2-turbo-start-end-video",
+      "inputs": []
+    },
+    "vidu-q2-pro-start-end-video": {
+      "method": "post",
+      "summary": "vidu-q2-pro-start-end-video",
+      "inputs": []
+    },
+    "vidu-q2-pro-text-to-video": {
+      "method": "post",
+      "summary": "vidu-q2-pro-text-to-video (balanced)",
+      "inputs": []
+    },
+    "vidu-q2-pro-image-to-video": {
+      "method": "post",
+      "summary": "vidu-q2-pro-image-to-video (balanced)",
+      "inputs": []
+    },
+    "vidu-q2-turbo-text-to-video": {
+      "method": "post",
+      "summary": "vidu-q2-turbo-text-to-video (fast)",
+      "inputs": []
+    },
+    "vidu-q2-turbo-image-to-video": {
+      "method": "post",
+      "summary": "vidu-q2-turbo-image-to-video (fast)",
+      "inputs": []
+    },
+    "minimax-hailuo-2.3-standard-i2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-2.3-standard-i2v (budget)",
+      "inputs": []
+    },
+    "minimax-hailuo-2.3-standard-t2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-2.3-standard-t2v (budget)",
+      "inputs": []
+    },
+    "minimax-hailuo-2.3-pro-i2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-2.3-pro-i2v (best)",
+      "inputs": []
+    },
+    "minimax-hailuo-2.3-pro-t2v": {
+      "method": "post",
+      "summary": "minimax-hailuo-2.3-pro-t2v (best)",
+      "inputs": []
+    },
+    "minimax-hailuo-2.3-fast": {
+      "method": "post",
+      "summary": "minimax-hailuo-2.3-fast (fast)",
+      "inputs": []
+    },
+    "minimax-h3-text-to-video": {
+      "method": "post",
+      "summary": "Minimax H3 Text To Video",
+      "inputs": []
+    },
+    "minimax-h3-image-to-video": {
+      "method": "post",
+      "summary": "Minimax H3 Image To Video",
+      "inputs": []
+    },
+    "minimax-h3-reference-to-video": {
+      "method": "post",
+      "summary": "Minimax H3 Reference To Video",
+      "inputs": []
+    },
+    "minimax-h3-open-text-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-open-text-to-video (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-open-image-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-open-image-to-video (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-image-to-video-spicy": {
+      "method": "post",
+      "summary": "minimax-h3-image-to-video-spicy (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-text-to-video-spicy": {
+      "method": "post",
+      "summary": "minimax-h3-text-to-video-spicy (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-reference-to-video-spicy": {
+      "method": "post",
+      "summary": "minimax-h3-reference-to-video-spicy (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-open-reference-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-open-reference-to-video",
+      "inputs": []
+    },
+    "minimax-h3-max-text-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-text-to-video (best)",
+      "inputs": []
+    },
+    "minimax-h3-max-image-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-image-to-video (best)",
+      "inputs": []
+    },
+    "minimax-h3-max-reference-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-reference-to-video (best)",
+      "inputs": []
+    },
+    "minimax-h3-max-turbo-text-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-turbo-text-to-video (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-max-turbo-image-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-turbo-image-to-video (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-max-spicy-text-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-spicy-text-to-video (best)",
+      "inputs": []
+    },
+    "minimax-h3-max-spicy-image-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-spicy-image-to-video (best)",
+      "inputs": []
+    },
+    "minimax-h3-max-spicy-reference-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-spicy-reference-to-video (best)",
+      "inputs": []
+    },
+    "minimax-h3-max-turbo-spicy-text-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-turbo-spicy-text-to-video (balanced)",
+      "inputs": []
+    },
+    "minimax-h3-max-turbo-spicy-image-to-video": {
+      "method": "post",
+      "summary": "minimax-h3-max-turbo-spicy-image-to-video (balanced)",
+      "inputs": []
+    },
+    "grok-imagine-video-1-5-preview": {
+      "method": "post",
+      "summary": "grok-imagine-video-1-5-preview",
+      "inputs": []
+    },
+    "grok-imagine-video-1-5-text-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-video-1-5-text-to-video (best)",
+      "inputs": []
+    },
+    "grok-imagine-video-1-5-image-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-video-1-5-image-to-video (best)",
+      "inputs": []
+    },
+    "grok-imagine-video-1-5-reference-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-video-1-5-reference-to-video (best)",
+      "inputs": []
+    },
+    "grok-imagine-video-1-5-lite-text-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-video-1-5-lite-text-to-video (budget)",
+      "inputs": []
+    },
+    "grok-imagine-video-1-5-lite-image-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-video-1-5-lite-image-to-video (budget)",
+      "inputs": []
+    },
+    "grok-imagine-image-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-image-to-video",
+      "inputs": []
+    },
+    "grok-imagine-text-to-video": {
+      "method": "post",
+      "summary": "grok-imagine-text-to-video",
+      "inputs": []
+    },
+    "grok-imagine-text-to-image": {
+      "method": "post",
+      "summary": "grok-imagine-text-to-image",
+      "inputs": []
+    },
+    "grok-imagine-text-to-image-quality": {
+      "method": "post",
+      "summary": "grok-imagine-text-to-image-quality",
+      "inputs": []
+    },
+    "grok-imagine-extend": {
+      "method": "post",
+      "summary": "grok-imagine-extend",
+      "inputs": []
+    },
+    "grok-imagine-image-2": {
+      "method": "post",
+      "summary": "grok-imagine-image-2",
+      "inputs": []
+    },
+    "grok-imagine-image-2-edit": {
+      "method": "post",
+      "summary": "grok-imagine-image-2-edit",
+      "inputs": []
+    },
+    "seedvr2-image-upscale": {
+      "method": "post",
+      "summary": "seedvr2-image-upscale",
+      "inputs": []
+    },
+    "qwen-image-edit-plus-lora": {
+      "method": "post",
+      "summary": "qwen-image-edit-plus-lora",
+      "inputs": []
+    },
+    "qwen-image-edit-2511-lora": {
+      "method": "post",
+      "summary": "qwen-image-edit-2511-lora",
+      "inputs": []
+    },
+    "qwen-image-edit-lora": {
+      "method": "post",
+      "summary": "qwen-image-edit-lora",
+      "inputs": []
+    },
+    "face-expression-change": {
+      "method": "post",
+      "summary": "qwen-image-face-expression-change",
+      "inputs": []
+    },
+    "nano-banana-pro-edit": {
+      "method": "post",
+      "summary": "nano-banana-pro-edit (best)",
+      "inputs": []
+    },
+    "nano-banana-pro": {
+      "method": "post",
+      "summary": "nano-banana-pro (best)",
+      "inputs": []
+    },
+    "kling-o1-image-to-video": {
+      "method": "post",
+      "summary": "kling-o1-image-to-video (best)",
+      "inputs": []
+    },
+    "kling-o1-text-to-video": {
+      "method": "post",
+      "summary": "kling-o1-text-to-video (best)",
+      "inputs": []
+    },
+    "kling-o1-reference-to-video": {
+      "method": "post",
+      "summary": "kling-o1-reference-to-video",
+      "inputs": []
+    },
+    "kling-o1-video-edit": {
+      "method": "post",
+      "summary": "kling-o1-video-edit",
+      "inputs": []
+    },
+    "kling-o1-video-edit-fast": {
+      "method": "post",
+      "summary": "kling-o1-video-edit-fast (fast)",
+      "inputs": []
+    },
+    "z-image-turbo": {
+      "method": "post",
+      "summary": "z-image-turbo (fast)",
+      "inputs": []
+    },
+    "kling-o1-text-to-image": {
+      "method": "post",
+      "summary": "kling-o1-text-to-image",
+      "inputs": []
+    },
+    "kling-o1-edit-image": {
+      "method": "post",
+      "summary": "kling-o1-edit-image",
+      "inputs": []
+    },
+    "flux-2-dev": {
+      "method": "post",
+      "summary": "flux-2-dev (balanced)",
+      "inputs": []
+    },
+    "flux-2-dev-edit": {
+      "method": "post",
+      "summary": "flux-2-dev-edit (balanced)",
+      "inputs": []
+    },
+    "flux-2-flex": {
+      "method": "post",
+      "summary": "flux-2-flex (balanced)",
+      "inputs": []
+    },
+    "flux-2-flex-edit": {
+      "method": "post",
+      "summary": "flux-2-flex-edit (balanced)",
+      "inputs": []
+    },
+    "flux-2-pro": {
+      "method": "post",
+      "summary": "flux-2-pro (best)",
+      "inputs": []
+    },
+    "flux-2-pro-edit": {
+      "method": "post",
+      "summary": "flux-2-pro-edit (best)",
+      "inputs": []
+    },
+    "vidu-q2-text-to-image": {
+      "method": "post",
+      "summary": "vidu-q2-text-to-image",
+      "inputs": []
+    },
+    "vidu-q2-reference-to-image": {
+      "method": "post",
+      "summary": "vidu-q2-reference",
+      "inputs": []
+    },
+    "bytedance-seedream-v4.5": {
+      "method": "post",
+      "summary": "bytedance-seedream-v4 (balanced)",
+      "inputs": []
+    },
+    "bytedance-seedream-v4.5-edit": {
+      "method": "post",
+      "summary": "bytedance-seedream-v4.5-edit",
+      "inputs": []
+    },
+    "pixverse-v5.5-t2v": {
+      "method": "post",
+      "summary": "pixverse-v5.5-t2v",
+      "inputs": []
+    },
+    "pixverse-v5.5-i2v": {
+      "method": "post",
+      "summary": "pixverse-v5.5-i2v",
+      "inputs": []
+    },
+    "kling-v2.6-pro-t2v": {
+      "method": "post",
+      "summary": "kling-v2.6-pro-t2v (balanced)",
+      "inputs": []
+    },
+    "kling-v2.6-pro-i2v": {
+      "method": "post",
+      "summary": "kling-v2.6-pro-i2v (balanced)",
+      "inputs": []
+    },
+    "kling-v2-avatar-standard": {
+      "method": "post",
+      "summary": "kling-v2-avatar-standard (balanced)",
+      "inputs": []
+    },
+    "kling-v2-avatar-pro": {
+      "method": "post",
+      "summary": "kling-v2-avatar-pro (best)",
+      "inputs": []
+    },
+    "wan2.2-spicy-image-to-video": {
+      "method": "post",
+      "summary": "wan2.2-spicy-image-to-video",
+      "inputs": []
+    },
+    "wan2.2-spicy-video-extend": {
+      "method": "post",
+      "summary": "wan2.2-spicy-video-extend",
+      "inputs": []
+    },
+    "minimax-voice-clone": {
+      "method": "post",
+      "summary": "minimax-voice-clone",
+      "inputs": []
+    },
+    "minimax-speech-2.6-hd": {
+      "method": "post",
+      "summary": "minimax-speech-2.6-hd (best)",
+      "inputs": []
+    },
+    "minimax-music-3.0": {
+      "method": "post",
+      "summary": "minimax-music-3.0 (balanced)",
+      "inputs": []
+    },
+    "minimax-speech-2.6-turbo": {
+      "method": "post",
+      "summary": "minimax-speech-2.6-turbo (fast)",
+      "inputs": []
+    },
+    "gpt-image-1.5": {
+      "method": "post",
+      "summary": "gpt-image-1.5 (best)",
+      "inputs": []
+    },
+    "wan2.6-image-to-video": {
+      "method": "post",
+      "summary": "wan2.6-image-to-video (balanced)",
+      "inputs": []
+    },
+    "wan2.6-text-to-video": {
+      "method": "post",
+      "summary": "wan2.6-text-to-video (balanced)",
+      "inputs": []
+    },
+    "kling-o1-standard-image-to-video": {
+      "method": "post",
+      "summary": "kling-o1-standard-image-to-video (fast)",
+      "inputs": []
+    },
+    "kling-o1-standard-reference-to-video": {
+      "method": "post",
+      "summary": "kling-o1-standard-reference-to-video",
+      "inputs": []
+    },
+    "kling-o1-standard-video-edit": {
+      "method": "post",
+      "summary": "kling-o1-standard-video-edit",
+      "inputs": []
+    },
+    "openrouter-vision": {
+      "method": "post",
+      "summary": "openrouter-vision",
+      "inputs": []
+    },
+    "any-llm-models": {
+      "method": "post",
+      "summary": "any-llm",
+      "inputs": []
+    },
+    "seedance-v1.5-pro-t2v": {
+      "method": "post",
+      "summary": "seedance-v1.5-pro-t2v (best)",
+      "inputs": []
+    },
+    "seedance-v1.5-pro-i2v": {
+      "method": "post",
+      "summary": "seedance-v1.5-pro-i2v (balanced)",
+      "inputs": []
+    },
+    "seedance-v1.5-pro-t2v-fast": {
+      "method": "post",
+      "summary": "seedance-v1.5-pro-t2v-fast (balanced)",
+      "inputs": []
+    },
+    "seedance-v1.5-pro-i2v-fast": {
+      "method": "post",
+      "summary": "seedance-v1.5-pro-i2v-fast (fast)",
+      "inputs": []
+    },
+    "seedance-v1.5-pro-video-extend": {
+      "method": "post",
+      "summary": "seedance-v1.5-pro-video-extend",
+      "inputs": []
+    },
+    "seedance-v1.5-pro-video-extend-fast": {
+      "method": "post",
+      "summary": "seedance-v1.5-pro-video-extend-fast (fast)",
+      "inputs": []
+    },
+    "kling-v2.6-pro-motion-control": {
+      "method": "post",
+      "summary": "kling-v2.6-pro-motion-control",
+      "inputs": []
+    },
+    "qwen-image-edit-2511": {
+      "method": "post",
+      "summary": "qwen-image-edit-2511",
+      "inputs": []
+    },
+    "wan2.6-text-to-image": {
+      "method": "post",
+      "summary": "wan2.6-text-to-image (balanced)",
+      "inputs": []
+    },
+    "wan2.6-image-edit": {
+      "method": "post",
+      "summary": "wan2.6-image-edit (balanced)",
+      "inputs": []
+    },
+    "qwen-text-to-image-2512": {
+      "method": "post",
+      "summary": "qwen-text-to-image-2512",
+      "inputs": []
+    },
+    "gpt-image-1.5-edit": {
+      "method": "post",
+      "summary": "gpt-image-1.5-edit",
+      "inputs": []
+    },
+    "kling-v2.6-std-motion-control": {
+      "method": "post",
+      "summary": "kling-v2.6-std-motion-control",
+      "inputs": []
+    },
+    "grok-imagine-image-to-image": {
+      "method": "post",
+      "summary": "grok-imagine-image-to-image",
+      "inputs": []
+    },
+    "storyboard-projects": {
+      "method": "post",
+      "summary": "Create Storyboard Project",
+      "inputs": []
+    },
+    "ltx-2-19b-image-to-video": {
+      "method": "post",
+      "summary": "ltx-2-19b-image-to-video",
+      "inputs": []
+    },
+    "ltx-2-19b-text-to-video": {
+      "method": "post",
+      "summary": "ltx-2-19b-text-to-video",
+      "inputs": []
+    },
+    "veo3.1-4k-video": {
+      "method": "post",
+      "summary": "veo3.1-4k-video (best)",
+      "inputs": []
+    },
+    "add-image-watermark": {
+      "method": "post",
+      "summary": "add-image-watermark",
+      "inputs": []
+    },
+    "add-video-watermark": {
+      "method": "post",
+      "summary": "add-video-watermark",
+      "inputs": []
+    },
+    "flux-2-klein-4b": {
+      "method": "post",
+      "summary": "flux-2-klein-4b (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-4b-edit": {
+      "method": "post",
+      "summary": "flux-2-klein-4b-edit (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-4b-turbo": {
+      "method": "post",
+      "summary": "flux-2-klein-4b-turbo (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-4b-turbo-edit": {
+      "method": "post",
+      "summary": "flux-2-klein-4b-turbo-edit (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-9b": {
+      "method": "post",
+      "summary": "flux-2-klein-9b (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-9b-edit": {
+      "method": "post",
+      "summary": "flux-2-klein-9b-edit (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-9b-turbo": {
+      "method": "post",
+      "summary": "flux-2-klein-9b-turbo (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-9b-turbo-edit": {
+      "method": "post",
+      "summary": "flux-2-klein-9b-turbo-edit (fast)",
+      "inputs": []
+    },
+    "flux-2-klein-4b-text-to-image-lora": {
+      "method": "post",
+      "summary": "flux-2-klein-4b-text-to-image-lora",
+      "inputs": []
+    },
+    "flux-2-klein-9b-text-to-image-lora": {
+      "method": "post",
+      "summary": "flux-2-klein-9b-text-to-image-lora",
+      "inputs": []
+    },
+    "flux-2-klein-4b-edit-lora": {
+      "method": "post",
+      "summary": "flux-2-klein-4b-edit-lora",
+      "inputs": []
+    },
+    "flux-2-klein-9b-edit-lora": {
+      "method": "post",
+      "summary": "flux-2-klein-9b-edit-lora",
+      "inputs": []
+    },
+    "qwen-image-text-to-image-lora": {
+      "method": "post",
+      "summary": "qwen-image-text-to-image-lora",
+      "inputs": []
+    },
+    "qwen-image-text-to-image-2512-lora": {
+      "method": "post",
+      "summary": "qwen-image-text-to-image-2512-lora",
+      "inputs": []
+    },
+    "z-image-base": {
+      "method": "post",
+      "summary": "z-image-base (budget)",
+      "inputs": []
+    },
+    "ltx-2-19b-lipsync": {
+      "method": "post",
+      "summary": "ltx-2-19b-lipsync",
+      "inputs": []
+    },
+    "kling-v3.0-pro-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-pro-image-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-pro-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-pro-text-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-standard-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-standard-image-to-video (balanced)",
+      "inputs": []
+    },
+    "kling-v3.0-standard-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-standard-text-to-video (balanced)",
+      "inputs": []
+    },
+    "kling-v3.0-4k-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-4k-image-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-4k-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-4k-text-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-omni-standard-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-omni-standard-text-to-video (balanced)",
+      "inputs": []
+    },
+    "kling-v3.0-omni-standard-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-omni-standard-image-to-video (balanced)",
+      "inputs": []
+    },
+    "kling-v3.0-omni-pro-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-omni-pro-text-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-omni-pro-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-omni-pro-image-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-omni-4k-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-omni-4k-text-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3.0-omni-4k-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3.0-omni-4k-image-to-video (best)",
+      "inputs": []
+    },
+    "kling-v3-turbo-standard-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3-turbo-standard-image-to-video (fast)",
+      "inputs": []
+    },
+    "kling-v3-turbo-pro-image-to-video": {
+      "method": "post",
+      "summary": "kling-v3-turbo-pro-image-to-video (balanced)",
+      "inputs": []
+    },
+    "kling-v3-turbo-standard-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3-turbo-standard-text-to-video (fast)",
+      "inputs": []
+    },
+    "kling-v3-turbo-pro-text-to-video": {
+      "method": "post",
+      "summary": "kling-v3-turbo-pro-text-to-video (balanced)",
+      "inputs": []
+    },
+    "seedream-5.0": {
+      "method": "post",
+      "summary": "bytedance-seedream-v5.0 (best)",
+      "inputs": []
+    },
+    "seedream-5.0-edit": {
+      "method": "post",
+      "summary": "bytedance-seedream-v5.0-edit",
+      "inputs": []
+    },
+    "seedream-5.0-pro": {
+      "method": "post",
+      "summary": "bytedance-seedream-5.0-pro (best)",
+      "inputs": []
+    },
+    "seedream-5.0-pro-edit": {
+      "method": "post",
+      "summary": "bytedance-seedream-5.0-pro-edit (best)",
+      "inputs": []
+    },
+    "bytedance-seedream-5.0-pro-layer": {
+      "method": "post",
+      "summary": "bytedance-seedream-5.0-pro-layer (best)",
+      "inputs": []
+    },
+    "seedream-5.0-flash": {
+      "method": "post",
+      "summary": "seedream-5.0-flash (fast)",
+      "inputs": []
+    },
+    "seedream-5.0-flash-edit": {
+      "method": "post",
+      "summary": "seedream-5.0-flash-edit (fast)",
+      "inputs": []
+    },
+    "seedream-5.0-flash-layerize": {
+      "method": "post",
+      "summary": "seedream-5.0-flash-layerize (fast)",
+      "inputs": []
+    },
+    "seedream-5.5": {
+      "method": "post",
+      "summary": "seedream-5.5 (best)",
+      "inputs": []
+    },
+    "seedream-5.5-edit": {
+      "method": "post",
+      "summary": "seedream-5.5-edit (best)",
+      "inputs": []
+    },
+    "seedream-5.5-layer": {
+      "method": "post",
+      "summary": "seedream-5.5-layer (best)",
+      "inputs": []
+    },
+    "minimax-h3-image-text-to-image": {
+      "method": "post",
+      "summary": "minimax-h3-image-text-to-image (best)",
+      "inputs": []
+    },
+    "minimax-h3-image-edit": {
+      "method": "post",
+      "summary": "minimax-h3-image-edit (best)",
+      "inputs": []
+    },
+    "minimax-h3-image-highspeed-text-to-image": {
+      "method": "post",
+      "summary": "minimax-h3-image-highspeed-text-to-image",
+      "inputs": []
+    },
+    "minimax-h3-image-highspeed-edit": {
+      "method": "post",
+      "summary": "minimax-h3-image-highspeed-edit",
+      "inputs": []
+    },
+    "nano-banana-2": {
+      "method": "post",
+      "summary": "nano-banana-2 (best)",
+      "inputs": []
+    },
+    "nano-banana-2-1": {
+      "method": "post",
+      "summary": "nano-banana-2-1 (best)",
+      "inputs": []
+    },
+    "nano-banana-2-1-edit": {
+      "method": "post",
+      "summary": "nano-banana-2-1-edit (balanced)",
+      "inputs": []
+    },
+    "nano-banana-2-edit": {
+      "method": "post",
+      "summary": "nano-banana-2-edit (balanced)",
+      "inputs": []
+    },
+    "seedance-v2.0-t2v": {
+      "method": "post",
+      "summary": "sd-2-t2v (best)",
+      "inputs": []
+    },
+    "seedance-v2.0-i2v": {
+      "method": "post",
+      "summary": "sd-2-i2v (best)",
+      "inputs": []
+    },
+    "seedance-2.0-t2v-480p": {
+      "method": "post",
+      "summary": "sd-2-t2v-480p (budget)",
+      "inputs": []
+    },
+    "seedance-2.0-i2v-480p": {
+      "method": "post",
+      "summary": "sd-2-i2v-480p (budget)",
+      "inputs": []
+    },
+    "seedance-v2.0-video-edit": {
+      "method": "post",
+      "summary": "sd-2-video-edit",
+      "inputs": []
+    },
+    "seedance-v2.0-extend": {
+      "method": "post",
+      "summary": "sd-2-extend",
+      "inputs": []
+    },
+    "seedance-2-vip-extend": {
+      "method": "post",
+      "summary": "sd-2-vip-extend (best)",
+      "inputs": []
+    },
+    "sd-2-vip-extend": {
+      "method": "post",
+      "summary": "sd-2-vip-extend (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-extend-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-extend-1080p (best)",
+      "inputs": []
+    },
+    "sd-2-vip-extend-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-extend-1080p (best)",
+      "inputs": []
+    },
+    "ai-captions": {
+      "method": "post",
+      "summary": "Ai Captions",
+      "inputs": []
+    },
+    "qwen-image-2.0": {
+      "method": "post",
+      "summary": "qwen-image-2.0",
+      "inputs": []
+    },
+    "qwen-image-2.0-edit": {
+      "method": "post",
+      "summary": "qwen-image-2.0-edit",
+      "inputs": []
+    },
+    "qwen-image-2.0-pro": {
+      "method": "post",
+      "summary": "qwen-image-2.0-pro",
+      "inputs": []
+    },
+    "qwen-image-2.0-pro-edit": {
+      "method": "post",
+      "summary": "qwen-image-2.0-pro-edit (balanced)",
+      "inputs": []
+    },
+    "ltx-2.3-text-to-video": {
+      "method": "post",
+      "summary": "ltx-2.3-text-to-video (best)",
+      "inputs": []
+    },
+    "ltx-2.3-image-to-video": {
+      "method": "post",
+      "summary": "ltx-2.3-image-to-video (best)",
+      "inputs": []
+    },
+    "ltx-2.5-text-to-video": {
+      "method": "post",
+      "summary": "ltx-2.5-text-to-video (best)",
+      "inputs": []
+    },
+    "ltx-2.5-image-to-video": {
+      "method": "post",
+      "summary": "ltx-2.5-image-to-video (best)",
+      "inputs": []
+    },
+    "ltx-2.3-lipsync": {
+      "method": "post",
+      "summary": "ltx-2.3-lipsync (best)",
+      "inputs": []
+    },
+    "volcengine-video-to-video-lip-sync": {
+      "method": "post",
+      "summary": "volcengine-video-to-video-lip-sync (balanced)",
+      "inputs": []
+    },
+    "omnihuman-1-5": {
+      "method": "post",
+      "summary": "omnihuman-1-5 (balanced)",
+      "inputs": []
+    },
+    "ltx-2.3-video-extend": {
+      "method": "post",
+      "summary": "ltx-2.3-video-extend",
+      "inputs": []
+    },
+    "kling-v3.0-std-motion-control": {
+      "method": "post",
+      "summary": "kling-v3.0-std-motion-control",
+      "inputs": []
+    },
+    "kling-v3.0-pro-motion-control": {
+      "method": "post",
+      "summary": "kling-v3.0-pro-motion-control",
+      "inputs": []
+    },
+    "photo-pack": {
+      "method": "post",
+      "summary": "photo-pack",
+      "inputs": []
+    },
+    "openai-sora-2-pro-characters": {
+      "method": "post",
+      "summary": "Sora 2 Characters Pro",
+      "inputs": []
+    },
+    "seedance-2.0-omni-reference": {
+      "method": "post",
+      "summary": "sd-2-omni-reference (best)",
+      "inputs": []
+    },
+    "seedance-2.0-omni-reference-480p": {
+      "method": "post",
+      "summary": "seedance-2.0-omni-reference-480p (budget)",
+      "inputs": []
+    },
+    "seedance-2-omni-reference-train": {
+      "method": "post",
+      "summary": "Omni Reference Train Character",
+      "inputs": []
+    },
+    "seedance-2-motion-control": {
+      "method": "post",
+      "summary": "seedance-2-motion-control (balanced)",
+      "inputs": []
+    },
+    "seedance-2-spicy-motion-control": {
+      "method": "post",
+      "summary": "seedance-2-spicy-motion-control (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-text-to-video (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-text-to-video (fast)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-image-to-video (fast)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-first-last-frame": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-first-last-frame (fast)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-reference-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-reference-to-video (fast)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-video-edit": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-video-edit (fast)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-video-extend": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-video-extend (fast)",
+      "inputs": []
+    },
+    "seedance-2.5-flash-spicy-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-spicy-text-to-video",
+      "inputs": []
+    },
+    "seedance-2.5-flash-spicy-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-spicy-image-to-video",
+      "inputs": []
+    },
+    "seedance-2.5-flash-spicy-first-last-frame": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-spicy-first-last-frame",
+      "inputs": []
+    },
+    "seedance-2.5-flash-spicy-reference-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-spicy-reference-to-video",
+      "inputs": []
+    },
+    "seedance-2.5-flash-spicy-video-edit": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-spicy-video-edit",
+      "inputs": []
+    },
+    "seedance-2.5-flash-spicy-video-extend": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-spicy-video-extend",
+      "inputs": []
+    },
+    "seedance-2.5-flash-intl-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-intl-text-to-video",
+      "inputs": []
+    },
+    "seedance-2.5-flash-intl-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-intl-image-to-video",
+      "inputs": []
+    },
+    "seedance-2.5-flash-intl-first-last-frame": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-intl-first-last-frame",
+      "inputs": []
+    },
+    "seedance-2.5-flash-intl-reference-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-intl-reference-to-video",
+      "inputs": []
+    },
+    "seedance-2.5-flash-intl-video-edit": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-intl-video-edit",
+      "inputs": []
+    },
+    "seedance-2.5-flash-intl-video-extend": {
+      "method": "post",
+      "summary": "seedance-2.5-flash-intl-video-extend",
+      "inputs": []
+    },
+    "seedance-2.5-text-to-video-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Text To Video 480P",
+      "inputs": []
+    },
+    "seedance-2.5-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2.5-image-to-video (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-image-to-video-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Image To Video 480P",
+      "inputs": []
+    },
+    "seedance-2.5-first-last-frame": {
+      "method": "post",
+      "summary": "seedance-2.5-first-last-frame (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-first-last-frame-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 First Last Frame 480P",
+      "inputs": []
+    },
+    "seedance-2.5-omni-reference": {
+      "method": "post",
+      "summary": "seedance-2.5-omni-reference (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-omni-reference-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Omni Reference 480P",
+      "inputs": []
+    },
+    "seedance-2.5-motion-control": {
+      "method": "post",
+      "summary": "seedance-2.5-motion-control (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-intl-motion-control": {
+      "method": "post",
+      "summary": "seedance-2.5-intl-motion-control (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-motion-control": {
+      "method": "post",
+      "summary": "seedance-2.5-spicy-motion-control (balanced)",
+      "inputs": []
+    },
+    "seedance-2.5-text-to-video-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Text To Video 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-text-to-video-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Text To Video 4K",
+      "inputs": []
+    },
+    "seedance-2.5-image-to-video-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Image To Video 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-image-to-video-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Image To Video 4K",
+      "inputs": []
+    },
+    "seedance-2.5-first-last-frame-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 First Last Frame 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-first-last-frame-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 First Last Frame 4K",
+      "inputs": []
+    },
+    "seedance-2.5-omni-reference-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Omni Reference 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-omni-reference-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Omni Reference 4K",
+      "inputs": []
+    },
+    "seedance-2.5-video-edit": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Edit",
+      "inputs": []
+    },
+    "seedance-2.5-video-edit-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Edit 480P",
+      "inputs": []
+    },
+    "seedance-2.5-video-edit-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Edit 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-video-edit-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Edit 4K",
+      "inputs": []
+    },
+    "seedance-2.5-video-extend": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Extend",
+      "inputs": []
+    },
+    "seedance-2.5-video-extend-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Extend 480P",
+      "inputs": []
+    },
+    "seedance-2.5-video-extend-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Extend 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-video-extend-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Video Extend 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-text-to-video": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Text To Video",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-image-to-video": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Image To Video",
+      "inputs": []
+    },
+    "seedance-2.5-intl-text-to-video": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Text To Video",
+      "inputs": []
+    },
+    "seedance-2.5-intl-text-to-video-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Text To Video 480P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-text-to-video-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Text To Video 480P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-text-to-video-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Text To Video 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-text-to-video-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Text To Video 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-text-to-video-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Text To Video 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-text-to-video-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Text To Video 4K",
+      "inputs": []
+    },
+    "seedance-2.5-intl-image-to-video": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Image To Video",
+      "inputs": []
+    },
+    "seedance-2.5-intl-image-to-video-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Image To Video 480P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-image-to-video-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Image To Video 480P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-image-to-video-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Image To Video 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-image-to-video-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Image To Video 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-image-to-video-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Image To Video 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-image-to-video-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Image To Video 4K",
+      "inputs": []
+    },
+    "seedance-2.5-intl-first-last-frame": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl First Last Frame",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-first-last-frame": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy First Last Frame",
+      "inputs": []
+    },
+    "seedance-2.5-intl-first-last-frame-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl First Last Frame 480P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-first-last-frame-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy First Last Frame 480P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-first-last-frame-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl First Last Frame 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-first-last-frame-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy First Last Frame 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-first-last-frame-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl First Last Frame 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-first-last-frame-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy First Last Frame 4K",
+      "inputs": []
+    },
+    "seedance-2.5-intl-omni-reference": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Omni Reference",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-omni-reference": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Omni Reference",
+      "inputs": []
+    },
+    "seedance-2.5-intl-omni-reference-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Omni Reference 480P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-omni-reference-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Omni Reference 480P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-omni-reference-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Omni Reference 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-omni-reference-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Omni Reference 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-omni-reference-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Omni Reference 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-omni-reference-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Omni Reference 4K",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-edit": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Edit",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-edit": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Edit",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-edit-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Edit 480P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-edit-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Edit 480P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-edit-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Edit 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-edit-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Edit 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-edit-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Edit 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-edit-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Edit 4K",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-extend": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Extend",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-extend": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Extend",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-extend-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Extend 480P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-extend-480p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Extend 480P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-extend-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Extend 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-extend-1080p": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Extend 1080P",
+      "inputs": []
+    },
+    "seedance-2.5-intl-video-extend-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Intl Video Extend 4K",
+      "inputs": []
+    },
+    "seedance-2.5-spicy-video-extend-4k": {
+      "method": "post",
+      "summary": "Seedance 2 5 Spicy Video Extend 4K",
+      "inputs": []
+    },
+    "video-combiner": {
+      "method": "post",
+      "summary": "video-combiner",
+      "inputs": []
+    },
+    "pixverse-v6-t2v": {
+      "method": "post",
+      "summary": "pixverse-v6-t2v (best)",
+      "inputs": []
+    },
+    "pixverse-v6-i2v": {
+      "method": "post",
+      "summary": "pixverse-v6-i2v (best)",
+      "inputs": []
+    },
+    "pixverse-v6-extend": {
+      "method": "post",
+      "summary": "pixverse-v6-extend",
+      "inputs": []
+    },
+    "pixverse-v6-transition": {
+      "method": "post",
+      "summary": "pixverse-v6-transition",
+      "inputs": []
+    },
+    "wan2.7-text-to-image": {
+      "method": "post",
+      "summary": "wan2.7-text-to-image (balanced)",
+      "inputs": []
+    },
+    "wan2.7-image-edit": {
+      "method": "post",
+      "summary": "wan2.7-image-edit (balanced)",
+      "inputs": []
+    },
+    "wan2.7-text-to-image-pro": {
+      "method": "post",
+      "summary": "wan2.7-text-to-image-pro (best)",
+      "inputs": []
+    },
+    "wan2.7-image-edit-pro": {
+      "method": "post",
+      "summary": "wan2.7-image-edit-pro (best)",
+      "inputs": []
+    },
+    "wan2.7-text-to-video": {
+      "method": "post",
+      "summary": "wan2.7-text-to-video (best)",
+      "inputs": []
+    },
+    "wan2.7-image-to-video": {
+      "method": "post",
+      "summary": "wan2.7-image-to-video (best)",
+      "inputs": []
+    },
+    "wan2.7-image-to-video-spicy": {
+      "method": "post",
+      "summary": "wan2.7-image-to-video-spicy (balanced)",
+      "inputs": []
+    },
+    "wan2.6-image-to-video-spicy": {
+      "method": "post",
+      "summary": "wan2.6-image-to-video-spicy (balanced)",
+      "inputs": []
+    },
+    "wan2.7-reference-to-video": {
+      "method": "post",
+      "summary": "wan2.7-reference-to-video",
+      "inputs": []
+    },
+    "wan2.7-video-extend": {
+      "method": "post",
+      "summary": "wan2.7-video-extend",
+      "inputs": []
+    },
+    "wan2.7-video-edit": {
+      "method": "post",
+      "summary": "wan2.7-video-edit",
+      "inputs": []
+    },
+    "wan3.0-text-to-video": {
+      "method": "post",
+      "summary": "wan3.0-text-to-video (best)",
+      "inputs": []
+    },
+    "wan3.0-image-to-video": {
+      "method": "post",
+      "summary": "wan3.0-image-to-video (best)",
+      "inputs": []
+    },
+    "wan3.0-reference-to-video": {
+      "method": "post",
+      "summary": "wan3.0-reference-to-video (best)",
+      "inputs": []
+    },
+    "wan3.0-prime-text-to-video": {
+      "method": "post",
+      "summary": "wan3.0-prime-text-to-video (best)",
+      "inputs": []
+    },
+    "wan3.0-prime-image-to-video": {
+      "method": "post",
+      "summary": "wan3.0-prime-image-to-video (best)",
+      "inputs": []
+    },
+    "wan3.0-prime-reference-to-video": {
+      "method": "post",
+      "summary": "wan3.0-prime-reference-to-video (best)",
+      "inputs": []
+    },
+    "wan3.0-spicy-text-to-video": {
+      "method": "post",
+      "summary": "wan3.0-spicy-text-to-video (balanced)",
+      "inputs": []
+    },
+    "wan3.0-spicy-image-to-video": {
+      "method": "post",
+      "summary": "wan3.0-spicy-image-to-video (balanced)",
+      "inputs": []
+    },
+    "wan3.0-spicy-reference-to-video": {
+      "method": "post",
+      "summary": "wan3.0-spicy-reference-to-video (balanced)",
+      "inputs": []
+    },
+    "seedance-2-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2-text-to-video (balanced)",
+      "inputs": []
+    },
+    "seedance-2-text-to-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-text-to-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2-image-to-video (balanced)",
+      "inputs": []
+    },
+    "seedance-2-image-to-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-image-to-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-omni-reference-no-video": {
+      "method": "post",
+      "summary": "seedance-2-omni-reference-no-video (balanced)",
+      "inputs": []
+    },
+    "seedance-2-omni-reference-no-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-omni-reference-no-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-first-last-frame": {
+      "method": "post",
+      "summary": "seedance-2-first-last-frame (balanced)",
+      "inputs": []
+    },
+    "seedance-2-first-last-frame-fast": {
+      "method": "post",
+      "summary": "seedance-2-first-last-frame-fast (fast)",
+      "inputs": []
+    },
+    "happy-horse-1-text-to-video-1080p": {
+      "method": "post",
+      "summary": "happy-horse-1-text-to-video-1080p (best)",
+      "inputs": []
+    },
+    "happy-horse-1-image-to-video-1080p": {
+      "method": "post",
+      "summary": "happy-horse-1-image-to-video-1080p (best)",
+      "inputs": []
+    },
+    "happy-horse-1-text-to-video-720p": {
+      "method": "post",
+      "summary": "happy-horse-1-text-to-video-720p (balanced)",
+      "inputs": []
+    },
+    "happy-horse-1-image-to-video-720p": {
+      "method": "post",
+      "summary": "happy-horse-1-image-to-video-720p (balanced)",
+      "inputs": []
+    },
+    "happy-horse-1-reference-to-video-1080p": {
+      "method": "post",
+      "summary": "happy-horse-1-reference-to-video-1080p (best)",
+      "inputs": []
+    },
+    "happy-horse-1-reference-to-video-720p": {
+      "method": "post",
+      "summary": "happy-horse-1-reference-to-video-720p (balanced)",
+      "inputs": []
+    },
+    "happy-horse-1-video-edit-1080p": {
+      "method": "post",
+      "summary": "happy-horse-1-video-edit-1080p (best)",
+      "inputs": []
+    },
+    "happy-horse-1-video-edit-720p": {
+      "method": "post",
+      "summary": "happy-horse-1-video-edit-720p (balanced)",
+      "inputs": []
+    },
+    "happy-horse-1-text-to-video": {
+      "method": "post",
+      "summary": "happy-horse-1-text-to-video",
+      "inputs": []
+    },
+    "happy-horse-1-image-to-video": {
+      "method": "post",
+      "summary": "happy-horse-1-image-to-video",
+      "inputs": []
+    },
+    "happy-horse-1-reference-to-video": {
+      "method": "post",
+      "summary": "happy-horse-1-reference-to-video",
+      "inputs": []
+    },
+    "happy-horse-1-video-edit": {
+      "method": "post",
+      "summary": "happy-horse-1-video-edit",
+      "inputs": []
+    },
+    "happy-horse-1.1-text-to-video-1080p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Text To Video 1080P",
+      "inputs": []
+    },
+    "happy-horse-1.1-image-to-video-1080p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Image To Video 1080P",
+      "inputs": []
+    },
+    "happy-horse-1.1-text-to-video-720p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Text To Video 720P",
+      "inputs": []
+    },
+    "happy-horse-1.1-image-to-video-720p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Image To Video 720P",
+      "inputs": []
+    },
+    "happy-horse-1.1-reference-to-video-1080p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Reference To Video 1080P",
+      "inputs": []
+    },
+    "happy-horse-1.1-reference-to-video-720p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Reference To Video 720P",
+      "inputs": []
+    },
+    "happy-horse-1.1-video-edit-1080p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Video Edit 1080P",
+      "inputs": []
+    },
+    "happy-horse-1.1-video-edit-720p": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Video Edit 720P",
+      "inputs": []
+    },
+    "happy-horse-1.1-text-to-video": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Text To Video",
+      "inputs": []
+    },
+    "happy-horse-1.1-image-to-video": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Image To Video",
+      "inputs": []
+    },
+    "happy-horse-1.1-reference-to-video": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Reference To Video",
+      "inputs": []
+    },
+    "happy-horse-1.1-video-edit": {
+      "method": "post",
+      "summary": "Happy Horse 1 1 Video Edit",
+      "inputs": []
+    },
+    "seedance-2-vip-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2-vip-text-to-video (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-text-to-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-vip-text-to-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2-vip-image-to-video (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-image-to-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-vip-image-to-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-spicy-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2-spicy-text-to-video (best)",
+      "inputs": []
+    },
+    "seedance-2-spicy-text-to-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-spicy-text-to-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-spicy-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2-spicy-image-to-video (best)",
+      "inputs": []
+    },
+    "seedance-2-spicy-image-to-video-fast": {
+      "method": "post",
+      "summary": "seedance-2-spicy-image-to-video-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-text-to-video-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-text-to-video-1080p (best)",
+      "inputs": []
+    },
+    "sd-2-vip-text-to-video-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-text-to-video-1080p (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-text-to-video-fast-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-text-to-video-fast-1080p (fast)",
+      "inputs": []
+    },
+    "sd-2-vip-text-to-video-fast-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-text-to-video-fast-1080p (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-image-to-video-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-image-to-video-1080p (best)",
+      "inputs": []
+    },
+    "sd-2-vip-image-to-video-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-image-to-video-1080p (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-image-to-video-fast-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-image-to-video-fast-1080p (fast)",
+      "inputs": []
+    },
+    "sd-2-vip-image-to-video-fast-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-image-to-video-fast-1080p (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-omni-reference-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-omni-reference-1080p (best)",
+      "inputs": []
+    },
+    "sd-2-vip-omni-reference-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-omni-reference-1080p (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-omni-reference-fast-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-omni-reference-fast-1080p (fast)",
+      "inputs": []
+    },
+    "sd-2-vip-omni-reference-fast-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-omni-reference-fast-1080p (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-first-last-frame": {
+      "method": "post",
+      "summary": "seedance-2-vip-first-last-frame (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-first-last-frame-fast": {
+      "method": "post",
+      "summary": "seedance-2-vip-first-last-frame-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-first-last-frame-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-first-last-frame-1080p (best)",
+      "inputs": []
+    },
+    "sd-2-vip-first-last-frame-1080p": {
+      "method": "post",
+      "summary": "sd-2-vip-first-last-frame-1080p (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-omni-reference": {
+      "method": "post",
+      "summary": "seedance-2-vip-omni-reference (best)",
+      "inputs": []
+    },
+    "seedance-2-vip-omni-reference-fast": {
+      "method": "post",
+      "summary": "seedance-2-vip-omni-reference-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-spicy-omni-reference": {
+      "method": "post",
+      "summary": "seedance-2-spicy-omni-reference (best)",
+      "inputs": []
+    },
+    "seedance-2-spicy-omni-reference-fast": {
+      "method": "post",
+      "summary": "seedance-2-spicy-omni-reference-fast (fast)",
+      "inputs": []
+    },
+    "seedance-2-vip-text-to-video-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip Text To Video 4K",
+      "inputs": []
+    },
+    "sd-2-vip-text-to-video-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip Text To Video 4K",
+      "inputs": []
+    },
+    "seedance-2-vip-image-to-video-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip Image To Video 4K",
+      "inputs": []
+    },
+    "sd-2-vip-image-to-video-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip Image To Video 4K",
+      "inputs": []
+    },
+    "seedance-2-vip-first-last-frame-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip First Last Frame 4K",
+      "inputs": []
+    },
+    "sd-2-vip-first-last-frame-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip First Last Frame 4K",
+      "inputs": []
+    },
+    "seedance-2-vip-omni-reference-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip Omni Reference 4K",
+      "inputs": []
+    },
+    "sd-2-vip-omni-reference-4k": {
+      "method": "post",
+      "summary": "Sd 2 Vip Omni Reference 4K",
+      "inputs": []
+    },
+    "youtube-download": {
+      "method": "post",
+      "summary": "Youtube Download",
+      "inputs": []
+    },
+    "tiktok-fetch-profile": {
+      "method": "post",
+      "summary": "Tiktok Fetch Profile",
+      "inputs": []
+    },
+    "tiktok-fetch-videos": {
+      "method": "post",
+      "summary": "Tiktok Fetch Videos",
+      "inputs": []
+    },
+    "instagram-fetch-reels": {
+      "method": "post",
+      "summary": "Instagram Fetch Reels",
+      "inputs": []
+    },
+    "youtube-fetch-shorts": {
+      "method": "post",
+      "summary": "Youtube Fetch Shorts",
+      "inputs": []
+    },
+    "twitter-fetch-posts": {
+      "method": "post",
+      "summary": "Twitter Fetch Posts",
+      "inputs": []
+    },
+    "facebook-fetch-reels": {
+      "method": "post",
+      "summary": "Facebook Fetch Reels",
+      "inputs": []
+    },
+    "generate-social-video-script": {
+      "method": "post",
+      "summary": "Generate Social Video Script",
+      "inputs": []
+    },
+    "openai-whisper": {
+      "method": "post",
+      "summary": "Openai Whisper",
+      "inputs": []
+    },
+    "moderate-image": {
+      "method": "post",
+      "summary": "Moderate Image",
+      "inputs": []
+    },
+    "moderate-video": {
+      "method": "post",
+      "summary": "Moderate Video",
+      "inputs": []
+    },
+    "molmo2-video-captioner": {
+      "method": "post",
+      "summary": "molmo2-video-captioner (balanced)",
+      "inputs": []
+    },
+    "moderate-text": {
+      "method": "post",
+      "summary": "Moderate Text",
+      "inputs": []
+    },
+    "gemini-omni-text-to-video": {
+      "method": "post",
+      "summary": "Gemini Omni Text To Video",
+      "inputs": []
+    },
+    "gemini-omni-image-to-video": {
+      "method": "post",
+      "summary": "Gemini Omni Image To Video",
+      "inputs": []
+    },
+    "gemini-omni-video-edit": {
+      "method": "post",
+      "summary": "Gemini Omni Video Edit",
+      "inputs": []
+    },
+    "gemini-omni-audio": {
+      "method": "post",
+      "summary": "Gemini Omni Audio",
+      "inputs": []
+    },
+    "gemini-omni-character": {
+      "method": "post",
+      "summary": "Gemini Omni Character",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-1-text-to-video": {
+      "method": "post",
+      "summary": "Gemini Omni Flash 1 1 Text To Video",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-1-image-to-video": {
+      "method": "post",
+      "summary": "Gemini Omni Flash 1 1 Image To Video",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-1-edit": {
+      "method": "post",
+      "summary": "Gemini Omni Flash 1 1 Edit",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-1-reference-to-video": {
+      "method": "post",
+      "summary": "Gemini Omni Flash 1 1 Reference To Video",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-2-text-to-video": {
+      "method": "post",
+      "summary": "gemini-omni-flash-1-2-text-to-video (fast)",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-2-image-to-video": {
+      "method": "post",
+      "summary": "gemini-omni-flash-1-2-image-to-video (fast)",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-2-video-edit": {
+      "method": "post",
+      "summary": "gemini-omni-flash-1-2-video-edit (fast)",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-2-extend": {
+      "method": "post",
+      "summary": "gemini-omni-flash-1-2-extend (fast)",
+      "inputs": []
+    },
+    "gemini-omni-flash-1-2-reference-to-video": {
+      "method": "post",
+      "summary": "gemini-omni-flash-1-2-reference-to-video (fast)",
+      "inputs": []
+    },
+    "motion-graphics": {
+      "method": "post",
+      "summary": "motion-graphics (balanced)",
+      "inputs": []
+    },
+    "motion-graphics-edit": {
+      "method": "post",
+      "summary": "motion-graphics-edit (balanced)",
+      "inputs": []
+    },
+    "youtube-publish": {
+      "method": "post",
+      "summary": "Youtube Publish",
+      "inputs": []
+    },
+    "youtube-set-thumbnail": {
+      "method": "post",
+      "summary": "Youtube Set Thumbnail",
+      "inputs": []
+    },
+    "youtube-update-metadata": {
+      "method": "post",
+      "summary": "Youtube Update Metadata",
+      "inputs": []
+    },
+    "tiktok-publish": {
+      "method": "post",
+      "summary": "Tiktok Publish",
+      "inputs": []
+    },
+    "instagram-publish": {
+      "method": "post",
+      "summary": "Instagram Publish",
+      "inputs": []
+    },
+    "facebook-publish": {
+      "method": "post",
+      "summary": "Facebook Publish",
+      "inputs": []
+    },
+    "linkedin-publish": {
+      "method": "post",
+      "summary": "Linkedin Publish",
+      "inputs": []
+    },
+    "x-publish": {
+      "method": "post",
+      "summary": "X Publish",
+      "inputs": []
+    },
+    "threads-publish": {
+      "method": "post",
+      "summary": "Threads Publish",
+      "inputs": []
+    },
+    "pinterest-publish": {
+      "method": "post",
+      "summary": "Pinterest Publish",
+      "inputs": []
+    },
+    "seedance-2-mini-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2-mini-text-to-video (budget)",
+      "inputs": []
+    },
+    "seedance-2-mini-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2-mini-image-to-video (budget)",
+      "inputs": []
+    },
+    "seedance-2-mini-spicy-text-to-video": {
+      "method": "post",
+      "summary": "seedance-2-mini-spicy-text-to-video (budget)",
+      "inputs": []
+    },
+    "seedance-2-mini-spicy-image-to-video": {
+      "method": "post",
+      "summary": "seedance-2-mini-spicy-image-to-video (budget)",
+      "inputs": []
+    },
+    "seedance-2-mini-omni-reference": {
+      "method": "post",
+      "summary": "seedance-2-mini-omni-reference (budget)",
+      "inputs": []
+    },
+    "seedance-2-mini-spicy-omni-reference": {
+      "method": "post",
+      "summary": "seedance-2-mini-spicy-omni-reference (budget)",
+      "inputs": []
+    },
+    "z-image-lora-trainer": {
+      "method": "post",
+      "summary": "z-image-lora-trainer (balanced)",
+      "inputs": []
+    },
+    "qwen-image-lora-trainer": {
+      "method": "post",
+      "summary": "qwen-image-lora-trainer (balanced)",
+      "inputs": []
+    },
+    "qwen-image-2512-lora-trainer": {
+      "method": "post",
+      "summary": "Qwen Image 2512 Lora Trainer",
+      "inputs": []
+    },
+    "z-image-base-lora-trainer": {
+      "method": "post",
+      "summary": "Z Image Base Lora Trainer",
+      "inputs": []
+    },
+    "flux-1-dev-style-lora-trainer": {
+      "method": "post",
+      "summary": "flux-1-dev-style-lora-trainer",
+      "inputs": []
+    },
+    "flux-2-klein-4b-style-lora-trainer": {
+      "method": "post",
+      "summary": "flux-2-klein-4b-style-lora-trainer",
+      "inputs": []
+    },
+    "flux-2-klein-9b-style-lora-trainer": {
+      "method": "post",
+      "summary": "flux-2-klein-9b-style-lora-trainer",
+      "inputs": []
+    },
+    "flux-1-dev-style-lora-inference": {
+      "method": "post",
+      "summary": "Flux 1 Dev Style Lora Inference",
+      "inputs": []
+    },
+    "qwen3-text-to-image": {
+      "method": "post",
+      "summary": "Qwen3 Text To Image",
+      "inputs": []
+    },
+    "qwen3-image-to-image": {
+      "method": "post",
+      "summary": "Qwen3 Image To Image",
+      "inputs": []
+    },
+    "qwen3-pro-text-to-image": {
+      "method": "post",
+      "summary": "Qwen3 Pro Text To Image",
+      "inputs": []
+    },
+    "qwen3-pro-image-to-image": {
+      "method": "post",
+      "summary": "Qwen3 Pro Image To Image",
+      "inputs": []
+    },
+    "qwen2-1-text-to-image": {
+      "method": "post",
+      "summary": "qwen2-1-text-to-image",
+      "inputs": []
+    },
+    "qwen2-1-image-to-image": {
+      "method": "post",
+      "summary": "qwen2-1-image-to-image",
+      "inputs": []
+    },
+    "z-image-base-text-to-image-lora": {
+      "method": "post",
+      "summary": "Z Image Base Lora",
+      "inputs": []
+    },
+    "z-image-turbo-text-to-image-lora": {
+      "method": "post",
+      "summary": "z-image-turbo-text-to-image-lora",
+      "inputs": []
+    },
+    "z-image-turbo-image-to-image-lora": {
+      "method": "post",
+      "summary": "z-image-turbo-image-to-image-lora",
+      "inputs": []
+    },
+    "krea-v2-turbo": {
+      "method": "post",
+      "summary": "krea-v2-turbo (fast)",
+      "inputs": []
+    },
+    "krea-v2-turbo-lora": {
+      "method": "post",
+      "summary": "krea-v2-turbo-lora (fast)",
+      "inputs": []
+    },
+    "minimax-h3-image-to-video-lora": {
+      "method": "post",
+      "summary": "minimax-h3-image-to-video-lora (best)",
+      "inputs": []
+    },
+    "minimax-h3-text-to-video-lora": {
+      "method": "post",
+      "summary": "minimax-h3-text-to-video-lora (best)",
+      "inputs": []
+    },
+    "minimax-h3-reference-to-video-lora": {
+      "method": "post",
+      "summary": "minimax-h3-reference-to-video-lora (best)",
+      "inputs": []
+    },
+    "meshy-v7-image-to-3d": {
+      "method": "post",
+      "summary": "meshy-v7-image-to-3d (best)",
+      "inputs": []
+    },
+    "meshy-v7-multi-image-to-3d": {
+      "method": "post",
+      "summary": "meshy-v7-multi-image-to-3d (best)",
+      "inputs": []
+    },
+    "mimo-v2-6-flash-abliterated": {
+      "method": "post",
+      "summary": "mimo-v2-6-flash-abliterated (balanced)",
+      "inputs": []
+    },
+    "abliterated-model": {
+      "method": "post",
+      "summary": "abliterated-model (balanced)",
+      "inputs": []
+    },
+    "abliterated-model-large": {
+      "method": "post",
+      "summary": "abliterated-model-large (balanced)",
+      "inputs": []
+    },
+    "abliterated-model-large-v2": {
+      "method": "post",
+      "summary": "abliterated-model-large-v2 (balanced)",
+      "inputs": []
+    },
+    "qwen-3-8-27b-obliterated": {
+      "method": "post",
+      "summary": "qwen-3-8-27b-obliterated (balanced)",
+      "inputs": []
+    },
+    "llama-3-3-70b-abliterated": {
+      "method": "post",
+      "summary": "llama-3-3-70b-abliterated (balanced)",
+      "inputs": []
+    },
+    "deepseek-r1-llama-70b-abliterated": {
+      "method": "post",
+      "summary": "deepseek-r1-llama-70b-abliterated (balanced)",
+      "inputs": []
+    },
+    "deepseek-r1-qwen-32b-abliterated": {
+      "method": "post",
+      "summary": "deepseek-r1-qwen-32b-abliterated (balanced)",
+      "inputs": []
+    },
+    "qwen-2-5-32b-abliterated": {
+      "method": "post",
+      "summary": "qwen-2-5-32b-abliterated (balanced)",
+      "inputs": []
+    },
+    "qwen-3-8-27b-abliterated": {
+      "method": "post",
+      "summary": "qwen-3-8-27b-abliterated (balanced)",
+      "inputs": []
+    },
+    "glm-5-3-flash-abliterated": {
+      "method": "post",
+      "summary": "glm-5-3-flash-abliterated (balanced)",
+      "inputs": []
+    },
+    "gemma-4-26b-a4b-abliterated": {
+      "method": "post",
+      "summary": "gemma-4-26b-a4b-abliterated (balanced)",
+      "inputs": []
+    },
+    "glm-5-3-abliterated": {
+      "method": "post",
+      "summary": "glm-5-3-abliterated (balanced)",
+      "inputs": []
+    },
+    "gemma-4-31b-gembrain-abliterated": {
+      "method": "post",
+      "summary": "gemma-4-31b-gembrain-abliterated (balanced)",
+      "inputs": []
+    },
+    "cydonia-24b-v4-1": {
+      "method": "post",
+      "summary": "cydonia-24b-v4-1 (balanced)",
+      "inputs": []
+    },
+    "anubis-70b-v1-1": {
+      "method": "post",
+      "summary": "anubis-70b-v1-1 (balanced)",
+      "inputs": []
+    },
+    "euryale-70b-v2-3": {
+      "method": "post",
+      "summary": "euryale-70b-v2-3 (balanced)",
+      "inputs": []
+    },
+    "stheno-8b-v3-2": {
+      "method": "post",
+      "summary": "stheno-8b-v3-2 (balanced)",
+      "inputs": []
+    },
+    "magnum-v4-72b": {
+      "method": "post",
+      "summary": "magnum-v4-72b (balanced)",
+      "inputs": []
+    },
+    "eva-llama-3-33-70b": {
+      "method": "post",
+      "summary": "eva-llama-3-33-70b (balanced)",
+      "inputs": []
+    },
+    "mythomax-13b": {
+      "method": "post",
+      "summary": "mythomax-13b (balanced)",
+      "inputs": []
+    },
+    "wayfarer-70b": {
+      "method": "post",
+      "summary": "wayfarer-70b (balanced)",
+      "inputs": []
+    },
+    "nevoria-r1-70b": {
+      "method": "post",
+      "summary": "nevoria-r1-70b (balanced)",
+      "inputs": []
+    },
+    "aion-llama-3-1-8b": {
+      "method": "post",
+      "summary": "aion-llama-3-1-8b (balanced)",
+      "inputs": []
+    },
+    "qwen-3-8-27b-queen": {
+      "method": "post",
+      "summary": "qwen-3-8-27b-queen (balanced)",
+      "inputs": []
+    },
+    "qwen-3-8-27b-fable": {
+      "method": "post",
+      "summary": "qwen-3-8-27b-fable (balanced)",
+      "inputs": []
+    },
+    "glm-4-6-derestricted-v5": {
+      "method": "post",
+      "summary": "glm-4-6-derestricted-v5 (balanced)",
+      "inputs": []
+    },
+    "qwen-3-5-27b-queen-derestricted": {
+      "method": "post",
+      "summary": "qwen-3-5-27b-queen-derestricted (balanced)",
+      "inputs": []
+    },
+    "qwen-3-5-27b-blossom-derestricted": {
+      "method": "post",
+      "summary": "qwen-3-5-27b-blossom-derestricted (balanced)",
+      "inputs": []
+    },
+    "qwen-3-5-27b-opus-distilled-derestricted": {
+      "method": "post",
+      "summary": "qwen-3-5-27b-opus-distilled-derestricted (balanced)",
+      "inputs": []
+    },
+    "gemma-4-31b-sdft-abliterated": {
+      "method": "post",
+      "summary": "gemma-4-31b-sdft-abliterated (balanced)",
+      "inputs": []
+    },
+    "venice-abliterated": {
+      "method": "post",
+      "summary": "venice-abliterated (balanced)",
+      "inputs": []
+    },
+    "hermes-4-405b": {
+      "method": "post",
+      "summary": "hermes-4-405b (balanced)",
+      "inputs": []
+    },
+    "neuraldaredevil-8b-abliterated": {
+      "method": "post",
+      "summary": "neuraldaredevil-8b-abliterated (balanced)",
+      "inputs": []
+    },
+    "deepseek-v4-1-flash-abliterated": {
+      "method": "post",
+      "summary": "deepseek-v4-1-flash-abliterated (balanced)",
+      "inputs": []
+    },
+    "pixverse-v6-max-text-to-video": {
+      "method": "post",
+      "summary": "pixverse-v6-max-text-to-video (best)",
+      "inputs": []
+    },
+    "pixverse-v6-max-image-to-video": {
+      "method": "post",
+      "summary": "pixverse-v6-max-image-to-video (best)",
+      "inputs": []
+    },
+    "omnihuman-2-0": {
+      "method": "post",
+      "summary": "omnihuman-2-0 (best)",
+      "inputs": []
+    },
+    "kling-4.0-text-to-image": {
+      "method": "post",
+      "summary": "kling-4.0-text-to-image (best)",
+      "inputs": []
+    },
+    "kling-4.0-image-edit": {
+      "method": "post",
+      "summary": "kling-4.0-image-edit (best)",
+      "inputs": []
+    },
+    "kling-4.0-image-set": {
+      "method": "post",
+      "summary": "kling-4.0-image-set (best)",
+      "inputs": []
+    },
+    "kling-4.0-long-image": {
+      "method": "post",
+      "summary": "kling-4.0-long-image (best)",
+      "inputs": []
+    },
+    "mai-image-2.7-text-to-image": {
+      "method": "post",
+      "summary": "mai-image-2.7-text-to-image (best)",
+      "inputs": []
+    },
+    "mai-image-2.7-image-edit": {
+      "method": "post",
+      "summary": "mai-image-2.7-image-edit (best)",
+      "inputs": []
+    },
+    "mai-image-2.7-flash-text-to-image": {
+      "method": "post",
+      "summary": "mai-image-2.7-flash-text-to-image (fast)",
+      "inputs": []
+    },
+    "mai-image-2.7-flash-image-edit": {
+      "method": "post",
+      "summary": "mai-image-2.7-flash-image-edit (fast)",
+      "inputs": []
+    },
+    "heygen-avatar-6": {
+      "method": "post",
+      "summary": "heygen-avatar-6 (best)",
+      "inputs": []
+    },
+    "heygen-avatar-6-turbo": {
+      "method": "post",
+      "summary": "heygen-avatar-6-turbo (balanced)",
+      "inputs": []
+    },
+    "rankings": {
+      "method": "get",
+      "summary": "Get All Rankings",
+      "inputs": []
+    },
+    "agent-embeds": {
+      "method": "get",
+      "summary": "List Agent Embeds",
+      "inputs": []
+    }
+  }
+}
