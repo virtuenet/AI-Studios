@@ -55,7 +55,7 @@ jobs:
             services/qc/requirements.lock
             services/qc/requirements-dev.lock
       - name: Cache QC models
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ai-studios-qc
           key: qc-models-${{ hashFiles('services/qc/models.py') }}
@@ -147,13 +147,13 @@ jobs:
           cache: npm
       - run: npm ci --legacy-peer-deps
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps chromium
       - name: Cache Next.js build
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .next/cache
           key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
@@ -182,7 +182,7 @@ jobs:
           cache: npm
       - run: npm ci --legacy-peer-deps
       - name: Cache Next.js build
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .next/cache
           key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
