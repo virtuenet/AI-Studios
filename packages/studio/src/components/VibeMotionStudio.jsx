@@ -235,6 +235,7 @@ export default function VibeMotionStudio({
     onGenerationError,
     onGenerationStart,
     copy,
+    generating,
   ]);
 
   const handleKeyDown = (e) => {

@@ -773,6 +773,7 @@ export default function CinemaStudio({
     onGenerationError,
     onGenerationStart,
     historyItems,
+    uploadedImage,
   ]);
 
   // ── Regenerate ──

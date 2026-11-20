@@ -1137,6 +1137,7 @@ export default function ImageStudio({
     uploadHistory,
     batchSize,
     localHistory,
+    PERSIST_KEY,
   ]);
 
   const processDroppedImages = async (files) => {

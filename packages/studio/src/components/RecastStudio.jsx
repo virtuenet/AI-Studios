@@ -668,6 +668,7 @@ export default function RecastStudio({
     imageName,
     prompt,
     internalHistory,
+    PERSIST_KEY,
   ]);
 
   // ── Derived model info ──────────────────────────────────────────────────────

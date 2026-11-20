@@ -1475,6 +1475,7 @@ export default function VideoStudio({
     workflowMediaDrafts,
     prompt,
     localHistory,
+    PERSIST_KEY,
   ]);
 
   // ── Derived UI values ────────────────────────────────────────────────────
@@ -1594,6 +1595,7 @@ export default function VideoStudio({
       selectedVariant,
       workflowMediaDraftKey,
       workflowMediaSlots,
+    copy.errors.sourceDoesNotAcceptImages,
     ],
   );
 
@@ -1825,6 +1827,7 @@ export default function VideoStudio({
     selectedWorkflowId,
     uploadDroppedWorkflowFiles,
     uploadReferences,
+    copy.errors.waitForCurrentUpload,
   ]);
 
   // Initialise controls for default model on mount
@@ -2373,6 +2376,8 @@ export default function VideoStudio({
     onGenerationEnd,
     onGenerationError,
     onGenerationStart,
+    uploadedImageUrl,
+    uploadedVideoUrl,
   ]);
 
   // ── reset to prompt bar ───────────────────────────────────────────────────
