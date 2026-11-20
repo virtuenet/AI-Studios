@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { startTransition, useState, useEffect, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { runClipping, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -284,7 +284,7 @@ export default function ClippingStudio({
   // Timer effect for generation progress
   useEffect(() => {
     if (isGenerating) {
-      setElapsedTime(0);
+      startTransition(() => setElapsedTime(0));
       timerRef.current = setInterval(() => {
         setElapsedTime((prev) => prev + 1);
       }, 1000);
@@ -304,12 +304,14 @@ export default function ClippingStudio({
       const stored = localStorage.getItem(PERSIST_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        if (data.videoUrl) setVideoUrl(data.videoUrl);
-        if (data.numHighlights) setNumHighlights(data.numHighlights);
-        if (data.aspectRatio) setAspectRatio(data.aspectRatio);
-        if (data.returnCoordinatesOnly !== undefined) setReturnCoordinatesOnly(data.returnCoordinatesOnly);
-        if (data.history) setHistory(data.history);
-        if (data.result) setResult(data.result);
+        startTransition(() => { if (data.videoUrl) setVideoUrl(data.videoUrl); });
+        startTransition(() => {
+          if (data.numHighlights) setNumHighlights(data.numHighlights);
+          if (data.aspectRatio) setAspectRatio(data.aspectRatio);
+          if (data.returnCoordinatesOnly !== undefined) setReturnCoordinatesOnly(data.returnCoordinatesOnly);
+          if (data.history) setHistory(data.history);
+          if (data.result) setResult(data.result);
+        });
       }
     } catch (err) {
       console.warn("Failed to load ClippingStudio persistent state:", err);
@@ -347,8 +349,10 @@ export default function ClippingStudio({
           onFilesHandled?.();
           return;
         }
-        setVideoUploading(true);
-        setVideoProgress(0);
+        startTransition(() => {
+          setVideoUploading(true);
+          setVideoProgress(0);
+        });
         uploadFile(apiKey, file, (pct) => {
           setVideoProgress(pct);
         })

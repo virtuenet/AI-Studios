@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { processRecast, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -582,21 +582,25 @@ export default function RecastStudio({
       const stored = localStorage.getItem(PERSIST_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        if (data.selectedModelId) setSelectedModelId(data.selectedModelId);
-        if (data.selectedAspectRatio) setSelectedAspectRatio(data.selectedAspectRatio);
-        if (data.characterOrientation) setCharacterOrientation(data.characterOrientation);
-        if (data.videoUrl) {
-          setVideoUrl(data.videoUrl);
-          setVideoState(UPLOAD_STATE.READY);
-        }
-        if (data.imageUrl) {
-          setImageUrl(data.imageUrl);
-          setImageState(UPLOAD_STATE.READY);
-        }
-        if (data.videoName) setVideoName(data.videoName);
-        if (data.imageName) setImageName(data.imageName);
-        if (data.prompt) setPrompt(data.prompt);
-        if (data.internalHistory) setInternalHistory(data.internalHistory);
+        startTransition(() => { if (data.selectedModelId) setSelectedModelId(data.selectedModelId); });
+        startTransition(() => {
+          if (data.selectedAspectRatio) setSelectedAspectRatio(data.selectedAspectRatio);
+          if (data.characterOrientation) setCharacterOrientation(data.characterOrientation);
+        });
+        startTransition(() => {
+          if (data.videoUrl) {
+            setVideoUrl(data.videoUrl);
+            setVideoState(UPLOAD_STATE.READY);
+          }
+          if (data.imageUrl) {
+            setImageUrl(data.imageUrl);
+            setImageState(UPLOAD_STATE.READY);
+          }
+          if (data.videoName) setVideoName(data.videoName);
+          if (data.imageName) setImageName(data.imageName);
+          if (data.prompt) setPrompt(data.prompt);
+          if (data.internalHistory) setInternalHistory(data.internalHistory);
+        });
       }
     } catch (err) {
       console.warn("Failed to load RecastStudio persistence:", err);
@@ -742,8 +746,10 @@ export default function RecastStudio({
     if (droppedFiles && droppedFiles.length > 0) {
       const imageFiles = droppedFiles.filter((f) => f.type.startsWith("image/"));
       const videoFiles = droppedFiles.filter((f) => f.type.startsWith("video/"));
-      if (videoFiles.length > 0) handleVideoPick(videoFiles[0]);
-      if (imageFiles.length > 0) handleImageUpload(imageFiles[0]);
+      startTransition(() => {
+        if (videoFiles.length > 0) handleVideoPick(videoFiles[0]);
+        if (imageFiles.length > 0) handleImageUpload(imageFiles[0]);
+      });
       onFilesHandled?.();
     }
   }, [droppedFiles, onFilesHandled, handleVideoPick, handleImageUpload]);

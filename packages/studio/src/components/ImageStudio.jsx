@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { generateImage, generateI2I, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -104,12 +104,12 @@ function UploadButton({ apiKey, maxImages, onSelect, onClear, initialUrls = [], 
   // Sync if parent provides a new persistedHistory (e.g. on first mount from localStorage)
   useEffect(() => {
     if (persistedHistory && persistedHistory.length > 0) {
-      setUploadHistory((prev) => {
+      startTransition(() => setUploadHistory((prev) => {
         // Merge: add any entries from persistedHistory that aren't already present
         const existingUrls = new Set(prev.map(h => h.url));
         const missing = persistedHistory.filter(h => h.url && !existingUrls.has(h.url));
         return missing.length > 0 ? [...prev, ...missing] : prev;
-      });
+      }));
     }
   }, [persistedHistory]);
   
@@ -146,11 +146,11 @@ function UploadButton({ apiKey, maxImages, onSelect, onClear, initialUrls = [], 
       nextUrls.every((url, index) => url === currentUrls[index]);
     if (isSame) return;
 
-    setSelectedEntries(nextUrls.map((url) => ({ url })));
+    startTransition(() => setSelectedEntries(nextUrls.map((url) => ({ url }))));
     if (nextUrls.length === 0) return;
 
     // Also ensure restored selections are available in the history panel.
-    setUploadHistory((history) => {
+    startTransition(() => setUploadHistory((history) => {
       const existingUrls = new Set(history.map((entry) => entry.url));
       const missing = nextUrls
         .filter((url) => !existingUrls.has(url))
@@ -161,14 +161,14 @@ function UploadButton({ apiKey, maxImages, onSelect, onClear, initialUrls = [], 
           progress: 100,
         }));
       return missing.length > 0 ? [...missing, ...history] : history;
-    });
+    }));
   }, [initialUrls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // When maxImages changes, trim excess selections
   useEffect(() => {
     if (selectedEntries.length > maxImages) {
       const trimmed = selectedEntries.slice(0, maxImages);
-      setSelectedEntries(trimmed);
+      startTransition(() => setSelectedEntries(trimmed));
       if (trimmed.length === 0) onClear?.();
     }
     if (fileInputRef.current) {
@@ -1066,6 +1066,7 @@ export default function ImageStudio({
       const stored = localStorage.getItem(PERSIST_KEY);
       if (stored) {
         const data = JSON.parse(stored);
+        startTransition(() => {
         if (data.imageMode !== undefined) setImageMode(data.imageMode);
         if (data.selectedModelId) {
           const restoredFamily = imageModelCatalog.familyByVariantId.get(data.selectedModelId);
@@ -1089,6 +1090,7 @@ export default function ImageStudio({
         if (data.uploadHistory) setUploadHistory(data.uploadHistory);
         if (data.batchSize) setBatchSize(data.batchSize);
         if (data.localHistory) setLocalHistory(data.localHistory);
+        });
       }
     } catch (err) {
       console.warn("Failed to load ImageStudio persistence:", err);

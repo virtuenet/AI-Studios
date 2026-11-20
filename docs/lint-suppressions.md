@@ -28,6 +28,11 @@ Rules:
    components run under Vite/Electron, where `next/image` does not exist. Images
    use `loading="lazy" decoding="async"`.
 
+Progress: `react-hooks/set-state-in-effect` is now **zero** (all 29 remaining
+persistence/init effects deferred with `startTransition` or moved to external
+stores), and the baseline shrank from 93 to 63 entries (41 `exhaustive-deps`,
+9 `purity`, 5 `immutability`, 5 `preserve-manual-memoization`, 3 `refs`).
+
 Already fixed outside the baseline: shell effects (client flag via
 `useSyncExternalStore`, external balance store, derived header visibility),
 ThemeToggle initialization, render-time ref writes in Image/Video/Draw, and all

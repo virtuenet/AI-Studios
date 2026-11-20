@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { startTransition, useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -230,11 +230,11 @@ export default function AgentStudio({ apiKey, locale = "en" }) {
   useEffect(() => {
     if (!apiKey) return;
     if (!urlAgentSlug || urlAgentSlug === "edit") {
-      setView("list");
+      startTransition(() => setView("list"));
       return;
     }
     if (urlAgentSlug === "create") {
-      setView("create");
+      startTransition(() => setView("create"));
       return;
     }
 

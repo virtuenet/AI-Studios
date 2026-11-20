@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import { uploadFile, generateMarketingStudioAd } from "../muapi.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
@@ -362,13 +362,15 @@ export default function MarketingStudio({
       const stored = localStorage.getItem(PERSIST_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        if (data.prompt) setPrompt(data.prompt);
-        if (data.params) setParams(data.params);
-        if (data.productImage) setProductImage(data.productImage);
-        if (data.avatarImage) setAvatarImage(data.avatarImage);
-        if (data.additionalImages) setAdditionalImages(data.additionalImages);
-        if (data.localHistory) setLocalHistory(data.localHistory);
-        else if (data.history) setLocalHistory(data.history);
+        startTransition(() => { if (data.prompt) setPrompt(data.prompt); });
+        startTransition(() => {
+          if (data.params) setParams(data.params);
+          if (data.productImage) setProductImage(data.productImage);
+          if (data.avatarImage) setAvatarImage(data.avatarImage);
+          if (data.additionalImages) setAdditionalImages(data.additionalImages);
+          if (data.localHistory) setLocalHistory(data.localHistory);
+          else if (data.history) setLocalHistory(data.history);
+        });
       }
     } catch (err) { console.warn("Load failed", err); }
   }, []);

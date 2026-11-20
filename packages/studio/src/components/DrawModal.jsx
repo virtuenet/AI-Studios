@@ -750,7 +750,7 @@ export default function DrawModal({
   // Listen for brush property changes and update selected text/shape colors or sizes
   useEffect(() => {
     if (selectedObjectId) {
-      setCanvasObjects((prev) =>
+      startTransition(() => setCanvasObjects((prev) =>
         prev.map((o) => {
           if (o.id !== selectedObjectId) return o;
           const updates = {};
@@ -759,13 +759,13 @@ export default function DrawModal({
           }
           return { ...o, ...updates };
         }),
-      );
+      ));
     }
   }, [brushColor]);
 
   useEffect(() => {
     if (selectedObjectId) {
-      setCanvasObjects((prev) =>
+      startTransition(() => setCanvasObjects((prev) =>
         prev.map((o) => {
           if (o.id !== selectedObjectId) return o;
           const updates = {};
@@ -779,7 +779,7 @@ export default function DrawModal({
           }
           return { ...o, ...updates };
         }),
-      );
+      ));
     }
   }, [brushSize]);
 

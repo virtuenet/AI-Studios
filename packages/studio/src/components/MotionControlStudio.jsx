@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { processMotionControl, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -584,10 +584,10 @@ export default function MotionControlStudio({
   // Sync parameters when switching model
   useEffect(() => {
     if (duration > maxDurationAllowed) {
-      setDuration(maxDurationAllowed);
+      startTransition(() => setDuration(maxDurationAllowed));
     }
     if (!availableAspectRatios.includes(aspectRatio)) {
-      setAspectRatio(availableAspectRatios[0] || "16:9");
+      startTransition(() => setAspectRatio(availableAspectRatios[0] || "16:9"));
     }
   }, [selectedModelId, maxDurationAllowed, availableAspectRatios, duration, aspectRatio]);
 
@@ -713,7 +713,7 @@ export default function MotionControlStudio({
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(PERSIST_KEY) || "[]");
-      if (Array.isArray(saved)) setHistory(saved);
+      startTransition(() => { if (Array.isArray(saved)) setHistory(saved); });
     } catch {}
   }, [PERSIST_KEY]);
 
@@ -788,7 +788,7 @@ export default function MotionControlStudio({
     const files = Array.from(droppedFiles);
 
     const videoFile = files.find((f) => f.type.startsWith("video/"));
-    if (videoFile) handleUploadVideo(videoFile);
+    startTransition(() => handleUploadVideo(videoFile));
 
     const imageFiles = files.filter((f) => f.type.startsWith("image/"));
     imageFiles.forEach((imgFile) => handleAddImage(imgFile));

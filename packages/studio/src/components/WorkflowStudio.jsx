@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { startTransition, useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   getTemplateWorkflows,
@@ -346,13 +346,13 @@ export default function WorkflowStudio({
     if (urlWorkflowId) {
       if (urlWorkflowId === "new") {
         if (!selectedWorkflow || selectedWorkflow.id !== null) {
-          handleCreateWorkflow(true);
+          startTransition(() => handleCreateWorkflow(true));
         }
       } else {
         const found = workflows.find((wf) => wf.id === urlWorkflowId);
         if (found) {
           if (!selectedWorkflow || selectedWorkflow.id !== urlWorkflowId) {
-            handleSelectWorkflow(found, true);
+            startTransition(() => handleSelectWorkflow(found, true));
           }
         } else if (
           !selectedWorkflow ||
@@ -360,14 +360,14 @@ export default function WorkflowStudio({
         ) {
           // Fallback for deep-linking: attempt to open even if not in the current tab's list
           // handleSelectWorkflow fetches official name/data anyway
-          handleSelectWorkflow(
+          startTransition(() => handleSelectWorkflow(
             { id: urlWorkflowId, name: "Loading..." },
             true,
-          );
+          ));
         }
       }
     } else if (selectedWorkflow) {
-      setSelectedWorkflow(null);
+      startTransition(() => setSelectedWorkflow(null));
     }
   }, [
     urlWorkflowId,

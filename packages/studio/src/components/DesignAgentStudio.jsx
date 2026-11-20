@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { startTransition, useState, useEffect } from "react";
 import { CreativeCanvas } from 'design-agent';
 
 import { getUserBalance } from '../muapi';
@@ -34,11 +34,11 @@ export default function DesignAgentStudio({
     // /api/whitelabel/balance) and pass them in directly — GET /account/balance explicitly
     // 403s for white-label end users, so getUserBalance() below must stay BYOK-only.
     if (userEmail !== undefined || balance !== undefined) {
-      setUserData({
+      startTransition(() => setUserData({
         username: userEmail?.split('@')[0] || 'Studio User',
         email: userEmail,
         balance: balance || 0,
-      });
+      }));
       return;
     }
 

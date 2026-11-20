@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { processLipSync, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -93,7 +93,7 @@ function MediaPickerButton({
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
       }
-      setIsPlaying(false);
+      startTransition(() => setIsPlaying(false));
     }
   }, [uploadState, previewUrl]);
 
@@ -560,26 +560,28 @@ export default function LipSyncStudio({
       const stored = localStorage.getItem(PERSIST_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        if (data.inputMode) setInputMode(data.inputMode);
-        if (data.selectedModelId) setSelectedModelId(data.selectedModelId);
-        if (data.selectedResolution) setSelectedResolution(data.selectedResolution);
-        if (data.imageUrl) {
-          setImageUrl(data.imageUrl);
-          setImageState(UPLOAD_STATE.READY);
-        }
-        if (data.videoUrl) {
-          setVideoUrl(data.videoUrl);
-          setVideoState(UPLOAD_STATE.READY);
-        }
-        if (data.audioUrl) {
-          setAudioUrl(data.audioUrl);
-          setAudioState(UPLOAD_STATE.READY);
-        }
-        if (data.imageName) setImageName(data.imageName);
-        if (data.videoName) setVideoName(data.videoName);
-        if (data.audioName) setAudioName(data.audioName);
-        if (data.prompt) setPrompt(data.prompt);
-        if (data.internalHistory) setInternalHistory(data.internalHistory);
+        startTransition(() => {
+          if (data.inputMode) setInputMode(data.inputMode);
+          if (data.selectedModelId) setSelectedModelId(data.selectedModelId);
+          if (data.selectedResolution) setSelectedResolution(data.selectedResolution);
+          if (data.imageUrl) {
+            setImageUrl(data.imageUrl);
+            setImageState(UPLOAD_STATE.READY);
+          }
+          if (data.videoUrl) {
+            setVideoUrl(data.videoUrl);
+            setVideoState(UPLOAD_STATE.READY);
+          }
+          if (data.audioUrl) {
+            setAudioUrl(data.audioUrl);
+            setAudioState(UPLOAD_STATE.READY);
+          }
+          if (data.imageName) setImageName(data.imageName);
+          if (data.videoName) setVideoName(data.videoName);
+          if (data.audioName) setAudioName(data.audioName);
+          if (data.prompt) setPrompt(data.prompt);
+          if (data.internalHistory) setInternalHistory(data.internalHistory);
+        });
       }
     } catch (err) {
       console.warn("Failed to load LipSyncStudio persistence:", err);
@@ -640,8 +642,10 @@ export default function LipSyncStudio({
       inputMode === "image" ? imageLipSyncModels : videoLipSyncModels;
     const first = models[0];
     if (!first) return;
-    setSelectedModelId(first.id);
-    setSelectedResolution(first.inputs?.resolution?.default ?? "480p");
+    startTransition(() => {
+      setSelectedModelId(first.id);
+      setSelectedResolution(first.inputs?.resolution?.default ?? "480p");
+    });
   }, [inputMode]);
 
   // ── Upload handlers ─────────────────────────────────────────────────────
@@ -738,15 +742,17 @@ export default function LipSyncStudio({
       const imageFiles = droppedFiles.filter(isImageFile);
       
       if (audioFiles.length > 0) {
-        handleAudioPick(audioFiles[0]);
+        startTransition(() => handleAudioPick(audioFiles[0]));
       }
-      if (videoFiles.length > 0) {
-        switchToVideo();
-        handleVideoPick(videoFiles[0]);
-      } else if (imageFiles.length > 0) {
-        switchToImage();
-        handleImageUpload(imageFiles[0]);
-      }
+      startTransition(() => {
+        if (videoFiles.length > 0) {
+          switchToVideo();
+          handleVideoPick(videoFiles[0]);
+        } else if (imageFiles.length > 0) {
+          switchToImage();
+          handleImageUpload(imageFiles[0]);
+        }
+      });
       onFilesHandled?.();
     }
   }, [droppedFiles, onFilesHandled, handleAudioPick, handleVideoPick, handleImageUpload]);

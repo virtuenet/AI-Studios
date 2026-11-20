@@ -9,7 +9,7 @@
 | 2 | Route-level error/loading/404 | ✅ | `app/error.js`, `app/global-error.js`, `app/not-found.js`, `app/loading.js` + structural tests |
 | 3 | Server route tests | ✅ | `tests/routes/`: middleware (headers, locale, rewrites, request id), session, health, upload-binary (401/SSRF/file-type/204), agent/workflow proxies — 23 tests |
 | 4 | Shared generation hooks | ✅ | `useGeneration` (abort/cancel) used by ImageStudio (Cancel button), `usePersistentObject` used by AudioStudio; 6 hook tests |
-| 5 | TS strictness ladder + compiler rules | ✅ | `strictNullChecks` + `noImplicitAny` clean; **React Compiler + exhaustive-deps rules are errors**; 12 legacy violations fixed; reviewed baseline in `eslint-suppressions.json`; CI `--max-warnings 0`; policy in `docs/lint-suppressions.md` |
+| 5 | TS strictness ladder + compiler rules | ✅ | `strictNullChecks` + `noImplicitAny` clean; **React Compiler + exhaustive-deps rules are errors**; **29 set-state-in-effect violations burned down to zero** (startTransition/external stores); 12 other violations fixed; baseline reduced 93 → 63; reviewed ledger in `eslint-suppressions.json`; CI `--max-warnings 0`; policy in `docs/lint-suppressions.md` |
 | 6 | Model catalog sync/drift | ✅ | `scripts/sync-models.js`, `docs/models-snapshot.json` (633 models), CI `check:models-sync`, `--fetch` against OpenAPI (899 upstream endpoints) |
 | 7 | Mocked generation E2E | ✅ | generation (generate/cancel/locale) **and upload** (`setInputFiles` + mocked `upload_file`, picker confirm, i2i generate); zero API key, service workers blocked |
 | 8 | Visual + interaction tests | ✅ | platform-agnostic Playwright baselines (dialog/sidebar); ApiKeyModal interaction + a11y label fix; ServiceWorkerUpdater tests |

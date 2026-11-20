@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { runMotionGraphics, runMotionGraphicsEdit } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -119,7 +119,7 @@ export default function VibeMotionStudio({
           const { canEdit, ...rest } = h;
           return rest; // canEdit is only an in-memory hint, never persisted
         });
-        setHistory(restored);
+        startTransition(() => setHistory(restored));
       }
     } catch (_) {}
   }, []);

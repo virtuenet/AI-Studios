@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, useMemo, useId } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback, useMemo, useId } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { generateVideo, generateI2V, processV2V, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -1333,37 +1333,45 @@ export default function VideoStudio({
             restoredResolution = resolutionField.options.find((option) =>
               option.modelId === restoredModelId && option.value === resolutionField.value,
             )?.resolution ?? restoredResolution;
-            setSelectedModel(restoredModelId);
-            setSelectedFamilyId(restored.family.id);
-            setSelectedWorkflowId(restored.workflowId);
-            setModelParameterValues(
-              mergeModelParameterValues(
-                restoredModel,
-                data.modelParameterValues || {},
-              ),
-            );
+            startTransition(() => {
+              setSelectedModel(restoredModelId);
+              setSelectedFamilyId(restored.family.id);
+              setSelectedWorkflowId(restored.workflowId);
+            });
+            startTransition(() => {
+              setModelParameterValues(
+                mergeModelParameterValues(
+                  restoredModel,
+                  data.modelParameterValues || {},
+                ),
+              );
+            });
           }
         }
-        setImageMode(restoredMode === "i2v");
-        setV2vMode(restoredMode === "v2v");
-        if (data.selectedAr) setSelectedAr(data.selectedAr);
-        if (data.selectedDuration) setSelectedDuration(data.selectedDuration);
-        if (restoredResolution) setSelectedResolution(restoredResolution);
-        if (data.selectedQuality) setSelectedQuality(data.selectedQuality);
-        if (data.selectedEffect) setSelectedEffect(data.selectedEffect);
-        if (data.selectedVeoSourceId) setSelectedVeoSourceId(data.selectedVeoSourceId);
-        if (data.uploadedImageUrls) {
-          setUploadedImageUrls(data.uploadedImageUrls);
-        } else if (data.uploadedImageUrl) {
-          setUploadedImageUrls([data.uploadedImageUrl]);
-        }
-        if (data.uploadedEndImageUrl) setUploadedEndImageUrl(data.uploadedEndImageUrl);
-        if (data.uploadedVideoUrls) {
-          setUploadedVideoUrls(data.uploadedVideoUrls);
-        } else if (data.uploadedVideoUrl) {
-          setUploadedVideoUrls([data.uploadedVideoUrl]);
-        }
-        if (data.uploadedAudioUrls) setUploadedAudioUrls(data.uploadedAudioUrls);
+        startTransition(() => {
+          setImageMode(restoredMode === "i2v");
+          setV2vMode(restoredMode === "v2v");
+          if (data.selectedAr) setSelectedAr(data.selectedAr);
+          if (data.selectedDuration) setSelectedDuration(data.selectedDuration);
+          if (restoredResolution) setSelectedResolution(restoredResolution);
+          if (data.selectedQuality) setSelectedQuality(data.selectedQuality);
+          if (data.selectedEffect) setSelectedEffect(data.selectedEffect);
+          if (data.selectedVeoSourceId) setSelectedVeoSourceId(data.selectedVeoSourceId);
+        });
+        startTransition(() => {
+          if (data.uploadedImageUrls) {
+            setUploadedImageUrls(data.uploadedImageUrls);
+          } else if (data.uploadedImageUrl) {
+            setUploadedImageUrls([data.uploadedImageUrl]);
+          }
+          if (data.uploadedEndImageUrl) setUploadedEndImageUrl(data.uploadedEndImageUrl);
+          if (data.uploadedVideoUrls) {
+            setUploadedVideoUrls(data.uploadedVideoUrls);
+          } else if (data.uploadedVideoUrl) {
+            setUploadedVideoUrls([data.uploadedVideoUrl]);
+          }
+          if (data.uploadedAudioUrls) setUploadedAudioUrls(data.uploadedAudioUrls);
+        });
         const persistedDrafts =
           data.workflowMediaDrafts && typeof data.workflowMediaDrafts === "object"
             ? migrateVideoWorkflowMediaDrafts(data.workflowMediaDrafts)
@@ -1389,9 +1397,11 @@ export default function VideoStudio({
             );
           }
         }
-        setWorkflowMediaDrafts(persistedDrafts);
-        if (data.prompt) setPrompt(data.prompt);
-        if (data.localHistory) setLocalHistory(data.localHistory);
+        startTransition(() => {
+          setWorkflowMediaDrafts(persistedDrafts);
+          if (data.prompt) setPrompt(data.prompt);
+          if (data.localHistory) setLocalHistory(data.localHistory);
+        });
 
         // Update control visibility based on restored model/mode
         commonParameterValuesRef.current = {
@@ -1401,11 +1411,11 @@ export default function VideoStudio({
           resolution: restoredResolution,
           quality: data.selectedQuality,
         };
-        applyControlsForModel(
+        startTransition(() => applyControlsForModel(
           restoredModelId,
           restoredMode === "i2v",
           restoredMode === "v2v",
-        );
+        ));
       }
     } catch (err) {
       console.warn("Failed to load VideoStudio persistence:", err);

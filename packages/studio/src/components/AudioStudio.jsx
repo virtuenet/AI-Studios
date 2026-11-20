@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { generateAudio, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
@@ -78,14 +78,16 @@ function AudioFileUploader({ label, value, onChange, apiKey, copy = en }) {
   const dragCounterRef = useRef(0);
 
   useEffect(() => {
-    if (!value) {
-      setUploadState(UPLOAD_STATE.IDLE);
-      setFileName("");
-      setProgress(0);
-    } else if (uploadState !== UPLOAD_STATE.READY) {
-      setUploadState(UPLOAD_STATE.READY);
-      setFileName(value.split('/').pop().slice(-30));
-    }
+    startTransition(() => {
+      if (!value) {
+        setUploadState(UPLOAD_STATE.IDLE);
+        setFileName("");
+        setProgress(0);
+      } else if (uploadState !== UPLOAD_STATE.READY) {
+        setUploadState(UPLOAD_STATE.READY);
+        setFileName(value.split('/').pop().slice(-30));
+      }
+    });
   }, [value]);
 
   const handleUpload = async (files) => {
@@ -296,9 +298,11 @@ function PremiumAudioPlayer({ url, title, copy = en }) {
 
   // Reset player when URL changes
   useEffect(() => {
-    setIsPlaying(false);
-    setCurrentTime(0);
-    setDuration(0);
+    startTransition(() => {
+      setIsPlaying(false);
+      setCurrentTime(0);
+      setDuration(0);
+    });
     if (audioRef.current) {
       audioRef.current.load();
     }
@@ -349,7 +353,7 @@ function PremiumAudioPlayer({ url, title, copy = en }) {
       if (visualizerIntervalRef.current) {
         clearInterval(visualizerIntervalRef.current);
       }
-      setVisualizerHeights(Array(18).fill(12));
+      startTransition(() => setVisualizerHeights(Array(18).fill(12)));
     }
     return () => {
       if (visualizerIntervalRef.current) clearInterval(visualizerIntervalRef.current);
@@ -592,7 +596,7 @@ export default function AudioStudio({
         initial[key] = schema.default !== undefined ? schema.default : "";
       }
     });
-    setParams(initial);
+    startTransition(() => setParams(initial));
   }, [selectedModelId]); // Only reset when model ID changes
 
   // ── Persistence (shared hook) ───────────────────────────────────────────

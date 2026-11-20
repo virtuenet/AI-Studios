@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, startTransition, useEffect, useRef, useCallback } from "react";
 import { generateImage, uploadFile } from "../muapi.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
@@ -654,10 +654,12 @@ export default function CinemaStudio({
       const stored = localStorage.getItem(PERSIST_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        if (data.settings) setSettings(data.settings);
-        if (data.resolution) setResolution(data.resolution);
-        if (data.internalHistory) setInternalHistory(data.internalHistory);
-        if (data.uploadedImage) setUploadedImage(data.uploadedImage);
+        startTransition(() => {
+          if (data.settings) setSettings(data.settings);
+          if (data.resolution) setResolution(data.resolution);
+          if (data.internalHistory) setInternalHistory(data.internalHistory);
+          if (data.uploadedImage) setUploadedImage(data.uploadedImage);
+        });
       }
     } catch (err) {
       console.warn("Failed to load CinemaStudio persistence:", err);
@@ -687,7 +689,7 @@ export default function CinemaStudio({
   const history = historyItems != null ? historyItems : internalHistory;
 
   useEffect(() => {
-    setCanvasUrl(history[0]?.url || null);
+    startTransition(() => setCanvasUrl(history[0]?.url || null));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [historyItems]);
 
