@@ -16,6 +16,13 @@ import { lipsyncModels } from './models/lipsyncModels.js';
 import { recastModels } from './models/recastModels.js';
 import { motionControlModels } from './models/motionControlModels.js';
 import { audioModels } from './models/audioModels.js';
+import { dedupeSharedModels } from './models/sharedModels.js';
+
+// Keep one canonical object per cross-category model (shared references).
+dedupeSharedModels({
+  t2iModels, t2vModels, i2iModels, i2vModels, v2vModels,
+  lipsyncModels, recastModels, motionControlModels, audioModels,
+});
 
 // Re-export the arrays so existing imports from './models.js' keep working.
 export { t2iModels, t2vModels, i2iModels, i2vModels, v2vModels, lipsyncModels, recastModels, motionControlModels, audioModels };

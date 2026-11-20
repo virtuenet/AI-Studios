@@ -6,6 +6,7 @@ import { generateImage, generateI2I, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import useGeneration from "../hooks/useGeneration";
+import useWindowedGrid from "../hooks/useWindowedGrid";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
 import MobileGenerationActions, {
@@ -1028,6 +1029,25 @@ export default function ImageStudio({
   // Use prop history if provided, otherwise local
   const history = historyItems ?? localHistory;
 
+  // ── Windowed history grid ────────────────────────────────────────────────
+  const galleryScrollRef = useRef(null);
+  const [galleryColumns, setGalleryColumns] = useState(4);
+  useEffect(() => {
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      setGalleryColumns(width >= 1024 ? 4 : width >= 768 ? 3 : width >= 640 ? 2 : 1);
+    };
+    updateColumns();
+    window.addEventListener('resize', updateColumns);
+    return () => window.removeEventListener('resize', updateColumns);
+  }, []);
+  const galleryWindow = useWindowedGrid({
+    count: history.length,
+    columns: galleryColumns,
+    rowHeight: 400,
+    scrollRef: galleryScrollRef,
+  });
+
   // When historyItems is server-backed (White Label / backfilled sessions),
   // localHistory isn't what's rendered — removal has to go through the
   // parent so it deletes server-side (UsageLog + S3) and updates the same
@@ -1485,10 +1505,18 @@ export default function ImageStudio({
     <div className="w-full h-full flex flex-col items-center justify-center bg-app-bg relative p-4 md:p-6 overflow-hidden">
       
       {/* ── CENTRAL GALLERY AREA ── */}
-      <div className="flex-1 w-full max-w-7xl mx-auto overflow-y-auto custom-scrollbar pb-40 lg:pb-32 px-2">
+      <div ref={galleryScrollRef} className="flex-1 w-full max-w-7xl mx-auto overflow-y-auto custom-scrollbar pb-40 lg:pb-32 px-2">
         {history.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full pt-4 animate-fade-in-up">
-            {history.map((entry, idx) => (
+            {galleryWindow.enabled && (
+              <div className="col-span-full" style={{ height: galleryWindow.topSpacer }} />
+            )}
+            {(galleryWindow.enabled
+              ? history.slice(galleryWindow.startIndex, galleryWindow.endIndex)
+              : history
+            ).map((entry, localIdx) => {
+              const idx = galleryWindow.enabled ? galleryWindow.startIndex + localIdx : localIdx;
+              return (
               <div
                 key={entry.id || idx}
                 className="cv-auto relative group rounded-lg overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col cursor-pointer"
@@ -1582,7 +1610,11 @@ export default function ImageStudio({
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
+            {galleryWindow.enabled && (
+              <div className="col-span-full" style={{ height: galleryWindow.bottomSpacer }} />
+            )}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center h-full animate-fade-in-up transition-all duration-700 min-h-[50vh]">
