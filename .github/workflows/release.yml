@@ -86,7 +86,7 @@ jobs:
         run: npm sbom --sbom-format cyclonedx > artifacts/sbom.cdx.json
 
       - name: Create / update release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_type == 'tag' && github.ref_name || inputs.version }}
           name: AI Studios ${{ github.ref_type == 'tag' && github.ref_name || inputs.version }}
