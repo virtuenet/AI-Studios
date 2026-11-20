@@ -2,6 +2,15 @@
 
 import { useCallback, useRef, useState } from 'react';
 
+export interface GenerationState {
+  isRunning: boolean;
+  error: unknown | null;
+  start: () => AbortSignal;
+  finish: () => void;
+  fail: (cause: unknown) => void;
+  cancel: () => void;
+}
+
 /**
  * Shared generation lifecycle: running/error state plus an AbortController.
  *
@@ -12,10 +21,10 @@ import { useCallback, useRef, useState } from 'react';
  *   catch (e) { gen.fail(e); }
  *   finally { gen.finish(); }
  */
-export default function useGeneration() {
+export default function useGeneration(): GenerationState {
   const [isRunning, setIsRunning] = useState(false);
-  const [error, setError] = useState(null);
-  const controllerRef = useRef(null);
+  const [error, setError] = useState<unknown | null>(null);
+  const controllerRef = useRef<AbortController | null>(null);
 
   const start = useCallback(() => {
     controllerRef.current?.abort();
@@ -30,8 +39,8 @@ export default function useGeneration() {
     setIsRunning(false);
   }, []);
 
-  const fail = useCallback((cause) => {
-    if (cause?.name !== 'AbortError') setError(cause);
+  const fail = useCallback((cause: unknown) => {
+    if (!(cause instanceof Error) || cause.name !== 'AbortError') setError(cause);
     setIsRunning(false);
   }, []);
 

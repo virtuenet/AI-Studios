@@ -16,7 +16,7 @@ import { lipsyncModels } from './models/lipsyncModels.js';
 import { recastModels } from './models/recastModels.js';
 import { motionControlModels } from './models/motionControlModels.js';
 import { audioModels } from './models/audioModels.js';
-import { dedupeSharedModels } from './models/sharedModels.js';
+import { dedupeSharedModels } from './models/sharedModels';
 
 // Keep one canonical object per cross-category model (shared references).
 dedupeSharedModels({

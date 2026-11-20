@@ -7,7 +7,12 @@
  * keep only one canonical object instance and make the later categories
  * reference it, so edits/objects are shared instead of silently diverging.
  */
-export const SHARED_MODEL_IDS = Object.freeze([
+export interface ModelLike {
+  id: string;
+  [key: string]: unknown;
+}
+
+export const SHARED_MODEL_IDS: readonly string[] = Object.freeze([
   'flux-pulid',
   'flux-redux',
   'qwen-text-to-image-2512',
@@ -18,18 +23,18 @@ export const SHARED_MODEL_IDS = Object.freeze([
 /**
  * Replace duplicate model objects in later categories with the first canonical
  * object reference. Mutates the category arrays in place and returns them.
- *
- * @param {Record<string, Array<{id: string}>>} categories
  */
-export function dedupeSharedModels(categories) {
-  const canonical = new Map();
+export function dedupeSharedModels<T extends ModelLike>(
+  categories: Record<string, T[]>
+): Record<string, T[]> {
+  const canonical = new Map<string, T>();
   for (const models of Object.values(categories)) {
     if (!Array.isArray(models)) continue;
     for (let index = 0; index < models.length; index += 1) {
       const model = models[index];
       if (!model || !SHARED_MODEL_IDS.includes(model.id)) continue;
       if (canonical.has(model.id)) {
-        models[index] = canonical.get(model.id);
+        models[index] = canonical.get(model.id) as T;
       } else {
         canonical.set(model.id, model);
       }

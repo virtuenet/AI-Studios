@@ -31,7 +31,7 @@ export default defineConfig({
         'lib/uploadProxyTarget.js',
         'lib/session.js',
         'lib/logger.js',
-        'packages/studio/src/hooks/**/*.js',
+        'packages/studio/src/hooks/**/*.{js,ts}',
       ],
       exclude: [
         'packages/studio/src/models.js',

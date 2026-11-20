@@ -4,6 +4,19 @@
  * Flags prompts that omit the anchors which keep a generated shot consistent:
  * camera, lighting, wardrobe/set, eyeline for two-handers, and product scale.
  */
+export interface PromptCheck {
+  id: string;
+  pass: boolean;
+  hint: string;
+}
+
+export interface PromptAudit {
+  passed: boolean;
+  score: number;
+  checks: PromptCheck[];
+  hints: string[];
+}
+
 const CAMERA = /\b(close[- ]?up|wide|medium shot|low angle|high angle|over[- ]the[- ]shoulder|dutch|macro|telephoto|\d{2,3}mm|lens|aperture|f\/\d)/i;
 const LIGHT = /\b(light(ing)?|golden hour|backlit|rim light|softbox|window light|neon|practical|moody|high[- ]key|low[- ]key)\b/i;
 const WARDROBE = /\b(wearing|wardrobe|outfit|dress|suit|jacket|uniform|costume)\b/i;
@@ -13,9 +26,9 @@ const PRODUCT_SCALE = /\b(\d+\s?(mm|cm|inch|in|oz|ml|g)\b|to scale|true size|rea
 const PEOPLE = /\b(man|woman|person|people|two|three|pair|couple|group|he|she|they|child)\b/i;
 const PRODUCT = /\b(bottle|can|jar|product|packaging|box|phone|laptop|watch|shoe|cup|mug)\b/i;
 
-export function lintShotPrompt(prompt = '') {
+export function lintShotPrompt(prompt = ''): PromptAudit {
   const text = String(prompt);
-  const checks = [
+  const checks: PromptCheck[] = [
     { id: 'camera', pass: CAMERA.test(text), hint: 'Add camera/lens language (e.g. "85mm close-up").' },
     { id: 'lighting', pass: LIGHT.test(text), hint: 'Add a lighting direction (e.g. "window light from camera left").' },
     { id: 'wardrobe', pass: WARDROBE.test(text), hint: 'State wardrobe so it stays consistent across shots.' },
@@ -27,11 +40,11 @@ export function lintShotPrompt(prompt = '') {
   if (PRODUCT.test(text)) {
     checks.push({ id: 'productScale', pass: PRODUCT_SCALE.test(text), hint: 'Give the real product size (mm/cm) to avoid drift.' });
   }
-  const failed = checks.filter((c) => !c.pass);
+  const failed = checks.filter((check) => !check.pass);
   return {
     passed: failed.length === 0,
     score: Math.round(((checks.length - failed.length) / checks.length) * 100),
     checks,
-    hints: failed.map((c) => c.hint),
+    hints: failed.map((check) => check.hint),
   };
 }

@@ -3,7 +3,12 @@
  * the Electron SPA. Icons, category grouping, and availability remain
  * entry-point specific; labels/ordering live here to avoid drift.
  */
-export const STUDIO_TABS = [
+export interface StudioTab {
+  id: string;
+  label: string;
+}
+
+export const STUDIO_TABS: StudioTab[] = [
   { id: 'image', label: 'Image Studio' },
   { id: 'layers', label: 'Layers Studio' },
   { id: 'video', label: 'Video Studio' },
@@ -23,6 +28,6 @@ export const STUDIO_TABS = [
   { id: 'mcp-cli', label: 'MCP & CLI' },
 ];
 
-export const STUDIO_LABELS = Object.fromEntries(
+export const STUDIO_LABELS: Record<string, string> = Object.fromEntries(
   STUDIO_TABS.map((tab) => [tab.id, tab.label])
 );
