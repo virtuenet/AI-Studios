@@ -441,7 +441,7 @@ export default function DrawModal({
     } else if (activeTool === "text") {
       const fontSize = brushSize * 4 > 12 ? brushSize * 4 : 20;
       const newText = {
-        id: Math.random().toString(36).substring(7),
+        id: createClientId(),
         type: "text",
         text: "Type text here...",
         x: Math.round(pos.x),
@@ -498,7 +498,7 @@ export default function DrawModal({
 
     if (activeTool === "pencil") {
       newObj = {
-        id: Math.random().toString(36).substring(7),
+        id: createClientId(),
         type: "pencil",
         points: drawingState.current.activePoints,
         color: brushColor,
@@ -506,7 +506,7 @@ export default function DrawModal({
       };
     } else if (activeTool === "eraser") {
       newObj = {
-        id: Math.random().toString(36).substring(7),
+        id: createClientId(),
         type: "eraser",
         points: drawingState.current.activePoints,
         brushSize: brushSize * 2,
@@ -515,7 +515,7 @@ export default function DrawModal({
       const w = pos.x - startX;
       const h = pos.y - startY;
       newObj = {
-        id: Math.random().toString(36).substring(7),
+        id: createClientId(),
         type: "rect",
         x: w < 0 ? startX + w : startX,
         y: h < 0 ? startY + h : startY,
@@ -526,7 +526,7 @@ export default function DrawModal({
       };
     } else if (activeTool === "arrow") {
       newObj = {
-        id: Math.random().toString(36).substring(7),
+        id: createClientId(),
         type: "arrow",
         x1: startX,
         y1: startY,
@@ -850,7 +850,7 @@ export default function DrawModal({
     reader.onload = (event) => {
       const img = new Image();
       img.onload = () => {
-        const id = Math.random().toString(36).substring(7);
+        const id = createClientId();
         const w = img.naturalWidth || img.width || 150;
         const h = img.naturalHeight || img.height || 150;
 
@@ -1032,7 +1032,7 @@ export default function DrawModal({
       results.forEach((res) => {
         if (res && res.url) {
           const entry = {
-            id: res.id || Math.random().toString(36).substring(7),
+            id: res.id || createClientId(),
             url: res.url,
             prompt: `Draw to Edit with ${selectedModel === "nano-banana-pro-edit" ? "Nano Banana Pro" : "Nano Banana 2"}`,
             model: selectedModel,

@@ -43,6 +43,11 @@ function joinClasses(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+function applyTextareaHeight(element, maxHeight) {
+  element.style.height = "auto";
+  element.style.height = `${Math.min(element.scrollHeight, maxHeight)}px`;
+}
+
 export function promptControlClassName({
   active = false,
   compact = false,
@@ -374,10 +379,9 @@ export const PromptTextarea = forwardRef(function PromptTextarea(
     (element = internalRef.current) => {
       if (!element) return;
 
-      element.style.height = "auto";
       const maxHeight =
         window.innerWidth < 768 ? maxHeightMobile : maxHeightDesktop;
-      element.style.height = `${Math.min(element.scrollHeight, maxHeight)}px`;
+      applyTextareaHeight(element, maxHeight);
     },
     [maxHeightDesktop, maxHeightMobile],
   );

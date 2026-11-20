@@ -22,8 +22,12 @@ export default function usePersistentObject({
   const loadedRef = useRef(false);
   const onLoadRef = useRef(onLoad);
   const getStateRef = useRef(getState);
-  onLoadRef.current = onLoad;
-  getStateRef.current = getState;
+  useEffect(() => {
+    onLoadRef.current = onLoad;
+  }, [onLoad]);
+  useEffect(() => {
+    getStateRef.current = getState;
+  }, [getState]);
 
   useEffect(() => {
     loadedRef.current = false;

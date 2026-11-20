@@ -443,7 +443,7 @@ export default function MarketingStudio({
 
       if (result?.url) {
         const entry = {
-          id: Date.now(),
+          id: clientTimestamp(),
           url: result.url,
           prompt,
           format: params.format,

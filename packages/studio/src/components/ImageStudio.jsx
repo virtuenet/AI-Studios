@@ -1046,7 +1046,9 @@ export default function ImageStudio({
   const dropdownRef = useRef(null);
   const uploadPickerResetRef = useRef(null); // not used directly — managed via key
   const selectionRef = useRef(null);
-  selectionRef.current = { imageMode, selectedFamilyId, selectedModelId };
+  useEffect(() => {
+    selectionRef.current = { imageMode, selectedFamilyId, selectedModelId };
+  }, [imageMode, selectedFamilyId, selectedModelId]);
 
   // ── Close dropdown on outside click ─────────────────────────────────────
   useEffect(() => {
@@ -1189,16 +1191,6 @@ export default function ImageStudio({
     }
   };
 
-  // ── Handle Dropped Files ────────────────────────────────────────────────
-  useEffect(() => {
-    if (droppedFiles && droppedFiles.length > 0) {
-      const imageFiles = droppedFiles.filter(f => f.type.startsWith('image/'));
-      if (imageFiles.length > 0) {
-        processDroppedImages(imageFiles);
-      }
-      onFilesHandled?.();
-    }
-  }, [droppedFiles, onFilesHandled, processDroppedImages]);
 
   // ── Derived: current model lists & helpers ───────────────────────────────
   const currentAspectRatios = imageMode
@@ -1262,7 +1254,7 @@ export default function ImageStudio({
     } else {
       setSelectedEffect("");
     }
-  }, []);
+  }, [setModelParameterValues]);
 
   const applyUserSelectedVariant = useCallback((variant, mode, family) => {
     if (mode === "t2i") {
@@ -1301,6 +1293,18 @@ export default function ImageStudio({
     },
     [applySelectedVariant],
   );
+
+  // ── Handle Dropped Files ────────────────────────────────────────────────
+  useEffect(() => {
+    if (droppedFiles && droppedFiles.length > 0) {
+      const imageFiles = droppedFiles.filter(f => f.type.startsWith('image/'));
+      if (imageFiles.length > 0) {
+        processDroppedImages(imageFiles);
+      }
+      onFilesHandled?.();
+    }
+  }, [droppedFiles, onFilesHandled, processDroppedImages]);
+
 
   const handleUploadClear = useCallback(() => {
     setUploadedImageUrls([]);

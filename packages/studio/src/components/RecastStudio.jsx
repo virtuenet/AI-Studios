@@ -343,7 +343,7 @@ function AssetsDropdown({
                   {item.name}
                 </span>
                 <span className="text-[9px] text-white/30 truncate mt-0.5">
-                  {new Date(item.timestamp || Date.now()).toLocaleDateString()}
+                  {new Date(item.timestamp || clientTimestamp()).toLocaleDateString()}
                 </span>
               </div>
 
@@ -816,7 +816,7 @@ export default function RecastStudio({
 
       if (!res?.url) throw new Error("No video URL returned by API");
 
-      const genId = res.id || Date.now().toString();
+      const genId = res.id || clientTimestamp().toString();
       const entry = {
         id: genId,
         url: res.url,

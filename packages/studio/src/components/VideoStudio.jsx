@@ -1170,7 +1170,7 @@ export default function VideoStudio({
     }), [selectedVariant, modelParameterValues, selectedAr, selectedDuration, selectedResolution, selectedQuality],
   );
   const aspectRatioHelp = groupCopy[selectedVariant?.model.inputs?.aspect_ratio?.descriptionKey];
-  const groupedModes = useMemo(() => groupedConfiguration && workflowFamily
+  const groupedModes = groupedConfiguration && workflowFamily
     ? [...(workflowFamily.hasBase ? [{ id: null }] : []), ...workflowFamily.workflows].map((workflow) => {
         const plan = getSelectionPlan({ workflowId: workflow.id });
         return {
@@ -1184,7 +1184,7 @@ export default function VideoStudio({
           disabled: !plan,
         };
       })
-    : [], [groupedConfiguration, workflowFamily, getSelectionPlan, describeSelectionAdjustments, groupCopy]);
+    : [];
   const promptDisabled = Boolean(selectedVeoTool && !selectedVariant?.model.inputs?.prompt) || shouldDisableVideoPrompt(
     selectedVariant?.model,
     currentFamilyMode,

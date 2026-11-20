@@ -442,7 +442,7 @@ function AssetsDropdown({
                   {item.name}
                 </span>
                 <span className="text-[10px] text-white/40 truncate mt-0.5">
-                  {new Date(item.timestamp || Date.now()).toLocaleDateString()}
+                  {new Date(item.timestamp || clientTimestamp()).toLocaleDateString()}
                 </span>
               </div>
 
@@ -663,7 +663,7 @@ export default function MotionControlStudio({
   const handleAddVideoAsset = (url, name) => {
     setAssetVideos((prev) => {
       if (prev.some((a) => a.url === url)) return prev;
-      const updated = [{ url, name, timestamp: Date.now() }, ...prev];
+      const updated = [{ url, name, timestamp: clientTimestamp() }, ...prev];
       saveAssets(updated, assetImages, assetResults);
       return updated;
     });
@@ -672,7 +672,7 @@ export default function MotionControlStudio({
   const handleAddImageAsset = (url, name) => {
     setAssetImages((prev) => {
       if (prev.some((a) => a.url === url)) return prev;
-      const updated = [{ url, name, timestamp: Date.now() }, ...prev];
+      const updated = [{ url, name, timestamp: clientTimestamp() }, ...prev];
       saveAssets(assetVideos, updated, assetResults);
       return updated;
     });
@@ -681,7 +681,7 @@ export default function MotionControlStudio({
   const handleAddResultAsset = (url, name) => {
     setAssetResults((prev) => {
       if (prev.some((a) => a.url === url)) return prev;
-      const updated = [{ url, name, timestamp: Date.now() }, ...prev];
+      const updated = [{ url, name, timestamp: clientTimestamp() }, ...prev];
       saveAssets(assetVideos, assetImages, updated);
       return updated;
     });
@@ -841,14 +841,14 @@ export default function MotionControlStudio({
       }
 
       const newEntry = {
-        id: result.request_id || pendingRequestId.current || `mc-${Date.now()}`,
+        id: result.request_id || pendingRequestId.current || `mc-${clientTimestamp()}`,
         url: outputUrl,
         prompt: prompt.trim() || (mode === "objects_swap" ? "Objects Swap" : "Motion Transfer"),
         mode: mode,
         model: selectedModel.name,
         duration: duration,
         aspectRatio: aspectRatio,
-        timestamp: Date.now(),
+        timestamp: clientTimestamp(),
       };
 
       saveHistory([newEntry, ...history]);

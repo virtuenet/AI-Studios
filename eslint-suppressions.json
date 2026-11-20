@@ -22,66 +22,39 @@
   "packages/studio/src/components/DrawModal.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 3
-    },
-    "react-hooks/purity": {
-      "count": 5
     }
   },
   "packages/studio/src/components/ImageStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 4
     },
-    "react-hooks/immutability": {
-      "count": 1
-    },
     "react-hooks/preserve-manual-memoization": {
-      "count": 4
-    },
-    "react-hooks/refs": {
-      "count": 1
+      "count": 3
     }
   },
   "packages/studio/src/components/LayersStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 1
-    },
-    "react-hooks/immutability": {
-      "count": 1
-    },
-    "react-hooks/purity": {
       "count": 1
     }
   },
   "packages/studio/src/components/LipSyncStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 1
-    },
-    "react-hooks/immutability": {
-      "count": 2
     }
   },
   "packages/studio/src/components/MarketingStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 2
-    },
-    "react-hooks/purity": {
-      "count": 1
     }
   },
   "packages/studio/src/components/MotionControlStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 2
-    },
-    "react-hooks/purity": {
-      "count": 1
     }
   },
   "packages/studio/src/components/RecastStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 4
-    },
-    "react-hooks/purity": {
-      "count": 1
     }
   },
   "packages/studio/src/components/VibeMotionStudio.jsx": {
@@ -92,24 +65,11 @@
   "packages/studio/src/components/VideoStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 7
-    },
-    "react-hooks/preserve-manual-memoization": {
-      "count": 1
     }
   },
   "packages/studio/src/components/WorkflowStudio.jsx": {
     "react-hooks/exhaustive-deps": {
       "count": 1
-    }
-  },
-  "packages/studio/src/components/prompt/PromptComposer.jsx": {
-    "react-hooks/immutability": {
-      "count": 1
-    }
-  },
-  "packages/studio/src/hooks/usePersistentObject.js": {
-    "react-hooks/refs": {
-      "count": 2
     }
   }
 }

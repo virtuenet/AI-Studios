@@ -1,5 +1,6 @@
 "use client";
 
+import { randomUnit } from "../utils/clientIds";
 import { useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import {
@@ -192,16 +193,6 @@ export default function LayersStudio({
   const [historyStack, setHistoryStack] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
 
-  // Handle external dropped files passed from parent shell
-  useEffect(() => {
-    if (droppedFiles && droppedFiles.length > 0) {
-      const file = droppedFiles[0];
-      if (file.type.startsWith("image/")) {
-        handleUploadFile(file);
-        if (onFilesHandled) onFilesHandled();
-      }
-    }
-  }, [droppedFiles, onFilesHandled]);
 
   // Sync drawing canvas overlay resolution with displayed image
   const syncCanvasDimensions = useCallback(() => {
@@ -272,7 +263,26 @@ export default function LayersStudio({
   };
 
   // Upload File Helper
-  const handleUploadFile = async (file) => {
+  const saveCanvasState = () => {
+    const canvas = drawingCanvasRef.current;
+    if (!canvas) return;
+    const dataUrl = canvas.toDataURL();
+    const newStack = historyStack.slice(0, historyIndex + 1);
+    newStack.push(dataUrl);
+    setHistoryStack(newStack);
+    setHistoryIndex(newStack.length - 1);
+  };
+
+  const clearDrawingCanvas = () => {
+    const canvas = drawingCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setMarkedRegions([]);
+    saveCanvasState();
+  };
+
+  async function handleUploadFile(file) {
     if (!apiKey) {
       toast.error(copy.toasts.enterApiKeyUpload);
       return;
@@ -295,7 +305,19 @@ export default function LayersStudio({
     } finally {
       setUploading(false);
     }
-  };
+  }
+
+  // Handle external dropped files passed from parent shell
+  useEffect(() => {
+    if (droppedFiles && droppedFiles.length > 0) {
+      const file = droppedFiles[0];
+      if (file.type.startsWith("image/")) {
+        startTransition(() => handleUploadFile(file));
+        if (onFilesHandled) onFilesHandled();
+      }
+    }
+  }, [droppedFiles, onFilesHandled]);
+
 
   // Shared entry point for both click-to-browse and drag-and-drop uploads
   const handleFiles = (files) => {
@@ -568,24 +590,9 @@ export default function LayersStudio({
   };
 
   // --- DRAWING CANVAS LOGIC ---
-  const saveCanvasState = () => {
-    const canvas = drawingCanvasRef.current;
-    if (!canvas) return;
-    const dataUrl = canvas.toDataURL();
-    const newStack = historyStack.slice(0, historyIndex + 1);
-    newStack.push(dataUrl);
-    setHistoryStack(newStack);
-    setHistoryIndex(newStack.length - 1);
-  };
 
-  const clearDrawingCanvas = () => {
-    const canvas = drawingCanvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    setMarkedRegions([]);
-    saveCanvasState();
-  };
+
+
 
   const handleUndo = () => {
     if (historyIndex > 0) {
@@ -1118,7 +1125,7 @@ export default function LayersStudio({
         const data = gImgData.data;
         const bias = colorGrading.filmGrain.bias * 50;
         for (let i = 0; i < data.length; i += 4) {
-          const noise = (Math.random() - 0.5) * 255 + bias;
+          const noise = (randomUnit() - 0.5) * 255 + bias;
           data[i] = noise;
           data[i + 1] = noise;
           data[i + 2] = noise;
