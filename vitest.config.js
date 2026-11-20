@@ -36,7 +36,7 @@ export default defineConfig({
         'lib/session.ts',
         'lib/logger.ts',
         'lib/locales.ts',
-        'lib/localModels.js',
+        'lib/localModels.ts',
         'packages/studio/src/hooks/**/*.{js,ts}',
         'packages/studio/src/filmCrew/{qaChecklist,audioQc,castLibrary,sceneSet,mlChecks,promptQa}.ts',
       ],

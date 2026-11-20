@@ -1,5 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const path = require('node:path');
+const esbuild = require('esbuild');
 
 const { WAN2GP_CATALOG, getModelById, buildWan2gpSettings } = require('../electron/lib/wan2gpCatalog');
 
@@ -16,8 +18,19 @@ test('catalog entries carry a real WanGP model_type and unique ids', () => {
     }
 });
 
-test('frontend catalog (src/lib/localModels.js) mirrors the Wan2GP catalog', async () => {
-    const { LOCAL_MODEL_CATALOG } = await import('../lib/localModels.js');
+test('frontend catalog (lib/localModels.ts) mirrors the Wan2GP catalog', async () => {
+    const bundle = await esbuild.build({
+        entryPoints: [path.resolve(__dirname, '../lib/localModels.ts')],
+        bundle: true,
+        platform: 'node',
+        format: 'esm',
+        write: false,
+        logLevel: 'silent',
+    });
+    const code = bundle.outputFiles[0].text;
+    const { LOCAL_MODEL_CATALOG } = await import(
+        `data:text/javascript;base64,${Buffer.from(code).toString('base64')}`
+    );
     const pick = (m) => ({ id: m.id, type: m.type, modelType: m.modelType, needsImage: !!m.needsImage, aspectRatios: m.aspectRatios });
     const frontend = LOCAL_MODEL_CATALOG.filter(m => m.provider === 'wan2gp').map(pick);
     assert.deepEqual(frontend, WAN2GP_CATALOG.map(pick));

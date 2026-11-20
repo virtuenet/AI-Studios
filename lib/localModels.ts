@@ -3,7 +3,25 @@
 //   - sdcpp: bundled engine, weights live on disk
 //   - wan2gp: user-installed Wan2GP (local folder or remote MCP server)
 // Mirrors electron/lib/modelCatalog.js (sd.cpp) and electron/lib/wan2gpCatalog.js (wan2gp).
-export const LOCAL_MODEL_CATALOG = [
+
+export interface LocalModel {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  provider: string;
+  filename?: string;
+  sizeGB?: number;
+  aspectRatios: string[];
+  defaultSteps?: number;
+  defaultGuidance?: number;
+  tags: string[];
+  featured?: boolean;
+  family?: string;
+  modelType?: string;
+  needsImage?: boolean;
+}
+export const LOCAL_MODEL_CATALOG: LocalModel[] = [
     // ── sd.cpp: Z-Image (Tongyi-MAI) ────────────────────────────────────────
     {
         id: 'z-image-turbo',
@@ -171,12 +189,16 @@ export const LOCAL_MODEL_CATALOG = [
     },
 ];
 
-export function getLocalModelById(id) {
-    return LOCAL_MODEL_CATALOG.find(m => m.id === id) || null;
+export function getLocalModelById(id: string): LocalModel | null {
+    return LOCAL_MODEL_CATALOG.find((model) => model.id === id) || null;
 }
 
-export const isWan2gpModelId = (id) => getLocalModelById(id)?.provider === 'wan2gp';
-export const isLocalModelId  = (id) => !!getLocalModelById(id);
+export const isWan2gpModelId = (id: string): boolean => getLocalModelById(id)?.provider === 'wan2gp';
+export const isLocalModelId = (id: string): boolean => Boolean(getLocalModelById(id));
 
-export const localT2VModels = LOCAL_MODEL_CATALOG.filter(m => m.provider === 'wan2gp' && m.type === 'video' && !m.needsImage);
-export const localI2VModels = LOCAL_MODEL_CATALOG.filter(m => m.provider === 'wan2gp' && m.type === 'video' &&  m.needsImage);
+export const localT2VModels = LOCAL_MODEL_CATALOG.filter(
+    (model) => model.provider === 'wan2gp' && model.type === 'video' && !model.needsImage
+);
+export const localI2VModels = LOCAL_MODEL_CATALOG.filter(
+    (model) => model.provider === 'wan2gp' && model.type === 'video' && model.needsImage
+);
