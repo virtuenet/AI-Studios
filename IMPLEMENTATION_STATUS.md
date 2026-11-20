@@ -36,7 +36,7 @@ Builds:       Next production build; studio dist 98 files; Vite/Electron build; 
 
 | Area | Evidence |
 |------|----------|
-| TypeScript | film-crew modules/UI, hooks, utils, `lib/` (session, upload proxy, logger, locales, local models), middleware, health/session/QC routes, typed `models.ts` aggregator; 37 TS files |
+| TypeScript | film-crew modules/UI, hooks, utils, `lib/` (session, upload proxy, logger, locales, local models), middleware, health/session/QC routes, typed `models.ts` aggregator; 38 TS files |
 | Model contract | `types/models.d.ts` exports `ModelDefinition`/`ModelInput`; catalog data stays JS; `validate:models` + snapshot sync pass |
 | QC security | optional `QC_API_TOKEN` bearer auth (tested 401/200), SSRF guard, non-root Docker UID 10001, pinned `python:3.12.13-slim` digest |
 | QC reproducibility | `requirements.lock` / `requirements-dev.lock`; verified on Python 3.12; CI builds the image and checks baked models + non-root user |
