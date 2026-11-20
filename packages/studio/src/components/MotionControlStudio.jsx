@@ -794,7 +794,7 @@ export default function MotionControlStudio({
     imageFiles.forEach((imgFile) => handleAddImage(imgFile));
 
     onFilesHandled?.();
-  }, [droppedFiles, onFilesHandled]);
+  }, [droppedFiles, onFilesHandled, handleAddImage, handleUploadVideo]);
 
   // ── Handle Generation ───────────────────────────────────────────────────────
   const handleGenerate = async () => {

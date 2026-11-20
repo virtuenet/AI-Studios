@@ -264,7 +264,7 @@ export default function AgentStudio({ apiKey, locale = "en" }) {
     }
     openFromUrl();
     return () => { cancelled = true; };
-  }, [apiKey, urlAgentSlug, urlConversationId]);
+  }, [apiKey, urlAgentSlug, urlConversationId, copy.errors.loadAgentFailed]);
 
   const handleSendMessage = useCallback(async () => {
     if (!chatInput.trim() || sending || !activeAgent) return;
@@ -299,7 +299,7 @@ export default function AgentStudio({ apiKey, locale = "en" }) {
     } finally {
       setSending(false);
     }
-  }, [apiKey, activeAgent, conversationId, chatInput, sending, router]);
+  }, [apiKey, activeAgent, conversationId, chatInput, sending, router, copy.errors.sendFailed]);
 
   const handleCreateSubmit = useCallback(
     async (e) => {
@@ -322,7 +322,7 @@ export default function AgentStudio({ apiKey, locale = "en" }) {
         setCreating(false);
       }
     },
-    [apiKey, createForm, creating, router]
+    [apiKey, createForm, creating, router, copy.errors.createFailed]
   );
 
   useEffect(() => {
@@ -355,7 +355,7 @@ export default function AgentStudio({ apiKey, locale = "en" }) {
 
     load();
     return () => { cancelled = true; };
-  }, [apiKey, activeMainTab, view]);
+  }, [apiKey, activeMainTab, view, copy.errors.loadFailed]);
 
   // ── Render: Create ───────────────────────────────────────────────────────────
   if (view === "create") {

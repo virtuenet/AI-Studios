@@ -1097,7 +1097,7 @@ export default function ImageStudio({
     } catch (err) {
       console.warn("Failed to load ImageStudio persistence:", err);
     }
-  }, []);
+  }, [PERSIST_KEY]);
 
   // ── Adjust height on load ────────────────────────────────────────────────
   // ── Persistence: Save ────────────────────────────────────────────────────
@@ -1291,7 +1291,7 @@ export default function ImageStudio({
         applySelectedVariant(target, target.mode, family);
       }
     },
-    [applySelectedVariant],
+    [applySelectedVariant, copy.errors.noImageReferenceSupport],
   );
 
   // ── Handle Dropped Files ────────────────────────────────────────────────

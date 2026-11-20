@@ -122,14 +122,14 @@ export default function VibeMotionStudio({
         startTransition(() => setHistory(restored));
       }
     } catch (_) {}
-  }, []);
+  }, [PERSIST_KEY]);
 
   const saveHistory = useCallback((items) => {
     setHistory(items);
     // Strip canEdit from persisted data — it is an in-memory hint only
     const stripped = items.map(({ canEdit, ...rest }) => rest);
     try { localStorage.setItem(PERSIST_KEY, JSON.stringify(stripped)); } catch (_) {}
-  }, []);
+  }, [PERSIST_KEY]);
 
   // ── Close dropdowns on outside click ─────────────────────────────────────
   useEffect(() => {

@@ -607,7 +607,7 @@ export default function RecastStudio({
     } finally {
       hasRestored.current = true;
     }
-  }, []);
+  }, [PERSIST_KEY]);
 
   // ── Save Assets ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -704,7 +704,7 @@ export default function RecastStudio({
         setVideoProgress(0);
       }
     },
-    [apiKey],
+    [apiKey, copy.errors.videoTooLarge, copy.errors.videoUploadFailed],
   );
 
   const handlePromptInput = (e) => {
@@ -738,7 +738,7 @@ export default function RecastStudio({
         setImageProgress(0);
       }
     },
-    [apiKey],
+    [apiKey, copy.errors.imageTooLarge, copy.errors.imageUploadFailed],
   );
 
   // ── Handle Dropped Files ────────────────────────────────────────────────────

@@ -1422,7 +1422,7 @@ export default function VideoStudio({
     } finally {
       hasRestored.current = true;
     }
-  }, [applyControlsForModel, defaultModel.id]);
+  }, [applyControlsForModel, defaultModel.id, PERSIST_KEY, defaultFamily.id, defaultModel]);
 
   // ── Persistence: Save ────────────────────────────────────────────────────
   useEffect(() => {
@@ -1551,7 +1551,7 @@ export default function VideoStudio({
           : setUploadedAudioUrls;
       setter((current) => mergeReferenceUrls(current, validUrls, limit));
     },
-    [applySelectedVariant, reconcileReferencesForModel, resolveMediaTarget],
+    [applySelectedVariant, reconcileReferencesForModel, resolveMediaTarget, copy.errors.modelChangedDuringUpload, copy.errors.modelDoesNotSupportReference],
   );
 
   const handleDrawReference = useCallback(
@@ -1790,7 +1790,7 @@ export default function VideoStudio({
       const urls = await uploadFiles(Array.from(files).slice(0, remaining), options);
       applyReferenceUrls(mediaType, urls, target, selectionAtStart);
     },
-    [applyReferenceUrls, resolveMediaTarget, uploadFiles],
+    [applyReferenceUrls, resolveMediaTarget, uploadFiles, copy.media.audio, copy.media.image, copy.media.video],
   );
 
   // ── Handle Dropped Files ────────────────────────────────────────────────

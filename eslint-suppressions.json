@@ -1,32 +1,17 @@
 {
-  "packages/studio/src/components/AgentStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 4
-    }
-  },
-  "packages/studio/src/components/AudioStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 3
-    }
-  },
   "packages/studio/src/components/CinemaStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 3
-    }
-  },
-  "packages/studio/src/components/ClippingStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
-      "count": 3
+      "count": 1
     }
   },
   "packages/studio/src/components/DrawModal.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 3
+      "count": 1
     }
   },
   "packages/studio/src/components/ImageStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 4
+      "count": 2
     },
     "react-hooks/preserve-manual-memoization": {
       "count": 3
@@ -39,32 +24,27 @@
   },
   "packages/studio/src/components/LipSyncStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 1
-    }
-  },
-  "packages/studio/src/components/MarketingStudio.jsx": {
-    "react-hooks/exhaustive-deps": {
       "count": 2
     }
   },
   "packages/studio/src/components/MotionControlStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 2
+      "count": 3
     }
   },
   "packages/studio/src/components/RecastStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 4
+      "count": 1
     }
   },
   "packages/studio/src/components/VibeMotionStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 3
+      "count": 1
     }
   },
   "packages/studio/src/components/VideoStudio.jsx": {
     "react-hooks/exhaustive-deps": {
-      "count": 7
+      "count": 4
     }
   },
   "packages/studio/src/components/WorkflowStudio.jsx": {

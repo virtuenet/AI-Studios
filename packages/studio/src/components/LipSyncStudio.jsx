@@ -755,7 +755,7 @@ export default function LipSyncStudio({
       });
       onFilesHandled?.();
     }
-  }, [droppedFiles, onFilesHandled, handleAudioPick, handleVideoPick, handleImageUpload]);
+  }, [droppedFiles, onFilesHandled, handleAudioPick, handleVideoPick, handleImageUpload, switchToImage, switchToVideo]);
 
   // ── Mode toggle ─────────────────────────────────────────────────────────
   function switchToImage() {

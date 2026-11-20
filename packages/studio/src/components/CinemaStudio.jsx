@@ -664,7 +664,7 @@ export default function CinemaStudio({
     } catch (err) {
       console.warn("Failed to load CinemaStudio persistence:", err);
     }
-  }, []);
+  }, [PERSIST_KEY]);
 
   // ── Adjust height on load ────────────────────────────────────────────────
   // ── Persistence: Save ────────────────────────────────────────────────────
@@ -683,7 +683,7 @@ export default function CinemaStudio({
       }
     }, 500); // 500ms debounce
     return () => clearTimeout(timer);
-  }, [settings, resolution, internalHistory, uploadedImage]);
+  }, [settings, resolution, internalHistory, uploadedImage, PERSIST_KEY]);
 
   // Derive effective history (prop wins over internal)
   const history = historyItems != null ? historyItems : internalHistory;

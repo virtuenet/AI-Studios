@@ -388,7 +388,7 @@ export default function DrawModal({
   // Trigger redraw on object updates
   useEffect(() => {
     redrawCanvas();
-  }, [canvasObjects, canvasDimensions, activeTool]);
+  }, [canvasObjects, canvasDimensions, activeTool, redrawCanvas]);
 
   // Drawing coordinates resolver
   const getCanvasMousePos = (e) => {
@@ -761,7 +761,7 @@ export default function DrawModal({
         }),
       ));
     }
-  }, [brushColor]);
+  }, [brushColor, selectedObjectId]);
 
   useEffect(() => {
     if (selectedObjectId) {
@@ -781,7 +781,7 @@ export default function DrawModal({
         }),
       ));
     }
-  }, [brushSize]);
+  }, [brushSize, selectedObjectId]);
 
   // Upload background file
   const handleUploadBg = (filesOrEvent) => {

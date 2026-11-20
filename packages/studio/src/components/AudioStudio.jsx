@@ -88,7 +88,7 @@ function AudioFileUploader({ label, value, onChange, apiKey, copy = en }) {
         setFileName(value.split('/').pop().slice(-30));
       }
     });
-  }, [value]);
+  }, [value, uploadState]);
 
   const handleUpload = async (files) => {
     const file = files?.[0];
@@ -585,19 +585,25 @@ export default function AudioStudio({
   const selectedModel = getAudioModelById(selectedModelId);
 
   // ── Initialize params when model changes ──────────────────────────────
+  const paramsRef = useRef(params);
+  useEffect(() => {
+    paramsRef.current = params;
+  }, [params]);
+
   useEffect(() => {
     if (!selectedModel) return;
+    const current = paramsRef.current;
     const initial = {};
     Object.entries(selectedModel.inputs || {}).forEach(([key, schema]) => {
       // Don't overwrite parameters like vocal upload, list etc. if they are already in state
-      if (params[key] !== undefined) {
-        initial[key] = params[key];
+      if (current[key] !== undefined) {
+        initial[key] = current[key];
       } else {
         initial[key] = schema.default !== undefined ? schema.default : "";
       }
     });
     startTransition(() => setParams(initial));
-  }, [selectedModelId]); // Only reset when model ID changes
+  }, [selectedModelId, selectedModel]); // Only reset when model ID changes
 
   // ── Persistence (shared hook) ───────────────────────────────────────────
   usePersistentObject({
@@ -658,7 +664,7 @@ export default function AudioStudio({
       }
       onFilesHandled?.();
     }
-  }, [droppedFiles, onFilesHandled, selectedModel, apiKey]);
+  }, [droppedFiles, onFilesHandled, selectedModel, apiKey, copy.generate.droppedFileUploadError]);
 
   // ── History helpers ─────────────────────────────────────────────────────
   const addToInternalHistory = useCallback((entry) => {

@@ -316,7 +316,7 @@ export default function LayersStudio({
         if (onFilesHandled) onFilesHandled();
       }
     }
-  }, [droppedFiles, onFilesHandled]);
+  }, [droppedFiles, onFilesHandled, handleUploadFile]);
 
 
   // Shared entry point for both click-to-browse and drag-and-drop uploads

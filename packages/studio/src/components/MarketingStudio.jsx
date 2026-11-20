@@ -373,7 +373,7 @@ export default function MarketingStudio({
         });
       }
     } catch (err) { console.warn("Load failed", err); }
-  }, []);
+  }, [PERSIST_KEY]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -381,7 +381,7 @@ export default function MarketingStudio({
       localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
     }, 500);
     return () => clearTimeout(timer);
-  }, [prompt, params, productImage, avatarImage, additionalImages, localHistory]);
+  }, [prompt, params, productImage, avatarImage, additionalImages, localHistory, PERSIST_KEY]);
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 

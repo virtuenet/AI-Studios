@@ -316,7 +316,7 @@ export default function ClippingStudio({
     } catch (err) {
       console.warn("Failed to load ClippingStudio persistent state:", err);
     }
-  }, []);
+  }, [PERSIST_KEY]);
 
   // ── Save Persistent State to localStorage ───────────────────────────────
   useEffect(() => {
@@ -336,7 +336,7 @@ export default function ClippingStudio({
       }
     }, 500);
     return () => clearTimeout(timer);
-  }, [videoUrl, numHighlights, aspectRatio, returnCoordinatesOnly, history, result]);
+  }, [videoUrl, numHighlights, aspectRatio, returnCoordinatesOnly, history, result, PERSIST_KEY]);
 
   // ── Handle Dropped Files ────────────────────────────────────────────────
   useEffect(() => {
@@ -367,7 +367,7 @@ export default function ClippingStudio({
       }
       onFilesHandled?.();
     }
-  }, [droppedFiles, onFilesHandled, apiKey]);
+  }, [droppedFiles, onFilesHandled, apiKey, copy]);
 
   // Adjust URL textarea height dynamically
   // ── Highlight Seeking Helper ─────────────────────────────────────────────
