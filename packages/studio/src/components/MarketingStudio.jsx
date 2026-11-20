@@ -187,7 +187,7 @@ function UploadSlot({ icon, url, progress, label, title, onUpload, onClear, mult
           </div>
         ) : url ? (
           <div className="w-full h-full rounded-full overflow-hidden border border-black/20">
-            <img src={url} className="w-full h-full object-cover" alt={label} />
+            <img loading="lazy" decoding="async" src={url} className="w-full h-full object-cover" alt={label} />
           </div>
         ) : (
           <div className="text-white/40 group-hover:text-primary transition-colors">
@@ -260,7 +260,7 @@ function Dropdown({ isOpen, title, items, selectedId, onSelect, onClose, isVideo
             {isVideo ? (
               <video src={item.url} autoPlay loop muted className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-all duration-500" />
             ) : (
-              <img src={item.url} className="w-full aspect-square object-cover group-hover:scale-105 transition-all duration-500" alt={item.name} />
+              <img loading="lazy" decoding="async" src={item.url} className="w-full aspect-square object-cover group-hover:scale-105 transition-all duration-500" alt={item.name} />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2 opacity-0 group-hover:opacity-100 transition-opacity">
               <span className="text-[9px] font-black text-white uppercase tracking-tight">{item.name}</span>
@@ -564,28 +564,28 @@ export default function MarketingStudio({
             {/* Overlapping floating cards */}
             <div className="flex items-center justify-center gap-1.5 md:gap-3 mb-10 select-none scale-90 sm:scale-100">
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif"
                   alt={copy.alt.creativeAsset.replace("{index}", "1")}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[4deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif"
                   alt={copy.alt.creativeAsset.replace("{index}", "2")}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full border border-white/10 shadow-2xl rotate-[6deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif"
                   alt={copy.alt.creativeAsset.replace("{index}", "3")}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif"
                   alt={copy.alt.creativeAsset.replace("{index}", "4")}
                   className="w-full h-full object-cover"
@@ -612,7 +612,7 @@ export default function MarketingStudio({
             <div className="flex items-center gap-1.5">
               {additionalImages.map((img, idx) => (
                 <div key={idx} className="relative group/img flex-shrink-0">
-                  <img src={img} className="w-9 h-9 rounded-full object-cover border border-white/10" />
+                  <img loading="lazy" decoding="async" src={img} className="w-9 h-9 rounded-full object-cover border border-white/10" />
                   <button 
                     onClick={() => setAdditionalImages(prev => prev.filter((_, i) => i !== idx))}
                     className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-black/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity border border-white/10"
@@ -711,7 +711,7 @@ export default function MarketingStudio({
                   })}
                 >
                   <div className="w-4 h-4 rounded-full overflow-hidden border border-white/20 shadow-inner">
-                    <img src={avatarImage || ASSETS.avatar[0].url} className="w-full h-full object-cover" />
+                    <img loading="lazy" decoding="async" src={avatarImage || ASSETS.avatar[0].url} className="w-full h-full object-cover" />
                   </div>
                   <span className={PROMPT_CONTROL_LABEL_CLASS}>
                     {ASSETS.avatar.find(a => a.url === avatarImage)?.name || copy.dropdowns.selectAvatarFallback}
@@ -934,7 +934,7 @@ export default function MarketingStudio({
                 }}
                 className="hidden md:flex flex-col items-center opacity-50 hover:opacity-60 scale-75 hover:scale-80 transition-all duration-300 cursor-pointer select-none max-w-[15vw] max-h-[50vh] rounded-xl overflow-hidden border border-white/5 bg-[#0d0d0f]/50"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={ASSETS.avatar[(ASSETS.avatar.findIndex(a => a.id === previewAvatar.id) - 1 + ASSETS.avatar.length) % ASSETS.avatar.length].url}
                   alt={copy.alt.previousAvatar}
                   className="w-full h-full object-cover aspect-[3/4]"
@@ -951,7 +951,7 @@ export default function MarketingStudio({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0f] shadow-2xl">
-                <img
+                <img loading="lazy" decoding="async"
                   src={previewAvatar.url}
                   alt={previewAvatar.name}
                   className="max-w-[80vw] md:max-w-[40vw] max-h-[70vh] md:max-h-[65vh] object-contain"
@@ -994,7 +994,7 @@ export default function MarketingStudio({
                 }}
                 className="hidden md:flex flex-col items-center opacity-50 hover:opacity-60 scale-75 hover:scale-80 transition-all duration-300 cursor-pointer select-none max-w-[15vw] max-h-[50vh] rounded-xl overflow-hidden border border-white/5 bg-[#0d0d0f]/50"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={ASSETS.avatar[(ASSETS.avatar.findIndex(a => a.id === previewAvatar.id) + 1) % ASSETS.avatar.length].url}
                   alt={copy.alt.nextAvatar}
                   className="w-full h-full object-cover aspect-[3/4]"

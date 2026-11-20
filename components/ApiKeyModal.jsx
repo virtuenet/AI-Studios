@@ -86,11 +86,12 @@ export default function ApiKeyModal({ onSave, onClose, overlay = false, title, s
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-white/60 ml-1">
+            <label htmlFor="api-key-input" className="block text-xs font-bold text-white/60 ml-1">
               {copy.label}
             </label>
             <input
               ref={inputRef}
+              id="api-key-input"
               type="password"
               value={key}
               onChange={(e) => { setKey(e.target.value); setError(''); }}

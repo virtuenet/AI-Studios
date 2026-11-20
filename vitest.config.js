@@ -6,7 +6,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: [],
-    include: ['tests/unit/**/*.test.{js,jsx}', 'tests/components/**/*.test.{js,jsx}', 'tests/accessibility/**/*.test.{js,jsx}'],
+    include: ['tests/unit/**/*.test.{js,jsx}', 'tests/components/**/*.test.{js,jsx}', 'tests/accessibility/**/*.test.{js,jsx}', 'tests/routes/**/*.test.{js,jsx}'],
     // Unit tests (models, muapi, middleware) run in node environment
     // Component tests override with jsdom via @vitest-environment docblock
     exclude: ['node_modules', 'dist', '.next', 'release'],
@@ -26,6 +26,9 @@ export default defineConfig({
         'packages/studio/src/utils/errorReporter.js',
         'packages/studio/src/utils/generationLifecycle.js',
         'lib/uploadProxyTarget.js',
+        'lib/session.js',
+        'lib/logger.js',
+        'packages/studio/src/hooks/**/*.js',
       ],
       exclude: [
         'packages/studio/src/models.js',

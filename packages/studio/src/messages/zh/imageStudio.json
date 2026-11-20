@@ -47,7 +47,8 @@
     "effectFallback": "效果",
     "drawButton": "绘制",
     "generating": "生成中...",
-    "generateButton": "生成"
+    "generateButton": "生成",
+    "cancelButton": "取消"
   },
   "popovers": {
     "model": "模型",

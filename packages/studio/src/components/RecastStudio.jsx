@@ -206,7 +206,7 @@ function MediaPickerButton({
                 muted
               />
             ) : (
-              <img
+              <img loading="lazy" decoding="async"
                 src={previewUrl}
                 alt=""
                 className="w-full h-full object-cover"
@@ -304,7 +304,7 @@ function AssetsDropdown({
               {/* Media Preview Thumbnail */}
               <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/5 flex-shrink-0 relative">
                 {activeTab === "images" ? (
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={item.url}
                     alt=""
                     className="w-full h-full object-cover"
@@ -962,28 +962,28 @@ export default function RecastStudio({
             {/* Overlapping floating cards */}
             <div className="flex items-center justify-center gap-1.5 md:gap-3 mb-10 select-none scale-90 sm:scale-100">
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif"
                   alt="Creative asset 1"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[4deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif"
                   alt="Creative asset 2"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full border border-white/10 shadow-2xl rotate-[6deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif"
                   alt="Creative asset 3"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif"
                   alt="Creative asset 4"
                   className="w-full h-full object-cover"
@@ -1270,7 +1270,7 @@ export default function RecastStudio({
                           fullscreenUrl.includes("image") || 
                           fullscreenUrl.startsWith("data:image");
             return isImg ? (
-              <img
+              <img loading="lazy" decoding="async"
                 src={fullscreenUrl}
                 alt="Fullscreen Preview"
                 className="max-w-[95vw] max-h-[95vh] rounded-2xl shadow-2xl object-contain animate-scale-up"

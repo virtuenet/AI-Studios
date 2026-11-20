@@ -38,7 +38,7 @@ function AgentCard({ agent, onClick, onEdit, copy }) {
         className="absolute inset-0 rounded-xl overflow-hidden border border-white/5 bg-[#0a0a0a] transition-all group-hover:border-[#22d3ee]/30 group-hover:scale-[1.02] shadow-2xl"
       >
         {agent.icon_url ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={agent.icon_url}
             alt={agent.name}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -96,7 +96,7 @@ function ConversationCard({ conv, onClick, copy }) {
       <div className="flex items-center gap-3">
         <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/5 border border-white/5 shrink-0">
           {conv.agent_icon_url ? (
-            <img src={conv.agent_icon_url} alt={conv.agent_name || "Agent"} className="w-full h-full object-cover" />
+            <img loading="lazy" decoding="async" src={conv.agent_icon_url} alt={conv.agent_name || "Agent"} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-white/20">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -464,7 +464,7 @@ export default function AgentStudio({ apiKey, locale = "en" }) {
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg overflow-hidden bg-white/5 border border-white/5 shrink-0">
                 {activeAgent.icon_url ? (
-                  <img src={activeAgent.icon_url} alt={activeAgent.name} className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={activeAgent.icon_url} alt={activeAgent.name} className="w-full h-full object-cover" />
                 ) : null}
               </div>
               <span className="text-sm font-bold text-white">{activeAgent.name}</span>

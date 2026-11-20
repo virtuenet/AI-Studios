@@ -7,6 +7,9 @@ const BASE_URL = `http://127.0.0.1:${PORT}`;
 
 export default defineConfig({
   testDir: './tests/e2e',
+  // Platform-agnostic baseline names so the same screenshots are compared on
+  // macOS locally and Linux in CI (threshold tolerates font rasterization).
+  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}{ext}',
   fullyParallel: true,
   timeout: 120 * 1000,
   expect: { timeout: 30 * 1000 },
@@ -43,6 +46,6 @@ export default defineConfig({
     url: BASE_URL,
     reuseExistingServer: false,
     timeout: 180 * 1000,
-    env: { NEXT_TELEMETRY_DISABLED: '1' },
+    env: { NEXT_TELEMETRY_DISABLED: '1', SESSION_SECRET: 'e2e-session-secret-0123456789abcdef' },
   },
 });

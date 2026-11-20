@@ -186,17 +186,33 @@ external qualification for accessibility.
 
 | Suite | Command | Count |
 |-------|---------|-------|
-| Unit (Vitest) | `npm run test:unit` | 223 across 16 files (coverage-gated) |
+| Unit (Vitest) | `npm run test:unit` | 273 across 27 files (coverage-gated) |
 | Components (RTL) | `npm run test:components` | included above |
 | Accessibility (axe-core) | included above | 15 |
 | Electron (Node) | `npm test` | 77 |
-| E2E (Playwright) | `npm run test:e2e` | 11 (production server; 1 live-generation skipped without key) |
+| E2E (Playwright) | `npm run test:e2e` | 17 (production server; smoke, mocked generation, visual, 1 live-generation skipped without key) |
 | Typecheck | `npm run typecheck` | `tsc --noEmit` |
 | Lint | `npm run lint` | ESLint flat config, 0 errors enforced |
 | Model catalog | `npm run validate:models` | 624 models |
 | Bundle budget | `npm run check:bundle` | 6 MB JS ceiling |
 
 Coverage includes: model catalog integrity, muapi submit/poll + retry + SSE streaming, error reporter, locales, studio render smoke tests, axe-core audits, keyboard/focus checks, PWA endpoints, security headers.
+
+## 8a. Sessions, Resilience & Observability
+
+- **Server sessions:** `/api/session` issues an AES-256-GCM encrypted,
+  `HttpOnly`, `SameSite=Strict` cookie (`lib/session.js`) so server-rendered
+  agent pages never trust a JS-writable cookie. Configure `SESSION_SECRET`.
+- **App Router resilience:** `app/error.js`, `app/global-error.js`,
+  `app/not-found.js`, `app/loading.js`.
+- **Health:** `GET /api/health` reports status/version/commit/upstream and
+  returns 503 when degraded (used by the Uptime workflow).
+- **Logging:** `lib/logger.js` JSON-line logs with propagated `x-request-id`
+  (set by middleware); proxy routes log status/duration without credentials.
+- **Shared hooks:** `useGeneration` (abortable lifecycle + Cancel button) and
+  `usePersistentObject` (debounced studio state) live in `packages/studio/src/hooks`.
+- **Model drift gate:** `docs/models-snapshot.json` + `npm run check:models-sync`;
+  `--fetch` compares against Muapi's OpenAPI.
 
 ## 8b. Security Operations
 
@@ -237,6 +253,15 @@ npm run electron:dev        # desktop
 npm run test:vitest         # unit + a11y + components
 npm test                    # electron
 ```
+
+## 11a. Release & supply chain
+
+- `release-please` manages versions/changelog; `release.yml` builds installers
+  and attaches an SBOM. Signing/notarization secrets are documented in
+  `docs/release-signing.md` (unsigned by default).
+- CI: Node 20/22 test matrix, CodeQL, gitleaks, Dependabot, cached Playwright
+  browsers and `.next/cache`, bundle budgets, model-sync checks.
+- Self-hosting caveats (Workflows/Agents backends): `docs/self-hosting.md`.
 
 ## 12. Roadmap
 

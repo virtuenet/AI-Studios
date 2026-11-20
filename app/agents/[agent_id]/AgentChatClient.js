@@ -28,10 +28,7 @@ export default function AgentChatClient({ agentDetails, initialHistory, userData
   useEffect(() => {
     const getKey = () => {
       if (typeof window === "undefined") return null;
-      const fromStorage = localStorage.getItem(STORAGE_KEY);
-      if (fromStorage) return fromStorage;
-      const match = document.cookie.match(/muapi_key=([^;]+)/);
-      return match ? match[1] : null;
+      return localStorage.getItem(STORAGE_KEY);
     };
 
     const apiKey = getKey();

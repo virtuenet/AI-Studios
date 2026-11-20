@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getRequestId, logProxy } from '@/lib/logger';
 
 const MUAPI_BASE = 'https://api.muapi.ai';
 
@@ -18,6 +19,8 @@ function cleanHeaders(request) {
 }
 
 export async function GET(request, { params }) {
+    const startedAt = Date.now();
+    const requestId = getRequestId(request);
     const slug = await params;
     const pathSegments = slug.path || [];
     const path = pathSegments.join('/');
@@ -37,16 +40,17 @@ export async function GET(request, { params }) {
             method: 'GET',
         });
         const data = await response.json();
-        if (path.includes('get-workflow-def')) {
-            console.log(`[proxy GET] get-workflow-def response: is_owner=${data?.is_owner}, workflow_id=${data?.workflow_id}`);
-        }
+        logProxy({ name: 'workflow.get', request, requestId, startedAt, status: response.status });
         return NextResponse.json(data, { status: response.status });
     } catch (error) {
+        logProxy({ name: 'workflow.get', request, requestId, startedAt, status: 500, error });
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
 
 export async function POST(request, { params }) {
+    const startedAt = Date.now();
+    const requestId = getRequestId(request);
     const slug = await params;
     const pathSegments = slug.path || [];
     const path = pathSegments.join('/');
@@ -62,11 +66,6 @@ export async function POST(request, { params }) {
 
     try {
         const body = await request.arrayBuffer();
-        // Decode body to see what workflow_id is being sent
-        try {
-            const parsed = JSON.parse(Buffer.from(body).toString('utf-8'));
-            console.log(`[proxy POST] body: workflow_id=${parsed.workflow_id}, source_workflow_id=${parsed.source_workflow_id}, name=${parsed.name}`);
-        } catch(e) { /* ignore decode errors */ }
 
         const response = await fetch(targetUrl, {
             method: 'POST',
@@ -74,9 +73,10 @@ export async function POST(request, { params }) {
             body
         });
         const data = await response.json();
-        console.log(`[proxy POST] response: status=${response.status}`, JSON.stringify(data).slice(0, 200));
+        logProxy({ name: 'workflow.post', request, requestId, startedAt, status: response.status });
         return NextResponse.json(data, { status: response.status });
     } catch (error) {
+        logProxy({ name: 'workflow.post', request, requestId, startedAt, status: 500, error });
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

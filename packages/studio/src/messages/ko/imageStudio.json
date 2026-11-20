@@ -47,7 +47,8 @@
     "effectFallback": "효과",
     "drawButton": "그리다",
     "generating": "생성 중...",
-    "generateButton": "생성하다"
+    "generateButton": "생성하다",
+    "cancelButton": "취소"
   },
   "popovers": {
     "model": "모델",

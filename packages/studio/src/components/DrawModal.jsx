@@ -1136,7 +1136,7 @@ export default function DrawModal({
               }`}
             >
               <div className="w-56 h-36 rounded-xl border border-white/5 overflow-hidden shadow-lg select-none relative bg-black/40">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif"
                   alt="Draw visual representation"
                   className="w-full h-full object-cover opacity-60"
@@ -1278,7 +1278,7 @@ export default function DrawModal({
                             handleStartMoveSelected(e);
                           }}
                         >
-                          <img
+                          <img loading="lazy" decoding="async"
                             src={imgObj.url}
                             alt=""
                             className="w-full h-full object-cover pointer-events-none"

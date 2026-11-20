@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { generateImage, generateI2I, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
+import useGeneration from "../hooks/useGeneration";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
 import MobileGenerationActions, {
@@ -381,7 +382,7 @@ function UploadButton({ apiKey, maxImages, onSelect, onClear, initialUrls = [], 
     </div>
   ) : label === copy.promptBar.swapFaceLabel ? (
     hasSelection ? (
-      <img src={selectedEntries[0].url} alt="" className="w-full h-full object-cover" />
+      <img loading="lazy" decoding="async" src={selectedEntries[0].url} alt="" className="w-full h-full object-cover" />
     ) : (
       <span className="text-[10px] font-bold text-white/50">{t.faceLabel}</span>
     )
@@ -536,7 +537,7 @@ function UploadButton({ apiKey, maxImages, onSelect, onClear, initialUrls = [], 
                     } ${atMax ? "opacity-40 cursor-not-allowed" : ""} ${!entry.url ? "cursor-wait" : ""}`}
                   >
                     {entry.url ? (
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={entry.url}
                         alt={entry.name}
                         className="w-full h-full object-cover"
@@ -786,7 +787,7 @@ function ModelDropdown({ selectedModel, onSelect, onClose, copy }) {
               title={p.name}
             >
               {PROVIDER_LOGOS[p.id] ? (
-                <img
+                <img loading="lazy" decoding="async"
                   src={PROVIDER_LOGOS[p.id]}
                   alt={p.name}
                   className={`w-full h-full rounded-full object-contain ${invertLogos.includes(p.id) ? "invert" : ""}`}
@@ -883,7 +884,7 @@ function ModelDropdown({ selectedModel, onSelect, onClose, copy }) {
                 <div className="flex items-center gap-3">
                   {PROVIDER_LOGOS[family.provider] ? (
                     <div className="w-8 h-8 rounded-full border border-white/5 overflow-hidden shrink-0 flex items-center justify-center bg-white/[0.02]">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={PROVIDER_LOGOS[family.provider]}
                         alt={family.provider_name}
                         className={`w-full h-full object-contain p-1 ${invertLogos.includes(family.provider) ? "invert" : ""}`}
@@ -1008,7 +1009,8 @@ export default function ImageStudio({
 
   // ── UI state ────────────────────────────────────────────────────────────
   const [dropdownOpen, setDropdownOpen] = useState(null); // 'model' | 'ar' | 'quality' | null
-  const [generating, setGenerating] = useState(false);
+  const generation = useGeneration();
+  const generating = generation.isRunning;
   const [generateError, setGenerateError] = useState(null);
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
   const [isDrawModalOpen, setIsDrawModalOpen] = useState(false);
@@ -1151,7 +1153,7 @@ export default function ImageStudio({
       return;
     }
 
-    setGenerating(true); // Show as generating/busy
+    generation.start(); // Show as generating/busy
     try {
       const uploadLimit = getMaxImagesForI2IModel(editor.model.id);
       const toUpload =
@@ -1177,7 +1179,7 @@ export default function ImageStudio({
     } catch (err) {
       alert(copy.uploadButton.uploadFailedAlert.replace("{message}", err.message));
     } finally {
-      setGenerating(false);
+      generation.finish();
     }
   };
 
@@ -1378,7 +1380,7 @@ export default function ImageStudio({
     }
 
     onGenerationStart?.();
-    setGenerating(true);
+    const signal = generation.start();
     setGenerateError(null);
 
     try {
@@ -1401,7 +1403,7 @@ export default function ImageStudio({
               genParams[currentQualityField] = selectedQuality;
             }
             if (showEffectBtn && selectedEffect) genParams.name = selectedEffect;
-            return await generateI2I(apiKey, genParams);
+            return await generateI2I(apiKey, { ...genParams, signal });
           } else {
             const referenceParams = buildReferenceParams(selectedVariant?.model, {
               imageUrls: uploadedImageUrls,
@@ -1419,7 +1421,7 @@ export default function ImageStudio({
             if (currentQualityField && selectedQuality) {
               genParams[currentQualityField] = selectedQuality;
             }
-            return await generateImage(apiKey, genParams);
+            return await generateImage(apiKey, { ...genParams, signal });
           }
         })
       );
@@ -1444,12 +1446,18 @@ export default function ImageStudio({
         }
       });
     } catch (e) {
+      if (e?.name === 'AbortError') {
+        generation.finish();
+        onGenerationEnd?.();
+        return;
+      }
       console.error("[ImageStudio] Generation failed:", e);
+      generation.fail(e);
       const errMsg = formatErrorMessage(e, copy.errors.generationFailed);
       if (onGenerationError) onGenerationError(errMsg);
       else toast.error(errMsg);
     } finally {
-      setGenerating(false);
+      generation.finish();
       onGenerationEnd?.();
     }
   };
@@ -1472,10 +1480,10 @@ export default function ImageStudio({
             {history.map((entry, idx) => (
               <div
                 key={entry.id || idx}
-                className="relative group rounded-lg overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col cursor-pointer"
+                className="cv-auto relative group rounded-lg overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-xl hover:border-primary/50 transition-all duration-300 flex flex-col cursor-pointer"
                 onClick={() => setFullscreenUrl(entry.url)}
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={entry.url}
                   alt={entry.prompt?.substring(0, 30) || copy.gallery.generatedImageAlt}
                   className="w-full aspect-square object-cover bg-black/40 hover:opacity-80 transition-opacity"
@@ -1570,28 +1578,28 @@ export default function ImageStudio({
             {/* Overlapping floating cards */}
             <div className="flex items-center justify-center gap-1.5 md:gap-3 mb-10 select-none scale-90 sm:scale-100">
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif"
                   alt="Creative asset 1"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[4deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif"
                   alt="Creative asset 2"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full border border-white/10 shadow-2xl rotate-[6deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif"
                   alt="Creative asset 3"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif"
                   alt="Creative asset 4"
                   className="w-full h-full object-cover"
@@ -1620,7 +1628,7 @@ export default function ImageStudio({
             <div className="flex items-center gap-2.5 flex-wrap">
               {uploadedImageUrls && uploadedImageUrls.length > 0 && uploadedImageUrls.map((url, idx) => (
                 <div key={url} className={PROMPT_MEDIA_PREVIEW_CLASS}>
-                  <img src={url} alt="" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={url} alt="" className="w-full h-full object-cover" />
                   <button
                     type="button"
                     onClick={() => {
@@ -1692,7 +1700,7 @@ export default function ImageStudio({
                     {(() => {
                       const selectedModelProvider = selectedFamily.provider || 'muapi';
                       return PROVIDER_LOGOS[selectedModelProvider] ? (
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           src={PROVIDER_LOGOS[selectedModelProvider]} 
                           alt="" 
                           className={`w-full h-full object-contain ${invertLogos.includes(selectedModelProvider) ? "invert" : ""}`} 
@@ -1882,6 +1890,17 @@ export default function ImageStudio({
               </button>
             </PromptControls>
 
+            {/* Cancel button (only while a generation is in flight) */}
+            {generating && (
+              <button
+                type="button"
+                onClick={generation.cancel}
+                className="mr-2 rounded-lg border border-white/15 px-3 py-2 text-xs font-bold text-white/70 hover:text-white hover:bg-white/10"
+              >
+                {copy.promptBar.cancelButton || 'Cancel'}
+              </button>
+            )}
+
             {/* Generate button */}
             <PromptAction
               onClick={handleGenerate}
@@ -1920,7 +1939,7 @@ export default function ImageStudio({
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          <img
+          <img loading="lazy" decoding="async"
             src={fullscreenUrl}
             alt={copy.fullscreen.previewAlt}
             className="max-w-[95vw] max-h-[95vh] rounded-2xl shadow-2xl object-contain animate-scale-up" 

@@ -47,7 +47,8 @@
     "effectFallback": "Efecto",
     "drawButton": "Dibujar",
     "generating": "Generando...",
-    "generateButton": "Generar"
+    "generateButton": "Generar",
+    "cancelButton": "Cancelar"
   },
   "popovers": {
     "model": "Modelo",

@@ -1,92 +1,40 @@
-# Codebase Improvement Implementation — Final Report
+# Implementation Status — 12 Recommendations
 
 > Date: 2026-11-20 | Project: AI Studios
-> Scope: all 9 recommended improvement areas implemented and verified.
+> All 12 recommendations implemented; verified locally and in CI.
 
-## 1. CI enforcement ✅
+| # | Recommendation | Status | Evidence |
+|---|----------------|--------|----------|
+| 1 | Session/cookie hardening | ✅ | `lib/session.js` (AES-256-GCM, HttpOnly, SameSite=Strict), `/api/session`, agent pages use `readApiKeyFromCookieStore`; JS cookie writes removed; 6 session + 6 route tests |
+| 2 | Route-level error/loading/404 | ✅ | `app/error.js`, `app/global-error.js`, `app/not-found.js`, `app/loading.js` + structural tests |
+| 3 | Server route tests | ✅ | `tests/routes/`: middleware (headers, locale, rewrites, request id), session, health, upload-binary (401/SSRF/file-type/204), agent/workflow proxies — 23 tests |
+| 4 | Shared generation hooks | ✅ | `useGeneration` (abort/cancel) used by ImageStudio (Cancel button), `usePersistentObject` used by AudioStudio; 6 hook tests |
+| 5 | TS strictness ladder | ✅ | `strictNullChecks` + `noImplicitAny` enabled; `tsc --noEmit` clean; warning budget ratcheted to 200; `any` removed from exported video-tool APIs |
+| 6 | Model catalog sync/drift | ✅ | `scripts/sync-models.js`, `docs/models-snapshot.json` (633 models), CI `check:models-sync`, `--fetch` against OpenAPI (899 upstream endpoints) |
+| 7 | Mocked generation E2E | ✅ | `tests/e2e/generation-mocked.spec.js`: generate, cancel, locale switch with zero API key (SW blocked) |
+| 8 | Visual + interaction tests | ✅ | platform-agnostic Playwright baselines (dialog/sidebar); ApiKeyModal interaction + a11y label fix; ServiceWorkerUpdater tests |
+| 9 | Perf/UX polish | ✅ | Web Vitals reporting (`components/WebVitals.jsx`), preconnect/dns-prefetch, 88 `<img>` tags lazy/async, `content-visibility` history cards, cancel + offline-queue banners/clear |
+| 10 | Health & observability | ✅ | `/api/health`, request IDs, structured JSON proxy logs, uptime workflow (`HEALTHCHECK_URL`) |
+| 11 | Release & supply chain | ✅ | release-please config/workflow, CodeQL, gitleaks, SBOM upload, Node 20/22 matrix, Playwright + Next caches, macOS entitlements/signing docs, auto-update |
+| 12 | Self-hosting documentation | ✅ | `docs/self-hosting.md` (Workflows/Agents backend caveat), README links, env reference |
 
-- `eslint.config.mjs` added (flat config, `next/core-web-vitals`, 0 errors enforced,
-  202 tracked warnings for React-Compiler migration rules).
-- `tsconfig.json` added; `npm run typecheck` runs `tsc --noEmit` (passes, 0 errors).
-- Coverage gate enforced: scoped to pure-logic modules with thresholds
-  **75.49% stmts / 64.54% branches / 86.07% funcs / 79.45% lines** (thresholds 70/60/70/72).
-- All `continue-on-error` removed from lint/tests/electron/E2E/build/model/budget steps.
-- CI jobs: Lint, Typecheck, Unit (coverage), Electron, E2E (production server), Build.
+## Verification
 
-## 2. Type checking ✅
+```
+Vitest:      273 passed (27 files)   coverage 78.1 / 66.0 / 88.6 / 81.8
+Electron:     77 passed
+E2E:          16 passed, 1 skipped (live key)
+Typecheck:    tsc --noEmit clean (strictNullChecks + noImplicitAny)
+Lint:         0 errors, 200 warnings (ratcheted)
+Model sync:   catalog matches snapshot (633 models)
+Bundle:       Next 5101/6144 KB; Electron 1872/6144 KB
+Builds:       Next 39 routes; studio dist 86 files
+```
 
-- `typescript@5.9.3` pinned (eslint-config-next compatibility).
-- `tsc --noEmit` clean over the TypeScript module set (9 modules).
-- Babel TS preset replaced by esbuild for `packages/studio/dist` (84 files, ~1.5s vs ~12s).
+## External/manual items
 
-## 3. Security ✅
-
-- `tests/unit/uploadProxyTarget.test.js` — 13 tests covering SSRF guards
-  (HTTPS-only, loopback/private/link-local/IP-literal blocking, S3 host patterns,
-  blocked extensions/MIME, API-key extraction).
-- Dependency upgrades: Next 15.5.29 → **16.4.6**, React 19.2, axios 1.21.1,
-  follow-redirects 1.16.3, form-data 4.0.6, postcss 8.5.33, sharp 0.35.5,
-  prismjs override. `npm audit --omit=dev` is clean for first-party dependencies;
-  only third-party submodule-nested moderate advisories remain (documented).
-- Next 16 migration fixes: CSS `@import` ordering, ESLint flat config, E2E against
-  the production server (dev HMR cross-origin is blocked by Next 16).
-- Session-only API-key storage option added to the API-key dialog.
-- `SECURITY.md`, `CODEOWNERS` added.
-
-## 4. Shell deduplication ✅
-
-- Canonical `packages/studio/src/studioRegistry.js` (ids + English labels).
-- Web `StandaloneShell` labels and Electron `StudioApp` tabs both derive from it.
-- Desktop SPA keeps studio subpath imports; shared barrel already memoized.
-
-## 5. Testing depth ✅
-
-- New unit suites: `imageSizing`, `imageInputContracts`, `modelParameters`,
-  `persistKey`, `videoToolCapabilities`, `uploadProxyTarget`, `muapi.contract`
-  (MSW), plus error-reporter dedupe/rate-limit and Retry-After/abort tests.
-- Totals: **223 Vitest tests (16 files)** + **77 Electron tests**, 0 failures.
-- Nightly E2E workflow runs Chromium, Firefox, and WebKit.
-- Interactive E2E flows remain a tracked follow-up (smoke coverage is in place).
-
-## 6. i18n quality ✅
-
-- `pluralize()` helper (Intl.PluralRules) added and tested.
-- Translation completeness gate: each of ja/ko/es/fr must translate ≥90% of
-  strings (measured 94.9–99.9%) and preserve all interpolation placeholders.
-- Bundle/key/placeholder parity tests cover 15 namespaces × 4 locales.
-
-## 7. Performance ✅
-
-- Desktop SPA: 13 studios now `React.lazy` + Suspense (Image stays eager).
-- Next bundle analyzer (`npm run analyze`) and **6 MB JS budget**
-  (`npm run check:bundle`): Next 5053 KB, Electron 1872 KB.
-- Studio package build moved from Babel to esbuild.
-- Model catalog remains split into nine category modules.
-
-## 8. Resilience/UX ✅
-
-- `fetchWithRetry` honors `Retry-After` (seconds and HTTP-date).
-- `AbortController` signal support through submit/poll and SSE streams; aborts are
-  never retried.
-- PWA update prompt (`components/ServiceWorkerUpdater.jsx`) replaces silent
-  activation; SW registration errors are non-fatal.
-- `errorReporter` dedupes identical crashes within 5s and rate-limits to 10/min.
-
-## 9. DX/ops ✅
-
-- Dependabot (npm, submodules, Actions); weekly submodule-sync PR workflow.
-- Issue templates, PR template, `SECURITY.md`, `CODEOWNERS`.
-- Husky + lint-staged pre-commit hook.
-- `electron-updater` wired for packaged builds with GitHub publish config.
-- `scripts/validate-models.js` (624 models) enforced in CI.
-- Docs updated: README, `project_knowledge.md`, `CONTRIBUTING.md`.
-
-## Remaining external/manual items
-
-| Item | Status |
-|------|--------|
-| Manual screen-reader pass (VoiceOver/NVDA) | Checklist in `docs/accessibility-manual-checklist.md`; requires human |
-| Professional translation review | Machine-generated bundles validated automatically; native review recommended |
-| Desktop signing/notarization | Auto-update wired; certificates are external secrets |
-| Submodule-nested moderate advisories | Owned by third-party submodules; tracked pending upstream sync |
-| Full TypeScript migration of all JS files | Incremental; enforced set is type-checked in CI |
+- `SESSION_SECRET` must be set in production (fallback is process-local).
+- Desktop signing/notarization requires certificate secrets (documented).
+- Manual screen-reader pass and professional translation review remain tracked.
+- Workflows/Agents studios require Muapi-hosted backends unless the submodule
+  servers are deployed and proxy routes are repointed (documented).

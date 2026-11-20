@@ -10,6 +10,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+
 jobs:
   lint:
     name: Lint
@@ -23,7 +26,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci --legacy-peer-deps
-      - run: npx eslint . --max-warnings 220
+      - run: npx eslint . --max-warnings 200
 
   typecheck:
     name: Typecheck
@@ -40,20 +43,30 @@ jobs:
       - run: npx tsc --noEmit
 
   test-unit:
-    name: Unit Tests
+    name: Unit Tests (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci --legacy-peer-deps
-      - run: npx vitest run --coverage
+      - name: Run tests (with coverage on Node 20)
+        run: |
+          if [ "${{ matrix.node }}" = "20" ]; then
+            npx vitest run --coverage
+          else
+            npx vitest run
+          fi
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: matrix.node == 20
         with:
           name: coverage
           path: coverage/
@@ -76,7 +89,7 @@ jobs:
   test-e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -86,7 +99,19 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci --legacy-peer-deps
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps chromium
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
       - run: npm run build:packages
       - run: npm run build
       - run: npx playwright test --project=chromium
@@ -109,6 +134,14 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci --legacy-peer-deps
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+      - run: npm run check:models-sync
       - run: npm run validate:models
       - run: npm run build:packages
       - run: npm run build

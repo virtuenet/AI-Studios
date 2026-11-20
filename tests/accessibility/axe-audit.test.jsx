@@ -156,6 +156,14 @@ describe('Accessibility Audit', () => {
       expect(src).toContain('<main');
     });
 
+    it('web vitals reporting is wired into the layout', () => {
+      const layout = fs.readFileSync(path.join(REPO_ROOT, 'app/layout.js'), 'utf-8');
+      expect(layout).toContain('WebVitals');
+      expect(layout).toContain('preconnect');
+      const vitals = fs.readFileSync(path.join(REPO_ROOT, 'components/WebVitals.jsx'), 'utf-8');
+      expect(vitals).toContain('useReportWebVitals');
+    });
+
     it('manual screen-reader checklist is documented', () => {
       const src = fs.readFileSync(
         path.join(REPO_ROOT, 'docs/accessibility-manual-checklist.md'),

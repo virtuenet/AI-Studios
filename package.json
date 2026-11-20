@@ -47,7 +47,9 @@
     "analyze": "ANALYZE=true next build",
     "check:bundle": "node scripts/check-bundle-size.js",
     "prepare": "husky || true",
-    "validate:models": "node scripts/validate-models.js"
+    "validate:models": "node scripts/validate-models.js",
+    "sync:models": "node scripts/sync-models.js",
+    "check:models-sync": "node scripts/sync-models.js"
   },
   "build": {
     "appId": "ai.generative.open",
@@ -82,7 +84,10 @@
             "arm64"
           ]
         }
-      ]
+      ],
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "win": {
       "icon": "public/banner.png",

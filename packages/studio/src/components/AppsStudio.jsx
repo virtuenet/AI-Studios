@@ -181,7 +181,7 @@ export default function AppsStudio({ apiKey, locale = 'en' }) {
         {/* Thumbnail Section */}
         <div className="relative h-44 w-full overflow-hidden bg-white/5">
           {app.thumbnail ? (
-            <img
+            <img loading="lazy" decoding="async"
               src={app.thumbnail}
               alt={app.name}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

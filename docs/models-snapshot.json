@@ -1,0 +1,2555 @@
+{
+  "generatedAt": "2026-11-20T01:10:59.921Z",
+  "categories": {
+    "t2iModels": [
+      {
+        "id": "ai-anime-generator",
+        "endpoint": "ai-anime-generator"
+      },
+      {
+        "id": "bytedance-seedream-5.0-pro",
+        "endpoint": "seedream-5.0-pro"
+      },
+      {
+        "id": "bytedance-seedream-v3",
+        "endpoint": "bytedance-seedream-image"
+      },
+      {
+        "id": "bytedance-seedream-v4",
+        "endpoint": "bytedance-seedream-v4"
+      },
+      {
+        "id": "bytedance-seedream-v4.5",
+        "endpoint": "bytedance-seedream-v4.5"
+      },
+      {
+        "id": "bytedance-seedream-v5.0",
+        "endpoint": "seedream-5.0"
+      },
+      {
+        "id": "chroma-image",
+        "endpoint": "chroma-image"
+      },
+      {
+        "id": "flux-1-dev-style-lora-inference",
+        "endpoint": "flux-1-dev-style-lora-inference"
+      },
+      {
+        "id": "flux-2-dev",
+        "endpoint": "flux-2-dev"
+      },
+      {
+        "id": "flux-2-flex",
+        "endpoint": "flux-2-flex"
+      },
+      {
+        "id": "flux-2-klein-4b",
+        "endpoint": "flux-2-klein-4b"
+      },
+      {
+        "id": "flux-2-klein-4b-text-to-image-lora",
+        "endpoint": "flux-2-klein-4b-text-to-image-lora"
+      },
+      {
+        "id": "flux-2-klein-4b-turbo",
+        "endpoint": "flux-2-klein-4b-turbo"
+      },
+      {
+        "id": "flux-2-klein-9b",
+        "endpoint": "flux-2-klein-9b"
+      },
+      {
+        "id": "flux-2-klein-9b-text-to-image-lora",
+        "endpoint": "flux-2-klein-9b-text-to-image-lora"
+      },
+      {
+        "id": "flux-2-klein-9b-turbo",
+        "endpoint": "flux-2-klein-9b-turbo"
+      },
+      {
+        "id": "flux-2-pro",
+        "endpoint": "flux-2-pro"
+      },
+      {
+        "id": "flux-3-dev",
+        "endpoint": "flux-3-dev"
+      },
+      {
+        "id": "flux-3-klein-text-to-image",
+        "endpoint": "flux-3-klein-text-to-image"
+      },
+      {
+        "id": "flux-3-text-to-image",
+        "endpoint": "flux-3-text-to-image"
+      },
+      {
+        "id": "flux-dev",
+        "endpoint": "flux-dev-image"
+      },
+      {
+        "id": "flux-kontext-dev-t2i",
+        "endpoint": "flux-kontext-dev-t2i"
+      },
+      {
+        "id": "flux-kontext-max-t2i",
+        "endpoint": "flux-kontext-max-t2i"
+      },
+      {
+        "id": "flux-kontext-pro-t2i",
+        "endpoint": "flux-kontext-pro-t2i"
+      },
+      {
+        "id": "flux-krea-dev",
+        "endpoint": "flux-krea-dev"
+      },
+      {
+        "id": "flux-pulid",
+        "endpoint": "flux-pulid"
+      },
+      {
+        "id": "flux-redux",
+        "endpoint": "flux-redux"
+      },
+      {
+        "id": "flux-schnell",
+        "endpoint": "flux-schnell-image"
+      },
+      {
+        "id": "google-imagen4",
+        "endpoint": "google-imagen4"
+      },
+      {
+        "id": "google-imagen4-fast",
+        "endpoint": "google-imagen4-fast"
+      },
+      {
+        "id": "google-imagen4-ultra",
+        "endpoint": "google-imagen4-ultra"
+      },
+      {
+        "id": "gpt-image-1.5",
+        "endpoint": "gpt-image-1.5"
+      },
+      {
+        "id": "gpt-image-2",
+        "endpoint": "gpt-image-2-text-to-image"
+      },
+      {
+        "id": "gpt-image-2.5-flare-text-to-image",
+        "endpoint": "gpt-image-2.5-flare-text-to-image"
+      },
+      {
+        "id": "gpt-image-2.5-sunburst-text-to-image",
+        "endpoint": "gpt-image-2.5-sunburst-text-to-image"
+      },
+      {
+        "id": "gpt-image-2.6-flare-text-to-image",
+        "endpoint": "gpt-image-2.6-flare-text-to-image"
+      },
+      {
+        "id": "gpt-image-2.6-sunburst-text-to-image",
+        "endpoint": "gpt-image-2.6-sunburst-text-to-image"
+      },
+      {
+        "id": "gpt4o-text-to-image",
+        "endpoint": "gpt4o-text-to-image"
+      },
+      {
+        "id": "grok-imagine-image-2",
+        "endpoint": "grok-imagine-image-2"
+      },
+      {
+        "id": "grok-imagine-text-to-image",
+        "endpoint": "grok-imagine-text-to-image"
+      },
+      {
+        "id": "grok-imagine-text-to-image-quality",
+        "endpoint": "grok-imagine-text-to-image-quality"
+      },
+      {
+        "id": "hidream-i1-dev",
+        "endpoint": "hidream_i1_dev_image"
+      },
+      {
+        "id": "hidream-i1-fast",
+        "endpoint": "hidream_i1_fast_image"
+      },
+      {
+        "id": "hidream-i1-full",
+        "endpoint": "hidream_i1_full_image"
+      },
+      {
+        "id": "hunyuan-image-2.1",
+        "endpoint": "hunyuan-image-2.1"
+      },
+      {
+        "id": "hunyuan-image-3.0",
+        "endpoint": "hunyuan-image-3.0"
+      },
+      {
+        "id": "ideogram-v3-t2i",
+        "endpoint": "ideogram-v3-t2i"
+      },
+      {
+        "id": "ideogram-v4",
+        "endpoint": "ideogram-v4"
+      },
+      {
+        "id": "kling-o1-text-to-image",
+        "endpoint": "kling-o1-text-to-image"
+      },
+      {
+        "id": "kling-o3-image",
+        "endpoint": "kling-o3-image"
+      },
+      {
+        "id": "krea-v2-turbo",
+        "endpoint": "krea-v2-turbo"
+      },
+      {
+        "id": "krea-v2-turbo-lora",
+        "endpoint": "krea-v2-turbo-lora"
+      },
+      {
+        "id": "leonardoai-lucid-origin",
+        "endpoint": "leonardoai-lucid-origin"
+      },
+      {
+        "id": "leonardoai-phoenix-1.0",
+        "endpoint": "leonardoai-phoenix-1.0"
+      },
+      {
+        "id": "midjourney-niji",
+        "endpoint": "midjourney-niji"
+      },
+      {
+        "id": "midjourney-v7",
+        "endpoint": "midjourney-v7"
+      },
+      {
+        "id": "midjourney-v8",
+        "endpoint": "midjourney-v8"
+      },
+      {
+        "id": "muse-image-text-to-image",
+        "endpoint": "muse-image-text-to-image"
+      },
+      {
+        "id": "nano-banana",
+        "endpoint": "nano-banana"
+      },
+      {
+        "id": "nano-banana-2",
+        "endpoint": "nano-banana-2"
+      },
+      {
+        "id": "nano-banana-2-1",
+        "endpoint": "nano-banana-2-1"
+      },
+      {
+        "id": "nano-banana-2-lite",
+        "endpoint": "nano-banana-2-lite"
+      },
+      {
+        "id": "nano-banana-pro",
+        "endpoint": "nano-banana-pro"
+      },
+      {
+        "id": "neta-lumina",
+        "endpoint": "neta-lumina"
+      },
+      {
+        "id": "perfect-pony-xl",
+        "endpoint": "perfect-pony-xl"
+      },
+      {
+        "id": "qwen-image",
+        "endpoint": "qwen-image"
+      },
+      {
+        "id": "qwen-image-2.0",
+        "endpoint": "qwen-image-2.0"
+      },
+      {
+        "id": "qwen-image-2.0-pro",
+        "endpoint": "qwen-image-2.0-pro"
+      },
+      {
+        "id": "qwen-image-text-to-image-2512-lora",
+        "endpoint": "qwen-image-text-to-image-2512-lora"
+      },
+      {
+        "id": "qwen-image-text-to-image-lora",
+        "endpoint": "qwen-image-text-to-image-lora"
+      },
+      {
+        "id": "qwen-text-to-image-2512",
+        "endpoint": "qwen-text-to-image-2512"
+      },
+      {
+        "id": "qwen2-1-text-to-image",
+        "endpoint": "qwen2-1-text-to-image"
+      },
+      {
+        "id": "qwen3-pro-text-to-image",
+        "endpoint": "qwen3-pro-text-to-image"
+      },
+      {
+        "id": "qwen3-text-to-image",
+        "endpoint": "qwen3-text-to-image"
+      },
+      {
+        "id": "reve-text-to-image",
+        "endpoint": "reve-text-to-image"
+      },
+      {
+        "id": "sdxl-image",
+        "endpoint": "sdxl-image"
+      },
+      {
+        "id": "seedream-5.0",
+        "endpoint": "seedream-5.0"
+      },
+      {
+        "id": "seedream-5.0-flash",
+        "endpoint": "seedream-5.0-flash"
+      },
+      {
+        "id": "tiktok-carousel",
+        "endpoint": "tiktok-carousel"
+      },
+      {
+        "id": "vidu-q2-text-to-image",
+        "endpoint": "vidu-q2-text-to-image"
+      },
+      {
+        "id": "wan2.1-text-to-image",
+        "endpoint": "wan2.1-text-to-image"
+      },
+      {
+        "id": "wan2.5-text-to-image",
+        "endpoint": "wan2.5-text-to-image"
+      },
+      {
+        "id": "wan2.6-text-to-image",
+        "endpoint": "wan2.6-text-to-image"
+      },
+      {
+        "id": "wan2.7-text-to-image",
+        "endpoint": "wan2.7-text-to-image"
+      },
+      {
+        "id": "wan2.7-text-to-image-pro",
+        "endpoint": "wan2.7-text-to-image-pro"
+      },
+      {
+        "id": "wan3.0-text-to-image",
+        "endpoint": "wan3.0-text-to-image"
+      },
+      {
+        "id": "z-image-base",
+        "endpoint": "z-image-base"
+      },
+      {
+        "id": "z-image-base-text-to-image-lora",
+        "endpoint": "z-image-base-text-to-image-lora"
+      },
+      {
+        "id": "z-image-p",
+        "endpoint": "z-image-p"
+      },
+      {
+        "id": "z-image-turbo",
+        "endpoint": "z-image-turbo"
+      },
+      {
+        "id": "z-image-turbo-text-to-image-lora",
+        "endpoint": "z-image-turbo-text-to-image-lora"
+      }
+    ],
+    "t2vModels": [
+      {
+        "id": "flux-3-text-to-video",
+        "endpoint": "flux-3-text-to-video"
+      },
+      {
+        "id": "flux-3-text-to-video-draft",
+        "endpoint": "flux-3-text-to-video-draft"
+      },
+      {
+        "id": "gemini-omni-flash-1-1-text-to-video",
+        "endpoint": "gemini-omni-flash-1-1-text-to-video"
+      },
+      {
+        "id": "gemini-omni-flash-1-2-text-to-video",
+        "endpoint": "gemini-omni-flash-1-2-text-to-video"
+      },
+      {
+        "id": "gemini-omni-text-to-video",
+        "endpoint": "gemini-omni-text-to-video"
+      },
+      {
+        "id": "grok-imagine-extend",
+        "endpoint": "grok-imagine-extend"
+      },
+      {
+        "id": "grok-imagine-text-to-video",
+        "endpoint": "grok-imagine-text-to-video"
+      },
+      {
+        "id": "grok-imagine-video-1-5-lite-text-to-video",
+        "endpoint": "grok-imagine-video-1-5-lite-text-to-video"
+      },
+      {
+        "id": "grok-imagine-video-1-5-text-to-video",
+        "endpoint": "grok-imagine-video-1-5-text-to-video"
+      },
+      {
+        "id": "happy-horse-1-text-to-video",
+        "endpoint": "happy-horse-1-text-to-video"
+      },
+      {
+        "id": "happy-horse-1-text-to-video-1080p",
+        "endpoint": "happy-horse-1-text-to-video-1080p"
+      },
+      {
+        "id": "happy-horse-1-text-to-video-720p",
+        "endpoint": "happy-horse-1-text-to-video-720p"
+      },
+      {
+        "id": "happy-horse-1.1-text-to-video",
+        "endpoint": "happy-horse-1.1-text-to-video"
+      },
+      {
+        "id": "happy-horse-1.1-text-to-video-1080p",
+        "endpoint": "happy-horse-1.1-text-to-video-1080p"
+      },
+      {
+        "id": "happy-horse-1.1-text-to-video-720p",
+        "endpoint": "happy-horse-1.1-text-to-video-720p"
+      },
+      {
+        "id": "hunyuan-fast-text-to-video",
+        "endpoint": "hunyuan-fast-text-to-video"
+      },
+      {
+        "id": "hunyuan-text-to-video",
+        "endpoint": "hunyuan-text-to-video"
+      },
+      {
+        "id": "kling-4.0-flash-text-to-video",
+        "endpoint": "kling-4.0-flash-text-to-video"
+      },
+      {
+        "id": "kling-4.0-text-to-video",
+        "endpoint": "kling-4.0-text-to-video"
+      },
+      {
+        "id": "kling-o1-text-to-video",
+        "endpoint": "kling-o1-text-to-video"
+      },
+      {
+        "id": "kling-v2.1-master-t2v",
+        "endpoint": "kling-v2.1-master-t2v"
+      },
+      {
+        "id": "kling-v2.5-turbo-pro-t2v",
+        "endpoint": "kling-v2.5-turbo-pro-t2v"
+      },
+      {
+        "id": "kling-v2.6-pro-t2v",
+        "endpoint": "kling-v2.6-pro-t2v"
+      },
+      {
+        "id": "kling-v3-turbo-pro-text-to-video",
+        "endpoint": "kling-v3-turbo-pro-text-to-video"
+      },
+      {
+        "id": "kling-v3-turbo-standard-text-to-video",
+        "endpoint": "kling-v3-turbo-standard-text-to-video"
+      },
+      {
+        "id": "kling-v3.0-4k-text-to-video",
+        "endpoint": "kling-v3.0-4k-text-to-video"
+      },
+      {
+        "id": "kling-v3.0-omni-4k-text-to-video",
+        "endpoint": "kling-v3.0-omni-4k-text-to-video"
+      },
+      {
+        "id": "kling-v3.0-omni-pro-text-to-video",
+        "endpoint": "kling-v3.0-omni-pro-text-to-video"
+      },
+      {
+        "id": "kling-v3.0-omni-standard-text-to-video",
+        "endpoint": "kling-v3.0-omni-standard-text-to-video"
+      },
+      {
+        "id": "kling-v3.0-pro-text-to-video",
+        "endpoint": "kling-v3.0-pro-text-to-video"
+      },
+      {
+        "id": "kling-v3.0-standard-text-to-video",
+        "endpoint": "kling-v3.0-standard-text-to-video"
+      },
+      {
+        "id": "ltx-2-19b-text-to-video",
+        "endpoint": "ltx-2-19b-text-to-video"
+      },
+      {
+        "id": "ltx-2-fast-text-to-video",
+        "endpoint": "ltx-2-fast-text-to-video"
+      },
+      {
+        "id": "ltx-2-pro-text-to-video",
+        "endpoint": "ltx-2-pro-text-to-video"
+      },
+      {
+        "id": "ltx-2.3-text-to-video",
+        "endpoint": "ltx-2.3-text-to-video"
+      },
+      {
+        "id": "ltx-2.5-text-to-video",
+        "endpoint": "ltx-2.5-text-to-video"
+      },
+      {
+        "id": "minimax-h3-max-spicy-text-to-video",
+        "endpoint": "minimax-h3-max-spicy-text-to-video"
+      },
+      {
+        "id": "minimax-h3-max-text-to-video",
+        "endpoint": "minimax-h3-max-text-to-video"
+      },
+      {
+        "id": "minimax-h3-max-turbo-spicy-text-to-video",
+        "endpoint": "minimax-h3-max-turbo-spicy-text-to-video"
+      },
+      {
+        "id": "minimax-h3-max-turbo-text-to-video",
+        "endpoint": "minimax-h3-max-turbo-text-to-video"
+      },
+      {
+        "id": "minimax-h3-open-text-to-video",
+        "endpoint": "minimax-h3-open-text-to-video"
+      },
+      {
+        "id": "minimax-h3-text-to-video",
+        "endpoint": "minimax-h3-text-to-video"
+      },
+      {
+        "id": "minimax-h3-text-to-video-lora",
+        "endpoint": "minimax-h3-text-to-video-lora"
+      },
+      {
+        "id": "minimax-hailuo-02-pro-t2v",
+        "endpoint": "minimax-hailuo-02-pro-t2v"
+      },
+      {
+        "id": "minimax-hailuo-02-standard-t2v",
+        "endpoint": "minimax-hailuo-02-standard-t2v"
+      },
+      {
+        "id": "minimax-hailuo-2.3-pro-t2v",
+        "endpoint": "minimax-hailuo-2.3-pro-t2v"
+      },
+      {
+        "id": "minimax-hailuo-2.3-standard-t2v",
+        "endpoint": "minimax-hailuo-2.3-standard-t2v"
+      },
+      {
+        "id": "motion-graphics",
+        "endpoint": "motion-graphics"
+      },
+      {
+        "id": "openai-sora",
+        "endpoint": "openai-sora"
+      },
+      {
+        "id": "openai-sora-2-pro-storyboard",
+        "endpoint": "openai-sora-2-pro-storyboard"
+      },
+      {
+        "id": "openai-sora-2-pro-text-to-video",
+        "endpoint": "openai-sora-2-pro-text-to-video"
+      },
+      {
+        "id": "openai-sora-2-text-to-video",
+        "endpoint": "openai-sora-2-text-to-video"
+      },
+      {
+        "id": "ovi-text-to-video",
+        "endpoint": "ovi-text-to-video"
+      },
+      {
+        "id": "pixverse-v4.5-t2v",
+        "endpoint": "pixverse-v4.5-t2v"
+      },
+      {
+        "id": "pixverse-v5-t2v",
+        "endpoint": "pixverse-v5-t2v"
+      },
+      {
+        "id": "pixverse-v5.5-t2v",
+        "endpoint": "pixverse-v5.5-t2v"
+      },
+      {
+        "id": "pixverse-v6-max-text-to-video",
+        "endpoint": "pixverse-v6-max-text-to-video"
+      },
+      {
+        "id": "pixverse-v6-t2v",
+        "endpoint": "pixverse-v6-t2v"
+      },
+      {
+        "id": "runway-text-to-video",
+        "endpoint": "runway-text-to-video"
+      },
+      {
+        "id": "seedance-2-extend",
+        "endpoint": "seedance-v2.0-extend"
+      },
+      {
+        "id": "seedance-2-mini-omni-reference",
+        "endpoint": "seedance-2-mini-omni-reference"
+      },
+      {
+        "id": "seedance-2-mini-spicy-omni-reference",
+        "endpoint": "seedance-2-mini-spicy-omni-reference"
+      },
+      {
+        "id": "seedance-2-mini-spicy-text-to-video",
+        "endpoint": "seedance-2-mini-spicy-text-to-video"
+      },
+      {
+        "id": "seedance-2-mini-text-to-video",
+        "endpoint": "seedance-2-mini-text-to-video"
+      },
+      {
+        "id": "seedance-2-new-t2v",
+        "endpoint": "seedance-2.0-new-t2v"
+      },
+      {
+        "id": "seedance-2-spicy-text-to-video",
+        "endpoint": "seedance-2-spicy-text-to-video"
+      },
+      {
+        "id": "seedance-2-spicy-text-to-video-fast",
+        "endpoint": "seedance-2-spicy-text-to-video-fast"
+      },
+      {
+        "id": "seedance-2-t2v",
+        "endpoint": "seedance-v2.0-t2v"
+      },
+      {
+        "id": "seedance-2-t2v-480p",
+        "endpoint": "seedance-2.0-t2v-480p"
+      },
+      {
+        "id": "seedance-2-text-to-video",
+        "endpoint": "seedance-2-text-to-video"
+      },
+      {
+        "id": "seedance-2-text-to-video-fast",
+        "endpoint": "seedance-2-text-to-video-fast"
+      },
+      {
+        "id": "seedance-2-vip-extend",
+        "endpoint": "sd-2-vip-extend"
+      },
+      {
+        "id": "seedance-2-vip-extend-1080p",
+        "endpoint": "sd-2-vip-extend-1080p"
+      },
+      {
+        "id": "seedance-2-vip-text-to-video",
+        "endpoint": "seedance-2-vip-text-to-video"
+      },
+      {
+        "id": "seedance-2-vip-text-to-video-1080p",
+        "endpoint": "sd-2-vip-text-to-video-1080p"
+      },
+      {
+        "id": "seedance-2-vip-text-to-video-4k",
+        "endpoint": "sd-2-vip-text-to-video-4k"
+      },
+      {
+        "id": "seedance-2-vip-text-to-video-fast",
+        "endpoint": "seedance-2-vip-text-to-video-fast"
+      },
+      {
+        "id": "seedance-2-vip-text-to-video-fast-1080p",
+        "endpoint": "sd-2-vip-text-to-video-fast-1080p"
+      },
+      {
+        "id": "seedance-2.1-text-to-video",
+        "endpoint": "seedance-2.1-text-to-video"
+      },
+      {
+        "id": "seedance-2.5-intl-text-to-video",
+        "endpoint": "seedance-2.5-intl-text-to-video"
+      },
+      {
+        "id": "seedance-2.5-intl-text-to-video-1080p",
+        "endpoint": "seedance-2.5-intl-text-to-video-1080p"
+      },
+      {
+        "id": "seedance-2.5-intl-text-to-video-480p",
+        "endpoint": "seedance-2.5-intl-text-to-video-480p"
+      },
+      {
+        "id": "seedance-2.5-intl-text-to-video-4k",
+        "endpoint": "seedance-2.5-intl-text-to-video-4k"
+      },
+      {
+        "id": "seedance-2.5-spicy-text-to-video",
+        "endpoint": "seedance-2.5-spicy-text-to-video"
+      },
+      {
+        "id": "seedance-2.5-spicy-text-to-video-1080p",
+        "endpoint": "seedance-2.5-spicy-text-to-video-1080p"
+      },
+      {
+        "id": "seedance-2.5-spicy-text-to-video-480p",
+        "endpoint": "seedance-2.5-spicy-text-to-video-480p"
+      },
+      {
+        "id": "seedance-2.5-spicy-text-to-video-4k",
+        "endpoint": "seedance-2.5-spicy-text-to-video-4k"
+      },
+      {
+        "id": "seedance-2.5-text-to-video",
+        "endpoint": "seedance-2.5-text-to-video"
+      },
+      {
+        "id": "seedance-2.5-text-to-video-1080p",
+        "endpoint": "seedance-2.5-text-to-video-1080p"
+      },
+      {
+        "id": "seedance-2.5-text-to-video-480p",
+        "endpoint": "seedance-2.5-text-to-video-480p"
+      },
+      {
+        "id": "seedance-2.5-text-to-video-4k",
+        "endpoint": "seedance-2.5-text-to-video-4k"
+      },
+      {
+        "id": "seedance-lite-t2v",
+        "endpoint": "seedance-lite-t2v"
+      },
+      {
+        "id": "seedance-pro-t2v",
+        "endpoint": "seedance-pro-t2v"
+      },
+      {
+        "id": "seedance-pro-t2v-fast",
+        "endpoint": "seedance-pro-t2v-fast"
+      },
+      {
+        "id": "seedance-v1.5-pro-t2v",
+        "endpoint": "seedance-v1.5-pro-t2v"
+      },
+      {
+        "id": "seedance-v1.5-pro-t2v-fast",
+        "endpoint": "seedance-v1.5-pro-t2v-fast"
+      },
+      {
+        "id": "seedance-v2.0-extend",
+        "endpoint": "seedance-v2.0-extend"
+      },
+      {
+        "id": "seedance-v2.0-t2v",
+        "endpoint": "seedance-v2.0-t2v"
+      },
+      {
+        "id": "veo-4-text-to-video",
+        "endpoint": "veo-4-text-to-video"
+      },
+      {
+        "id": "veo3-fast-text-to-video",
+        "endpoint": "veo3-fast-text-to-video"
+      },
+      {
+        "id": "veo3-text-to-video",
+        "endpoint": "veo3-text-to-video"
+      },
+      {
+        "id": "veo3.1-4k-video",
+        "endpoint": "veo3.1-4k-video"
+      },
+      {
+        "id": "veo3.1-extend-video",
+        "endpoint": "veo3.1-extend-video"
+      },
+      {
+        "id": "veo3.1-fast-text-to-video",
+        "endpoint": "veo3.1-fast-text-to-video"
+      },
+      {
+        "id": "veo3.1-lite-text-to-video",
+        "endpoint": "veo3.1-lite-text-to-video"
+      },
+      {
+        "id": "veo3.1-text-to-video",
+        "endpoint": "veo3.1-text-to-video"
+      },
+      {
+        "id": "vidu-q2-pro-text-to-video",
+        "endpoint": "vidu-q2-pro-text-to-video"
+      },
+      {
+        "id": "vidu-q2-turbo-text-to-video",
+        "endpoint": "vidu-q2-turbo-text-to-video"
+      },
+      {
+        "id": "vidu-q3-pro-text-to-video",
+        "endpoint": "vidu-q3-pro-text-to-video"
+      },
+      {
+        "id": "vidu-q3-turbo-text-to-video",
+        "endpoint": "vidu-q3-turbo-text-to-video"
+      },
+      {
+        "id": "vidu-v2.0-t2v",
+        "endpoint": "vidu-v2.0-t2v"
+      },
+      {
+        "id": "wan2.1-text-to-video",
+        "endpoint": "wan2.1-text-to-video"
+      },
+      {
+        "id": "wan2.2-5b-fast-t2v",
+        "endpoint": "wan2.2-5b-fast-t2v"
+      },
+      {
+        "id": "wan2.2-text-to-video",
+        "endpoint": "wan2.2-text-to-video"
+      },
+      {
+        "id": "wan2.5-text-to-video",
+        "endpoint": "wan2.5-text-to-video"
+      },
+      {
+        "id": "wan2.5-text-to-video-fast",
+        "endpoint": "wan2.5-text-to-video-fast"
+      },
+      {
+        "id": "wan2.6-text-to-video",
+        "endpoint": "wan2.6-text-to-video"
+      },
+      {
+        "id": "wan2.7-text-to-video",
+        "endpoint": "wan2.7-text-to-video"
+      },
+      {
+        "id": "wan3.0-prime-text-to-video",
+        "endpoint": "wan3.0-prime-text-to-video"
+      },
+      {
+        "id": "wan3.0-spicy-text-to-video",
+        "endpoint": "wan3.0-spicy-text-to-video"
+      },
+      {
+        "id": "wan3.0-text-to-video",
+        "endpoint": "wan3.0-text-to-video"
+      }
+    ],
+    "i2iModels": [
+      {
+        "id": "add-image-watermark",
+        "endpoint": "add-image-watermark"
+      },
+      {
+        "id": "ai-background-remover",
+        "endpoint": "ai-background-remover"
+      },
+      {
+        "id": "ai-color-photo",
+        "endpoint": "ai-color-photo"
+      },
+      {
+        "id": "ai-dress-change",
+        "endpoint": "ai-dress-change"
+      },
+      {
+        "id": "ai-ghibli-style",
+        "endpoint": "ai-ghibli-style"
+      },
+      {
+        "id": "ai-image-extension",
+        "endpoint": "ai-image-extension"
+      },
+      {
+        "id": "ai-image-face-swap",
+        "endpoint": "ai-image-face-swap"
+      },
+      {
+        "id": "ai-image-upscaler",
+        "endpoint": "ai-image-upscale"
+      },
+      {
+        "id": "ai-object-eraser",
+        "endpoint": "ai-object-eraser"
+      },
+      {
+        "id": "ai-product-photography",
+        "endpoint": "ai-product-photography"
+      },
+      {
+        "id": "ai-product-shot",
+        "endpoint": "ai-product-shot"
+      },
+      {
+        "id": "ai-skin-enhancer",
+        "endpoint": "ai-skin-enhancer"
+      },
+      {
+        "id": "Api Node",
+        "endpoint": "Api Node"
+      },
+      {
+        "id": "bytedance-seededit-v3",
+        "endpoint": "bytedance-seededit-image"
+      },
+      {
+        "id": "bytedance-seedream-5.0-pro-edit",
+        "endpoint": "seedream-5.0-pro-edit"
+      },
+      {
+        "id": "bytedance-seedream-5.0-pro-layer",
+        "endpoint": "bytedance-seedream-5.0-pro-layer"
+      },
+      {
+        "id": "bytedance-seedream-edit-v4",
+        "endpoint": "bytedance-seedream-edit-v4"
+      },
+      {
+        "id": "bytedance-seedream-v4-edit",
+        "endpoint": "bytedance-seedream-edit-v4"
+      },
+      {
+        "id": "bytedance-seedream-v4.5-edit",
+        "endpoint": "bytedance-seedream-v4.5-edit"
+      },
+      {
+        "id": "bytedance-seedream-v5.0-edit",
+        "endpoint": "seedream-5.0-edit"
+      },
+      {
+        "id": "face-expression-change",
+        "endpoint": "face-expression-change"
+      },
+      {
+        "id": "flux-2-dev-edit",
+        "endpoint": "flux-2-dev-edit"
+      },
+      {
+        "id": "flux-2-flex-edit",
+        "endpoint": "flux-2-flex-edit"
+      },
+      {
+        "id": "flux-2-klein-4b-edit",
+        "endpoint": "flux-2-klein-4b-edit"
+      },
+      {
+        "id": "flux-2-klein-4b-edit-lora",
+        "endpoint": "flux-2-klein-4b-edit-lora"
+      },
+      {
+        "id": "flux-2-klein-4b-turbo-edit",
+        "endpoint": "flux-2-klein-4b-turbo-edit"
+      },
+      {
+        "id": "flux-2-klein-9b-edit",
+        "endpoint": "flux-2-klein-9b-edit"
+      },
+      {
+        "id": "flux-2-klein-9b-edit-lora",
+        "endpoint": "flux-2-klein-9b-edit-lora"
+      },
+      {
+        "id": "flux-2-klein-9b-turbo-edit",
+        "endpoint": "flux-2-klein-9b-turbo-edit"
+      },
+      {
+        "id": "flux-2-pro-edit",
+        "endpoint": "flux-2-pro-edit"
+      },
+      {
+        "id": "flux-3-image-to-image",
+        "endpoint": "flux-3-image-to-image"
+      },
+      {
+        "id": "flux-3-klein-edit-image",
+        "endpoint": "flux-3-klein-edit-image"
+      },
+      {
+        "id": "flux-kontext-dev-i2i",
+        "endpoint": "flux-kontext-dev-i2i"
+      },
+      {
+        "id": "flux-kontext-effects",
+        "endpoint": "flux-kontext-effects"
+      },
+      {
+        "id": "flux-kontext-max-i2i",
+        "endpoint": "flux-kontext-max-i2i"
+      },
+      {
+        "id": "flux-kontext-pro-i2i",
+        "endpoint": "flux-kontext-pro-i2i"
+      },
+      {
+        "id": "flux-pulid",
+        "endpoint": "flux-pulid"
+      },
+      {
+        "id": "flux-redux",
+        "endpoint": "flux-redux"
+      },
+      {
+        "id": "gemini-omni-character",
+        "endpoint": "gemini-omni-character"
+      },
+      {
+        "id": "gpt-image-1.5-edit",
+        "endpoint": "gpt-image-1.5-edit"
+      },
+      {
+        "id": "gpt-image-2-edit",
+        "endpoint": "gpt-image-2-image-to-image"
+      },
+      {
+        "id": "gpt-image-2.5-flare-image-to-image",
+        "endpoint": "gpt-image-2.5-flare-image-to-image"
+      },
+      {
+        "id": "gpt-image-2.5-sunburst-image-to-image",
+        "endpoint": "gpt-image-2.5-sunburst-image-to-image"
+      },
+      {
+        "id": "gpt-image-2.6-flare-image-to-image",
+        "endpoint": "gpt-image-2.6-flare-image-to-image"
+      },
+      {
+        "id": "gpt-image-2.6-sunburst-image-to-image",
+        "endpoint": "gpt-image-2.6-sunburst-image-to-image"
+      },
+      {
+        "id": "gpt4o-edit",
+        "endpoint": "gpt4o-edit"
+      },
+      {
+        "id": "gpt4o-image-to-image",
+        "endpoint": "gpt4o-image-to-image"
+      },
+      {
+        "id": "grok-imagine-image-2-edit",
+        "endpoint": "grok-imagine-image-2-edit"
+      },
+      {
+        "id": "grok-imagine-image-to-image",
+        "endpoint": "grok-imagine-image-to-image"
+      },
+      {
+        "id": "ideogram-character",
+        "endpoint": "ideogram-character"
+      },
+      {
+        "id": "ideogram-v3-reframe",
+        "endpoint": "ideogram-v3-reframe"
+      },
+      {
+        "id": "image-effects",
+        "endpoint": "image-effects"
+      },
+      {
+        "id": "image-passthrough",
+        "endpoint": "image-passthrough"
+      },
+      {
+        "id": "kling-o1-edit-image",
+        "endpoint": "kling-o1-edit-image"
+      },
+      {
+        "id": "kling-o3-image-edit",
+        "endpoint": "kling-o3-image-edit"
+      },
+      {
+        "id": "minimax-image-01-subject-reference",
+        "endpoint": "minimax-01-subject-reference"
+      },
+      {
+        "id": "muse-image-edit",
+        "endpoint": "muse-image-edit"
+      },
+      {
+        "id": "nano-banana-2-1-edit",
+        "endpoint": "nano-banana-2-1-edit"
+      },
+      {
+        "id": "nano-banana-2-edit",
+        "endpoint": "nano-banana-2-edit"
+      },
+      {
+        "id": "nano-banana-2-lite-edit",
+        "endpoint": "nano-banana-2-lite-edit"
+      },
+      {
+        "id": "nano-banana-edit",
+        "endpoint": "nano-banana-edit"
+      },
+      {
+        "id": "nano-banana-effects",
+        "endpoint": "nano-banana-effects"
+      },
+      {
+        "id": "nano-banana-pro-edit",
+        "endpoint": "nano-banana-pro-edit"
+      },
+      {
+        "id": "photo-pack",
+        "endpoint": "photo-pack"
+      },
+      {
+        "id": "portrait-stylist",
+        "endpoint": "portrait-stylist"
+      },
+      {
+        "id": "qwen-image-2.0-edit",
+        "endpoint": "qwen-image-2.0-edit"
+      },
+      {
+        "id": "qwen-image-2.0-pro-edit",
+        "endpoint": "qwen-image-2.0-pro-edit"
+      },
+      {
+        "id": "qwen-image-edit",
+        "endpoint": "qwen-image-edit"
+      },
+      {
+        "id": "qwen-image-edit-2511",
+        "endpoint": "qwen-image-edit-2511"
+      },
+      {
+        "id": "qwen-image-edit-2511-lora",
+        "endpoint": "qwen-image-edit-2511-lora"
+      },
+      {
+        "id": "qwen-image-edit-lora",
+        "endpoint": "qwen-image-edit-lora"
+      },
+      {
+        "id": "qwen-image-edit-plus",
+        "endpoint": "qwen-image-edit-plus"
+      },
+      {
+        "id": "qwen-image-edit-plus-lora",
+        "endpoint": "qwen-image-edit-plus-lora"
+      },
+      {
+        "id": "qwen-text-to-image-2512",
+        "endpoint": "qwen-text-to-image-2512"
+      },
+      {
+        "id": "qwen2-1-image-to-image",
+        "endpoint": "qwen2-1-image-to-image"
+      },
+      {
+        "id": "qwen3-image-to-image",
+        "endpoint": "qwen3-image-to-image"
+      },
+      {
+        "id": "qwen3-pro-image-to-image",
+        "endpoint": "qwen3-pro-image-to-image"
+      },
+      {
+        "id": "reve-image-edit",
+        "endpoint": "reve-image-edit"
+      },
+      {
+        "id": "seedance-2-character",
+        "endpoint": "seedance-2-character"
+      },
+      {
+        "id": "seedream-5.0-edit",
+        "endpoint": "seedream-5.0-edit"
+      },
+      {
+        "id": "seedream-5.0-flash-edit",
+        "endpoint": "seedream-5.0-flash-edit"
+      },
+      {
+        "id": "seedream-5.0-flash-layerize",
+        "endpoint": "seedream-5.0-flash-layerize"
+      },
+      {
+        "id": "seedvr2-image-upscale",
+        "endpoint": "seedvr2-image-upscale"
+      },
+      {
+        "id": "topaz-image-upscale",
+        "endpoint": "topaz-image-upscale"
+      },
+      {
+        "id": "topaz-upscale-image-creative",
+        "endpoint": "topaz-upscale-image-creative"
+      },
+      {
+        "id": "topaz-upscale-image-generative",
+        "endpoint": "topaz-upscale-image-generative"
+      },
+      {
+        "id": "topaz-upscale-image-precision",
+        "endpoint": "topaz-upscale-image-precision"
+      },
+      {
+        "id": "vidu-q2-reference-to-image",
+        "endpoint": "vidu-q2-reference-to-image"
+      },
+      {
+        "id": "wan2.5-image-edit",
+        "endpoint": "wan2.5-image-edit"
+      },
+      {
+        "id": "wan2.6-image-edit",
+        "endpoint": "wan2.6-image-edit"
+      },
+      {
+        "id": "wan2.7-image-edit",
+        "endpoint": "wan2.7-image-edit"
+      },
+      {
+        "id": "wan2.7-image-edit-pro",
+        "endpoint": "wan2.7-image-edit-pro"
+      },
+      {
+        "id": "wan3.0-image-edit",
+        "endpoint": "wan3.0-image-edit"
+      },
+      {
+        "id": "z-image-turbo-image-to-image-lora",
+        "endpoint": "z-image-turbo-image-to-image-lora"
+      }
+    ],
+    "i2vModels": [
+      {
+        "id": "ai-video-effects",
+        "endpoint": "generate_wan_ai_effects"
+      },
+      {
+        "id": "flux-3-image-to-video",
+        "endpoint": "flux-3-image-to-video"
+      },
+      {
+        "id": "flux-3-omni",
+        "endpoint": "flux-3-omni"
+      },
+      {
+        "id": "flux-3-start-end-to-video",
+        "endpoint": "flux-3-start-end-to-video"
+      },
+      {
+        "id": "gemini-omni-flash-1-1-image-to-video",
+        "endpoint": "gemini-omni-flash-1-1-image-to-video"
+      },
+      {
+        "id": "gemini-omni-flash-1-1-reference-to-video",
+        "endpoint": "gemini-omni-flash-1-1-reference-to-video"
+      },
+      {
+        "id": "gemini-omni-flash-1-2-image-to-video",
+        "endpoint": "gemini-omni-flash-1-2-image-to-video"
+      },
+      {
+        "id": "gemini-omni-flash-1-2-reference-to-video",
+        "endpoint": "gemini-omni-flash-1-2-reference-to-video"
+      },
+      {
+        "id": "gemini-omni-image-to-video",
+        "endpoint": "gemini-omni-image-to-video"
+      },
+      {
+        "id": "grok-imagine-image-to-video",
+        "endpoint": "grok-imagine-image-to-video"
+      },
+      {
+        "id": "grok-imagine-video-1-5-image-to-video",
+        "endpoint": "grok-imagine-video-1-5-image-to-video"
+      },
+      {
+        "id": "grok-imagine-video-1-5-lite-image-to-video",
+        "endpoint": "grok-imagine-video-1-5-lite-image-to-video"
+      },
+      {
+        "id": "grok-imagine-video-1-5-preview",
+        "endpoint": "grok-imagine-video-1-5-preview"
+      },
+      {
+        "id": "grok-imagine-video-1-5-reference-to-video",
+        "endpoint": "grok-imagine-video-1-5-reference-to-video"
+      },
+      {
+        "id": "happy-horse-1-image-to-video",
+        "endpoint": "happy-horse-1-image-to-video"
+      },
+      {
+        "id": "happy-horse-1-image-to-video-1080p",
+        "endpoint": "happy-horse-1-image-to-video-1080p"
+      },
+      {
+        "id": "happy-horse-1-image-to-video-720p",
+        "endpoint": "happy-horse-1-image-to-video-720p"
+      },
+      {
+        "id": "happy-horse-1-reference-to-video",
+        "endpoint": "happy-horse-1-reference-to-video"
+      },
+      {
+        "id": "happy-horse-1-reference-to-video-1080p",
+        "endpoint": "happy-horse-1-reference-to-video-1080p"
+      },
+      {
+        "id": "happy-horse-1-reference-to-video-720p",
+        "endpoint": "happy-horse-1-reference-to-video-720p"
+      },
+      {
+        "id": "happy-horse-1.1-image-to-video",
+        "endpoint": "happy-horse-1.1-image-to-video"
+      },
+      {
+        "id": "happy-horse-1.1-image-to-video-1080p",
+        "endpoint": "happy-horse-1.1-image-to-video-1080p"
+      },
+      {
+        "id": "happy-horse-1.1-image-to-video-720p",
+        "endpoint": "happy-horse-1.1-image-to-video-720p"
+      },
+      {
+        "id": "happy-horse-1.1-reference-to-video",
+        "endpoint": "happy-horse-1.1-reference-to-video"
+      },
+      {
+        "id": "happy-horse-1.1-reference-to-video-1080p",
+        "endpoint": "happy-horse-1.1-reference-to-video-1080p"
+      },
+      {
+        "id": "happy-horse-1.1-reference-to-video-720p",
+        "endpoint": "happy-horse-1.1-reference-to-video-720p"
+      },
+      {
+        "id": "hunyuan-image-to-video",
+        "endpoint": "hunyuan-image-to-video"
+      },
+      {
+        "id": "kling-4.0-flash-keyframe-to-video",
+        "endpoint": "kling-4.0-flash-keyframe-to-video"
+      },
+      {
+        "id": "kling-4.0-flash-reference-to-video",
+        "endpoint": "kling-4.0-flash-reference-to-video"
+      },
+      {
+        "id": "kling-4.0-keyframe-to-video",
+        "endpoint": "kling-4.0-keyframe-to-video"
+      },
+      {
+        "id": "kling-4.0-reference-to-video",
+        "endpoint": "kling-4.0-reference-to-video"
+      },
+      {
+        "id": "kling-o1-image-to-video",
+        "endpoint": "kling-o1-image-to-video"
+      },
+      {
+        "id": "kling-o1-reference-to-video",
+        "endpoint": "kling-o1-reference-to-video"
+      },
+      {
+        "id": "kling-o1-standard-image-to-video",
+        "endpoint": "kling-o1-standard-image-to-video"
+      },
+      {
+        "id": "kling-o1-standard-reference-to-video",
+        "endpoint": "kling-o1-standard-reference-to-video"
+      },
+      {
+        "id": "kling-v2.1-master-i2v",
+        "endpoint": "kling-v2.1-master-i2v"
+      },
+      {
+        "id": "kling-v2.1-pro-i2v",
+        "endpoint": "kling-v2.1-pro-i2v"
+      },
+      {
+        "id": "kling-v2.1-standard-i2v",
+        "endpoint": "kling-v2.1-standard-i2v"
+      },
+      {
+        "id": "kling-v2.5-turbo-pro-i2v",
+        "endpoint": "kling-v2.5-turbo-pro-i2v"
+      },
+      {
+        "id": "kling-v2.5-turbo-std-i2v",
+        "endpoint": "kling-v2.5-turbo-std-i2v"
+      },
+      {
+        "id": "kling-v2.6-pro-i2v",
+        "endpoint": "kling-v2.6-pro-i2v"
+      },
+      {
+        "id": "kling-v3-turbo-pro-image-to-video",
+        "endpoint": "kling-v3-turbo-pro-image-to-video"
+      },
+      {
+        "id": "kling-v3-turbo-standard-image-to-video",
+        "endpoint": "kling-v3-turbo-standard-image-to-video"
+      },
+      {
+        "id": "kling-v3.0-4k-image-to-video",
+        "endpoint": "kling-v3.0-4k-image-to-video"
+      },
+      {
+        "id": "kling-v3.0-omni-4k-image-to-video",
+        "endpoint": "kling-v3.0-omni-4k-image-to-video"
+      },
+      {
+        "id": "kling-v3.0-omni-pro-image-to-video",
+        "endpoint": "kling-v3.0-omni-pro-image-to-video"
+      },
+      {
+        "id": "kling-v3.0-omni-standard-image-to-video",
+        "endpoint": "kling-v3.0-omni-standard-image-to-video"
+      },
+      {
+        "id": "kling-v3.0-pro-image-to-video",
+        "endpoint": "kling-v3.0-pro-image-to-video"
+      },
+      {
+        "id": "kling-v3.0-standard-image-to-video",
+        "endpoint": "kling-v3.0-standard-image-to-video"
+      },
+      {
+        "id": "leonardoai-motion-2.0",
+        "endpoint": "leonardoai-motion-2.0"
+      },
+      {
+        "id": "ltx-2-19b-image-to-video",
+        "endpoint": "ltx-2-19b-image-to-video"
+      },
+      {
+        "id": "ltx-2-fast-image-to-video",
+        "endpoint": "ltx-2-fast-image-to-video"
+      },
+      {
+        "id": "ltx-2-pro-image-to-video",
+        "endpoint": "ltx-2-pro-image-to-video"
+      },
+      {
+        "id": "ltx-2.3-image-to-video",
+        "endpoint": "ltx-2.3-image-to-video"
+      },
+      {
+        "id": "ltx-2.5-image-to-video",
+        "endpoint": "ltx-2.5-image-to-video"
+      },
+      {
+        "id": "minimax-h3-image-to-video",
+        "endpoint": "minimax-h3-image-to-video"
+      },
+      {
+        "id": "minimax-h3-image-to-video-lora",
+        "endpoint": "minimax-h3-image-to-video-lora"
+      },
+      {
+        "id": "minimax-h3-image-to-video-spicy",
+        "endpoint": "minimax-h3-image-to-video-spicy"
+      },
+      {
+        "id": "minimax-h3-max-image-to-video",
+        "endpoint": "minimax-h3-max-image-to-video"
+      },
+      {
+        "id": "minimax-h3-max-reference-to-video",
+        "endpoint": "minimax-h3-max-reference-to-video"
+      },
+      {
+        "id": "minimax-h3-max-spicy-image-to-video",
+        "endpoint": "minimax-h3-max-spicy-image-to-video"
+      },
+      {
+        "id": "minimax-h3-max-spicy-reference-to-video",
+        "endpoint": "minimax-h3-max-spicy-reference-to-video"
+      },
+      {
+        "id": "minimax-h3-max-turbo-image-to-video",
+        "endpoint": "minimax-h3-max-turbo-image-to-video"
+      },
+      {
+        "id": "minimax-h3-max-turbo-spicy-image-to-video",
+        "endpoint": "minimax-h3-max-turbo-spicy-image-to-video"
+      },
+      {
+        "id": "minimax-h3-open-image-to-video",
+        "endpoint": "minimax-h3-open-image-to-video"
+      },
+      {
+        "id": "minimax-h3-open-reference-to-video",
+        "endpoint": "minimax-h3-open-reference-to-video"
+      },
+      {
+        "id": "minimax-h3-reference-to-video",
+        "endpoint": "minimax-h3-reference-to-video"
+      },
+      {
+        "id": "minimax-h3-reference-to-video-lora",
+        "endpoint": "minimax-h3-reference-to-video-lora"
+      },
+      {
+        "id": "minimax-hailuo-02-pro-i2v",
+        "endpoint": "minimax-hailuo-02-pro-i2v"
+      },
+      {
+        "id": "minimax-hailuo-02-standard-i2v",
+        "endpoint": "minimax-hailuo-02-standard-i2v"
+      },
+      {
+        "id": "minimax-hailuo-2.3-fast",
+        "endpoint": "minimax-hailuo-2.3-fast"
+      },
+      {
+        "id": "minimax-hailuo-2.3-pro-i2v",
+        "endpoint": "minimax-hailuo-2.3-pro-i2v"
+      },
+      {
+        "id": "minimax-hailuo-2.3-standard-i2v",
+        "endpoint": "minimax-hailuo-2.3-standard-i2v"
+      },
+      {
+        "id": "motion-controls",
+        "endpoint": "generate_wan_ai_effects"
+      },
+      {
+        "id": "openai-sora-2-image-to-video",
+        "endpoint": "openai-sora-2-image-to-video"
+      },
+      {
+        "id": "openai-sora-2-pro-image-to-video",
+        "endpoint": "openai-sora-2-pro-image-to-video"
+      },
+      {
+        "id": "ovi-image-to-video",
+        "endpoint": "ovi-image-to-video"
+      },
+      {
+        "id": "pixverse-v4.5-i2v",
+        "endpoint": "pixverse-v4.5-i2v"
+      },
+      {
+        "id": "pixverse-v5-i2v",
+        "endpoint": "pixverse-v5-i2v"
+      },
+      {
+        "id": "pixverse-v5.5-i2v",
+        "endpoint": "pixverse-v5.5-i2v"
+      },
+      {
+        "id": "pixverse-v6-i2v",
+        "endpoint": "pixverse-v6-i2v"
+      },
+      {
+        "id": "pixverse-v6-max-image-to-video",
+        "endpoint": "pixverse-v6-max-image-to-video"
+      },
+      {
+        "id": "pixverse-v6-transition",
+        "endpoint": "pixverse-v6-transition"
+      },
+      {
+        "id": "runway-act-two-i2v",
+        "endpoint": "runway-act-two-i2v"
+      },
+      {
+        "id": "runway-image-to-video",
+        "endpoint": "runway-image-to-video"
+      },
+      {
+        "id": "seedance-2-first-last-frame",
+        "endpoint": "seedance-2-first-last-frame"
+      },
+      {
+        "id": "seedance-2-first-last-frame-fast",
+        "endpoint": "seedance-2-first-last-frame-fast"
+      },
+      {
+        "id": "seedance-2-i2v",
+        "endpoint": "seedance-v2.0-i2v"
+      },
+      {
+        "id": "seedance-2-i2v-480p",
+        "endpoint": "seedance-2.0-i2v-480p"
+      },
+      {
+        "id": "seedance-2-image-to-video",
+        "endpoint": "seedance-2-image-to-video"
+      },
+      {
+        "id": "seedance-2-image-to-video-fast",
+        "endpoint": "seedance-2-image-to-video-fast"
+      },
+      {
+        "id": "seedance-2-mini-image-to-video",
+        "endpoint": "seedance-2-mini-image-to-video"
+      },
+      {
+        "id": "seedance-2-mini-spicy-image-to-video",
+        "endpoint": "seedance-2-mini-spicy-image-to-video"
+      },
+      {
+        "id": "seedance-2-new-first-last",
+        "endpoint": "seedance-2.0-new-first-last"
+      },
+      {
+        "id": "seedance-2-omni-reference",
+        "endpoint": "seedance-2.0-omni-reference"
+      },
+      {
+        "id": "seedance-2-omni-reference-480p",
+        "endpoint": "seedance-2.0-omni-reference-480p"
+      },
+      {
+        "id": "seedance-2-omni-reference-no-video",
+        "endpoint": "seedance-2-omni-reference-no-video"
+      },
+      {
+        "id": "seedance-2-omni-reference-no-video-fast",
+        "endpoint": "seedance-2-omni-reference-no-video-fast"
+      },
+      {
+        "id": "seedance-2-spicy-image-to-video",
+        "endpoint": "seedance-2-spicy-image-to-video"
+      },
+      {
+        "id": "seedance-2-spicy-image-to-video-fast",
+        "endpoint": "seedance-2-spicy-image-to-video-fast"
+      },
+      {
+        "id": "seedance-2-spicy-omni-reference",
+        "endpoint": "seedance-2-spicy-omni-reference"
+      },
+      {
+        "id": "seedance-2-spicy-omni-reference-fast",
+        "endpoint": "seedance-2-spicy-omni-reference-fast"
+      },
+      {
+        "id": "seedance-2-vip-first-last-frame",
+        "endpoint": "seedance-2-vip-first-last-frame"
+      },
+      {
+        "id": "seedance-2-vip-first-last-frame-1080p",
+        "endpoint": "sd-2-vip-first-last-frame-1080p"
+      },
+      {
+        "id": "seedance-2-vip-first-last-frame-4k",
+        "endpoint": "sd-2-vip-first-last-frame-4k"
+      },
+      {
+        "id": "seedance-2-vip-first-last-frame-fast",
+        "endpoint": "seedance-2-vip-first-last-frame-fast"
+      },
+      {
+        "id": "seedance-2-vip-image-to-video",
+        "endpoint": "seedance-2-vip-image-to-video"
+      },
+      {
+        "id": "seedance-2-vip-image-to-video-1080p",
+        "endpoint": "sd-2-vip-image-to-video-1080p"
+      },
+      {
+        "id": "seedance-2-vip-image-to-video-4k",
+        "endpoint": "sd-2-vip-image-to-video-4k"
+      },
+      {
+        "id": "seedance-2-vip-image-to-video-fast",
+        "endpoint": "seedance-2-vip-image-to-video-fast"
+      },
+      {
+        "id": "seedance-2-vip-image-to-video-fast-1080p",
+        "endpoint": "sd-2-vip-image-to-video-fast-1080p"
+      },
+      {
+        "id": "seedance-2-vip-omni-reference",
+        "endpoint": "seedance-2-vip-omni-reference"
+      },
+      {
+        "id": "seedance-2-vip-omni-reference-1080p",
+        "endpoint": "sd-2-vip-omni-reference-1080p"
+      },
+      {
+        "id": "seedance-2-vip-omni-reference-4k",
+        "endpoint": "sd-2-vip-omni-reference-4k"
+      },
+      {
+        "id": "seedance-2-vip-omni-reference-fast",
+        "endpoint": "seedance-2-vip-omni-reference-fast"
+      },
+      {
+        "id": "seedance-2-vip-omni-reference-fast-1080p",
+        "endpoint": "sd-2-vip-omni-reference-fast-1080p"
+      },
+      {
+        "id": "seedance-2.1-image-to-video",
+        "endpoint": "seedance-2.1-image-to-video"
+      },
+      {
+        "id": "seedance-2.5-first-last-frame",
+        "endpoint": "seedance-2.5-first-last-frame"
+      },
+      {
+        "id": "seedance-2.5-first-last-frame-1080p",
+        "endpoint": "seedance-2.5-first-last-frame-1080p"
+      },
+      {
+        "id": "seedance-2.5-first-last-frame-480p",
+        "endpoint": "seedance-2.5-first-last-frame-480p"
+      },
+      {
+        "id": "seedance-2.5-first-last-frame-4k",
+        "endpoint": "seedance-2.5-first-last-frame-4k"
+      },
+      {
+        "id": "seedance-2.5-image-to-video",
+        "endpoint": "seedance-2.5-image-to-video"
+      },
+      {
+        "id": "seedance-2.5-image-to-video-1080p",
+        "endpoint": "seedance-2.5-image-to-video-1080p"
+      },
+      {
+        "id": "seedance-2.5-image-to-video-480p",
+        "endpoint": "seedance-2.5-image-to-video-480p"
+      },
+      {
+        "id": "seedance-2.5-image-to-video-4k",
+        "endpoint": "seedance-2.5-image-to-video-4k"
+      },
+      {
+        "id": "seedance-2.5-intl-first-last-frame",
+        "endpoint": "seedance-2.5-intl-first-last-frame"
+      },
+      {
+        "id": "seedance-2.5-intl-first-last-frame-1080p",
+        "endpoint": "seedance-2.5-intl-first-last-frame-1080p"
+      },
+      {
+        "id": "seedance-2.5-intl-first-last-frame-480p",
+        "endpoint": "seedance-2.5-intl-first-last-frame-480p"
+      },
+      {
+        "id": "seedance-2.5-intl-first-last-frame-4k",
+        "endpoint": "seedance-2.5-intl-first-last-frame-4k"
+      },
+      {
+        "id": "seedance-2.5-intl-image-to-video",
+        "endpoint": "seedance-2.5-intl-image-to-video"
+      },
+      {
+        "id": "seedance-2.5-intl-image-to-video-1080p",
+        "endpoint": "seedance-2.5-intl-image-to-video-1080p"
+      },
+      {
+        "id": "seedance-2.5-intl-image-to-video-480p",
+        "endpoint": "seedance-2.5-intl-image-to-video-480p"
+      },
+      {
+        "id": "seedance-2.5-intl-image-to-video-4k",
+        "endpoint": "seedance-2.5-intl-image-to-video-4k"
+      },
+      {
+        "id": "seedance-2.5-intl-omni-reference",
+        "endpoint": "seedance-2.5-intl-omni-reference"
+      },
+      {
+        "id": "seedance-2.5-intl-omni-reference-1080p",
+        "endpoint": "seedance-2.5-intl-omni-reference-1080p"
+      },
+      {
+        "id": "seedance-2.5-intl-omni-reference-480p",
+        "endpoint": "seedance-2.5-intl-omni-reference-480p"
+      },
+      {
+        "id": "seedance-2.5-intl-omni-reference-4k",
+        "endpoint": "seedance-2.5-intl-omni-reference-4k"
+      },
+      {
+        "id": "seedance-2.5-omni-reference",
+        "endpoint": "seedance-2.5-omni-reference"
+      },
+      {
+        "id": "seedance-2.5-omni-reference-1080p",
+        "endpoint": "seedance-2.5-omni-reference-1080p"
+      },
+      {
+        "id": "seedance-2.5-omni-reference-480p",
+        "endpoint": "seedance-2.5-omni-reference-480p"
+      },
+      {
+        "id": "seedance-2.5-omni-reference-4k",
+        "endpoint": "seedance-2.5-omni-reference-4k"
+      },
+      {
+        "id": "seedance-2.5-spicy-first-last-frame",
+        "endpoint": "seedance-2.5-spicy-first-last-frame"
+      },
+      {
+        "id": "seedance-2.5-spicy-first-last-frame-1080p",
+        "endpoint": "seedance-2.5-spicy-first-last-frame-1080p"
+      },
+      {
+        "id": "seedance-2.5-spicy-first-last-frame-480p",
+        "endpoint": "seedance-2.5-spicy-first-last-frame-480p"
+      },
+      {
+        "id": "seedance-2.5-spicy-first-last-frame-4k",
+        "endpoint": "seedance-2.5-spicy-first-last-frame-4k"
+      },
+      {
+        "id": "seedance-2.5-spicy-image-to-video",
+        "endpoint": "seedance-2.5-spicy-image-to-video"
+      },
+      {
+        "id": "seedance-2.5-spicy-image-to-video-1080p",
+        "endpoint": "seedance-2.5-spicy-image-to-video-1080p"
+      },
+      {
+        "id": "seedance-2.5-spicy-image-to-video-480p",
+        "endpoint": "seedance-2.5-spicy-image-to-video-480p"
+      },
+      {
+        "id": "seedance-2.5-spicy-image-to-video-4k",
+        "endpoint": "seedance-2.5-spicy-image-to-video-4k"
+      },
+      {
+        "id": "seedance-2.5-spicy-omni-reference",
+        "endpoint": "seedance-2.5-spicy-omni-reference"
+      },
+      {
+        "id": "seedance-2.5-spicy-omni-reference-1080p",
+        "endpoint": "seedance-2.5-spicy-omni-reference-1080p"
+      },
+      {
+        "id": "seedance-2.5-spicy-omni-reference-480p",
+        "endpoint": "seedance-2.5-spicy-omni-reference-480p"
+      },
+      {
+        "id": "seedance-2.5-spicy-omni-reference-4k",
+        "endpoint": "seedance-2.5-spicy-omni-reference-4k"
+      },
+      {
+        "id": "seedance-lite-i2v",
+        "endpoint": "seedance-lite-i2v"
+      },
+      {
+        "id": "seedance-lite-reference-video",
+        "endpoint": "seedance-lite-reference-to-video"
+      },
+      {
+        "id": "seedance-pro-i2v",
+        "endpoint": "seedance-pro-i2v"
+      },
+      {
+        "id": "seedance-pro-i2v-fast",
+        "endpoint": "seedance-pro-i2v-fast"
+      },
+      {
+        "id": "seedance-v1.5-pro-i2v",
+        "endpoint": "seedance-v1.5-pro-i2v"
+      },
+      {
+        "id": "seedance-v1.5-pro-i2v-fast",
+        "endpoint": "seedance-v1.5-pro-i2v-fast"
+      },
+      {
+        "id": "seedance-v2.0-i2v",
+        "endpoint": "seedance-v2.0-i2v"
+      },
+      {
+        "id": "veo-4-image-to-video",
+        "endpoint": "veo-4-image-to-video"
+      },
+      {
+        "id": "veo3-fast-image-to-video",
+        "endpoint": "veo3-fast-image-to-video"
+      },
+      {
+        "id": "veo3-image-to-video",
+        "endpoint": "veo3-image-to-video"
+      },
+      {
+        "id": "veo3.1-fast-image-to-video",
+        "endpoint": "veo3.1-fast-image-to-video"
+      },
+      {
+        "id": "veo3.1-image-to-video",
+        "endpoint": "veo3.1-image-to-video"
+      },
+      {
+        "id": "veo3.1-lite-image-to-video",
+        "endpoint": "veo3.1-lite-image-to-video"
+      },
+      {
+        "id": "veo3.1-reference-to-video",
+        "endpoint": "veo3.1-reference-to-video"
+      },
+      {
+        "id": "vfx",
+        "endpoint": "generate_wan_ai_effects"
+      },
+      {
+        "id": "video-effects",
+        "endpoint": "video-effects"
+      },
+      {
+        "id": "vidu-q1-reference",
+        "endpoint": "vidu-q1-reference"
+      },
+      {
+        "id": "vidu-q2-pro-image-to-video",
+        "endpoint": "vidu-q2-pro-image-to-video"
+      },
+      {
+        "id": "vidu-q2-pro-start-end-video",
+        "endpoint": "vidu-q2-pro-start-end-video"
+      },
+      {
+        "id": "vidu-q2-reference",
+        "endpoint": "vidu-q2-reference"
+      },
+      {
+        "id": "vidu-q2-turbo-image-to-video",
+        "endpoint": "vidu-q2-turbo-image-to-video"
+      },
+      {
+        "id": "vidu-q2-turbo-start-end-video",
+        "endpoint": "vidu-q2-turbo-start-end-video"
+      },
+      {
+        "id": "vidu-q3-pro-first-last-frames",
+        "endpoint": "vidu-q3-pro-first-last-frames"
+      },
+      {
+        "id": "vidu-q3-pro-image-to-video",
+        "endpoint": "vidu-q3-pro-image-to-video"
+      },
+      {
+        "id": "vidu-q3-turbo-first-last-frames",
+        "endpoint": "vidu-q3-turbo-first-last-frames"
+      },
+      {
+        "id": "vidu-q3-turbo-image-to-video",
+        "endpoint": "vidu-q3-turbo-image-to-video"
+      },
+      {
+        "id": "vidu-q4-image-to-video",
+        "endpoint": "vidu-q4-image-to-video"
+      },
+      {
+        "id": "vidu-q4-reference-to-video",
+        "endpoint": "vidu-q4-reference-to-video"
+      },
+      {
+        "id": "vidu-v2.0-i2v",
+        "endpoint": "vidu-v2.0-i2v"
+      },
+      {
+        "id": "wan2.1-image-to-video",
+        "endpoint": "wan2.1-image-to-video"
+      },
+      {
+        "id": "wan2.1-reference-video",
+        "endpoint": "wan2.1-reference-video"
+      },
+      {
+        "id": "wan2.2-image-to-video",
+        "endpoint": "wan2.2-image-to-video"
+      },
+      {
+        "id": "wan2.2-spicy-image-to-video",
+        "endpoint": "wan2.2-spicy-image-to-video"
+      },
+      {
+        "id": "wan2.5-image-to-video",
+        "endpoint": "wan2.5-image-to-video"
+      },
+      {
+        "id": "wan2.5-image-to-video-fast",
+        "endpoint": "wan2.5-image-to-video-fast"
+      },
+      {
+        "id": "wan2.6-image-to-video",
+        "endpoint": "wan2.6-image-to-video"
+      },
+      {
+        "id": "wan2.6-image-to-video-spicy",
+        "endpoint": "wan2.6-image-to-video-spicy"
+      },
+      {
+        "id": "wan2.7-image-to-video",
+        "endpoint": "wan2.7-image-to-video"
+      },
+      {
+        "id": "wan2.7-image-to-video-spicy",
+        "endpoint": "wan2.7-image-to-video-spicy"
+      },
+      {
+        "id": "wan2.7-reference-to-video",
+        "endpoint": "wan2.7-reference-to-video"
+      },
+      {
+        "id": "wan3.0-image-to-video",
+        "endpoint": "wan3.0-image-to-video"
+      },
+      {
+        "id": "wan3.0-prime-image-to-video",
+        "endpoint": "wan3.0-prime-image-to-video"
+      },
+      {
+        "id": "wan3.0-prime-reference-to-video",
+        "endpoint": "wan3.0-prime-reference-to-video"
+      },
+      {
+        "id": "wan3.0-reference-to-video",
+        "endpoint": "wan3.0-reference-to-video"
+      },
+      {
+        "id": "wan3.0-spicy-image-to-video",
+        "endpoint": "wan3.0-spicy-image-to-video"
+      },
+      {
+        "id": "wan3.0-spicy-reference-to-video",
+        "endpoint": "wan3.0-spicy-reference-to-video"
+      }
+    ],
+    "v2vModels": [
+      {
+        "id": "add-video-watermark",
+        "endpoint": "add-video-watermark"
+      },
+      {
+        "id": "ai-captions",
+        "endpoint": "ai-captions"
+      },
+      {
+        "id": "ai-clipping",
+        "endpoint": "ai-clipping"
+      },
+      {
+        "id": "ai-dance-effects",
+        "endpoint": "ai-dance-effects"
+      },
+      {
+        "id": "ai-video-face-swap",
+        "endpoint": "ai-video-face-swap"
+      },
+      {
+        "id": "ai-video-upscaler",
+        "endpoint": "ai-video-upscaler"
+      },
+      {
+        "id": "ai-video-upscaler-pro",
+        "endpoint": "ai-video-upscaler-pro"
+      },
+      {
+        "id": "autocrop",
+        "endpoint": "autocrop"
+      },
+      {
+        "id": "depth-anything",
+        "endpoint": "depth-anything"
+      },
+      {
+        "id": "flux-3-video-extend",
+        "endpoint": "flux-3-video-extend"
+      },
+      {
+        "id": "flux-3-video-extend-draft",
+        "endpoint": "flux-3-video-extend-draft"
+      },
+      {
+        "id": "flux-3-video-upscaler",
+        "endpoint": "flux-3-video-upscaler"
+      },
+      {
+        "id": "gemini-omni-flash-1-1-edit",
+        "endpoint": "gemini-omni-flash-1-1-edit"
+      },
+      {
+        "id": "gemini-omni-flash-1-2-edit",
+        "endpoint": "gemini-omni-flash-1-2-edit"
+      },
+      {
+        "id": "gemini-omni-video-edit",
+        "endpoint": "gemini-omni-video-edit"
+      },
+      {
+        "id": "happy-horse-1-video-edit",
+        "endpoint": "happy-horse-1-video-edit"
+      },
+      {
+        "id": "happy-horse-1-video-edit-1080p",
+        "endpoint": "happy-horse-1-video-edit-1080p"
+      },
+      {
+        "id": "happy-horse-1-video-edit-720p",
+        "endpoint": "happy-horse-1-video-edit-720p"
+      },
+      {
+        "id": "happy-horse-1.1-video-edit",
+        "endpoint": "happy-horse-1.1-video-edit"
+      },
+      {
+        "id": "happy-horse-1.1-video-edit-1080p",
+        "endpoint": "happy-horse-1.1-video-edit-1080p"
+      },
+      {
+        "id": "happy-horse-1.1-video-edit-720p",
+        "endpoint": "happy-horse-1.1-video-edit-720p"
+      },
+      {
+        "id": "heygen-video-translate",
+        "endpoint": "heygen-video-translate"
+      },
+      {
+        "id": "infinitetalk-video-to-video",
+        "endpoint": "infinitetalk-video-to-video"
+      },
+      {
+        "id": "kling-o1-standard-video-edit",
+        "endpoint": "kling-o1-standard-video-edit"
+      },
+      {
+        "id": "kling-o1-video-edit",
+        "endpoint": "kling-o1-video-edit"
+      },
+      {
+        "id": "kling-o1-video-edit-fast",
+        "endpoint": "kling-o1-video-edit-fast"
+      },
+      {
+        "id": "kling-v2.6-pro-motion-control",
+        "endpoint": "kling-v2.6-pro-motion-control"
+      },
+      {
+        "id": "kling-v2.6-std-motion-control",
+        "endpoint": "kling-v2.6-std-motion-control"
+      },
+      {
+        "id": "kling-v3.0-pro-motion-control",
+        "endpoint": "kling-v3.0-pro-motion-control"
+      },
+      {
+        "id": "kling-v3.0-std-motion-control",
+        "endpoint": "kling-v3.0-std-motion-control"
+      },
+      {
+        "id": "ltx-2.3-video-extend",
+        "endpoint": "ltx-2.3-video-extend"
+      },
+      {
+        "id": "luma-flash-reframe",
+        "endpoint": "luma-flash-reframe"
+      },
+      {
+        "id": "mmaudio-v2-video-to-video",
+        "endpoint": "mmaudio-v2/video-to-video"
+      },
+      {
+        "id": "pixverse-v6-extend",
+        "endpoint": "pixverse-v6-extend"
+      },
+      {
+        "id": "remix-video",
+        "endpoint": "remix-video"
+      },
+      {
+        "id": "runway-act-two-v2v",
+        "endpoint": "runway-act-two-v2v"
+      },
+      {
+        "id": "runway-aleph-v2v",
+        "endpoint": "runway-aleph-v2v"
+      },
+      {
+        "id": "seedance-2-video-edit",
+        "endpoint": "seedance-v2.0-video-edit"
+      },
+      {
+        "id": "seedance-2-video-watermark-remover-pro",
+        "endpoint": "seedance-2-video-watermark-remover-pro"
+      },
+      {
+        "id": "seedance-2-watermark-remover",
+        "endpoint": "seedance-2.0-watermark-remover"
+      },
+      {
+        "id": "seedance-2.5-intl-video-edit",
+        "endpoint": "seedance-2.5-intl-video-edit"
+      },
+      {
+        "id": "seedance-2.5-intl-video-edit-1080p",
+        "endpoint": "seedance-2.5-intl-video-edit-1080p"
+      },
+      {
+        "id": "seedance-2.5-intl-video-edit-480p",
+        "endpoint": "seedance-2.5-intl-video-edit-480p"
+      },
+      {
+        "id": "seedance-2.5-intl-video-edit-4k",
+        "endpoint": "seedance-2.5-intl-video-edit-4k"
+      },
+      {
+        "id": "seedance-2.5-intl-video-extend",
+        "endpoint": "seedance-2.5-intl-video-extend"
+      },
+      {
+        "id": "seedance-2.5-intl-video-extend-1080p",
+        "endpoint": "seedance-2.5-intl-video-extend-1080p"
+      },
+      {
+        "id": "seedance-2.5-intl-video-extend-480p",
+        "endpoint": "seedance-2.5-intl-video-extend-480p"
+      },
+      {
+        "id": "seedance-2.5-intl-video-extend-4k",
+        "endpoint": "seedance-2.5-intl-video-extend-4k"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-edit",
+        "endpoint": "seedance-2.5-spicy-video-edit"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-edit-1080p",
+        "endpoint": "seedance-2.5-spicy-video-edit-1080p"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-edit-480p",
+        "endpoint": "seedance-2.5-spicy-video-edit-480p"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-edit-4k",
+        "endpoint": "seedance-2.5-spicy-video-edit-4k"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-extend",
+        "endpoint": "seedance-2.5-spicy-video-extend"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-extend-1080p",
+        "endpoint": "seedance-2.5-spicy-video-extend-1080p"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-extend-480p",
+        "endpoint": "seedance-2.5-spicy-video-extend-480p"
+      },
+      {
+        "id": "seedance-2.5-spicy-video-extend-4k",
+        "endpoint": "seedance-2.5-spicy-video-extend-4k"
+      },
+      {
+        "id": "seedance-2.5-video-edit",
+        "endpoint": "seedance-2.5-video-edit"
+      },
+      {
+        "id": "seedance-2.5-video-edit-1080p",
+        "endpoint": "seedance-2.5-video-edit-1080p"
+      },
+      {
+        "id": "seedance-2.5-video-edit-480p",
+        "endpoint": "seedance-2.5-video-edit-480p"
+      },
+      {
+        "id": "seedance-2.5-video-edit-4k",
+        "endpoint": "seedance-2.5-video-edit-4k"
+      },
+      {
+        "id": "seedance-2.5-video-extend",
+        "endpoint": "seedance-2.5-video-extend"
+      },
+      {
+        "id": "seedance-2.5-video-extend-1080p",
+        "endpoint": "seedance-2.5-video-extend-1080p"
+      },
+      {
+        "id": "seedance-2.5-video-extend-480p",
+        "endpoint": "seedance-2.5-video-extend-480p"
+      },
+      {
+        "id": "seedance-2.5-video-extend-4k",
+        "endpoint": "seedance-2.5-video-extend-4k"
+      },
+      {
+        "id": "seedance-v1.5-pro-video-extend",
+        "endpoint": "seedance-v1.5-pro-video-extend"
+      },
+      {
+        "id": "seedance-v1.5-pro-video-extend-fast",
+        "endpoint": "seedance-v1.5-pro-video-extend-fast"
+      },
+      {
+        "id": "topaz-upscale-video-creative",
+        "endpoint": "topaz-upscale-video-creative"
+      },
+      {
+        "id": "topaz-upscale-video-generative",
+        "endpoint": "topaz-upscale-video-generative"
+      },
+      {
+        "id": "topaz-upscale-video-precision",
+        "endpoint": "topaz-upscale-video-precision"
+      },
+      {
+        "id": "topaz-video-upscale",
+        "endpoint": "topaz-video-upscale"
+      },
+      {
+        "id": "video-background-remover",
+        "endpoint": "video-background-remover"
+      },
+      {
+        "id": "video-combiner",
+        "endpoint": "video-combiner"
+      },
+      {
+        "id": "video-watermark-remover",
+        "endpoint": "video-watermark-remover"
+      },
+      {
+        "id": "volcengine-video-to-video-lip-sync",
+        "endpoint": "volcengine-video-to-video-lip-sync"
+      },
+      {
+        "id": "wan2.2-animate",
+        "endpoint": "wan2.2-animate"
+      },
+      {
+        "id": "wan2.2-edit-video",
+        "endpoint": "wan2.2-edit-video"
+      },
+      {
+        "id": "wan2.2-spicy-video-extend",
+        "endpoint": "wan2.2-spicy-video-extend"
+      },
+      {
+        "id": "wan2.7-video-edit",
+        "endpoint": "wan2.7-video-edit"
+      },
+      {
+        "id": "wan2.7-video-extend",
+        "endpoint": "wan2.7-video-extend"
+      }
+    ],
+    "lipsyncModels": [
+      {
+        "id": "creatify-lipsync",
+        "endpoint": "creatify-lipsync"
+      },
+      {
+        "id": "infinitetalk-image-to-video",
+        "endpoint": "infinitetalk-image-to-video"
+      },
+      {
+        "id": "infinitetalk-video-to-video",
+        "endpoint": "infinitetalk-video-to-video"
+      },
+      {
+        "id": "kling-v1-avatar-pro",
+        "endpoint": "kling-v1-avatar-pro"
+      },
+      {
+        "id": "kling-v1-avatar-standard",
+        "endpoint": "kling-v1-avatar-standard"
+      },
+      {
+        "id": "kling-v2-avatar-pro",
+        "endpoint": "kling-v2-avatar-pro"
+      },
+      {
+        "id": "kling-v2-avatar-standard",
+        "endpoint": "kling-v2-avatar-standard"
+      },
+      {
+        "id": "latent-sync",
+        "endpoint": "latentsync-video"
+      },
+      {
+        "id": "ltx-2-19b-lipsync",
+        "endpoint": "ltx-2-19b-lipsync"
+      },
+      {
+        "id": "ltx-2.3-lipsync",
+        "endpoint": "ltx-2.3-lipsync"
+      },
+      {
+        "id": "omnihuman-1-5",
+        "endpoint": "omnihuman-1-5"
+      },
+      {
+        "id": "omnihuman-2-0",
+        "endpoint": "omnihuman-2-0"
+      },
+      {
+        "id": "sync-lipsync",
+        "endpoint": "sync-lipsync"
+      },
+      {
+        "id": "veed-lipsync",
+        "endpoint": "veed-lipsync"
+      },
+      {
+        "id": "volcengine-video-to-video-lip-sync",
+        "endpoint": "volcengine-video-to-video-lip-sync"
+      },
+      {
+        "id": "wan2.2-speech-to-video",
+        "endpoint": "wan2.2-speech-to-video"
+      }
+    ],
+    "recastModels": [
+      {
+        "id": "kling-v3.0-pro-recast",
+        "endpoint": "kling-v3.0-pro-motion-control"
+      },
+      {
+        "id": "runway-act-two-recast",
+        "endpoint": "runway-act-two-i2v"
+      },
+      {
+        "id": "wan2.2-animate-recast",
+        "endpoint": "wan2.2-animate"
+      }
+    ],
+    "motionControlModels": [
+      {
+        "id": "seedance-2-motion-control",
+        "endpoint": "seedance-2-motion-control"
+      },
+      {
+        "id": "seedance-2.5-intl-motion-control",
+        "endpoint": "seedance-2.5-intl-motion-control"
+      },
+      {
+        "id": "seedance-2.5-motion-control",
+        "endpoint": "seedance-2.5-motion-control"
+      },
+      {
+        "id": "seedance-2.5-spicy-motion-control",
+        "endpoint": "seedance-2.5-spicy-motion-control"
+      }
+    ],
+    "audioModels": [
+      {
+        "id": "elevenlabs-text-to-dialogue-v3",
+        "endpoint": "elevenlabs-text-to-dialogue-v3"
+      },
+      {
+        "id": "elevenlabs-tts-turbo-2-5",
+        "endpoint": "elevenlabs-tts-turbo-2-5"
+      },
+      {
+        "id": "elevenlabs-v4",
+        "endpoint": "elevenlabs-v4"
+      },
+      {
+        "id": "elevenlabs-v4-turbo",
+        "endpoint": "elevenlabs-v4-turbo"
+      },
+      {
+        "id": "fish-s2-1-pro",
+        "endpoint": "fish-s2-1-pro"
+      },
+      {
+        "id": "gemini-2-5-pro-tts",
+        "endpoint": "gemini-2-5-pro-tts"
+      },
+      {
+        "id": "gemini-3-1-flash-tts",
+        "endpoint": "gemini-3-1-flash-tts"
+      },
+      {
+        "id": "gemini-3-8-flash-lite-tts",
+        "endpoint": "gemini-3-8-flash-lite-tts"
+      },
+      {
+        "id": "gemini-3-8-flash-tts",
+        "endpoint": "gemini-3-8-flash-tts"
+      },
+      {
+        "id": "lyria-2",
+        "endpoint": "lyria-2"
+      },
+      {
+        "id": "lyria-3",
+        "endpoint": "lyria-3"
+      },
+      {
+        "id": "lyria-3-pro",
+        "endpoint": "lyria-3-pro"
+      },
+      {
+        "id": "minimax-music-3.0",
+        "endpoint": "minimax-music-3.0"
+      },
+      {
+        "id": "minimax-speech-2.6-hd",
+        "endpoint": "minimax-speech-2.6-hd"
+      },
+      {
+        "id": "minimax-speech-2.6-turbo",
+        "endpoint": "minimax-speech-2.6-turbo"
+      },
+      {
+        "id": "minimax-voice-clone",
+        "endpoint": "minimax-voice-clone"
+      },
+      {
+        "id": "mmaudio-v2-text-to-audio",
+        "endpoint": "mmaudio-v2/text-to-audio"
+      },
+      {
+        "id": "suno-add-instrumental",
+        "endpoint": "suno-add-instrumental"
+      },
+      {
+        "id": "suno-add-vocals",
+        "endpoint": "suno-add-vocals"
+      },
+      {
+        "id": "suno-convert-to-wav",
+        "endpoint": "suno-convert-to-wav"
+      },
+      {
+        "id": "suno-create-music",
+        "endpoint": "suno-create-music"
+      },
+      {
+        "id": "suno-extend-music",
+        "endpoint": "suno-extend-music"
+      },
+      {
+        "id": "suno-generate-mashup",
+        "endpoint": "suno-generate-mashup"
+      },
+      {
+        "id": "suno-generate-sounds",
+        "endpoint": "suno-generate-sounds"
+      },
+      {
+        "id": "suno-remix-music",
+        "endpoint": "suno-remix-music"
+      },
+      {
+        "id": "suno-voice-clone",
+        "endpoint": "suno-voice-clone"
+      }
+    ]
+  }
+}

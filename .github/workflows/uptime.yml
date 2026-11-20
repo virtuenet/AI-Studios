@@ -1,0 +1,21 @@
+name: Uptime check
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip when no healthcheck URL is configured
+        if: ${{ vars.HEALTHCHECK_URL == '' }}
+        run: echo "Set the HEALTHCHECK_URL repository variable to enable uptime checks."
+      - name: Poll /api/health
+        if: ${{ vars.HEALTHCHECK_URL != '' }}
+        run: |
+          set -euo pipefail
+          body=$(curl -fsS --max-time 10 "${{ vars.HEALTHCHECK_URL }}/api/health")
+          echo "$body"
+          echo "$body" | grep -q '"status":"ok"'

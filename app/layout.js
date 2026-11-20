@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { headers } from 'next/headers';
 import { getLocaleConfig } from '@/lib/locales';
 import ServiceWorkerUpdater from '@/components/ServiceWorkerUpdater';
+import WebVitals from '@/components/WebVitals';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,11 +35,15 @@ export default async function RootLayout({ children }) {
   return (
     <html lang={htmlLang} suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://cdn.muapi.ai" />
+        <link rel="dns-prefetch" href="https://cdn.muapi.ai" />
+        <link rel="dns-prefetch" href="https://api.muapi.ai" />
         {/* Apply the saved theme before first paint to avoid a dark flash. */}
         <script dangerouslySetInnerHTML={{ __html: "try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}" }} />
       </head>
       <body className={inter.variable}>{children}
         <ServiceWorkerUpdater />
+        <WebVitals />
       </body>
     </html>
   );

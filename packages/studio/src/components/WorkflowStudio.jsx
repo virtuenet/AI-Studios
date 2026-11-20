@@ -39,7 +39,7 @@ function WorkflowCard({ workflow, onClick, activeTab, onRename, onDelete }) {
       className="group relative aspect-[3/4] rounded-lg overflow-hidden cursor-pointer border border-white/5 bg-[#0a0a0a] transition-all hover:border-[#22d3ee]/30 hover:scale-[1.02] shadow-2xl"
     >
       {workflow.thumbnail ? (
-        <img
+        <img loading="lazy" decoding="async"
           src={workflow.thumbnail}
           alt={workflow.name}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -108,7 +108,7 @@ function WorkflowCard({ workflow, onClick, activeTab, onRename, onDelete }) {
       {/* Community Profile Info */}
       {activeTab === 'published' && workflow.user_name && (
         <div className="absolute top-2 left-2 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-white/10">
-          <img src={workflow.user_profile || "/user_profile.png"} alt="profile" className="w-4 h-4 rounded-full" />
+          <img loading="lazy" decoding="async" src={workflow.user_profile || "/user_profile.png"} alt="profile" className="w-4 h-4 rounded-full" />
           <span className="text-[9px] font-black text-white/80 uppercase tracking-widest">{workflow.user_name}</span>
         </div>
       )}
@@ -783,7 +783,7 @@ export default function WorkflowStudio({
                           className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-[#22d3ee]/30 transition-all shadow-2xl"
                         >
                           {out.type === "image_url" ? (
-                            <img
+                            <img loading="lazy" decoding="async"
                               src={out.value}
                               className="w-full aspect-square object-cover"
                               alt="Output"

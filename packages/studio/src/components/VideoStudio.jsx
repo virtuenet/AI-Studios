@@ -166,7 +166,7 @@ function ReferencePreview({
     <div className="flex min-w-[60px] flex-col items-center gap-1.5">
       <div className={PROMPT_MEDIA_PREVIEW_CLASS}>
         {type === "image" ? (
-          <img src={url} alt="" className="w-full h-full object-cover" />
+          <img loading="lazy" decoding="async" src={url} alt="" className="w-full h-full object-cover" />
         ) : type === "video" ? (
           <video src={url} className="w-full h-full object-cover" muted />
         ) : (
@@ -581,7 +581,7 @@ function ModelDropdown({ selectedModel, onSelect, onClose, copy = en }) {
       <div className="flex items-center gap-3.5">
         {PROVIDER_LOGOS[family.provider] ? (
           <div className="w-8 h-8 rounded-xl border border-white/5 overflow-hidden shrink-0 flex items-center justify-center bg-white/[0.02]">
-            <img
+            <img loading="lazy" decoding="async"
               src={PROVIDER_LOGOS[family.provider]}
               alt={family.provider_name}
               className={`w-full h-full object-contain p-1 ${invertLogos.includes(family.provider) ? "invert" : ""}`}
@@ -648,7 +648,7 @@ function ModelDropdown({ selectedModel, onSelect, onClose, copy = en }) {
               title={p.name}
             >
               {PROVIDER_LOGOS[p.id] ? (
-                <img
+                <img loading="lazy" decoding="async"
                   src={PROVIDER_LOGOS[p.id]}
                   alt={p.name}
                   className={`w-full h-full rounded-full object-contain ${invertLogos.includes(p.id) ? "invert" : ""}`}
@@ -2627,28 +2627,28 @@ export default function VideoStudio({
             {/* Overlapping floating cards */}
             <div className="flex items-center justify-center gap-1.5 md:gap-3 mb-10 select-none scale-90 sm:scale-100">
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif"
                   alt={copy.creativeAssets.asset1}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[4deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif"
                   alt={copy.creativeAssets.asset2}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full border border-white/10 shadow-2xl rotate-[6deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif"
                   alt={copy.creativeAssets.asset3}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif"
                   alt={copy.creativeAssets.asset4}
                   className="w-full h-full object-cover"
@@ -2953,7 +2953,7 @@ export default function VideoStudio({
                     {(() => {
                       const selectedModelProvider = selectedFamily.provider || 'muapi';
                       return PROVIDER_LOGOS[selectedModelProvider] ? (
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           src={PROVIDER_LOGOS[selectedModelProvider]} 
                           alt="" 
                           className={`w-full h-full object-contain ${invertLogos.includes(selectedModelProvider) ? "invert" : ""}`} 

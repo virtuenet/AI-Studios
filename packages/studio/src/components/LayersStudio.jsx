@@ -1323,7 +1323,7 @@ export default function LayersStudio({
           className="group relative w-12 h-14 rounded-2xl overflow-hidden bg-[#1a1c23] border border-white/10 flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-[0_0_20px_rgba(0,0,0,0.5)] ring-2 ring-[#84cc16]/80"
         >
           {currentImageUrl ? (
-            <img
+            <img loading="lazy" decoding="async"
               src={currentImageUrl}
               alt="Input thumb"
               className="w-full h-full object-cover"
@@ -1408,7 +1408,7 @@ export default function LayersStudio({
                     : undefined,
               }}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 ref={imageRef}
                 src={currentImageUrl}
                 alt="Main canvas"
@@ -1558,7 +1558,7 @@ export default function LayersStudio({
                     if (!isVisible) return null;
                     const isSelected = carouselIndex === idx;
                     return (
-                      <img
+                      <img loading="lazy" decoding="async"
                         key={idx}
                         src={layerUrl}
                         alt={`Layer ${idx + 1}`}
@@ -2224,7 +2224,7 @@ export default function LayersStudio({
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="relative w-28 h-36 rounded-2xl overflow-hidden bg-zinc-900 flex-shrink-0 shadow-md">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="https://cdn.muapi.ai/assets/1786019968051_cKRYLHHu.png"
                         alt="Seedream original demo"
                         className="w-full h-full object-cover"
@@ -2256,7 +2256,7 @@ export default function LayersStudio({
                             }}
                             title={`Layer ${idx + 1}`}
                           >
-                            <img
+                            <img loading="lazy" decoding="async"
                               src={layerUrl}
                               alt={`Layer ${idx + 1}`}
                               className="max-h-full max-w-full object-contain drop-shadow-sm transition-transform duration-200 group-hover:scale-105"
@@ -2373,7 +2373,7 @@ export default function LayersStudio({
                           backgroundPosition: "0 0, 0 8px, 8px -8px, -8px 0px",
                         }}
                       >
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={decomposedLayers[carouselIndex]}
                           alt={`Layer ${carouselIndex + 1}`}
                           className="max-h-full max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 transform group-hover:scale-105"
@@ -2455,7 +2455,7 @@ export default function LayersStudio({
                               : "border-white/10 opacity-60 hover:opacity-100"
                           }`}
                         >
-                          <img
+                          <img loading="lazy" decoding="async"
                             src={layerUrl}
                             alt={`Thumb ${idx + 1}`}
                             className="w-full h-full object-contain"
@@ -3741,7 +3741,7 @@ export default function LayersStudio({
                     }}
                   >
                     {currentImageUrl && (
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={currentImageUrl}
                         alt="Current input"
                         className="max-h-full max-w-full object-contain drop-shadow-md"
@@ -3831,7 +3831,7 @@ export default function LayersStudio({
 
                     {currentImageUrl && (
                       <div className="relative border border-white/30 rounded-lg overflow-hidden shadow-2xl max-h-[75%] max-w-[75%]">
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={currentImageUrl}
                           alt="Current input"
                           className="w-full h-full object-contain"

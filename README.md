@@ -325,7 +325,8 @@ A healthy run on Apple Silicon prints `total params memory size = 1969.78MB (VRA
 - **6 Languages** — English, Chinese, Japanese, Korean, Spanish, and French shell UI with a built-in language switcher and per-locale routes (`/ja/studio/video`, …)
 - **PWA & Offline** — Installable web app with a service worker that caches the shell, keeps generation results for offline viewing, and queues prompts while offline
 - **Resilient API Client** — Automatic retry with exponential backoff on rate limits and transient failures; streaming-ready SSE path with transparent polling fallback
-- **Error Monitoring** — Per-studio crash boundaries plus a buffered client error reporter that can forward to any HTTP collector
+- **Error Monitoring** — Per-studio crash boundaries, app-level error/loading/404 pages, buffered client error reporter, and structured proxy logs with request IDs
+- **Health & Sessions** — `/api/health` for uptime checks; encrypted HttpOnly session cookies for server-rendered pages
 - **Localized Shell, Memoized Studios, Split Model Catalog** — 13 studios lazy-load, all studio components are memoized, and the 579-model catalog is split into 9 tree-shakeable modules
 
 ### 🖼️ Image Studio — Dual Mode
@@ -590,10 +591,10 @@ The `packages/studio` library is also consumed by the hosted version on [muapi.a
 ```bash
 npm run lint           # ESLint (flat config, next/core-web-vitals)
 npm run typecheck      # tsc --noEmit (TypeScript modules)
-npm run test:vitest    # 223 unit / component / accessibility tests (Vitest)
+npm run test:vitest    # 273 unit / component / route / accessibility tests (Vitest)
 npm run test:coverage  # Coverage gate (75%/64%/86%/79% thresholds)
 npm test               # 77 Electron local-inference tests (Node)
-npm run test:e2e       # 11 Playwright smoke tests (production build, port 3100)
+npm run test:e2e       # Playwright: smoke + mocked generation + visual (production build)
 npm run validate:models # Catalog integrity (624 models)
 npm run check:bundle   # 6 MB JS bundle budget (Next + Electron SPA)
 ```
@@ -617,8 +618,14 @@ Multi-stage build, non-root user, `HEALTHCHECK`, and `NEXT_TELEMETRY_DISABLED`.
 
 ## 🔐 Security & Operations
 
+- Server-rendered pages use an encrypted, `HttpOnly`, `SameSite=Strict` session
+  cookie (`SESSION_SECRET`); the BYOK key never lives in a JS-writable cookie.
 - CSP + hardening headers in `middleware.js`; SSRF/file-type guards in
   `lib/uploadProxyTarget.js` with a dedicated test suite.
+- `GET /api/health` exposes status/commit/upstream for uptime checks.
+- Self-hosting details (including the Workflows/Agents backend caveat):
+  [`docs/self-hosting.md`](docs/self-hosting.md). Desktop signing:
+  [`docs/release-signing.md`](docs/release-signing.md).
 - Session-only API-key storage option in the API-key dialog.
 - Error reports are buffered/deduped; set `NEXT_PUBLIC_ERROR_ENDPOINT` to forward.
 - Desktop builds auto-update via `electron-updater` (GitHub releases); installers

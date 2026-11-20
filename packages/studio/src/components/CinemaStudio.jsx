@@ -365,7 +365,7 @@ function ScrollColumn({ title, items, columnKey, value, onChange }) {
                   }`}
                 >
                   {imageUrl ? (
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={imageUrl}
                       alt=""
                       className="h-full w-full object-contain"
@@ -871,7 +871,7 @@ export default function CinemaStudio({
                 className="relative group rounded-lg overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-xl hover:border-[#22d3ee]/50 transition-all duration-300 flex flex-col cursor-pointer"
                 onClick={() => setFullscreenUrl(entry.url)}
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={entry.url}
                   alt={copy.card.historyItemAlt.replace("{index}", idx + 1)}
                   className="w-full aspect-[4/3] object-cover bg-black/40"
@@ -1044,28 +1044,28 @@ export default function CinemaStudio({
             {/* Overlapping floating cards */}
             <div className="flex items-center justify-center gap-1.5 md:gap-3 mb-10 select-none scale-90 sm:scale-100">
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif"
                   alt="Creative asset 1"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl -rotate-[4deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif"
                   alt="Creative asset 2"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full border border-white/10 shadow-2xl rotate-[6deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif"
                   alt="Creative asset 3"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-2xl border border-white/10 shadow-2xl rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-3 sm:-ml-4 flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif"
                   alt="Creative asset 4"
                   className="w-full h-full object-cover"
@@ -1150,7 +1150,7 @@ export default function CinemaStudio({
                   </div>
                 ) : uploadedImage ? (
                   <div className="relative w-full h-full group">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={uploadedImage}
                       alt={copy.referenceImage.alt}
                       className="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition-opacity"
@@ -1290,7 +1290,7 @@ export default function CinemaStudio({
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          <img
+          <img loading="lazy" decoding="async"
             src={fullscreenUrl}
             alt={copy.fullscreen.alt}
             className="max-w-[95vw] max-h-[95vh] rounded-2xl shadow-2xl object-contain animate-scale-up" 

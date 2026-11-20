@@ -43,7 +43,9 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true,
+    "noImplicitAny": true
   },
   "include": [
     "packages/studio/src/**/*.ts",

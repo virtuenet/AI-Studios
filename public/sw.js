@@ -184,6 +184,14 @@ self.addEventListener('message', (event) => {
       );
       break;
 
+    case 'CLEAR_QUEUED_GENERATIONS':
+      event.waitUntil(
+        clearOfflineGenerations().then(() => {
+          event.ports?.[0]?.postMessage({ cleared: true });
+        })
+      );
+      break;
+
     default:
       break;
   }
@@ -205,6 +213,13 @@ async function getOfflineGenerations() {
   const db = await openQueueDB();
   const tx = db.transaction('queue', 'readonly');
   return tx.objectStore('queue').getAll();
+}
+
+async function clearOfflineGenerations() {
+  const db = await openQueueDB();
+  const tx = db.transaction('queue', 'readwrite');
+  tx.objectStore('queue').clear();
+  return tx.complete;
 }
 
 function openQueueDB() {

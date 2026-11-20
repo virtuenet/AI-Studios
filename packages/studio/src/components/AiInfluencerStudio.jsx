@@ -319,7 +319,7 @@ function HoverPill({ label, img, onClick }) {
         >
           <div className="w-[72px] h-[72px] rounded-xl overflow-hidden border border-white/20 bg-[#1a1a1a]"
             style={{ transform: "rotate(-3deg)" }}>
-            <img src={img} alt={label} className="w-full h-full object-cover" />
+            <img loading="lazy" decoding="async" src={img} alt={label} className="w-full h-full object-cover" />
           </div>
         </div>
       )}
@@ -638,7 +638,7 @@ export default function AiInfluencerStudio({
               </div>
             ) : previewUrl ? (
               <>
-                <img src={previewUrl} alt={copy.preview.altGenerated} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={previewUrl} alt={copy.preview.altGenerated} className="w-full h-full object-cover" />
                 {/* Download overlay button */}
                 <button
                   onClick={() => downloadImg(previewUrl)}
@@ -744,7 +744,7 @@ export default function AiInfluencerStudio({
                     : "border-white/[0.08] hover:border-white/20"
                 }`}
               >
-                <img src={item.url} alt={`${copy.gallery.altPrefix} ${idx + 1}`} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={item.url} alt={`${copy.gallery.altPrefix} ${idx + 1}`} className="w-full h-full object-cover" />
                 {/* Download on hover */}
                 <div className="absolute inset-0 hidden md:flex bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity items-end justify-center pb-2">
                   <div className="absolute right-2 top-2 flex flex-col gap-2">

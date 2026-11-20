@@ -292,6 +292,29 @@ const getNavigationCategory = (tabId) => (
 );
 
 const STORAGE_KEY = 'muapi_key';
+
+// Mirrors the BYOK key into an HttpOnly, encrypted, SameSite=Strict session
+// cookie so server-rendered routes (/agents/*) never trust a JS-writable cookie.
+async function syncServerSession(apiKey) {
+  try {
+    await fetch('/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ apiKey }),
+    });
+  } catch {
+    // Non-fatal: the browser can still call the API directly with the header.
+  }
+}
+
+async function clearServerSession() {
+  try {
+    await fetch('/api/session', { method: 'DELETE' });
+  } catch {
+    // ignore
+  }
+}
+
 const NOTIFICATIONS_STORAGE_KEY = 'ai_studios_notifications_v1';
 const MAX_VISIBLE_NOTIFICATIONS = 3;
 
@@ -616,8 +639,8 @@ export default function StandaloneShell({ locale = 'en' }) {
     if (stored) {
       setApiKey(stored);
       fetchBalance(stored);
-      // Sync cookie immediately on mount to establish identity for background requests
-      document.cookie = `muapi_key=${stored}; path=/; max-age=31536000; SameSite=Lax`;
+      // Establish/refresh the encrypted server session for SSR agent routes.
+      void syncServerSession(stored);
     }
   }, [fetchBalance]);
 
@@ -625,14 +648,14 @@ export default function StandaloneShell({ locale = 'en' }) {
     localStorage.setItem(STORAGE_KEY, key);
     setApiKey(key);
     fetchBalance(key);
-    document.cookie = `muapi_key=${key}; path=/; max-age=31536000; SameSite=Lax`;
+    void syncServerSession(key);
   }, [fetchBalance]);
 
   const handleKeyChange = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
     setApiKey(null);
     setBalance(null);
-    document.cookie = "muapi_key=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    void clearServerSession();
   }, []);
 
   // Inject API key into all outgoing Axios requests (prop-based approach)

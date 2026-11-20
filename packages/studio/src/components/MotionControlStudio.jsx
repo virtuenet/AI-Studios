@@ -287,7 +287,7 @@ function CharacterImagesMediaButton({
 
         {images.length > 0 && (
           <div className="w-full h-full relative rounded-full overflow-hidden">
-            <img src={images[images.length - 1].url} alt="" className="w-full h-full object-cover" />
+            <img loading="lazy" decoding="async" src={images[images.length - 1].url} alt="" className="w-full h-full object-cover" />
             <div className="absolute bottom-0 inset-x-0 bg-black/75 text-[9px] font-black text-[#22d3ee] text-center leading-3">
               {images.length}
             </div>
@@ -326,7 +326,7 @@ function CharacterImagesMediaButton({
           <div className="grid grid-cols-4 gap-2 max-h-48 overflow-y-auto custom-scrollbar p-0.5">
             {images.map((img, idx) => (
               <div key={idx} className="relative group w-14 h-14 rounded-xl overflow-hidden border border-white/10 bg-black/50">
-                <img src={img.url} alt="" className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={img.url} alt="" className="w-full h-full object-cover" />
                 <button
                   type="button"
                   onClick={(e) => {
@@ -417,7 +417,7 @@ function AssetsDropdown({
             >
               <div className="w-11 h-11 rounded-lg overflow-hidden bg-white/5 flex-shrink-0 relative border border-white/10">
                 {activeTab === "images" ? (
-                  <img src={item.url} alt="" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={item.url} alt="" className="w-full h-full object-cover" />
                 ) : (
                   <video src={item.url} className="w-full h-full object-cover" muted playsInline loop />
                 )}
@@ -1004,16 +1004,16 @@ export default function MotionControlStudio({
             {/* Visual Overlapping Cards */}
             <div className="flex items-center justify-center gap-2 md:gap-4 mb-8 select-none scale-90 sm:scale-100">
               <div className="w-20 h-24 sm:w-26 sm:h-32 rounded-2xl border border-white/10 shadow-2xl -rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] flex-shrink-0">
-                <img src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif" alt="" className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/sdxl-image.avif" alt="" className="w-full h-full object-cover" />
               </div>
               <div className="w-20 h-24 sm:w-26 sm:h-32 rounded-2xl border border-white/10 shadow-2xl -rotate-[4deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-4 flex-shrink-0">
-                <img src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif" alt="" className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/chroma-image.avif" alt="" className="w-full h-full object-cover" />
               </div>
               <div className="w-20 h-20 sm:w-26 sm:h-26 rounded-full border border-white/10 shadow-2xl rotate-[6deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-4 flex-shrink-0">
-                <img src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif" alt="" className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/neta-lumina.avif" alt="" className="w-full h-full object-cover" />
               </div>
               <div className="w-20 h-24 sm:w-26 sm:h-32 rounded-2xl border border-white/10 shadow-2xl rotate-[12deg] transform hover:rotate-0 hover:scale-110 hover:z-20 transition-all duration-300 overflow-hidden bg-white/[0.01] -ml-4 flex-shrink-0">
-                <img src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif" alt="" className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src="https://d3adwkbyhxyrtq.cloudfront.net/webassets/videomodels/perfect-pony-xl.avif" alt="" className="w-full h-full object-cover" />
               </div>
             </div>
 

@@ -98,3 +98,9 @@ body {
 [data-theme="light"] .border-white\/5,
 [data-theme="light"] .border-white\/10,
 [data-theme="light"] .border-white\/\[0\.05\] { border-color: rgba(0,0,0,0.1); }
+
+/* Render-skipping for long history grids: offscreen cards skip layout/paint. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 320px 320px;
+}

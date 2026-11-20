@@ -534,7 +534,7 @@ const CONTINUATION_TARGETS = Object.freeze({
 });
 
 const continuationSourceModelIds = new Map(
-  Object.entries(CONTINUATION_FAMILIES).map(([family, config]) => [
+  Object.entries(CONTINUATION_FAMILIES as Record<string, any>).map(([family, config]) => [
     family, new Set(config.sourceModelIds),
   ]),
 );
@@ -542,7 +542,7 @@ const continuationSourceModelIds = new Map(
 export function isContinuationSourceModel(modelOrId: any, sourceModelId?: string | null): boolean {
   const modelId = typeof modelOrId === "string" ? modelOrId : (modelOrId as any)?.id;
   const family = (CONTINUATION_TARGETS as any)[modelId]?.family;
-  return continuationSourceModelIds.get(family)?.has(sourceModelId) || false;
+  return continuationSourceModelIds.get(family as string)?.has(sourceModelId as string) || false;
 }
 
 const MIN_CLIENT_TIMESTAMP = Date.UTC(2000, 0, 1);
@@ -556,7 +556,7 @@ function mergeInputs(modelInputs: any = {}, overrideInputs: any = {}) {
   return inputs;
 }
 
-function getVideoToolCapabilities(model) {
+function getVideoToolCapabilities(model: any) {
   if (!model) return null;
   const override = VIDEO_TOOL_OVERRIDES[model.id] || {};
   return {
@@ -586,11 +586,11 @@ export function getVideoToolPresentation(model: any) {
     capabilities.hasPrompt ?? Boolean(capabilities.inputs?.prompt);
   const promptRequired = showPrompt && Boolean(capabilities.promptRequired);
   const operation = capabilities.operation || "process";
-  const promptLabel = PROMPT_LABELS[operation] || PROMPT_LABELS.process;
+  const promptLabel = (PROMPT_LABELS as Record<string, string>)[operation] || PROMPT_LABELS.process;
 
   return {
     actionLabel:
-      capabilities.actionLabel || ACTION_LABELS[operation] || ACTION_LABELS.process,
+      capabilities.actionLabel || (ACTION_LABELS as Record<string, string>)[operation] || ACTION_LABELS.process,
     promptPlaceholder: promptRequired ? promptLabel : `${promptLabel} (optional)`,
     promptRequired,
     showPrompt,
@@ -609,6 +609,10 @@ export function resolveVideoUploadTransition({
   mode,
   currentModel,
   defaultModel,
+}: {
+  mode?: string;
+  currentModel?: any;
+  defaultModel?: any;
 }) {
   const preservesSelection =
     (mode === "v2v" && Boolean(currentModel)) ||
@@ -641,7 +645,7 @@ export function getVideoToolOptionDefinitions(model: any) {
 }
 
 export function getDefaultVideoToolOptions(model: any) {
-  const options = {};
+  const options: Record<string, any> = {};
   for (const input of getVideoToolOptionDefinitions(model)) {
     if (input.default !== undefined) options[input.key] = input.default;
   }
@@ -649,7 +653,7 @@ export function getDefaultVideoToolOptions(model: any) {
 }
 
 export function serializeVideoToolOptions(model: any, values: any = {}) {
-  const payload = {};
+  const payload: Record<string, any> = {};
   for (const input of getVideoToolOptionDefinitions(model)) {
     const value = values[input.key];
     if (typeof value === "string") {
@@ -662,7 +666,7 @@ export function serializeVideoToolOptions(model: any, values: any = {}) {
   return payload;
 }
 
-function getVideoToolPayloadDefaults(model) {
+function getVideoToolPayloadDefaults(model: any) {
   const capabilities = getVideoToolCapabilities(model);
   return { ...(capabilities?.payloadDefaults || {}) };
 }
@@ -696,13 +700,13 @@ export function getContinuationConfig(modelOrId: any) {
   const capabilities = getVideoToolCapabilities(model);
 
   return {
-    ...CONTINUATION_FAMILIES[target.family],
+    ...(CONTINUATION_FAMILIES as Record<string, any>)[target.family],
     ...target,
     promptRequired: Boolean(capabilities?.promptRequired),
   };
 }
 
-function normalizeRequestId(value) {
+function normalizeRequestId(value: any) {
   if (typeof value !== "string" && typeof value !== "number") return null;
   if (typeof value === "number" && !Number.isFinite(value)) return null;
 
@@ -723,7 +727,7 @@ function normalizeRequestId(value) {
   return requestId;
 }
 
-function resolveContinuationRequestId(entry) {
+function resolveContinuationRequestId(entry: any) {
   if (!entry) return null;
 
   for (const candidate of [entry.requestId, entry.request_id, entry.id]) {
