@@ -735,6 +735,41 @@ export default function LipSyncStudio({
   );
 
   // ── Handle Dropped Files ────────────────────────────────────────────────
+  // ── Mode toggle ─────────────────────────────────────────────────────────
+  const switchToImageImpl = () => {
+    if (inputMode === "image") return;
+    setInputMode("image");
+    setVideoUrl(null);
+    setVideoState(UPLOAD_STATE.IDLE);
+    setVideoName("");
+    const first = imageLipSyncModels[0];
+    if (first) {
+      setSelectedModelId(first.id);
+      setSelectedResolution(first.inputs?.resolution?.default ?? "480p");
+    }
+  };
+
+  const switchToImageRef = useRef(switchToImageImpl);
+  useEffect(() => { switchToImageRef.current = switchToImageImpl; });
+  const switchToImage = useCallback((...args) => switchToImageRef.current(...args), []);
+
+  const switchToVideoImpl = () => {
+    if (inputMode === "video") return;
+    setInputMode("video");
+    setImageUrl(null);
+    setImageState(UPLOAD_STATE.IDLE);
+    setImageName("");
+    const first = videoLipSyncModels[0];
+    if (first) {
+      setSelectedModelId(first.id);
+      setSelectedResolution(first.inputs?.resolution?.default ?? "480p");
+    }
+  };
+
+  const switchToVideoRef = useRef(switchToVideoImpl);
+  useEffect(() => { switchToVideoRef.current = switchToVideoImpl; });
+  const switchToVideo = useCallback((...args) => switchToVideoRef.current(...args), []);
+
   useEffect(() => {
     if (droppedFiles && droppedFiles.length > 0) {
       const audioFiles = droppedFiles.filter(isAudioFile);
@@ -756,33 +791,6 @@ export default function LipSyncStudio({
       onFilesHandled?.();
     }
   }, [droppedFiles, onFilesHandled, handleAudioPick, handleVideoPick, handleImageUpload, switchToImage, switchToVideo]);
-
-  // ── Mode toggle ─────────────────────────────────────────────────────────
-  function switchToImage() {
-    if (inputMode === "image") return;
-    setInputMode("image");
-    setVideoUrl(null);
-    setVideoState(UPLOAD_STATE.IDLE);
-    setVideoName("");
-    const first = imageLipSyncModels[0];
-    if (first) {
-      setSelectedModelId(first.id);
-      setSelectedResolution(first.inputs?.resolution?.default ?? "480p");
-    }
-  }
-
-  function switchToVideo() {
-    if (inputMode === "video") return;
-    setInputMode("video");
-    setImageUrl(null);
-    setImageState(UPLOAD_STATE.IDLE);
-    setImageName("");
-    const first = videoLipSyncModels[0];
-    if (first) {
-      setSelectedModelId(first.id);
-      setSelectedResolution(first.inputs?.resolution?.default ?? "480p");
-    }
-  }
 
   // ── Model selection ─────────────────────────────────────────────────────
   const handleModelSelect = (model) => {

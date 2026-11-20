@@ -1160,57 +1160,7 @@ export default function ImageStudio({
     PERSIST_KEY,
   ]);
 
-  const processDroppedImages = async (files) => {
-    const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
-    const tooLarge = files.filter((f) => f.size > MAX_IMAGE_SIZE);
-    if (tooLarge.length > 0) {
-      alert(
-        copy.uploadButton.tooLargeAlert.replace("{names}", tooLarge.map((f) => f.name).join(", "))
-      );
-      return;
-    }
 
-    const family = imageModelCatalog.familyById.get(selectedFamilyId);
-    const editor = getFamilyVariant(
-      imageModelCatalog,
-      family,
-      "i2i",
-      selectedModelId,
-    );
-    if (!editor) {
-      toast.error(copy.errors.noImageReferenceSupport.replace("{name}", family.name));
-      return;
-    }
-
-    generation.start(); // Show as generating/busy
-    try {
-      const uploadLimit = getMaxImagesForI2IModel(editor.model.id);
-      const toUpload =
-        uploadLimit === 1
-          ? files.slice(0, 1)
-          : files.slice(0, uploadLimit);
-      const urls = await Promise.all(
-        toUpload.map(async (file) => {
-          try {
-            return await uploadFile(apiKey, file);
-          } catch (err) {
-            console.error(
-              "[ImageStudio] Drop upload failed for",
-              file.name,
-              err
-            );
-            throw err;
-          }
-        })
-      );
-
-      handleUploadSelect({ urls });
-    } catch (err) {
-      alert(copy.uploadButton.uploadFailedAlert.replace("{message}", err.message));
-    } finally {
-      generation.finish();
-    }
-  };
 
 
   // ── Derived: current model lists & helpers ───────────────────────────────
@@ -1325,6 +1275,62 @@ export default function ImageStudio({
     },
     [applySelectedVariant, copy.errors.noImageReferenceSupport],
   );
+
+  const processDroppedImagesImpl = async (files) => {
+    const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
+    const tooLarge = files.filter((f) => f.size > MAX_IMAGE_SIZE);
+    if (tooLarge.length > 0) {
+      alert(
+        copy.uploadButton.tooLargeAlert.replace("{names}", tooLarge.map((f) => f.name).join(", "))
+      );
+      return;
+    }
+
+    const family = imageModelCatalog.familyById.get(selectedFamilyId);
+    const editor = getFamilyVariant(
+      imageModelCatalog,
+      family,
+      "i2i",
+      selectedModelId,
+    );
+    if (!editor) {
+      toast.error(copy.errors.noImageReferenceSupport.replace("{name}", family.name));
+      return;
+    }
+
+    generation.start(); // Show as generating/busy
+    try {
+      const uploadLimit = getMaxImagesForI2IModel(editor.model.id);
+      const toUpload =
+        uploadLimit === 1
+          ? files.slice(0, 1)
+          : files.slice(0, uploadLimit);
+      const urls = await Promise.all(
+        toUpload.map(async (file) => {
+          try {
+            return await uploadFile(apiKey, file);
+          } catch (err) {
+            console.error(
+              "[ImageStudio] Drop upload failed for",
+              file.name,
+              err
+            );
+            throw err;
+          }
+        })
+      );
+
+      handleUploadSelect({ urls });
+    } catch (err) {
+      alert(copy.uploadButton.uploadFailedAlert.replace("{message}", err.message));
+    } finally {
+      generation.finish();
+    }
+  };
+
+  const processDroppedImagesRef = useRef(processDroppedImagesImpl);
+  useEffect(() => { processDroppedImagesRef.current = processDroppedImagesImpl; });
+  const processDroppedImages = useCallback((...args) => processDroppedImagesRef.current(...args), []);
 
   // ── Handle Dropped Files ────────────────────────────────────────────────
   useEffect(() => {
