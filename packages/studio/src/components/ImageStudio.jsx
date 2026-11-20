@@ -8,6 +8,7 @@ import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import useGeneration from "../hooks/useGeneration";
 import useWindowedGrid from "../hooks/useWindowedGrid";
 import ReviewChecklistModal from "../filmCrew/ReviewChecklistModal";
+import CrewPanel from "../filmCrew/CrewPanel";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
 import MobileGenerationActions, {
@@ -1020,6 +1021,7 @@ export default function ImageStudio({
   const [generateError, setGenerateError] = useState(null);
   const [fullscreenUrl, setFullscreenUrl] = useState(null);
   const [reviewEntry, setReviewEntry] = useState(null);
+  const [crewOpen, setCrewOpen] = useState(false);
   const [isDrawModalOpen, setIsDrawModalOpen] = useState(false);
 
   // ── Canvas / history state ──────────────────────────────────────────────
@@ -1249,7 +1251,7 @@ export default function ImageStudio({
     }
     setSwapImageUrl(null);
     applySelectedVariant(variant, mode, family);
-  }, [applySelectedVariant]);
+  }, [applySelectedVariant, setUploadedImageUrls]);
 
   // ── Textarea auto-resize ─────────────────────────────────────────────────
   // ── Upload picker callbacks ──────────────────────────────────────────────
@@ -1275,7 +1277,7 @@ export default function ImageStudio({
         applySelectedVariant(target, target.mode, family);
       }
     },
-    [applySelectedVariant, copy.errors.noImageReferenceSupport],
+    [applySelectedVariant, copy.errors.noImageReferenceSupport, setUploadedImageUrls],
   );
 
   const processDroppedImagesImpl = async (files) => {
@@ -1357,7 +1359,7 @@ export default function ImageStudio({
       selection.selectedModelId,
     );
     if (target) applySelectedVariant(target, "t2i", family);
-  }, [applySelectedVariant]);
+  }, [applySelectedVariant, setUploadedImageUrls]);
 
   // ── Model selection ──────────────────────────────────────────────────────
   const handleModelSelect = (pickerEntry, category = "all") => {
@@ -1947,6 +1949,16 @@ export default function ImageStudio({
                 </button>
               </div>
 
+              {/* Crew continuity (cast + scene) */}
+              <button
+                type="button"
+                className={promptControlClassName()}
+                onClick={() => setCrewOpen(true)}
+                title="Crew: cast and scene continuity"
+              >
+                <span className={PROMPT_CONTROL_LABEL_CLASS}>Crew</span>
+              </button>
+
               {/* Draw button */}
               <button
                 type="button"
@@ -2030,10 +2042,26 @@ export default function ImageStudio({
         onAddHistoryItem={addToHistory}
       />
       <Toaster position="top-right" containerStyle={{ zIndex: 99999 }} toastOptions={{ duration: 5000, style: { background: '#18181b', color: '#ffffff', border: '1px solid rgba(255,255,255,0.15)', fontSize: '13px', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.6)', maxWidth: '440px', wordBreak: 'break-word', whiteSpace: 'pre-wrap', padding: '12px 16px' } }} />
+      <CrewPanel
+        open={crewOpen}
+        initialPrompt={prompt}
+        onClose={() => setCrewOpen(false)}
+        onApply={({ prompt: nextPrompt, referenceUrls }) => {
+          if (nextPrompt) setPrompt(nextPrompt);
+          if (referenceUrls?.length) {
+            const limit = getModelMediaCapabilities(selectedVariant?.model).image.maxItems;
+            if (limit > 0) {
+              setUploadedImageUrls((prev) => [...new Set([...prev, ...referenceUrls])].slice(0, limit));
+            }
+          }
+        }}
+      />
+
       <ReviewChecklistModal
         open={Boolean(reviewEntry)}
         type="image"
         prompt={reviewEntry?.prompt || ''}
+        imageUrl={reviewEntry?.url}
         onClose={() => setReviewEntry(null)}
       />
     </div>

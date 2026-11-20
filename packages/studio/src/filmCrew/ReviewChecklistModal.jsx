@@ -3,14 +3,18 @@
 import { useMemo, useState } from 'react';
 import { gradeChecklist, questionsFor } from './qaChecklist';
 import { lintShotPrompt } from './promptQa';
+import { getMlEndpoint, runMlChecks } from './mlChecks';
 
 /**
  * Blind-review panel adapted from ai-film-crew's "test audience": fixed-answer
  * questions, code decides PASS/FAIL, and a pre-flight shot-prompt audit.
  */
-export default function ReviewChecklistModal({ open, type = 'image', prompt = '', onClose }) {
+export default function ReviewChecklistModal({ open, type = 'image', prompt = '', imageUrl, onClose }) {
   const questions = useMemo(() => questionsFor(type), [type]);
   const [answers, setAnswers] = useState({});
+  const [ml, setMl] = useState(null);
+  const [mlBusy, setMlBusy] = useState(false);
+  const mlEnabled = Boolean(getMlEndpoint());
   const grade = useMemo(() => gradeChecklist(type, answers), [type, answers]);
   const promptAudit = useMemo(
     () => (prompt ? lintShotPrompt(prompt) : null),
@@ -36,6 +40,37 @@ export default function ReviewChecklistModal({ open, type = 'image', prompt = ''
             {promptAudit.hints.length > 0 && (
               <ul className="mt-1 list-disc space-y-0.5 pl-4 text-white/60">
                 {promptAudit.hints.map((hint) => <li key={hint}>{hint}</li>)}
+              </ul>
+            )}
+          </div>
+        )}
+
+        {mlEnabled && imageUrl && (
+          <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-bold text-white/80">ML checks</span>
+              <button
+                type="button"
+                disabled={mlBusy}
+                onClick={async () => {
+                  setMlBusy(true);
+                  setMl(await runMlChecks({ imageUrl, prompt }));
+                  setMlBusy(false);
+                }}
+                className="rounded-md border border-white/15 px-2 py-1 font-bold text-white/70 hover:bg-white/10 disabled:opacity-50"
+              >
+                {mlBusy ? 'Running…' : 'Run'}
+              </button>
+            </div>
+            {ml && (
+              <ul className="mt-2 space-y-1">
+                {ml.ok && ml.checks.length === 0 && <li className="text-white/50">Service returned no checks.</li>}
+                {ml.checks.map((check) => (
+                  <li key={check.id || check.name} className={check.pass ? 'text-emerald-300' : 'text-red-300'}>
+                    {check.pass ? 'PASS' : 'FAIL'} · {check.name || check.id}{check.detail ? ` — ${check.detail}` : ''}
+                  </li>
+                ))}
+                {!ml.ok && <li className="text-red-300">{ml.error || 'ML QC failed'}</li>}
               </ul>
             )}
           </div>

@@ -33,3 +33,27 @@ Runs in the browser or tests without ffmpeg.
 
 `tests/unit/filmCrew.test.js` — 10 tests covering grading, prompt anchors,
 multi-person eyeline detection, clipping/quiet/healthy/empty audio.
+
+## Optional features (implemented)
+
+### Cast library (`castLibrary.js` + `CrewPanel` → Cast tab)
+Named characters with a continuity description and reference-image URLs,
+persisted in localStorage. Applying a shot appends a "Cast (keep identical
+across shots)" prompt block and merges the reference images into multi-image
+models (respecting each model's max items).
+
+### Scene/set builder (`sceneSet.js` + `CrewPanel` → Scene tab)
+Structured location, time of day, wardrobe, props, light direction, camera,
+lens and eyeline. Applying composes a continuity prompt prefix and persists the
+set for the next shot.
+
+### Upload-time audio QC (`analyzeAudioFile`)
+Audio Studio and Lip Sync decode uploads with Web Audio and show a non-blocking
+toast when clipping, excessive quiet, DC offset or too-short duration is found.
+
+### Pluggable ML checks (`mlChecks.js`)
+Configure `NEXT_PUBLIC_FILM_CREW_ML_ENDPOINT` (or
+`window.__FILM_CREW_ML_ENDPOINT__`) to call an external QC service for
+product-size/face-identity checks. The QC dialog shows a "Run" button and
+renders PASS/FAIL rows; without an endpoint it is hidden (no 1 GB model
+downloads in the browser).

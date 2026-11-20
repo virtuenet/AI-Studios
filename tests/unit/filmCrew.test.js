@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { gradeChecklist, questionsFor } from '../../packages/studio/src/filmCrew/qaChecklist';
 import { lintShotPrompt } from '../../packages/studio/src/filmCrew/promptQa';
 import { analyzeAudio, audioQcHints } from '../../packages/studio/src/filmCrew/audioQc';
@@ -73,5 +73,110 @@ describe('film crew QA modules', () => {
     it('handles empty input', () => {
       expect(analyzeAudio([], 48000).issues).toEqual(['empty_audio']);
     });
+  });
+});
+
+import {
+  createCastMember,
+  upsertCastMember,
+  removeCastMember,
+  applyCastToPrompt,
+  collectCastReferences,
+  loadCast,
+  saveCast,
+} from '../../packages/studio/src/filmCrew/castLibrary';
+import { composeScenePrompt, sceneSetSummary, EMPTY_SCENE } from '../../packages/studio/src/filmCrew/sceneSet';
+import { runMlChecks } from '../../packages/studio/src/filmCrew/mlChecks';
+import { analyzeAudioFile } from '../../packages/studio/src/filmCrew/audioQc';
+
+describe('cast library', () => {
+  it('creates, updates and removes members without duplicates', () => {
+    const ana = createCastMember({ name: 'Ana', description: 'short dark hair', referenceUrls: ['a.png', 'a.png'] });
+    expect(ana.referenceUrls).toEqual(['a.png']);
+    let list = upsertCastMember([], ana);
+    const updated = { ...ana, description: 'bob haircut' };
+    list = upsertCastMember(list, updated);
+    expect(list).toHaveLength(1);
+    expect(list[0].description).toBe('bob haircut');
+    expect(removeCastMember(list, ana.id)).toEqual([]);
+  });
+
+  it('composes cast descriptions and collects capped references', () => {
+    const cast = [
+      createCastMember({ name: 'Ana', description: 'red coat', referenceUrls: ['a.png'] }),
+      createCastMember({ name: 'Jo', referenceUrls: ['b.png', 'c.png'] }),
+    ];
+    const prompt = applyCastToPrompt('a wide shot', cast);
+    expect(prompt).toContain('Cast (keep identical across shots)');
+    expect(prompt).toContain('Ana: red coat');
+    expect(collectCastReferences(cast, 2)).toEqual(['a.png', 'b.png']);
+  });
+
+  it('round-trips through storage', () => {
+    const storage = { value: null, getItem() { return this.value; }, setItem(_k, v) { this.value = v; } };
+    const cast = [createCastMember({ name: 'Ana' })];
+    saveCast(cast, storage);
+    expect(loadCast(storage)[0].name).toBe('Ana');
+    storage.value = '{bad';
+    expect(loadCast(storage)).toEqual([]);
+  });
+});
+
+describe('scene set', () => {
+  it('composes a continuity prompt and summary', () => {
+    const scene = { ...EMPTY_SCENE, location: 'loft', lightDirection: 'window left', camera: 'medium shot' };
+    const prompt = composeScenePrompt(scene, 'Ana lifts the bottle');
+    expect(prompt).toContain('Ana lifts the bottle');
+    expect(prompt).toContain('Light direction: window left');
+    expect(sceneSetSummary(scene)).toHaveLength(3);
+  });
+
+  it('returns empty string when nothing is set', () => {
+    expect(composeScenePrompt(EMPTY_SCENE, '')).toBe('');
+  });
+});
+
+describe('ML checks client', () => {
+  it('is disabled without an endpoint', async () => {
+    const result = await runMlChecks({ imageUrl: 'x.png' }, { endpoint: null });
+    expect(result.enabled).toBe(false);
+  });
+
+  it('posts and returns checks', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ checks: [{ id: 'face', pass: true }] }) });
+    const result = await runMlChecks({ imageUrl: 'x.png', prompt: 'p' }, { endpoint: 'https://qc', fetchImpl });
+    expect(result.ok).toBe(true);
+    expect(result.checks[0].id).toBe('face');
+    expect(fetchImpl.mock.calls[0][0]).toBe('https://qc');
+  });
+
+  it('reports transport failures without throwing', async () => {
+    const fetchImpl = vi.fn().mockRejectedValue(new Error('down'));
+    const result = await runMlChecks({ imageUrl: 'x.png' }, { endpoint: 'https://qc', fetchImpl });
+    expect(result.ok).toBe(false);
+    expect(result.error).toBe('down');
+  });
+});
+
+describe('analyzeAudioFile', () => {
+  it('decodes and analyzes through Web Audio', async () => {
+    class MockContext {
+      async decodeAudioData() {
+        return {
+          numberOfChannels: 1,
+          sampleRate: 48000,
+          getChannelData: () => new Float32Array([0.5, -0.5, 0.25, -0.25]),
+        };
+      }
+      async close() {}
+    }
+    const file = { arrayBuffer: async () => new ArrayBuffer(8) };
+    const result = await analyzeAudioFile(file, { AudioContextImpl: MockContext });
+    expect(result.peakDb).toBeLessThan(0);
+    expect(result.durationSeconds).toBeGreaterThan(0);
+  });
+
+  it('returns null without Web Audio', async () => {
+    expect(await analyzeAudioFile({ arrayBuffer: async () => new ArrayBuffer(8) }, { AudioContextImpl: null })).toBeNull();
   });
 });

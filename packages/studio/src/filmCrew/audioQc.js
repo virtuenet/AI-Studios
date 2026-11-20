@@ -60,3 +60,27 @@ export function audioQcHints(result) {
   };
   return (result?.issues || []).map((issue) => hints[issue]).filter(Boolean);
 }
+
+/**
+ * Decode and analyze an audio File before upload. Returns null when Web Audio
+ * is unavailable or decoding fails (never blocks generation).
+ */
+export async function analyzeAudioFile(file, { AudioContextImpl } = {}) {
+  const Ctor = AudioContextImpl || (typeof AudioContext !== 'undefined' ? AudioContext : null);
+  if (!Ctor || !file?.arrayBuffer) return null;
+  let context;
+  try {
+    const buffer = await file.arrayBuffer();
+    context = new Ctor();
+    const decoded = await context.decodeAudioData(buffer);
+    const channels = [];
+    for (let i = 0; i < decoded.numberOfChannels; i += 1) {
+      channels.push(decoded.getChannelData(i));
+    }
+    return analyzeAudio(channels, decoded.sampleRate);
+  } catch {
+    return null;
+  } finally {
+    try { await context?.close?.(); } catch { /* ignore */ }
+  }
+}

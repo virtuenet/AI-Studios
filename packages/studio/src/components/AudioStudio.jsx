@@ -2,6 +2,7 @@
 
 import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { analyzeAudioFile, audioQcHints } from "../filmCrew/audioQc";
 import { generateAudio, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
@@ -93,6 +94,11 @@ function AudioFileUploader({ label, value, onChange, apiKey, copy = en }) {
   const handleUpload = async (files) => {
     const file = files?.[0];
     if (!file) return;
+
+    void analyzeAudioFile(file).then((qc) => {
+      const hints = audioQcHints(qc);
+      if (hints.length > 0) toast.error(`Audio QC: ${hints[0]}`);
+    });
 
     if (file.size > 20 * 1024 * 1024) {
       alert(copy.uploader.sizeLimitError);

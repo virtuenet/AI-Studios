@@ -2,6 +2,7 @@
 
 import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { analyzeAudioFile, audioQcHints } from "../filmCrew/audioQc";
 import { processLipSync, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
@@ -653,6 +654,10 @@ export default function LipSyncStudio({
     async (files) => {
       const file = Array.isArray(files) ? files[0] : files;
       if (!file) return;
+      void analyzeAudioFile(file).then((qc) => {
+        const hints = audioQcHints(qc);
+        if (hints.length > 0) toast.error(`Audio QC: ${hints[0]}`);
+      });
       if (file.size > 10 * 1024 * 1024) {
         toast.error(copy.errors.imageTooLarge);
         return;
@@ -711,6 +716,10 @@ export default function LipSyncStudio({
     async (files) => {
       const file = Array.isArray(files) ? files[0] : files;
       if (!file) return;
+      void analyzeAudioFile(file).then((qc) => {
+        const hints = audioQcHints(qc);
+        if (hints.length > 0) toast.error(`Audio QC: ${hints[0]}`);
+      });
       if (file.size > 10 * 1024 * 1024) {
         toast.error(copy.errors.audioTooLarge);
         return;
