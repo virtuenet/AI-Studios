@@ -20,7 +20,7 @@ jobs:
       - name: Update submodules to latest tracked branches
         run: git submodule update --remote --merge
       - name: Open or update PR
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: chore/update-submodules
