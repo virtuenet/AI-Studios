@@ -9,7 +9,7 @@
 
 import { NextResponse, type NextRequest } from 'next/server';
 import { CreditLedger } from '@/packages/studio/src/client/creditLedger';
-import { createMemoryAuditLog } from '@/lib/auditLog';
+import Database from 'better-sqlite3';
 import { sqliteLedgerStore } from '@/lib/db/sqlite';
 
 export const runtime = 'nodejs';
@@ -17,7 +17,18 @@ export const dynamic = 'force-dynamic';
 
 // In production, swap for Drizzle-backed stores.
 const ledger = new CreditLedger(sqliteLedgerStore);
-const auditLog = createMemoryAuditLog();
+const DB_PATH = process.env.SQLITE_PATH || '.data/ai-studios.db';
+function recordAudit(event: { orgId: string; userId: string; action: string; resource: string; resourceId: string; metadata?: Record<string, unknown> }) {
+  const db = new Database(DB_PATH);
+  try {
+    db.prepare('INSERT INTO audit_log (id, org_id, user_id, action, resource, resource_id, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)').run(
+      `audit-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      event.orgId, event.userId, event.action, event.resource, event.resourceId,
+      event.metadata ? JSON.stringify(event.metadata) : null,
+      new Date().toISOString()
+    );
+  } finally { db.close(); }
+}
 
 function verifySignature(
   body: string,
@@ -55,7 +66,7 @@ async function handleCheckoutCompleted(
   );
 
   // Record the audit event
-  await auditLog.record({
+  recordAudit({
     orgId,
     userId: 'stripe',
     action: 'stripe.checkout.completed',
@@ -83,7 +94,7 @@ async function handleSubscriptionUpdated(
 
   if (!orgId) return;
 
-  await auditLog.record({
+  recordAudit({
     orgId,
     userId: 'stripe',
     action: 'stripe.subscription.updated',
