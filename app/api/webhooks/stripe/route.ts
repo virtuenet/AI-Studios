@@ -8,17 +8,15 @@
  */
 
 import { NextResponse, type NextRequest } from 'next/server';
-import {
-  createMemoryLedgerStore,
-  CreditLedger,
-} from '@/packages/studio/src/client/creditLedger';
+import { CreditLedger } from '@/packages/studio/src/client/creditLedger';
 import { createMemoryAuditLog } from '@/lib/auditLog';
+import { sqliteLedgerStore } from '@/lib/db/sqlite';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 // In production, swap for Drizzle-backed stores.
-const ledger = new CreditLedger(createMemoryLedgerStore());
+const ledger = new CreditLedger(sqliteLedgerStore);
 const auditLog = createMemoryAuditLog();
 
 function verifySignature(

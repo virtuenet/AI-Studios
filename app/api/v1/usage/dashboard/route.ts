@@ -8,18 +8,15 @@
 
 import { NextResponse, type NextRequest } from 'next/server';
 import { requireManagedAuth } from '@/lib/auth';
-import {
-  createMemoryLedgerStore,
-  CreditLedger,
-} from '@/packages/studio/src/client/creditLedger';
-import { createMemoryJobStore } from '@/packages/studio/src/client/jobQueue';
+import { CreditLedger } from '@/packages/studio/src/client/creditLedger';
+import { sqliteLedgerStore, sqliteJobStore } from '@/lib/db/sqlite';
 import { checkRateLimit, rateLimitKey } from '@/lib/rateLimit';
 
 export const runtime = 'nodejs';
 
 // In production, these are singletons backed by Postgres.
-const ledger = new CreditLedger(createMemoryLedgerStore());
-const jobStore = createMemoryJobStore();
+const ledger = new CreditLedger(sqliteLedgerStore);
+const jobStore = sqliteJobStore;
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const auth = await requireManagedAuth(request);
