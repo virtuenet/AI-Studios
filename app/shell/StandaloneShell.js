@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useBalance, setBalance } from '@/lib/useBalance';
+import useNotifications from '@/lib/useNotifications';
 import { useParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ImageStudio, VideoStudio, getUserBalance } from 'studio';
@@ -316,36 +317,6 @@ async function clearServerSession() {
   }
 }
 
-const NOTIFICATIONS_STORAGE_KEY = 'ai_studios_notifications_v1';
-const MAX_VISIBLE_NOTIFICATIONS = 3;
-
-const loadStoredNotifications = () => {
-  if (typeof window === 'undefined') return [];
-
-  try {
-    const stored = JSON.parse(window.sessionStorage.getItem(NOTIFICATIONS_STORAGE_KEY) || '[]');
-    const now = Date.now();
-    return Array.isArray(stored)
-      ? stored.filter((notification) => notification.expiresAt > now).slice(0, MAX_VISIBLE_NOTIFICATIONS)
-      : [];
-  } catch {
-    return [];
-  }
-};
-
-const persistNotifications = (notifications) => {
-  if (typeof window === 'undefined') return;
-
-  try {
-    window.sessionStorage.setItem(
-      NOTIFICATIONS_STORAGE_KEY,
-      JSON.stringify(notifications),
-    );
-  } catch {
-    // Notification persistence is optional; rendering still works without storage.
-  }
-};
-
 export default function StandaloneShell({ locale = 'en' }) {
   const params = useParams();
   const router = useRouter();
@@ -451,52 +422,8 @@ export default function StandaloneShell({ locale = 'en' }) {
   const [isDragging, setIsDragging] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState(null);
 
-  // Global generation notifications remain mounted while users switch studios.
-  // Initialized lazily; the app renders a loading shell until mounted, so this
-  // cannot cause a hydration mismatch.
-  const [notifications, setNotifications] = useState(() =>
-    typeof window === 'undefined' ? [] : loadStoredNotifications()
-  );
+  const { notifications, pushNotification, dismissNotification } = useNotifications();
   const [generationCounts, setGenerationCounts] = useState({});
-
-  const pushNotification = useCallback((notif) => {
-    const now = Date.now();
-    const id = `notif-${Date.now()}-${Math.random()}`;
-    const ttl = 12000;
-    const entry = { ...notif, id, expiresAt: now + ttl };
-    setNotifications((previous) => {
-      const next = [
-        ...previous.filter((notification) => notification.expiresAt > now),
-        entry,
-      ].slice(-MAX_VISIBLE_NOTIFICATIONS);
-      persistNotifications(next);
-      return next;
-    });
-  }, []);
-
-  const dismissNotification = useCallback((id) => {
-    setNotifications((previous) => {
-      const next = previous.filter((notification) => notification.id !== id);
-      persistNotifications(next);
-      return next;
-    });
-  }, []);
-
-  useEffect(() => {
-    persistNotifications(notifications);
-  }, [notifications]);
-
-  useEffect(() => {
-    if (notifications.length === 0) return undefined;
-
-    const nextExpiry = Math.min(...notifications.map((notification) => notification.expiresAt));
-    const timer = window.setTimeout(() => {
-      const now = Date.now();
-      setNotifications((previous) => previous.filter((notification) => notification.expiresAt > now));
-    }, Math.max(0, nextExpiry - Date.now()));
-
-    return () => window.clearTimeout(timer);
-  }, [notifications]);
 
   const fetchBalance = useCallback(async (key) => {
     try {

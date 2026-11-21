@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { processRecast, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -579,38 +580,37 @@ export default function RecastStudio({
   const textareaRef = useRef(null);
   const hasRestored = useRef(false);
 
-  // ── Persistence: Load ──────────────────────────────────────────────────────
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        startTransition(() => { if (data.selectedModelId) setSelectedModelId(data.selectedModelId); });
-        startTransition(() => {
-          if (data.selectedAspectRatio) setSelectedAspectRatio(data.selectedAspectRatio);
-          if (data.characterOrientation) setCharacterOrientation(data.characterOrientation);
-        });
-        startTransition(() => {
-          if (data.videoUrl) {
-            setVideoUrl(data.videoUrl);
-            setVideoState(UPLOAD_STATE.READY);
-          }
-          if (data.imageUrl) {
-            setImageUrl(data.imageUrl);
-            setImageState(UPLOAD_STATE.READY);
-          }
-          if (data.videoName) setVideoName(data.videoName);
-          if (data.imageName) setImageName(data.imageName);
-          if (data.prompt) setPrompt(data.prompt);
-          if (data.internalHistory) setInternalHistory(data.internalHistory);
-        });
-      }
-    } catch (err) {
-      console.warn("Failed to load RecastStudio persistence:", err);
-    } finally {
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) { hasRestored.current = true; return; }
+      startTransition(() => {
+        if (data.selectedModelId) setSelectedModelId(data.selectedModelId);
+        if (data.selectedAspectRatio) setSelectedAspectRatio(data.selectedAspectRatio);
+        if (data.characterOrientation) setCharacterOrientation(data.characterOrientation);
+        if (data.videoUrl) { setVideoUrl(data.videoUrl); setVideoState(UPLOAD_STATE.READY); }
+        if (data.imageUrl) { setImageUrl(data.imageUrl); setImageState(UPLOAD_STATE.READY); }
+        if (data.videoName) setVideoName(data.videoName);
+        if (data.imageName) setImageName(data.imageName);
+        if (data.prompt) setPrompt(data.prompt);
+        if (data.internalHistory) setInternalHistory(data.internalHistory);
+      });
       hasRestored.current = true;
-    }
-  }, [PERSIST_KEY]);
+    },
+    getState: () => ({
+      selectedModelId,
+      selectedAspectRatio,
+      characterOrientation,
+      videoUrl,
+      videoName,
+      imageUrl,
+      imageName,
+      prompt,
+      internalHistory,
+    }),
+    deps: [selectedModelId, selectedAspectRatio, characterOrientation, videoUrl, videoName, imageUrl, imageName, prompt, internalHistory],
+  });
 
   // ── Save Assets ────────────────────────────────────────────────────────────
   useEffect(() => {
