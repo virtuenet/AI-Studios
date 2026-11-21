@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { processMotionControl, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import useGeneration from "../hooks/useGeneration";
+import useHistoryPersistence from "../../../../lib/useHistoryPersistence";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
@@ -714,19 +715,7 @@ export default function MotionControlStudio({
   };
 
   // ── Load / Save History ─────────────────────────────────────────────────────
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(PERSIST_KEY) || "[]");
-      startTransition(() => { if (Array.isArray(saved)) setHistory(saved); });
-    } catch {}
-  }, [PERSIST_KEY]);
-
-  const saveHistory = (items) => {
-    setHistory(items);
-    try {
-      localStorage.setItem(PERSIST_KEY, JSON.stringify(items));
-    } catch {}
-  };
+  const { saveHistory } = useHistoryPersistence(PERSIST_KEY, setHistory);
 
   // ── Video Upload ────────────────────────────────────────────────────────────
   const handleUploadVideoImpl = async (file) => {

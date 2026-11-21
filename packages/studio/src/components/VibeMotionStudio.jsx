@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { runMotionGraphics, runMotionGraphicsEdit } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import useGeneration from "../hooks/useGeneration";
+import useHistoryPersistence from "../../../../lib/useHistoryPersistence";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
   GenerationCopyButtons,
