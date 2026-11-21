@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useBalance, setBalance } from '@/lib/useBalance';
 import useNotifications from '@/lib/useNotifications';
+import useSidebar from '@/lib/useSidebar';
+import useDragDrop from '@/lib/useDragDrop';
 import { useParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ImageStudio, VideoStudio, getUserBalance } from 'studio';
@@ -385,24 +387,12 @@ export default function StandaloneShell({ locale = 'en' }) {
     return true;
   });
 
-  // Sidebar Collapsed & Mobile Drawer State
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
-    if (typeof window !== 'undefined') return localStorage.getItem('sidebar_collapsed') === 'true';
-    return false;
-  });
+  const { isCollapsed: isSidebarCollapsed, toggle: toggleSidebar } = useSidebar();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [expandedCategoryId, setExpandedCategoryId] = useState(() => (
     getNavigationCategory(getInitialTab())?.id || NAVIGATION_CATEGORIES[0].id
   ));
   const activeCategory = getNavigationCategory(activeTab);
-
-  const toggleSidebar = useCallback(() => {
-    setIsSidebarCollapsed(prev => {
-      const next = !prev;
-      localStorage.setItem('sidebar_collapsed', next ? 'true' : 'false');
-      return next;
-    });
-  }, []);
 
   const handleCategoryToggle = useCallback((categoryId) => {
     const isCollapsedNavigation = isSidebarCollapsed && !isMobileOpen;
