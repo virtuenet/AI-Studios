@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo, useSyncExternalStore } from 'react';
+import { useBalance, setBalance } from '@/lib/useBalance';
 import { useParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ImageStudio, VideoStudio, getUserBalance } from 'studio';
@@ -649,7 +650,7 @@ export default function StandaloneShell({ locale = 'en' }) {
   const handleKeyChange = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
     setApiKey(null);
-    setBalanceValue(null);
+    setBalance(null);
     void clearServerSession();
   }, []);
 
