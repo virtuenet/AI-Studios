@@ -1,0 +1,32 @@
+# syntax=docker/dockerfile:1.7
+# ─────────────────────────────────────────────────────────────
+# AI Studios — Generation worker
+# ─────────────────────────────────────────────────────────────
+# Runs alongside the Next.js app. Consumes jobs from BullMQ/Redis,
+# calls the Muapi API with the server-held key, stores results in
+# Postgres, and settles the credit ledger.
+#
+# In production, scale replicas based on queue depth.
+# ─────────────────────────────────────────────────────────────
+
+FROM node:22-alpine AS base
+WORKDIR /app
+RUN apk add --no-cache libc6-compat
+
+FROM base AS deps
+COPY package*.json ./
+COPY packages/studio/package.json ./packages/studio/
+RUN npm ci --omit=dev --legacy-peer-deps
+
+FROM base AS runner
+ENV NODE_ENV=production
+RUN addgroup -g 1001 -S nodejs && adduser -S worker -u 1001
+COPY --from=deps --chown=worker:nodejs /app/node_modules ./node_modules
+COPY --from=deps --chown=worker:nodejs /app/package.json ./package.json
+COPY --chown=worker:nodejs packages ./packages
+COPY --chown=worker:nodejs lib ./lib
+COPY --chown=worker:nodejs services ./services
+USER worker
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD node -e "require('http').get('http://127.0.0.1:3000/api/health',r=>{process.exit(r.statusCode===200?0:1)})"
+CMD ["node", "lib/worker.js"]

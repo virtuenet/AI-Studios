@@ -6,6 +6,7 @@ import { generateImage, generateI2I, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import useWindowedGrid from "../hooks/useWindowedGrid";
 import ReviewChecklistModal from "../filmCrew/ReviewChecklistModal";
 import CrewPanel from "../filmCrew/CrewPanel";
@@ -1086,13 +1087,12 @@ export default function ImageStudio({
     return () => window.removeEventListener("click", handler);
   }, [dropdownOpen]);
 
-  // ── Persistence: Load ────────────────────────────────────────────────────
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        startTransition(() => {
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) return;
+      startTransition(() => {
         if (data.imageMode !== undefined) setImageMode(data.imageMode);
         if (data.selectedModelId) {
           const restoredFamily = imageModelCatalog.familyByVariantId.get(data.selectedModelId);
@@ -1116,53 +1116,37 @@ export default function ImageStudio({
         if (data.uploadHistory) setUploadHistory(data.uploadHistory);
         if (data.batchSize) setBatchSize(data.batchSize);
         if (data.localHistory) setLocalHistory(data.localHistory);
-        });
-      }
-    } catch (err) {
-      console.warn("Failed to load ImageStudio persistence:", err);
-    }
-  }, [PERSIST_KEY]);
-
-  // ── Adjust height on load ────────────────────────────────────────────────
-  // ── Persistence: Save ────────────────────────────────────────────────────
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        const state = {
-          imageMode,
-          selectedModelId,
-          selectedFamilyId,
-          selectedAr,
-          selectedQuality,
-          selectedEffect,
-          modelParameterValues,
-          prompt,
-          uploadedImageUrls,
-          uploadHistory,
-          batchSize,
-          localHistory,
-        };
-        localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
-      } catch (err) {
-        console.warn("Failed to save ImageStudio persistence:", err);
-      }
-    }, 500); // 500ms debounce
-    return () => clearTimeout(timer);
-  }, [
-    imageMode,
-    selectedModelId,
-    selectedFamilyId,
-    selectedAr,
-    selectedQuality,
-    selectedEffect,
-    modelParameterValues,
-    prompt,
-    uploadedImageUrls,
-    uploadHistory,
-    batchSize,
-    localHistory,
-    PERSIST_KEY,
-  ]);
+      });
+    },
+    getState: () => ({
+      imageMode,
+      selectedModelId,
+      selectedFamilyId,
+      selectedAr,
+      selectedQuality,
+      selectedEffect,
+      modelParameterValues,
+      prompt,
+      uploadedImageUrls,
+      uploadHistory,
+      batchSize,
+      localHistory,
+    }),
+    deps: [
+      imageMode,
+      selectedModelId,
+      selectedFamilyId,
+      selectedAr,
+      selectedQuality,
+      selectedEffect,
+      modelParameterValues,
+      prompt,
+      uploadedImageUrls,
+      uploadHistory,
+      batchSize,
+      localHistory,
+    ],
+  });
 
 
 
