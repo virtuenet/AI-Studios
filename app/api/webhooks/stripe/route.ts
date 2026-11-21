@@ -1,25 +1,30 @@
 /**
- * Stripe webhook handler scaffold (Phase 1).
+ * Stripe webhook handler (Phase 1).
  *
- * Receives Stripe events, verifies the signature, and updates subscriptions,
- * credit packs, and payment status. In production, the signing secret comes
- * from the Stripe dashboard and is stored in STRIPE_WEBHOOK_SECRET.
- *
- * Events handled:
- *   - checkout.session.completed → grant credits
- *   - customer.subscription.updated → sync plan
- *   - customer.subscription.deleted → downgrade to free
- *   - invoice.paid → record payment
- *   - invoice.payment_failed → notify billing contact
+ * Receives Stripe events, verifies the signature, and updates the credit
+ * ledger and subscriptions. In production, the signing secret comes from
+ * the Stripe dashboard (STRIPE_WEBHOOK_SECRET) and the ledger is backed
+ * by Postgres. In development, the in-memory ledger is used.
  */
 
 import { NextResponse, type NextRequest } from 'next/server';
+import {
+  createMemoryLedgerStore,
+  CreditLedger,
+} from '@/packages/studio/src/client/creditLedger';
+import { createMemoryAuditLog } from '@/lib/auditLog';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-/** Verify the Stripe webhook signature. */
-function verifySignature(body: string, signature: string): { verified: boolean; event?: Record<string, unknown> } {
+// In production, swap for Drizzle-backed stores.
+const ledger = new CreditLedger(createMemoryLedgerStore());
+const auditLog = createMemoryAuditLog();
+
+function verifySignature(
+  body: string,
+  signature: string,
+): { verified: boolean; event?: Record<string, unknown> } {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!secret) {
     try {
@@ -28,26 +33,68 @@ function verifySignature(body: string, signature: string): { verified: boolean; 
       return { verified: false };
     }
   }
-  // TODO: install stripe package and use stripe.webhooks.constructEvent()
+  // TODO: install stripe and use stripe.webhooks.constructEvent()
   return { verified: false };
 }
 
-async function handleCheckoutCompleted(event: Record<string, unknown>): Promise<void> {
-  const data = (event.data as Record<string, unknown> | undefined)?.object as Record<string, unknown> | undefined;
-  const orgId = data?.client_reference_id as string | undefined;
-  const metadata = data?.metadata as Record<string, unknown> | undefined;
+async function handleCheckoutCompleted(
+  event: Record<string, unknown>,
+): Promise<void> {
+  const obj = (event.data as Record<string, unknown> | undefined)
+    ?.object as Record<string, unknown> | undefined;
+  const orgId = obj?.client_reference_id as string | undefined;
+  const metadata = obj?.metadata as Record<string, unknown> | undefined;
   const creditAmount = Number(metadata?.credits || '0');
 
-  if (!orgId || !creditAmount) return;
-  // TODO: credit the org's ledger
-  console.log(`[stripe] checkout completed: org=${orgId} credits=${creditAmount}`);
+  if (!orgId || creditAmount <= 0) return;
+
+  // Grant credits via the ledger
+  const entry = await ledger.credit(
+    orgId,
+    creditAmount,
+    'credit_pack_purchase',
+    obj?.id as string || 'unknown',
+  );
+
+  // Record the audit event
+  await auditLog.record({
+    orgId,
+    userId: 'stripe',
+    action: 'stripe.checkout.completed',
+    resource: 'credit_ledger',
+    resourceId: entry.id,
+    metadata: {
+      stripeSessionId: obj?.id,
+      amount: creditAmount,
+    },
+  });
+
+  console.log(
+    `[stripe] credited ${creditAmount} to org ${orgId} (ledger: ${entry.id})`,
+  );
 }
 
-async function handleSubscriptionUpdated(event: Record<string, unknown>): Promise<void> {
-  const data = (event.data as Record<string, unknown> | undefined)?.object as Record<string, unknown> | undefined;
-  const orgId = data?.metadata as Record<string, unknown> | undefined;
+async function handleSubscriptionUpdated(
+  event: Record<string, unknown>,
+): Promise<void> {
+  const obj = (event.data as Record<string, unknown> | undefined)
+    ?.object as Record<string, unknown> | undefined;
+  const orgId = (obj?.metadata as Record<string, unknown> | undefined)
+    ?.orgId as string | undefined;
+  const status = obj?.status as string | undefined;
+
   if (!orgId) return;
-  console.log(`[stripe] subscription updated: org=${String(orgId)}`);
+
+  await auditLog.record({
+    orgId,
+    userId: 'stripe',
+    action: 'stripe.subscription.updated',
+    resource: 'subscription',
+    resourceId: obj?.id as string || 'unknown',
+    metadata: { status },
+  });
+
+  console.log(`[stripe] subscription updated: org=${orgId} status=${status}`);
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -77,6 +124,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error('[stripe] webhook error:', error);
-    return NextResponse.json({ error: 'Webhook handler error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Webhook handler error' },
+      { status: 500 },
+    );
   }
 }

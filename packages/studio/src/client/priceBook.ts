@@ -54,7 +54,7 @@ export function getModelPrice(modelId: string): ModelPrice {
 }
 
 /** Estimate the credit cost for a generation request. */
-export function estimateCost(modelId: string, options?: { durationSeconds?: number; is4K?: boolean }): number {
+export function estimateCost(modelId: string, options?: { durationSeconds?: number | undefined; is4K?: boolean | undefined }): number {
   const price = getModelPrice(modelId);
   let cost = price.baseCredits;
   if (options?.is4K && price.credits4K) cost = price.credits4K;
