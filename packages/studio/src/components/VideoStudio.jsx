@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { generateVideo, generateI2V, processV2V, uploadFile } from "../muapi.js";
 import { formatErrorMessage } from "../utils/formatError";
 import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import DrawModal from "./DrawModal.jsx";
 import ModelParameterControls from "./ModelParameterControls.jsx";
@@ -1305,181 +1306,121 @@ export default function VideoStudio({
     [applySelectedVariant, reconcileReferencesForModel],
   );
 
-  // ── Persistence: Load ────────────────────────────────────────────────────
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        let restoredMode = data.v2vMode ? "v2v" : data.imageMode ? "i2v" : "t2v";
-        let restoredModelId = data.selectedModel || defaultModel.id;
-        let restoredWorkflowId = null;
-        let restoredModel = defaultModel;
-        let restoredFamilyId = defaultFamily.id;
-        let restoredResolution = data.selectedResolution;
-        if (data.selectedModel) {
-          const restored = resolvePersistedVideoWorkflowSelection(
-            migrateSeedanceResolutionSelection(data.selectedModel, data.selectedResolution),
-            data.selectedWorkflowId || null,
-            { hasEndFrame: Boolean(data.uploadedEndImageUrl || data.uploadedImageUrls?.[1]) },
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) { hasRestored.current = true; return; }
+      let restoredMode = data.v2vMode ? "v2v" : data.imageMode ? "i2v" : "t2v";
+      let restoredModelId = data.selectedModel || defaultModel.id;
+      let restoredWorkflowId = null;
+      let restoredModel = defaultModel;
+      let restoredFamilyId = defaultFamily.id;
+      let restoredResolution = data.selectedResolution;
+      if (data.selectedModel) {
+        const restored = resolvePersistedVideoWorkflowSelection(
+          migrateSeedanceResolutionSelection(data.selectedModel, data.selectedResolution),
+          data.selectedWorkflowId || null,
+          { hasEndFrame: Boolean(data.uploadedEndImageUrl || data.uploadedImageUrls?.[1]) },
+        );
+        if (restored.family && restored.variant) {
+          restoredModelId = restored.variant.model.id;
+          restoredMode = restored.variant.mode;
+          restoredWorkflowId = restored.workflowId;
+          restoredModel = restored.variant.model;
+          restoredFamilyId = restored.family.id;
+          const resolutionField = getGroupedVideoResolutionOptions(
+            restoredFamilyId, restoredWorkflowId, restoredModelId, restoredResolution,
           );
-          if (restored.family && restored.variant) {
-            restoredModelId = restored.variant.model.id;
-            restoredMode = restored.variant.mode;
-            restoredWorkflowId = restored.workflowId;
-            restoredModel = restored.variant.model;
-            restoredFamilyId = restored.family.id;
-            const resolutionField = getGroupedVideoResolutionOptions(
-              restoredFamilyId, restoredWorkflowId, restoredModelId, restoredResolution,
+          restoredResolution = resolutionField.options.find((option) =>
+            option.modelId === restoredModelId && option.value === resolutionField.value,
+          )?.resolution ?? restoredResolution;
+          startTransition(() => {
+            setSelectedModel(restoredModelId);
+            setSelectedFamilyId(restored.family.id);
+            setSelectedWorkflowId(restored.workflowId);
+          });
+          startTransition(() => {
+            setModelParameterValues(
+              mergeModelParameterValues(
+                restoredModel,
+                data.modelParameterValues || {},
+              ),
             );
-            // Restore the exact endpoint while respecting the workflow's allowed resolutions.
-            restoredResolution = resolutionField.options.find((option) =>
-              option.modelId === restoredModelId && option.value === resolutionField.value,
-            )?.resolution ?? restoredResolution;
-            startTransition(() => {
-              setSelectedModel(restoredModelId);
-              setSelectedFamilyId(restored.family.id);
-              setSelectedWorkflowId(restored.workflowId);
-            });
-            startTransition(() => {
-              setModelParameterValues(
-                mergeModelParameterValues(
-                  restoredModel,
-                  data.modelParameterValues || {},
-                ),
-              );
-            });
-          }
+          });
         }
-        startTransition(() => {
-          setImageMode(restoredMode === "i2v");
-          setV2vMode(restoredMode === "v2v");
-          if (data.selectedAr) setSelectedAr(data.selectedAr);
-          if (data.selectedDuration) setSelectedDuration(data.selectedDuration);
-          if (restoredResolution) setSelectedResolution(restoredResolution);
-          if (data.selectedQuality) setSelectedQuality(data.selectedQuality);
-          if (data.selectedEffect) setSelectedEffect(data.selectedEffect);
-          if (data.selectedVeoSourceId) setSelectedVeoSourceId(data.selectedVeoSourceId);
-        });
-        startTransition(() => {
-          if (data.uploadedImageUrls) {
-            setUploadedImageUrls(data.uploadedImageUrls);
-          } else if (data.uploadedImageUrl) {
-            setUploadedImageUrls([data.uploadedImageUrl]);
-          }
-          if (data.uploadedEndImageUrl) setUploadedEndImageUrl(data.uploadedEndImageUrl);
-          if (data.uploadedVideoUrls) {
-            setUploadedVideoUrls(data.uploadedVideoUrls);
-          } else if (data.uploadedVideoUrl) {
-            setUploadedVideoUrls([data.uploadedVideoUrl]);
-          }
-          if (data.uploadedAudioUrls) setUploadedAudioUrls(data.uploadedAudioUrls);
-        });
-        const persistedDrafts =
-          data.workflowMediaDrafts && typeof data.workflowMediaDrafts === "object"
-            ? migrateVideoWorkflowMediaDrafts(data.workflowMediaDrafts)
-            : {};
-        if (restoredWorkflowId) {
-          const draftKey = getVideoWorkflowDraftKey(
-            restoredFamilyId,
-            restoredWorkflowId,
-          );
-          if (!data.selectedWorkflowId || !persistedDrafts[draftKey]) {
-            persistedDrafts[draftKey] = legacyVideoMediaToWorkflowDraft(
-              restoredModel,
-              restoredWorkflowId,
-              {
-                imageUrls: data.uploadedImageUrls ||
-                  (data.uploadedImageUrl ? [data.uploadedImageUrl] : []),
-                endImageUrl: data.uploadedEndImageUrl ||
-                  (restoredWorkflowId === "keyframes" ? data.uploadedImageUrls?.[1] : null),
-                videoUrls: data.uploadedVideoUrls ||
-                  (data.uploadedVideoUrl ? [data.uploadedVideoUrl] : []),
-                audioUrls: data.uploadedAudioUrls || [],
-              },
-            );
-          }
-        }
-        startTransition(() => {
-          setWorkflowMediaDrafts(persistedDrafts);
-          if (data.prompt) setPrompt(data.prompt);
-          if (data.localHistory) setLocalHistory(data.localHistory);
-        });
-
-        // Update control visibility based on restored model/mode
-        commonParameterValuesRef.current = {
-          ...data.modelParameterValues,
-          aspectRatio: data.selectedAr,
-          duration: data.selectedDuration,
-          resolution: restoredResolution,
-          quality: data.selectedQuality,
-        };
-        startTransition(() => applyControlsForModel(
-          restoredModelId,
-          restoredMode === "i2v",
-          restoredMode === "v2v",
-        ));
       }
-    } catch (err) {
-      console.warn("Failed to load VideoStudio persistence:", err);
-    } finally {
+      startTransition(() => {
+        setImageMode(restoredMode === "i2v");
+        setV2vMode(restoredMode === "v2v");
+        if (data.selectedAr) setSelectedAr(data.selectedAr);
+        if (data.selectedDuration) setSelectedDuration(data.selectedDuration);
+        if (restoredResolution) setSelectedResolution(restoredResolution);
+        if (data.selectedQuality) setSelectedQuality(data.selectedQuality);
+        if (data.selectedEffect) setSelectedEffect(data.selectedEffect);
+        if (data.selectedVeoSourceId) setSelectedVeoSourceId(data.selectedVeoSourceId);
+      });
+      startTransition(() => {
+        if (data.uploadedImageUrls) {
+          setUploadedImageUrls(data.uploadedImageUrls);
+        } else if (data.uploadedImageUrl) {
+          setUploadedImageUrls([data.uploadedImageUrl]);
+        }
+        if (data.uploadedEndImageUrl) setUploadedEndImageUrl(data.uploadedEndImageUrl);
+        if (data.uploadedVideoUrls) {
+          setUploadedVideoUrls(data.uploadedVideoUrls);
+        } else if (data.uploadedVideoUrl) {
+          setUploadedVideoUrls([data.uploadedVideoUrl]);
+        }
+        if (data.uploadedAudioUrls) setUploadedAudioUrls(data.uploadedAudioUrls);
+      });
+      const persistedDrafts =
+        data.workflowMediaDrafts && typeof data.workflowMediaDrafts === "object"
+          ? migrateVideoWorkflowMediaDrafts(data.workflowMediaDrafts)
+          : {};
+      if (restoredWorkflowId) {
+        const draftKey = getVideoWorkflowDraftKey(restoredFamilyId, restoredWorkflowId);
+        if (!data.selectedWorkflowId || !persistedDrafts[draftKey]) {
+          persistedDrafts[draftKey] = legacyVideoMediaToWorkflowDraft(
+            restoredModel, restoredWorkflowId,
+            {
+              imageUrls: data.uploadedImageUrls || (data.uploadedImageUrl ? [data.uploadedImageUrl] : []),
+              endImageUrl: data.uploadedEndImageUrl || (restoredWorkflowId === "keyframes" ? data.uploadedImageUrls?.[1] : null),
+              videoUrls: data.uploadedVideoUrls || (data.uploadedVideoUrl ? [data.uploadedVideoUrl] : []),
+              audioUrls: data.uploadedAudioUrls || [],
+            },
+          );
+        }
+      }
+      startTransition(() => {
+        setWorkflowMediaDrafts(persistedDrafts);
+        if (data.prompt) setPrompt(data.prompt);
+        if (data.localHistory) setLocalHistory(data.localHistory);
+      });
+      commonParameterValuesRef.current = {
+        ...data.modelParameterValues,
+        aspectRatio: data.selectedAr,
+        duration: data.selectedDuration,
+        resolution: restoredResolution,
+        quality: data.selectedQuality,
+      };
+      startTransition(() => applyControlsForModel(restoredModelId, restoredMode === "i2v", restoredMode === "v2v"));
       hasRestored.current = true;
-    }
-  }, [applyControlsForModel, defaultModel.id, PERSIST_KEY, defaultFamily.id, defaultModel]);
-
-  // ── Persistence: Save ────────────────────────────────────────────────────
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        const state = {
-          imageMode,
-          v2vMode,
-          selectedWorkflowId,
-          selectedModel,
-          selectedFamilyId,
-          selectedAr,
-          selectedDuration,
-          selectedResolution,
-          selectedQuality,
-          selectedEffect,
-          selectedVeoSourceId,
-          modelParameterValues,
-          uploadedImageUrls,
-          uploadedEndImageUrl,
-          uploadedVideoUrls,
-          uploadedAudioUrls,
-          workflowMediaDrafts,
-          prompt,
-          localHistory,
-        };
-        localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
-      } catch (err) {
-        console.warn("Failed to save VideoStudio persistence:", err);
-      }
-    }, 500); // 500ms debounce
-    return () => clearTimeout(timer);
-  }, [
-    imageMode,
-    v2vMode,
-    selectedWorkflowId,
-    selectedModel,
-    selectedFamilyId,
-    selectedAr,
-    selectedDuration,
-    selectedResolution,
-    selectedQuality,
-    selectedEffect,
-    selectedVeoSourceId,
-    modelParameterValues,
-    uploadedImageUrls,
-    uploadedEndImageUrl,
-    uploadedVideoUrls,
-    uploadedAudioUrls,
-    workflowMediaDrafts,
-    prompt,
-    localHistory,
-    PERSIST_KEY,
-  ]);
+    },
+    getState: () => ({
+      imageMode, v2vMode, selectedWorkflowId, selectedModel, selectedFamilyId,
+      selectedAr, selectedDuration, selectedResolution, selectedQuality, selectedEffect,
+      selectedVeoSourceId, modelParameterValues, uploadedImageUrls, uploadedEndImageUrl,
+      uploadedVideoUrls, uploadedAudioUrls, workflowMediaDrafts, prompt, localHistory,
+    }),
+    deps: [
+      imageMode, v2vMode, selectedWorkflowId, selectedModel, selectedFamilyId,
+      selectedAr, selectedDuration, selectedResolution, selectedQuality, selectedEffect,
+      selectedVeoSourceId, modelParameterValues, uploadedImageUrls, uploadedEndImageUrl,
+      uploadedVideoUrls, uploadedAudioUrls, workflowMediaDrafts, prompt, localHistory,
+    ],
+    delayMs: 500,
+  });
 
   // ── Derived UI values ────────────────────────────────────────────────────
 
