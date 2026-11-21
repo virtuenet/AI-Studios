@@ -2,6 +2,7 @@
 
 import { startTransition, useState, useEffect, useRef, useCallback } from "react";
 import useGeneration from "../hooks/useGeneration";
+import usePersistentObject from "../hooks/usePersistentObject";
 import { uploadFile, generateMarketingStudioAd } from "../muapi.js";
 import { scopedPersistKey, migrateLegacyPersistKey } from "../persistKey";
 import MobileGenerationActions, {
@@ -356,33 +357,24 @@ export default function MarketingStudio({
 
   const textareaRef = useRef(null);
 
-  // ── Persistence ───────────────────────────────────────────────────────────
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PERSIST_KEY);
-      if (stored) {
-        const data = JSON.parse(stored);
-        startTransition(() => { if (data.prompt) setPrompt(data.prompt); });
-        startTransition(() => {
-          if (data.params) setParams(data.params);
-          if (data.productImage) setProductImage(data.productImage);
-          if (data.avatarImage) setAvatarImage(data.avatarImage);
-          if (data.additionalImages) setAdditionalImages(data.additionalImages);
-          if (data.localHistory) setLocalHistory(data.localHistory);
-          else if (data.history) setLocalHistory(data.history);
-        });
-      }
-    } catch (err) { console.warn("Load failed", err); }
-  }, [PERSIST_KEY]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const state = { prompt, params, productImage, avatarImage, additionalImages, localHistory };
-      localStorage.setItem(PERSIST_KEY, JSON.stringify(state));
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [prompt, params, productImage, avatarImage, additionalImages, localHistory, PERSIST_KEY]);
+  // ── Persistence (shared hook) ───────────────────────────────────────────
+  usePersistentObject({
+    storageKey: PERSIST_KEY,
+    onLoad: (data) => {
+      if (!data) return;
+      startTransition(() => {
+        if (data.prompt) setPrompt(data.prompt);
+        if (data.params) setParams(data.params);
+        if (data.productImage) setProductImage(data.productImage);
+        if (data.avatarImage) setAvatarImage(data.avatarImage);
+        if (data.additionalImages) setAdditionalImages(data.additionalImages);
+        if (data.localHistory) setLocalHistory(data.localHistory);
+        else if (data.history) setLocalHistory(data.history);
+      });
+    },
+    getState: () => ({ prompt, params, productImage, avatarImage, additionalImages, localHistory }),
+    deps: [prompt, params, productImage, avatarImage, additionalImages, localHistory],
+  });
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 

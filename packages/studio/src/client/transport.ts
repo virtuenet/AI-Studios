@@ -32,12 +32,12 @@ export interface GenerationRequest {
 export interface GenerationResult {
   id: string;
   status: 'queued' | 'processing' | 'completed' | 'failed' | 'cancelled';
-  url?: string;
-  outputs?: string[];
-  requestId?: string;
-  error?: string;
-  cost?: number;
-  refunded?: boolean;
+  url?: string | undefined;
+  outputs?: string[] | undefined;
+  requestId?: string | undefined;
+  error?: string | undefined;
+  cost?: number | undefined;
+  refunded?: boolean | undefined;
 }
 
 export interface AssetUploadRequest {
