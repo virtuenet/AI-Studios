@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.2.0](https://github.com/virtuenet/AI-Studios/compare/ai-studios-v2.1.0...ai-studios-v2.2.0) (2026-11-21)
+
+
+### Features
+
+* **phase0-1-4:** wire SQLite stores, DesignAgent iframe bridge, real worker ([6e0b728](https://github.com/virtuenet/AI-Studios/commit/6e0b728ee38af139712abe4cbe192b562df9cfe4))
+* **phase0-1:** balance store extraction, transport interface, data model ([8dd4ce2](https://github.com/virtuenet/AI-Studios/commit/8dd4ce210b5db86df1bebc112dfcb6ed1c622053))
+* **phase0-1:** extract notifications, persist RecastStudio, Drizzle schema ([f2bca1f](https://github.com/virtuenet/AI-Studios/commit/f2bca1f1cb62ba9382fad642b06e8dab3bfbfb94))
+* **phase0-1:** persistence conversion, byokTransport, credit ledger, job queue ([92f76af](https://github.com/virtuenet/AI-Studios/commit/92f76afa8aa39d06c8e16c16aba1edf98ba8f17e))
+* **phase0-1:** rate-limiting, Stripe webhook, audit log, price book, managed transport ([2c82cc5](https://github.com/virtuenet/AI-Studios/commit/2c82cc5a0ef1d0c42c73c9947767915ddc31ed24))
+* **phase0-1:** VideoStudio persistence, SQLite-backed control plane ([09f3279](https://github.com/virtuenet/AI-Studios/commit/09f3279b76ec10ad4694c8da4d8ca23d5ba3ebcb))
+* **phase0-3-4:** ImageStudio persistence, deployment artifacts, API endpoints ([cc1d715](https://github.com/virtuenet/AI-Studios/commit/cc1d71525f18f7ba2e4cc0bafd7ea63673493848))
+* **phase0:** complete muapi.js split and persistence conversions ([ffc9ef8](https://github.com/virtuenet/AI-Studios/commit/ffc9ef8776f2e23166c704d29ced94961de8fdc3))
+* **phase1-3:** wire all remaining in-memory stores to SQLite ([255ac99](https://github.com/virtuenet/AI-Studios/commit/255ac99709d764242cf064258e584144d1bff938))
+* **phase1:** migration runner, tenant-isolation tests, pricing API, Stripe-ledger wiring ([1f8f8ab](https://github.com/virtuenet/AI-Studios/commit/1f8f8abd28d39330e9d50e4b57dcef2c61aa06c1))
+* **phase2:** rate-limited BFF, usage dashboard, team API, SSO scaffold ([9a370e0](https://github.com/virtuenet/AI-Studios/commit/9a370e07e465adbfe4b989db97e4b04b69224909))
+
+
+### Bug Fixes
+
+* move useBalance out of app/ and fix import ([9e217f6](https://github.com/virtuenet/AI-Studios/commit/9e217f64af26d45653e55c2195ce131a8e464880))
+
 ## [2.1.0](https://github.com/virtuenet/AI-Studios/compare/ai-studios-v2.0.0...ai-studios-v2.1.0) (2026-11-20)
 
 

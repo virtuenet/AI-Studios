@@ -3,7 +3,7 @@
   "description": "Open-source alternative to HF AI — AI image, video, cinema and lip sync studio",
   "homepage": "",
   "private": true,
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "workspaces": [
     "packages/studio",
